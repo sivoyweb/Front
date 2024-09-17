@@ -1,7 +1,7 @@
 function Blog() {
 
     return (
-        <div>
+        <div> <p>hola</p>
         </div>
     )
 };
