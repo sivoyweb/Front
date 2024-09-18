@@ -11,10 +11,12 @@ const navigation = [
   { name: 'Destinos', href: 'destinations' },
   { name: 'Servicios a Empresas', href: 'business-services' },
   { name: 'Blog', href: 'blog'},
+  { name: 'Academia', href: 'blog'},
+  
+
 ]
 const paths = {
-  login:'/login-page',
-  register:'/register-page'
+  login:'/auth-page',
 };
 
 
