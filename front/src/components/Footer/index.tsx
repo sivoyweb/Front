@@ -1,36 +1,13 @@
 "use client"
 
-import { icon } from '@fortawesome/fontawesome-svg-core';
+
 import { faFacebook, faInstagram, faLinkedin, faWhatsapp, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import { useState } from 'react';
 
 function Footer() {
-    const [currentReview, setCurrentReview] = useState(0);
-    const reviews = [
-        "¡Me encantó la experiencia! 100% recomendable.",
-        "Una atención excepcional, volvería sin dudarlo.",
-        "Un destino que superó mis expectativas."
-    ];
-    const [isTransitioning, setIsTransitioning] = useState(false);
-
-    const nextReview = () => {
-        setIsTransitioning(true);
-        setTimeout(() => {
-            setCurrentReview((currentReview + 1) % reviews.length);
-            setIsTransitioning(false);
-        }, 500); 
-    };
-
-    const previousReview = () => {
-        setIsTransitioning(true);
-        setTimeout(() => {
-            setCurrentReview((currentReview - 1 + reviews.length) % reviews.length);
-            setIsTransitioning(false);
-        }, 300);
-    };
-
+   
     return (
         <footer className="bg-black text-white p-10">
             
