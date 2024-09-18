@@ -1,6 +1,6 @@
 function LoginPage() {
     return (
-        <div></div>
+        <div>este es el login</div>
     );
 }
 

@@ -3,19 +3,25 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 const navigation = [
-  { name: 'Inicio', href: '#', current: true },
-  { name: 'Destinos', href: '#', current: false },
-  { name: 'Servicios a Empresas', href: '#', current: false },
-  { name: 'Academia', href: '#', current: false },
-  { name: 'Blog', href: '#', current: false },
+  { name: 'Inicio', href: '/home' },
+  { name: 'Destinos', href: 'destinations' },
+  { name: 'Servicios a Empresas', href: 'business-services' },
+  { name: 'Blog', href: 'blog'},
 ]
+const paths = {
+  login:'/login-page',
+  register:'/register-page'
+};
 
 
 
  const Navbar: React.FC = () => {
+const router = useRouter();
+
   return (
     <Disclosure as="nav" className="bg-black text-white">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -37,7 +43,6 @@ const navigation = [
                   <a
                     key={item.name}
                     href={item.href}
-                    aria-current={item.current ? 'page' : undefined}
                     className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
                   >
                     {item.name}
@@ -46,8 +51,14 @@ const navigation = [
                 ))}
 
                 <div className='ml-10 flex space-x-4'>
-                <button className="bg-gray-500 hover:bg-gray-700 text-white font-small  p-1 rounded-md text-sm">Ingresar</button>
-                <button className="bg-gray-500 hover:bg-gray-700 text-white font-small  p-1 rounded-md text-sm">Registro</button>
+                <button className="bg-gray-500 hover:bg-gray-700 text-white font-small  p-1 rounded-md text-sm"
+                        onClick={()=> router.push(paths.login)}
+                >Ingresar
+                </button>
+                <button className="bg-gray-500 hover:bg-gray-700 text-white font-small  p-1 rounded-md text-sm"
+                        onClick={()=> router.push(paths.register)}
+                >Registro
+                </button>
                 </div>
               </div>
               
@@ -97,7 +108,6 @@ const navigation = [
               key={item.name}
               as="a"
               href={item.href}
-              aria-current={item.current ? 'page' : undefined}
             >
               {item.name}
             </DisclosureButton>
