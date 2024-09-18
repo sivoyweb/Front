@@ -1,7 +1,8 @@
 function Blog() {
 
     return (
-        <div> <p>hola</p>
+        <div> 
+            Este es el blog
         </div>
     )
 };
