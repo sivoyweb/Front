@@ -1,6 +1,8 @@
 function Destinations() {
     return (
-        <div></div>
+        <div>
+            estos so los destinos
+        </div>
     );
 }
 
