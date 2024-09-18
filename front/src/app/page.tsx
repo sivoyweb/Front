@@ -1,6 +1,9 @@
-export default function Index() {
+
+
+const Home:React.FC = () => {
   return (
-    <div> <p>Esto es el home (index le dicen los sí voy)</p>
-    </div>
-  );
+    <div>este es el home</div>
+  )
 }
+
+export default Home;
