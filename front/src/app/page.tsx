@@ -1,9 +1,9 @@
-import Home from "./home/page";
 
-export default function Index() {
+
+const Home:React.FC = () => {
   return (
-    <div> 
-      <Home />
-    </div>
-  );
+    <div>este es el home</div>
+  )
 }
+
+export default Home;
