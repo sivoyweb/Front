@@ -8,9 +8,14 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        arialroundedmtbold: ["arialroundedmtbold"],
+        dinroundpro: ["dinroundpro"],
+      },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+       "sivoy-orange": "#df5430",
+       "sivoy-green": "#1a7970",
+       "sivoy-blue": "#1b202f"
       },
     },
   },
