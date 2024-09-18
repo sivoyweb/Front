@@ -1,6 +1,6 @@
 function RegisterPage() {
     return (
-        <div>este es el register</div>
+        <div></div>
     );
 }
 
