@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 
 const navigation = [
-  { name: 'Inicio', href: '/home' },
+  { name: 'Inicio', href: '/' },
   { name: 'Destinos', href: 'destinations' },
   { name: 'Servicios a Empresas', href: 'business-services' },
   { name: 'Blog', href: 'blog'},
