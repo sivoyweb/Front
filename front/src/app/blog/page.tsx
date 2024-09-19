@@ -2,7 +2,7 @@ function Blog() {
 
     return (
         <div> 
-            Este es el blog
+            Prensa
         </div>
     )
 };
