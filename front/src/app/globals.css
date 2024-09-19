@@ -13,6 +13,12 @@
   src: url('/fonts/dinroundpro.otf') format('opentype');
 }
 
+@layer utilities {
+  .bg-sivoy-gradient {
+    background-image: linear-gradient(to right, #43af69, #355b58, #2a2f44);
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
