@@ -10,7 +10,7 @@ const navigation = [
   { name: 'Destinos', href: 'destinations' },
   { name: 'Servicios a Empresas', href: 'business-services' },
   { name: 'Blog', href: 'blog'},
-  { name: 'Academia', href: 'blog'},
+  { name: 'Academia', href: 'academy'},
   
 
 ]
@@ -24,7 +24,7 @@ const paths = {
 const router = useRouter();
 
   return (
-    <Disclosure as="nav" className="bg-black text-white">
+    <Disclosure as="nav" className="bg-sivoy-blue text-white  font-dinroundpro">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">

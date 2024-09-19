@@ -24,3 +24,12 @@ body {
   padding: 0;
   background-color: #ffffff;
 }
+
+.shadow-gradient {
+  background: linear-gradient(145deg, rgba(26, 121, 112, 0.2), rgba(26, 121, 112, 0.5));
+  box-shadow: 
+    0 4px 6px rgba(26, 121, 112, 0.1), 
+    0 10px 15px rgba(26, 121, 112, 0.2), 
+    0 20px 25px rgba(26, 121, 112, 0.3), 
+    inset 0 1px 3px rgba(26, 121, 112, 0.4);
+}
