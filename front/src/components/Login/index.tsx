@@ -21,8 +21,8 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded shadow-lg w-full max-w-md mx-4 md:mx-auto">
+    <div className="p-10">
+      <div className="bg-slate-50 m-5 p-8 rounded shadow-xl w-full max-w-md mx-4 md:mx-auto">
         <h1 className="text-2xl font-bold mb-6 text-center">Iniciar sesión</h1>
         <Formik
           initialValues={initialValues}
