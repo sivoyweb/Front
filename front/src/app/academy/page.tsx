@@ -13,7 +13,7 @@ const Academia = () => {
       <section className="bg-white py-16 ml-7">
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         <div className="m-7">
-  <h2 className="text-4xl font-bold mb-4">
+  <h2 className="text-4xl font-arialroundedmtbold text-sivoy-blue mb-4">
     Capacitación Profesional en Turismo Accesible
   </h2>
   <p className="text-lg mb-6">
@@ -43,24 +43,24 @@ const Academia = () => {
      
       <section className="bg-gray-100 py-16">
         <div className="container mx-auto text-center">
-          <h3 className="text-3xl font-bold mb-8">
+          <h3 className="text-3xl font-arialroundedmtbold text-sivoy-blue mb-8">
             Beneficios de formarte con nosotros
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-6 bg-sivoy-green shadow-gradient rounded-lg">
-              <h4 className="text-2xl font-semibold mb-4">100% Online</h4>
+              <h4 className="text-2xl font-arialroundedmtbold text-sivoy-blue mb-4">100% Online</h4>
               <p className="text-lg">
                 Accede a nuestras clases desde cualquier lugar y en cualquier momento.
               </p>
             </div>
             <div className="p-6 bg-sivoy-green shadow-gradient rounded-lg">
-              <h4 className="text-2xl font-semibold mb-4">Material Exclusivo</h4>
+              <h4 className="text-2xl font-arialroundedmtbold text-sivoy-blue mb-4">Material Exclusivo</h4>
               <p className="text-lg">
                 Material de estudio de alta calidad disponible para ti durante el curso.
               </p>
             </div>
             <div className="p-6 bg-sivoy-green shadow-gradient rounded-lg">
-              <h4 className="text-2xl font-semibold mb-4">Diploma Certificado</h4>
+              <h4 className="text-2xl font-arialroundedmtbold text-sivoy-blue mb-4">Diploma Certificado</h4>
               <p className="text-lg">
                 Al finalizar, recibirás un diploma digitalizado y certificado.
               </p>
@@ -72,7 +72,7 @@ const Academia = () => {
       
       <section id="program" className="py-16">
         <div className="container mx-auto text-center">
-          <h3 className="text-3xl font-bold mb-8">Detalles del Programa</h3>
+          <h3 className="text-3xl font-arialroundedmtbold text-sivoy-blue mb-8">Detalles del Programa</h3>
           <div className="flex justify-center items-center mx-auto max-w-6xl gap-8 py-8">
             <div className="bg-white p-8 shadow-lg rounded-lg">
               <ul className="list-disc list-inside text-lg">

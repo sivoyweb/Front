@@ -41,16 +41,16 @@ function Footer() {
       <Link href="https://whatsapp.com" target="_blank" rel="noopener noreferrer">
         <FontAwesomeIcon icon={faWhatsapp} size="lg" />
       </Link>
-      <Link href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+      <Link href="https://www.facebook.com/sivoy.com.ar/" target="_blank" rel="noopener noreferrer">
         <FontAwesomeIcon icon={faFacebook} size="lg" />
       </Link>
-      <Link href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+      <Link href="https://www.linkedin.com/company/si-voy/" target="_blank" rel="noopener noreferrer">
         <FontAwesomeIcon icon={faLinkedin} size="lg" />
       </Link>
-      <Link href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+      <Link href="https://www.instagram.com/sivoy.accesible/?hl=es-la" target="_blank" rel="noopener noreferrer">
         <FontAwesomeIcon icon={faInstagram} size="lg" />
       </Link>
-      <Link href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+      <Link href="https://www.youtube.com/channel/UCKzAGfo-XL5qUa_NamBRwfw" target="_blank" rel="noopener noreferrer">
         <FontAwesomeIcon icon={faYoutube} size="lg" />
       </Link>
     </div>
