@@ -15,7 +15,7 @@ const config: Config = {
       colors: {
        "sivoy-orange": "#df5430",
        "sivoy-green": "#1a7970",
-       "sivoy-blue": "#1b202f",
+       "sivoy-blue": "#00243C",
       },
     },
   },
