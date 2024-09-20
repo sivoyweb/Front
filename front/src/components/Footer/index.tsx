@@ -9,9 +9,9 @@ function Footer() {
     
 
     return (
-        <footer className="bg-black text-white p-10">
+        <footer className="bg-sivoy-blue text-white p-10">
             
-            <div className="container mx-auto px-4 flex justify-center items-start bg-black py-4">
+            <div className="container mx-auto px-4 flex justify-center items-start bg-sivoy-blue py-4">
   {/* Bloque izquierdo */}
   <div className="w-1/2 max-w-xs h-64 bg-gray-600 p-4 rounded-lg flex items-center justify-center">
     <h3 className="text-xl font-bold text-center">Tu destino sin límites</h3>
