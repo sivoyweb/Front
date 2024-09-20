@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react';
 import logo from '../../../public/assets/logo.png';
+import Link from 'next/link'
 
 const navigation = [
   { name: 'Inicio', href: '/' },
@@ -36,49 +37,49 @@ const Navbar: React.FC = () => {
             </DisclosureButton>
           </div>
 
-          {/* Main content */}
+         
           <div className="flex w-full items-center justify-between">
-            {/* Logo */}
-            <div className="flex flex-shrink-0 items-center">
-              <Image
-                alt="Your Company"
-                src={logo}
-                className="h-11"
-                width={60}
-                height={60}
-              />
-            </div>
+      {/* Contenedor del logo alineado a la izquierda */}
+        <div className="flex items-start ml-0">
+        <Image
+            alt="Your Company"
+            src={logo}
+            className="h-11"
+            width={80}
+            height={70}
+         />
+        </div>
 
-            {/* Navigation Links */}
-            <div className="hidden sm:flex sm:items-center sm:ml-auto">
-              <div className="flex space-x-4">
-                {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    {item.name}
-                  </a>
-                ))}
+       {/* Contenedor de los enlaces alineado a la derecha */}
+        <div className="flex items-center space-x-4 ml-auto">
+          {navigation.map((item) => (
+           <a
+             key={item.name}
+             href={item.href}
+             className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+           >
+             {item.name}
+           </a>
+         ))}
 
-                <div className='ml-10 flex space-x-4'>
-                  <button
-                    className="bg-gray-500 hover:bg-gray-700 text-white font-small p-1 rounded-md text-sm"
-                    onClick={() => router.push(paths.authPage)}
-                  >
-                    Ingresar
-                  </button>
-                  <button
-                    className="bg-gray-500 hover:bg-gray-700 text-white font-small p-1 rounded-md text-sm"
-                    onClick={() => router.push(paths.authPage)}
-                  >
-                    Registro
-                  </button>
-                </div>
-              </div>
-            </div>
+         <div className="flex space-x-4">
+           <button
+             className="bg-gray-500 hover:bg-gray-700 text-white font-small p-1 rounded-md text-sm"
+             onClick={() => router.push(paths.authPage)}
+           >
+             Ingresar
+           </button>
+            <button
+              className="bg-gray-500 hover:bg-gray-700 text-white font-small p-1 rounded-md text-sm"
+              onClick={() => router.push(paths.authPage)}
+            >
+              Registro
+            </button>
           </div>
+       </div>
+      </div>
+
+
 
           {/* Profile dropdown */}
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
