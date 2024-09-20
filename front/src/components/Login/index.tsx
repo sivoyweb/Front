@@ -23,7 +23,7 @@ const Login: React.FC = () => {
   return (
     <div className="p-10">
       <div className="bg-slate-50 m-5 p-8 rounded shadow-xl w-full max-w-md mx-4 md:mx-auto">
-        <h1 className="text-2xl font-bold mb-6 text-center">Iniciar sesión</h1>
+        <h1 className="text-3xl font-bold mb-6 text-center">Iniciar sesión</h1>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -32,7 +32,7 @@ const Login: React.FC = () => {
           {({ isSubmitting }) => (
             <Form className="space-y-4">
               <div>
-                <label htmlFor="username" className="block text-sm font-medium">
+                <label htmlFor="username" className="block text-xl font-medium">
                   Nombre de usuario
                 </label>
                 <Field
@@ -44,12 +44,12 @@ const Login: React.FC = () => {
                 <ErrorMessage
                   name="username"
                   component="div"
-                  className="text-red-500 text-sm mt-1"
+                  className="text-red-500 text-xl mt-1"
                 />
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium">
+                <label htmlFor="password" className="block text-xl font-medium">
                   Contraseña
                 </label>
                 <Field
@@ -61,7 +61,7 @@ const Login: React.FC = () => {
                 <ErrorMessage
                   name="password"
                   component="div"
-                  className="text-red-500 text-sm mt-1"
+                  className="text-red-500 text-xl mt-1"
                 />
               </div>
 

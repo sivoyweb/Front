@@ -8,8 +8,7 @@ function RegisterPage() {
         src="https://res.cloudinary.com/ddzcann0m/image/upload/v1726792832/lay5koxqn1haaos3wqmm.jpg"
         alt="Register"
         fill
-        objectFit="cover"
-        className="z-0"
+        className="object-cover z-0"
         priority={true}
       />
 
