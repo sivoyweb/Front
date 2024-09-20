@@ -1,10 +1,12 @@
 import Image from "next/image";
 import tudestino from "../assets/tudestino.png"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faWheelchairMove, faMapLocationDot, faGlobe, faFileLines} from "@fortawesome/free-solid-svg-icons"
 
 const Home:React.FC = () => {
   return (
     <div>
-      <header className="mt-56 mr-10 relative overflow-hidden before: content-none min-h-[400px] w-[calc(100% - 2rem)] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[url(../assets/chalten.jpg)] bg-center bg-cover rounded-3xl z-10 p-8 md:p-16">
+      <header className="mt-4 ml-5 mr-5 relative overflow-hidden before: content-none min-h-[400px] w-[calc(100% - 2rem)] bg-[url(../assets/chalten.jpg)] bg-center bg-cover rounded-3xl z-10 p-8 md:p-16">
         <div className="grid">
           <div className="pt-16 pr-4">
             <div className="relative flex justify-center">
@@ -23,26 +25,61 @@ const Home:React.FC = () => {
         </div>
       </header>
 
-      <section>
-        <h2>Destinos populares</h2>
-        <p>Descubre los destinos accesibles mejor valorados de Argentina</p>
+      <section className="text-left mt-10 ml-5">
+        <h2 className="font-arialroundedmtbold text-2xl text-sivoy-blue">Destinos populares</h2>
+        <p className="text-lg text-gray-600 mt-1">Descubre los destinos accesibles mejor valorados de Argentina.</p>
 
-        <div>
+        {/* <div className="mt-5">
           <div>
-            <p>Acá van las tarjetas de cada destino</p>
+            <p>Acá va el grid de tarjetas</p>
           </div>
+        </div> */}
+      </section>
+
+      <section className="text-left mt-10 ml-5">
+        <h2 className="font-arialroundedmtbold text-2xl text-sivoy-blue">¿Quiénes somos?</h2>
+      </section>
+
+      <section className="text-left mt-10 ml-5">
+        <h2 className="font-arialroundedmtbold text-2xl text-sivoy-blue">Servicios Adicionales</h2>
+        <p className="text-lg text-gray-600 mt-1">Todos los servicios pueden realizarse de forma presencial o virtual.</p>
+        
+
+        <div className='-ml-4 mb-8 grid grid-cols-[repeat(2,_1fr)]'>
+            
+            <div className='relative isolate m-4'>
+                <div className='top-full left-0 w-full h-full p-8 bg-gray-100 rounded-2xl'>
+                    <span className='inline-block mb-4 pt-2 pr-2'><FontAwesomeIcon icon={faWheelchairMove} size="2xl" style={{color: "#229764",}} /></span>
+                    <h4 className="mb-4 text-lg font-arialroundedmtbold text-sivoy-blue">Consultoría en Turismo Accesible</h4>
+                    <p className='text-sivoy-blue'>Consultoría a agencias de viajes y operadores turísticos en la organización y diseño de rutas para personas o grupos con movilidad reducida.</p>
+                </div>
+            </div>
+
+            <div className='relative isolate m-4'>
+                <div className='top-full left-0 w-full h-full p-8 bg-gray-100 rounded-2xl'>
+                    <span className='inline-block mb-4 pt-2 pr-2'><FontAwesomeIcon icon={faMapLocationDot} size="2xl" style={{color: "#229764",}} /></span>
+                    <h4 className="mb-4 text-lg font-arialroundedmtbold text-sivoy-blue">Itinerarios Accesibles Personalizados</h4>
+                    <p className='text-sivoy-blue'>Diseño de itinerarios adaptados a cada necesidad en particular con énfasis en el trato personalizado con el viajero.</p>
+                </div>
+            </div>
+
+            <div className='relative isolate m-4'>
+                <div className='top-full left-0 w-full h-full p-8 bg-gray-100 rounded-2xl'>
+                    <span className='inline-block mb-4 pt-2 pr-2'><FontAwesomeIcon icon={faGlobe} size="2xl" style={{color: "#229764",}} /></span>
+                    <h4 className="mb-4 text-lg font-arialroundedmtbold text-sivoy-blue">Asesoramiento en Diseño Universal</h4>
+                    <p className='text-sivoy-blue'>Consultoría en accesibilidad universal a hoteles, empresas y proveedores de productos turísticos.</p>
+                </div>
+            </div>
+
+            <div className='relative isolate m-4'>
+                <div className='top-full left-0 w-full h-full p-8 bg-gray-100 rounded-2xl'>
+                    <span className='inline-block mb-4 pt-2 pr-2'><FontAwesomeIcon icon={faFileLines} size="2xl" style={{color: "#229764",}} /></span>
+                    <h4 className="mb-4 text-lg font-arialroundedmtbold text-sivoy-blue">Capacitaciones</h4>
+                    <p className='text-sivoy-blue'>Capacitaciones en diseño universal y en trato adecuado a personas con movilidad reducida.</p>
+                </div>
+            </div>
         </div>
       </section>
-
-      <section>
-        <h2>¿Quienes somos?</h2>
-      </section>
-
-      <section>
-        <h2>Servicios</h2>
-      </section>
-
-
     </div>
   )
 }
