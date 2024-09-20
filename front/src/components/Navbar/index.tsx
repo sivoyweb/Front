@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import React from 'react';
 import logo from '../../../public/assets/logo.png';
+import Link from 'next/link'
 
 
 const navigation = [
@@ -25,7 +26,7 @@ const Navbar: React.FC = () => {
   const router = useRouter();
 
   return (
-    <Disclosure as="nav" className="bg-sivoy-blue text-white font-dinroundpro">
+    <Disclosure as="nav" className="bg-sivoy-blue text-white font-arialroundedmtbold">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           {/* Mobile menu button */}
@@ -40,45 +41,46 @@ const Navbar: React.FC = () => {
 
          
           <div className="flex w-full items-center justify-between">
-      {/* Contenedor del logo alineado a la izquierda */}
-        <div className="flex items-start ml-0">
-        <Image
-            alt="Your Company"
-            src={logo}
-            className="h-11"
-            width={80}
-            height={70}
-         />
-        </div>
+ 
+            <div className="flex items-center">
+              <Image
+                alt="Your Company"
+                src={logo}
+                className="h-12"
+                width={70}
+                height={70}
+              />
+            </div>
 
-       {/* Contenedor de los enlaces alineado a la derecha */}
-        <div className="flex items-center space-x-4 ml-auto">
-          {navigation.map((item) => (
-           <a
-             key={item.name}
-             href={item.href}
-             className="text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
-           >
-             {item.name}
-           </a>
-         ))}
+            {/* Contenedor de navegación y botones alineados a la derecha */}
+            <div className="flex items-center space-x-4 ml-auto">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="text-white hover:text-sivoy-orange px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  {item.name}
+                </Link>
+              ))}
 
-         <div className="flex space-x-4">
-           <button
-             className="bg-gray-500 hover:bg-gray-700 text-white font-small p-1 rounded-md text-sm"
-             onClick={() => router.push(paths.login)}
-           >
-             Ingresar
-           </button>
-            <button
-              className="bg-gray-500 hover:bg-gray-700 text-white font-small p-1 rounded-md text-sm"
-              onClick={() => router.push(paths.register)}
-            >
-              Registro
-            </button>
+              <div className="flex space-x-4">
+                <button
+                  className="hover:text-sivoy-orange text-white font-small p-2 rounded-md text-sm"
+                  onClick={() => router.push(paths.login)}
+                >
+                  Ingresar
+                </button>
+                <button
+                  className="hover:text-sivoy-orange text-white font-small p-1 rounded-md text-sm"
+                  onClick={() => router.push(paths.register)}
+                >
+                  Registro
+                </button>
+              </div>
+            </div>
           </div>
-       </div>
-      </div>
+
 
 
 
@@ -96,19 +98,19 @@ const Navbar: React.FC = () => {
                 className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
               >
                 <MenuItem>
-                  <a href="#" className="block px-4 py-2 text-sm text-white data-[focus]:bg-gray-100">
+                  <Link href="#" className="block px-4 py-2 text-sm text-white data-[focus]:bg-gray-100">
                     Your Profile
-                  </a>
+                  </Link>
                 </MenuItem>
                 <MenuItem>
-                  <a href="#" className="block px-4 py-2 text-sm text-white data-[focus]:bg-gray-100">
+                  <Link href="#" className="block px-4 py-2 text-sm text-white data-[focus]:bg-gray-100">
                     Settings
-                  </a>
+                  </Link>
                 </MenuItem>
                 <MenuItem>
-                  <a href="#" className="block px-4 py-2 text-sm text-white data-[focus]:bg-gray-100">
+                  <Link href="#" className="block px-4 py-2 text-sm text-white data-[focus]:bg-gray-100">
                     Sign out
-                  </a>
+                  </Link>
                 </MenuItem>
               </MenuItems>
             </Menu>

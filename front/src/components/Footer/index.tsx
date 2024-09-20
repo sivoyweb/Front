@@ -12,7 +12,7 @@ function Footer() {
   const fotoFooter = 'https://res.cloudinary.com/dvxh2vynm/image/upload/v1726775425/si-voy/akziw4bhnofbehkbrgij.jpg';
    
     return (
-        <footer className="bg-sivoy-blue text-white p-10">
+        <footer className="bg-sivoy-blue text-white font-arialroundedmtbold p-10">
             
             <div className="container mx-auto px-4 flex justify-center items-start bg-sivoy-blue py-4">
   {/* Bloque izquierdo */}
