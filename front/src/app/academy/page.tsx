@@ -1,8 +1,11 @@
 import Image from "next/image";
-import fotoidea from '../../../public/assets/fotoIdea.jpg';
 import Link from "next/link";
 
 const Academia = () => {
+
+  const fotoAccesibilidad = 'https://res.cloudinary.com/dvxh2vynm/image/upload/v1726775425/si-voy/jpopgadipfqijrfn7jwu.jpg'
+  const fotoSinLimites = 'https://res.cloudinary.com/dvxh2vynm/image/upload/v1726775424/si-voy/e5esfzasxmkjkf9tryff.png';
+
   return (
     <div className="min-h-screen bg-gray-100  ">
     
@@ -27,7 +30,7 @@ const Academia = () => {
           <div>
            
             <Image
-              src={fotoidea}
+              src={fotoAccesibilidad}
               alt="Turismo accesible"
               className="rounded-lg shadow-lg ml-10"
               width={400}
@@ -83,7 +86,7 @@ const Academia = () => {
             <div>
              
               <Image
-                src={fotoidea}
+                src={fotoSinLimites}
                 alt="Detalles del Programa"
                 className="rounded-lg shadow-lg ml-10"
                 width={400}

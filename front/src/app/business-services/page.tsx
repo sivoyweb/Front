@@ -1,26 +1,17 @@
 import Image from "next/image";
-import fotoEmpresa from '../../../public/assets/servicioaemmpresas.jpg';
-import fotoaccess from '../../../public/assets/turismoAcequible.jpg';
-import fotocapacitacion from '../../../public/assets/capTurismo.jpg';
+
+const fotoInfo = 'https://res.cloudinary.com/dvxh2vynm/image/upload/v1726775425/si-voy/fkergitm9nvxuanmblks.jpg';
+const fotoAccess = 'https://res.cloudinary.com/dvxh2vynm/image/upload/v1726775425/si-voy/oc8beborc0vk6stxoz6x.jpg';
+const fotoTurism = 'https://res.cloudinary.com/dvxh2vynm/image/upload/v1726775424/si-voy/zfqujtcnaupyb4e29cck.jpg';
 
 const BusinessServices = () => {
 
+
     return (
         <main className="bg-white">
-
-      <section
-        className="relative h-80 bg-cover bg-center"
-        style={{ backgroundImage: "url('/assets/images/servicios.jpg')" }}
-      >
-        <div className="absolute inset-0 bg-black bg-opacity-60"></div>
-        <div className="relative z-10 flex justify-center items-center h-full">
-          <h1 className="text-white text-4xl font-bold">Servicios a Empresas</h1>
-        </div>
-      </section>
-
     
       <section className="grid grid-cols-1 md:grid-cols-2 gap-8 py-16 px-8 md:px-16">
-        <div className="order-2 md:order-2 space-y-6">
+        <div className="order-2 md:order-2 space-y-6 mt-16">
           <h2 className="text-3xl font-semibold">Asesoramiento en Turismo Accesible</h2>
           <p className="text-lg">
             ¿Tenés una Agencia de viajes o sos Operador Turístico? Te ayudamos a elaborar
@@ -38,9 +29,9 @@ const BusinessServices = () => {
             </a>
           </p>
         </div>
-        <div className="order-1 md:order-1">
+        <div className="order-1 md:order-1 mb-10 mt-[-20px]">
           <Image
-            src={fotoEmpresa}
+            src={fotoInfo}
             alt="Servicio 1"
             width={600}
             height={400}
@@ -71,7 +62,7 @@ const BusinessServices = () => {
         </div>
         <div>
           <Image
-            src={fotoaccess}
+            src={fotoAccess}
             alt="Servicio 2"
             width={600}
             height={400}
@@ -82,7 +73,7 @@ const BusinessServices = () => {
 
       
       <section className="grid grid-cols-1 md:grid-cols-2 gap-8 py-16 px-8 md:px-16">
-        <div className="order-2 md:order-2 space-y-6">
+        <div className="order-2 md:order-2 space-y-6 mt-10">
           <h2 className="text-3xl font-semibold">Capacitación en Turismo Accesible</h2>
           <p className="text-lg">
             ¿Contás con personal a cargo y querés brindar una atención inclusiva? Formamos a tu equipo sobre la
@@ -100,9 +91,9 @@ const BusinessServices = () => {
             </a>
           </p>
         </div>
-        <div className="order-1 md:order-1">
+        <div className="order-1 md:order-1 mb-10 mt-[-20px]">
           <Image
-            src={fotocapacitacion}
+            src={fotoTurism}
             alt="Servicio 3"
             width={600}
             height={400}
