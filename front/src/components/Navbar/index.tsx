@@ -15,7 +15,8 @@ const navigation = [
 
 ]
 const paths = {
-  authPage:'/auth-page',
+  login:'/login',
+  register:'/register',
 };
 
 
@@ -53,11 +54,11 @@ const router = useRouter();
 
                 <div className='ml-10 flex space-x-4'>
                 <button className="bg-gray-500 hover:bg-gray-700 text-white font-small  p-1 rounded-md text-sm"
-                        onClick={()=> router.push(paths.authPage)}
+                        onClick={()=> router.push(paths.login)}
                 >Ingresar
                 </button>
                 <button className="bg-gray-500 hover:bg-gray-700 text-white font-small  p-1 rounded-md text-sm"
-                        onClick={()=> router.push(paths.authPage)}
+                        onClick={()=> router.push(paths.register)}
                 >Registro
                 </button>
                 </div>

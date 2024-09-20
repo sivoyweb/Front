@@ -1,12 +1,13 @@
 "use client"
 
-
 import { faFacebook, faInstagram, faLinkedin, faWhatsapp, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 
+
 function Footer() {
-   
+    
+
     return (
         <footer className="bg-sivoy-blue text-white p-10">
             
