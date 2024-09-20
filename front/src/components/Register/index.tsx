@@ -33,9 +33,8 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded shadow-lg w-full max-w-md mx-4 md:mx-auto">
-        <h1 className="text-2xl font-bold mb-6 text-center">Registrarse</h1>
+      <div className="bg-white mt-3 p-9 px-11 rounded shadow-lg w-full max-w-md mx-4 md:mx-auto">
+        <h1 className="text-3xl font-bold mb-6 text-center">Registrarse</h1>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -44,94 +43,94 @@ const Register: React.FC = () => {
           {({ isSubmitting }) => (
             <Form className="space-y-4">
               <div>
-                <label htmlFor="username" className="block text-sm font-medium">
+                <label htmlFor="username" className="block text-xl font-medium">
                   Nombre de usuario
                 </label>
                 <Field
                   type="text"
                   id="username"
                   name="username"
-                  className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-sivoy-green"
                 />
                 <ErrorMessage
                   name="username"
                   component="div"
-                  className="text-red-500 text-sm mt-1"
+                  className="text-red-500 text-xl mt-1"
                 />
               </div>
 
               <div>
-                <label htmlFor="fullName" className="block text-sm font-medium">
+                <label htmlFor="fullName" className="block text-xl font-medium">
                   Nombre completo
                 </label>
                 <Field
                   type="text"
                   id="fullName"
                   name="fullName"
-                  className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-sivoy-green"
                 />
                 <ErrorMessage
                   name="fullName"
                   component="div"
-                  className="text-red-500 text-sm mt-1"
+                  className="text-red-500 text-xl mt-1"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium">
+                <label htmlFor="email" className="block text-xl font-medium">
                   Correo electrónico
                 </label>
                 <Field
                   type="email"
                   id="email"
                   name="email"
-                  className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-sivoy-green"
                 />
                 <ErrorMessage
                   name="email"
                   component="div"
-                  className="text-red-500 text-sm mt-1"
+                  className="text-red-500 text-xl mt-1"
                 />
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium">
+                <label htmlFor="password" className="block text-xl font-medium">
                   Contraseña
                 </label>
                 <Field
                   type="password"
                   id="password"
                   name="password"
-                  className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-sivoy-green"
                 />
                 <ErrorMessage
                   name="password"
                   component="div"
-                  className="text-red-500 text-sm mt-1"
+                  className="text-red-500 text-xl mt-1"
                 />
               </div>
 
               <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium">
+                <label htmlFor="confirmPassword" className="block text-xl font-medium">
                   Repetir contraseña
                 </label>
                 <Field
                   type="password"
                   id="confirmPassword"
                   name="confirmPassword"
-                  className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-sivoy-green"
                 />
                 <ErrorMessage
                   name="confirmPassword"
                   component="div"
-                  className="text-red-500 text-sm mt-1"
+                  className="text-red-500 text-xl mt-1"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-blue-500 text-white py-3 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full bg-blue-500 text-white py-3 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-sivoy-green"
               >
                 {isSubmitting ? 'Registrando...' : 'Registrarse'}
               </button>
@@ -139,7 +138,6 @@ const Register: React.FC = () => {
           )}
         </Formik>
       </div>
-    </div>
   );
 };
 

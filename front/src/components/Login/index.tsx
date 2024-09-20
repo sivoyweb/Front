@@ -39,7 +39,7 @@ const Login: React.FC = () => {
                   type="text"
                   id="username"
                   name="username"
-                  className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-sivoy-green"
                 />
                 <ErrorMessage
                   name="username"
@@ -56,7 +56,7 @@ const Login: React.FC = () => {
                   type="password"
                   id="password"
                   name="password"
-                  className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-sivoy-green"
                 />
                 <ErrorMessage
                   name="password"

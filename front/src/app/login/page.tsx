@@ -3,9 +3,9 @@ import Image from "next/image";
 
 function LoginPage() {
   return (
-    <div className="relative h-screen w-screen">
+    <div className="relative">
       <Image
-        src="https://res.cloudinary.com/ddzcann0m/image/upload/v1726789702/m82sfhs2b4k2cw7iuihe.jpg"
+        src="https://res.cloudinary.com/ddzcann0m/image/upload/v1726792832/lay5koxqn1haaos3wqmm.jpg"
         alt="Login"
         fill
         objectFit="cover"
@@ -15,13 +15,13 @@ function LoginPage() {
 
       <div className="relative z-10 flex justify-center items-center h-full bg-black bg-opacity-50">
         <div className="flex flex-col justify-center p-8">
-          <h1 className="text-white text-2xl mb-6 text-center">
+          <h1 className="text-white text-4xl mb-6 text-center">
             Ingrese su nombre de usuario y contraseña para acceder.
           </h1>
           <Login />
         </div>
 
-        <div className="ml-6">
+        <div className="ml-6 bg-white rounded-full p-5">
           <Image
             src="https://res.cloudinary.com/ddzcann0m/image/upload/v1726790351/wolbf7thf78to3chhlk8.png"
             width={400}
