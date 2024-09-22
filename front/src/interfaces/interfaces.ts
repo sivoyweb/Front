@@ -1,13 +1,149 @@
 
-export interface ILoginFormValues {
-    username: string;
+export interface ILogin {
+    email: string;
     password: string;
   }
 
-  export interface IRegisterFormValues {
-    username: string;
-    fullName: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
+  export interface IRegister{
+    name: string,
+    phone: number,
+    email: string,
+    password: string,
+    confirmPassword: string,
   }
+
+  export interface IDisability{
+    id: string,
+    name: string,
+    category: string,
+    user: IUser,
+  }
+  
+
+  export interface IDonation{
+    id: string,
+    user: IUser,
+    mount: number,
+    date: Date,
+    description: string,
+  }
+
+  export interface ISuggestion{
+    id: string,
+    user: IUser,
+    name: string,
+    country: string,
+    city: string,
+    date: Date,
+    price: number,
+    description: string,
+    typeService: string,
+    accesibilitySeal: string,
+    imagesUrl: IImage[],
+    state: boolean,
+  }
+
+
+  export interface IRole{
+
+  }
+
+
+
+  export interface IUser{
+    id?: string,
+    name: string,
+    role: IRole,
+    disabilities: IDisability[],
+    phone: number,
+    createdAt: Date,
+    auth: boolean,
+    cascade: true,
+    credential: ICredential,
+    reviews: IReview[],
+    donations: IDonation[],
+    suggestions: ISuggestion[],
+    history: ITravel[],
+    block: boolean,
+    email: string,
+    password: string,
+    confirmPassword: string,
+  }
+
+  export interface ICredential{
+    id: string,
+    email: string,
+    password: string,
+    avatar: IImage,
+    user: IUser,
+  }
+
+
+export interface IImage{
+  id: string,
+  url: string,
+  publicId: string,
+
+}
+
+export interface ITravelProvider{
+  id: string,
+  travel: ITravel;
+  provider: IProvider;
+}
+
+  export interface IProvider{
+    id: string,
+    name: string;
+    description: string;
+    travelProviders: ITravelProvider[];
+  }
+
+  export interface IReview{
+    id: string
+    user: IUser,
+    travel: ITravel,
+    review: string,
+    stars: number;
+  }
+
+  export interface IPromotion{
+    id: string,
+    travel: ITravel,
+    discount: number,
+    validUntil: Date,
+  }
+
+  export interface ITravel {
+    name: string,
+    country: string,
+    city: string,
+    price: number,
+    description: string,
+    serviceType: string,
+    accesibilitySeal: string,
+    reviews: IReview[],
+    images: IImage[],
+    stars: number,
+    promotions: IPromotion[],
+    provider: ITravelProvider;
+    userHistory: IUser,
+  }
+
+
+  export interface IUserResponse {
+    login:boolean;
+    user: Partial<IUser> | null;
+    token: string;
+}
+
+
+  export interface IUserContextType {
+    user: Partial<IUserResponse> | null;
+    setUser: React.Dispatch<React.SetStateAction<Partial<IUserResponse> | null>>;
+    isLogged: boolean;
+    setIsLogged: (isLogged: boolean) => void;
+    login: (credentials: ILogin) => Promise<boolean>;
+    register: (user: Omit<IUser, "id">) => Promise<boolean>;
+    logOut: () => void;
+}

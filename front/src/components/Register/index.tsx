@@ -3,12 +3,12 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { IRegisterFormValues } from "../../interfaces/interfaces";
+import { IRegister } from "../../interfaces/interfaces";
 
 const Register: React.FC = () => {
-  const initialValues: IRegisterFormValues = {
-    username: '',
-    fullName: '',
+  const initialValues: IRegister = {
+    name: '',
+    phone: 0,
     email: '',
     password: '',
     confirmPassword: '',
@@ -28,7 +28,7 @@ const Register: React.FC = () => {
       .required('Repetir la contraseña es obligatorio'),
   });
 
-  const handleSubmit = (values: IRegisterFormValues) => {
+  const handleSubmit = (values: IRegister) => {
     console.log('Datos del formulario:', values);
   };
 
@@ -44,33 +44,33 @@ const Register: React.FC = () => {
             <Form className="space-y-4">
               <div>
                 <label htmlFor="username" className="block text-xl font-medium">
-                  Nombre de usuario
+                  Nombre Completo
                 </label>
                 <Field
                   type="text"
-                  id="username"
-                  name="username"
+                  id="name"
+                  name="name"
                   className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-sivoy-green"
                 />
                 <ErrorMessage
-                  name="username"
+                  name="name"
                   component="div"
                   className="text-red-500 text-xl mt-1"
                 />
               </div>
 
               <div>
-                <label htmlFor="fullName" className="block text-xl font-medium">
-                  Nombre completo
+                <label htmlFor="phone" className="block text-xl font-medium">
+                  Numero de telefono
                 </label>
                 <Field
-                  type="text"
-                  id="fullName"
-                  name="fullName"
+                  type="number"
+                  id="phone"
+                  name="phone"
                   className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-sivoy-green"
                 />
                 <ErrorMessage
-                  name="fullName"
+                  name="phone"
                   component="div"
                   className="text-red-500 text-xl mt-1"
                 />
