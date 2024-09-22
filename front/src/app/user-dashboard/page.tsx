@@ -1,9 +1,11 @@
-function UserDashboard() {
+import UserDashboard from "@/components/UserDashboard";
 
-    return (
-        <div>
-        </div>
-    )
-};
 
-export default UserDashboard;
+ const UserDashboardPage = () => {
+  return (
+    <div>
+        <UserDashboard />
+    </div>
+  )
+}
+ export default UserDashboardPage;

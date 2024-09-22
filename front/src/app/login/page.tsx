@@ -14,7 +14,7 @@ function LoginPage() {
           <h2 className="text-white text-4xl mb-6 text-center m-3">¿Todavía no sos parte de la comunidad de Sí, Voy!? Registrate aca: <button className=" w-auto p-3 bg-blue-500 text-white py-3 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-sivoy-green">Registrarse</button></h2>
         </div>
 
-        <div className="ml-6 bg-white rounded-full p-5">
+        <div className="m-6 bg-white rounded-full p-5">
           <Image
             src="https://res.cloudinary.com/ddzcann0m/image/upload/v1726790351/wolbf7thf78to3chhlk8.png"
             width={400}
