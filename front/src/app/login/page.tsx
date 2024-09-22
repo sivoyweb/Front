@@ -3,14 +3,7 @@ import Image from "next/image";
 
 function LoginPage() {
   return (
-    <div className="relative">
-      <Image
-        src="https://res.cloudinary.com/ddzcann0m/image/upload/v1726792832/lay5koxqn1haaos3wqmm.jpg"
-        alt="Login"
-        fill
-        className="object-cover z-0"
-        priority={true}
-      />
+    <div className="relative bg-sivoy-gradient">
 
       <div className="relative z-10 flex justify-center items-center h-full bg-black bg-opacity-50">
         <div className="flex flex-col justify-center p-8">

@@ -3,11 +3,11 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { ILoginFormValues } from "../../interfaces/interfaces";
+import { ILogin} from "../../interfaces/interfaces";
 
 const Login: React.FC = () => {
-  const initialValues: ILoginFormValues = {
-    username: '',
+  const initialValues: ILogin = {
+    email: '',
     password: '',
   };
 
@@ -16,7 +16,7 @@ const Login: React.FC = () => {
     password: Yup.string().required('La contraseña es obligatoria'),
   });
 
-  const handleSubmit = (values: ILoginFormValues) => {
+  const handleSubmit = (values: ILogin) => {
     console.log('Datos del formulario:', values);
   };
 
@@ -32,17 +32,17 @@ const Login: React.FC = () => {
           {({ isSubmitting }) => (
             <Form className="space-y-4">
               <div>
-                <label htmlFor="username" className="block text-xl font-medium">
-                  Nombre de usuario
+                <label htmlFor="email" className="block text-xl font-medium">
+                  Email
                 </label>
                 <Field
                   type="text"
-                  id="username"
-                  name="username"
+                  id="email"
+                  name="email"
                   className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-sivoy-green"
                 />
                 <ErrorMessage
-                  name="username"
+                  name="email"
                   component="div"
                   className="text-red-500 text-xl mt-1"
                 />
