@@ -1,11 +1,16 @@
 "use client";
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { ILogin} from "../../interfaces/interfaces";
+import { useRouter } from 'next/navigation';
+import { UserContext } from '@/context/userContext';
 
 const Login: React.FC = () => {
+  const router = useRouter();
+  const {login} = useContext(UserContext);
+
   const initialValues: ILogin = {
     email: '',
     password: '',
@@ -16,10 +21,11 @@ const Login: React.FC = () => {
     password: Yup.string().required('La contraseña es obligatoria'),
   });
 
-  const handleSubmit = (values: ILogin) => {
-    console.log('Datos del formulario:', values);
-  };
-
+  const handleSubmit = async (values: { email: string; password: string }) => {
+    const resultado = await login(values);
+    if (resultado) router.push("/home");
+    if(!resultado) alert("Error al conectarse");
+  }
   return (
     <div className="p-10">
       <div className="bg-slate-50 m-5 p-8 rounded shadow-xl w-full max-w-md mx-4 md:mx-auto">

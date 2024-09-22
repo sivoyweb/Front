@@ -1,11 +1,16 @@
 "use client";
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { IRegister } from "../../interfaces/interfaces";
+import { useRouter } from "next/navigation";
+import { UserContext } from "../../context/userContext";
 
 const Register: React.FC = () => {
+  const router = useRouter();
+  const {register} = useContext(UserContext);
+
   const initialValues: IRegister = {
     name: '',
     phone: 0,
@@ -28,8 +33,10 @@ const Register: React.FC = () => {
       .required('Repetir la contraseña es obligatorio'),
   });
 
-  const handleSubmit = (values: IRegister) => {
-    console.log('Datos del formulario:', values);
+  const handleSubmit = async(values: IRegister) => {
+    const resultado = await register(values);
+        if (resultado) router.push("/home");
+        if (!resultado) alert("Error al crear el usuario")
   };
 
   return (
