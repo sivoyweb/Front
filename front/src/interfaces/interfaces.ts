@@ -119,6 +119,7 @@ export interface ITravelProvider{
     name: string,
     country: string,
     city: string,
+    date: Date,
     price: number,
     description: string,
     serviceType: string,
