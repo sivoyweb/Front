@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faWheelchairMove, faMapLocationDot, faGlobe, faFileLines, faCircleInfo, faHandshakeAngle, faLocationDot, faMugHot} from "@fortawesome/free-solid-svg-icons"
 import { HomeButton } from "@/components/HomeButton";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import HomeGridComponent from "@/components/HomeGrid";
 
 const Home:React.FC = () => {
 
@@ -31,11 +32,7 @@ const Home:React.FC = () => {
         <h2 className="font-arialroundedmtbold text-2xl text-sivoy-blue">Destinos populares</h2>
         <p className="text-lg text-sivoy-blue mt-1">Descubre los destinos accesibles mejor valorados de Argentina.</p>
 
-        {/* <div className="mt-5">
-          <div>
-            <p>Acá va el grid de tarjetas</p>
-          </div>
-        </div> */}
+        <HomeGridComponent />
       </section>
 
       <section className="flex text-justify mt-10 ml-5">

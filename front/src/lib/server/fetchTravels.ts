@@ -2,7 +2,7 @@ import { ITravel } from "@/interfaces/interfaces";
 
 export async function fetchTravels() {
     try {
-        const response = await fetch("http://localhost:3002/travels?page=1&limit=5");
+        const response = await fetch("http://localhost:3001/travels");
 
         if (!response.ok) {
             throw new Error(`Error al obtener los datos: ${response.status} ${response.statusText}`);
@@ -18,7 +18,7 @@ export async function fetchTravels() {
 
 
 export async function fetchTravelById(id: string): Promise<ITravel> {
-    const response = await fetch(`http://localhost:3002/travels/${id}`);
+    const response = await fetch(`http://localhost:3001/travels/${id}`);
     const travel = await response.json();
     return travel;
 }
