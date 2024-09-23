@@ -3,7 +3,7 @@
 
 import { createContext, useEffect, useState } from "react"
 import { IUserContextType, IUserResponse, ILogin, IRegister } from "../interfaces/interfaces"
-import {  postLogin, postRegister } from "@/lib/server/fetchUsers";
+import { postLogin, postRegister} from "@/lib/server/fetchUsers";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 
