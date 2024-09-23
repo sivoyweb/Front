@@ -30,6 +30,9 @@ const Register: React.FC = () => {
       .required('El correo electrónico es obligatorio'),
     password: Yup.string()
       .min(6, 'La contraseña debe tener al menos 6 caracteres')
+      .matches(/[A-Z]/, 'Debe contener al menos una letra mayúscula')
+      .matches(/\d/, 'Debe contener al menos un número')
+      .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Debe contener al menos un signo')
       .required('La contraseña es obligatoria'),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password')], 'Las contraseñas no coinciden')
