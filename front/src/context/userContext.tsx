@@ -4,6 +4,7 @@
 import { createContext, useEffect, useState } from "react"
 import { IUserContextType, IUserResponse, ILogin, IRegister } from "../interfaces/interfaces"
 import {  postLogin, postRegister } from "@/lib/server/fetchUsers";
+import Swal from "sweetalert2";
 
 
 export const UserContext = createContext<IUserContextType>({
@@ -38,11 +39,19 @@ const login = async (credentials: ILogin) => {
         const data = await postRegister(user);
 
         if (data.id){
-            login({email: user.email, password: user.password});
-            return true;
+           Swal.fire({
+            title:'Registro exitoso',
+            text:'Inicie Sesion',
+            icon:'success'
+           })
         }
         return false;
     } catch (error) {
+        Swal.fire({
+            title:'Algo salio mal',
+            text:'vuelva a intentarlo',
+            icon:'error',
+           })
         return false;
     }
 };
