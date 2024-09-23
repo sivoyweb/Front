@@ -15,7 +15,7 @@ function TravelCard({ travels }: ITravelCardProps) {
 
   return (
     <div className='flex justify-center'>
-      <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-3 transition-transform duration-300 hover:scale-110">
+      <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow m-3 transition-transform duration-300 hover:scale-110">
 
         <div onClick={handleClick} className="cursor-pointer">
           <Image 
@@ -28,7 +28,7 @@ function TravelCard({ travels }: ITravelCardProps) {
         </div>
         <div className="p-5">
           <div onClick={handleClick} className="cursor-pointer">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
               {travels.name}
             </h5>
           </div>
