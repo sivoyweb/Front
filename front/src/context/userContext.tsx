@@ -30,44 +30,52 @@ const [isLogged, setIsLogged] = useState(false);
 const login = async (credentials: ILogin) => {
     try {
         const data = await postLogin(credentials);
-        alert(data);
         setUser(data);
         localStorage.setItem("user", JSON.stringify(data));
         localStorage.setItem("token", data.token);
-        alert("Se conecto");
+        Swal.fire({
+            title:'Inicio de sesion exitoso',
+            text:'Bienvenido',
+            icon:'success'
+           });
         return true;
     } catch (error) {
         return false;
     }    
 };
 
- const register = async (user: IRegister) =>{
+const register = async (user: IRegister) => {
     try {
-        const data = await postRegister(user);
-
-        if (data.id){
-            
-           Swal.fire({
-            title:'Registro exitoso',
-            text:'Inicie Sesion',
-            icon:'success'
-           });
-           setTimeout(() => {
-            router.push('/login') ;
-          }, 2000);
-           ;
-        }
-        return false;
-    } catch (error) {
+      const data = await postRegister(user);
+      if (data && data.message === 'User created successfully') {
         Swal.fire({
-            title:'Algo salio mal',
-            text:'vuelva a intentarlo',
-            icon:'error',
-           })
+          title: 'Registro exitoso',
+          text: 'Inicie Sesión',
+          icon: 'success',
+        });
+  
+        setTimeout(() => {
+          router.push('/login');
+        }, 2000);
+  
+        return true;
+      } else {
+        Swal.fire({
+          title: 'Algo salió mal',
+          text: 'Vuelva a intentarlo',
+          icon: 'error',
+        });
         return false;
+      }
+    } catch (error) {
+      Swal.fire({
+        title: 'Algo salió mal',
+        text: 'Vuelva a intentarlo',
+        icon: 'error',
+      });
+      return false;
     }
-};
-
+  };
 
 
 const logOut = () => {

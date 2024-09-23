@@ -13,7 +13,7 @@ const Register: React.FC = () => {
 
   const initialValues: IRegister = {
     name: '',
-    phone: 0,
+    phone: "",
     email: '',
     password: '',
     confirmPassword: '',
@@ -38,7 +38,7 @@ const Register: React.FC = () => {
 
   const handleSubmit = async (values: IRegister) => {
     const resultado = await register(values);
-    if (resultado) router.push("/login");
+    if (resultado){ router.push("/login");}
     else alert("Error al crear el usuario");
   };
 

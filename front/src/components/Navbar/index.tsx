@@ -34,7 +34,10 @@ const paths = {
 
 const Navbar: React.FC = () => {
   const router = useRouter();
-  const {isLogged} = useContext(UserContext);
+  const {isLogged, logOut} = useContext(UserContext);
+  const handleClick = ()=>{ logOut()
+  }
+
 
   return (
           <Disclosure as="nav" className="bg-sivoy-blue text-white font-arialroundedmtbold">
@@ -107,7 +110,7 @@ const Navbar: React.FC = () => {
                         </Link>
                       </MenuItem>
                       <MenuItem>
-                        <Link href="#" className="block px-4 py-2 text-sm text-gray-700">
+                        <Link href="#" onClick={handleClick} className="block px-4 py-2 text-sm text-gray-700">
                           Cerrar Sesión
                         </Link>
                       </MenuItem>
