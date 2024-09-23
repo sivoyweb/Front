@@ -30,9 +30,11 @@ const [isLogged, setIsLogged] = useState(false);
 const login = async (credentials: ILogin) => {
     try {
         const data = await postLogin(credentials);
+        alert(data);
         setUser(data);
         localStorage.setItem("user", JSON.stringify(data));
         localStorage.setItem("token", data.token);
+        alert("Se conecto");
         return true;
     } catch (error) {
         return false;

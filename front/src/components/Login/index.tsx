@@ -3,13 +3,13 @@
 import React, { useContext } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { ILogin} from "../../interfaces/interfaces";
+import { ILogin } from "../../interfaces/interfaces";
 import { useRouter } from 'next/navigation';
 import { UserContext } from '@/context/userContext';
 
 const Login: React.FC = () => {
   const router = useRouter();
-  const {login} = useContext(UserContext);
+  const { login } = useContext(UserContext);
 
   const initialValues: ILogin = {
     email: '',
@@ -17,15 +17,18 @@ const Login: React.FC = () => {
   };
 
   const validationSchema = Yup.object({
-    username: Yup.string().required('El nombre de usuario es obligatorio'),
+    email: Yup.string()
+      .email('Correo electrónico inválido')
+      .required('El correo electrónico es obligatorio'),
     password: Yup.string().required('La contraseña es obligatoria'),
   });
 
-  const handleSubmit = async (values: { email: string; password: string }) => {
+  const handleSubmit = async (values: ILogin) => {
     const resultado = await login(values);
-    if (resultado) router.push("/home");
-    if(!resultado) alert("Error al conectarse");
-  }
+    if (resultado) router.push("/");
+    else alert("Error al conectarse");
+  };
+
   return (
     <div className="p-10">
       <div className="bg-slate-50 m-5 p-8 rounded shadow-xl w-full max-w-md mx-4 md:mx-auto">
