@@ -64,7 +64,7 @@ type BlogPost = {
               <div className="p-4">
                 <p className="text-sm text-gray-500 mb-2">{post.date}</p>
                 <h2 className="text-xl font-semibold mb-4">{post.title}</h2>
-                <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                <button className="-m-1">
                   Leer más
                 </button>
               </div>
