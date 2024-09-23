@@ -1,50 +1,51 @@
 // components/TravelSearch.tsx
 "use client";
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
+import { TravelContext } from '../../context/travelContext';
 import { ITravel } from '@/interfaces/interfaces';
-import { fetchTravels } from '@/lib/server/fetchTravels';
 
 interface TravelSearchProps {
-  setSearchResults: (travels: ITravel[]) => void; // Función para actualizar resultados
+  setFilteredTravels: (travels: ITravel[]) => void; // Prop para actualizar los resultados filtrados
 }
 
-const TravelSearch = ({ setSearchResults }: TravelSearchProps) => {
-  const [query, setQuery] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+const TravelSearch = ({ setFilteredTravels }: TravelSearchProps) => {
+  const { travels } = useContext(TravelContext);
+  const [queryService, setQueryService] = useState('');
+  const [queryLocation, setQueryLocation] = useState('');
 
-  const fetchTravelData = async () => {
-    setLoading(true);
-    setError('');
-
-    try {
-      const fetchedTravels = await fetchTravels(query); // Asumiendo que tu función puede filtrar por query
-      setSearchResults(fetchedTravels); // Actualiza los resultados en Destinations
-    } catch (error) {
-      setError('Error al obtener los viajes. Intenta de nuevo.');
-    } finally {
-      setLoading(false);
-    }
+  const handleSearch = () => {
+    const results = travels.filter(travel => 
+      travel.name.toLowerCase().includes(queryService.toLowerCase()) &&
+      travel.city.toLowerCase().includes(queryLocation.toLowerCase())
+    );
+    setFilteredTravels(results);
   };
 
-  useEffect(() => {
-    if (query) {
-      fetchTravelData();
-    } else {
-      setSearchResults([]); // Limpia resultados si no hay consulta
-    }
-  }, [query]);
-
   return (
-    <div>
-      <input
-        type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search travels"
-      />
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
+    <div className="flex flex-row space-x-4 items-center">
+      <div>
+        <h1 className="text-white text-2xl mb-6 font-arialroundedmtbold">¿Qué servicio busca?</h1>
+        <input
+          type="text"
+          value={queryService}
+          onChange={(e) => setQueryService(e.target.value)}
+          placeholder="Escribe algo..."
+          className="px-4 py-2 w-64 rounded-md bg-white/80"
+        />
+      </div>
+      <div>
+        <h1 className="text-white text-2xl mb-6 font-arialroundedmtbold">¿En dónde?</h1>
+        <input
+          type="text"
+          value={queryLocation}
+          onChange={(e) => setQueryLocation(e.target.value)}
+          placeholder="Escribe algo..."
+          className="px-4 py-2 w-64 rounded-md bg-white/80"
+        />
+        <button className="ml-8" onClick={handleSearch}>
+          Buscar
+        </button>
+      </div>
     </div>
   );
 };

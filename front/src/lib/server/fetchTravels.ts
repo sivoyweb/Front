@@ -1,6 +1,6 @@
 import { ITravel } from "@/interfaces/interfaces";
 
-export async function fetchTravels(query = '', page = 1, limit = 5): Promise<ITravel[]> {
+export async function fetchTravels(): Promise<ITravel[]> {
     try {
         const response = await fetch("http://localhost:3001/travels");
 

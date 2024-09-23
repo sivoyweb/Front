@@ -1,4 +1,5 @@
 import TravelGridComponent from "@/components/TravelGrid";
+
 import Image from "next/image";
 
 function Destinations() {
