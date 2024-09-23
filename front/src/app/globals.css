@@ -25,6 +25,35 @@ body {
   background-color: #ffffff;
 }
 
+button {
+  border-radius: 1.5rem;
+  background-color: #df5430; 
+  padding: 0.5rem 1.5rem;
+  text-align: center; 
+  font-size: 0.875rem;
+  color: white; 
+  transition: all 0.3s ease; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-left: 0.5rem;
+}
+
+button:hover {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); 
+  background-color: #ea580c; 
+}
+
+button:focus, 
+button:active {
+  background-color: #ea580c; 
+  box-shadow: none; 
+}
+
+button:disabled {
+  pointer-events: none; 
+  opacity: 0.5;
+  box-shadow: none;
+}
+
 .shadow-gradient {
   background: linear-gradient(145deg, rgba(26, 121, 112, 0.2), rgba(26, 121, 112, 0.5));
   box-shadow: 
