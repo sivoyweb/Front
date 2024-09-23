@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+  font-family: "arialroundedmtbold";
+  src: url('/fonts/arialroundedmtbold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "dinroundpro";
+  src: url('/fonts/dinroundpro.otf') format('opentype');
+}
+
+@layer utilities {
+  .bg-sivoy-gradient {
+    background-image: linear-gradient(to right, #43af69, #355b58, #2a2f44);
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+}
+
+button {
+  border-radius: 1.5rem;
+  background-color: #df5430; 
+  padding: 0.5rem 1.5rem;
+  text-align: center; 
+  font-size: 0.875rem;
+  color: white; 
+  transition: all 0.3s ease; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-left: 0.5rem;
+}
+
+button:hover {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); 
+  background-color: #ea580c; 
+}
+
+button:focus, 
+button:active {
+  background-color: #ea580c; 
+  box-shadow: none; 
+}
+
+button:disabled {
+  pointer-events: none; 
+  opacity: 0.5;
+  box-shadow: none;
+}
+
+.shadow-gradient {
+  background: linear-gradient(145deg, rgba(26, 121, 112, 0.2), rgba(26, 121, 112, 0.5));
+  box-shadow: 
+    0 4px 6px rgba(26, 121, 112, 0.1), 
+    0 10px 15px rgba(26, 121, 112, 0.2), 
+    0 20px 25px rgba(26, 121, 112, 0.3), 
+    inset 0 1px 3px rgba(26, 121, 112, 0.4);
+}
