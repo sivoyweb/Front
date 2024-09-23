@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { Metadata } from "next";
 import "./globals.css";
 import { UserProvider } from "@/context/userContext";
+import { TravelProvider } from "@/context/travelContext";
 
 export const metadata: Metadata = {
   title: "Sí, Voy | Turismo Accesible",
@@ -18,10 +19,12 @@ export default function RootLayout({
     <html lang="en">
       <body>
       <UserProvider>
+        <TravelProvider>
             <Navbar />
             {children}
            <Footer />
-           </UserProvider>
+        </TravelProvider>
+      </UserProvider>
       </body>
     </html>
   );

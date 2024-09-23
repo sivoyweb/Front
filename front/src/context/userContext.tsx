@@ -44,13 +44,16 @@ const login = async (credentials: ILogin) => {
         const data = await postRegister(user);
 
         if (data.id){
-
-           await Swal.fire({
+            
+           Swal.fire({
             title:'Registro exitoso',
             text:'Inicie Sesion',
             icon:'success'
            });
-           router.push('/login');
+           setTimeout(() => {
+            router.push('/login') ;
+          }, 2000);
+           ;
         }
         return false;
     } catch (error) {
