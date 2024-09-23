@@ -19,9 +19,10 @@ export const UserContext = createContext<IUserContextType>({
     logOut: () => {},
 });
 
-const router = useRouter();
+
 
 export const UserProvider = ({children}:{children: React.ReactNode})=>{
+const router = useRouter();
 const [user, setUser] = useState<Partial<IUserResponse> | null>(null);
 const [isLogged, setIsLogged] = useState(false);
 
