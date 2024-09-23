@@ -2,7 +2,7 @@
 "use client"
 
 import { createContext, useEffect, useState } from "react"
-import { IUserContextType, IUser, IUserResponse, ILogin } from "../interfaces/interfaces"
+import { IUserContextType, IUserResponse, ILogin, IRegister } from "../interfaces/interfaces"
 import {  postLogin, postRegister } from "@/lib/server/fetchUsers";
 
 
@@ -33,7 +33,7 @@ const login = async (credentials: ILogin) => {
     }    
 };
 
- const register = async (user: Omit<IUser, "id">) =>{
+ const register = async (user: IRegister) =>{
     try {
         const data = await postRegister(user);
 

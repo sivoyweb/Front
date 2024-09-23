@@ -144,6 +144,6 @@ export interface ITravelProvider{
     isLogged: boolean;
     setIsLogged: (isLogged: boolean) => void;
     login: (credentials: ILogin) => Promise<boolean>;
-    register: (user: Omit<IUser, "id">) => Promise<boolean>;
+    register: (user: IRegister) => Promise<boolean>;
     logOut: () => void;
 }
