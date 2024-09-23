@@ -27,6 +27,7 @@ const navigation = [
 const paths = {
   login: "/login",
   register: "/register",
+  home: "/",
 };
 
 const Navbar: React.FC = () => {
@@ -49,11 +50,10 @@ const Navbar: React.FC = () => {
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex items-center">
                     <Image
-                      alt="Your Company"
+                      alt="Sí, voy"
                       src={logo}
-                      className="block h-12 w-auto"
-                      width={70}
-                      height={70}
+                      className="w-auto"
+                      onClick={() => router.push(paths.home)}
                     />
                   </div>
                 </div>
