@@ -149,6 +149,9 @@ export interface ITravelContextType {
   setNoResults: (noResults: boolean) => void;
 }
 
+export interface TravelSearchProps {
+  onSearchToggle: (searching: boolean) => void;
+}
 
   export interface IUserContextType {
     user: Partial<IUserResponse> | null;

@@ -2,9 +2,10 @@
 import { useContext, useRef, useState } from "react";
 import { TravelContext } from "@/context/travelContext";
 import { FaChevronDown } from "react-icons/fa";
+import { TravelSearchProps } from "@/interfaces/interfaces";
 
 
-const TravelSearch = () => {
+const TravelSearch:React.FC<TravelSearchProps> = ({onSearchToggle}) => {
   const { travels } = useContext(TravelContext);
   const inputRef = useRef<HTMLInputElement>(null); 
   const cityInputRef = useRef<HTMLInputElement>(null); 
@@ -22,6 +23,7 @@ const TravelSearch = () => {
         travel.city.toLowerCase().includes(texto)
       );
       setFilteredTravels(resultado);
+      onSearchToggle(texto.length > 0); 
 
       if (resultado.length === 0) {
         setNoResults(true);
