@@ -4,9 +4,12 @@
 import { createContext, useEffect, useState } from "react"
 import { IUserContextType, IUserResponse, ILogin, IRegister } from "../interfaces/interfaces"
 import {  postLogin, postRegister } from "@/lib/server/fetchUsers";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
 
 export const UserContext = createContext<IUserContextType>({
+    
     user: null,
     setUser: () => {},
     isLogged: false,
@@ -16,7 +19,10 @@ export const UserContext = createContext<IUserContextType>({
     logOut: () => {},
 });
 
+
+
 export const UserProvider = ({children}:{children: React.ReactNode})=>{
+const router = useRouter();
 const [user, setUser] = useState<Partial<IUserResponse> | null>(null);
 const [isLogged, setIsLogged] = useState(false);
 
@@ -38,11 +44,24 @@ const login = async (credentials: ILogin) => {
         const data = await postRegister(user);
 
         if (data.id){
-            login({email: user.email, password: user.password});
-            return true;
+            
+           Swal.fire({
+            title:'Registro exitoso',
+            text:'Inicie Sesion',
+            icon:'success'
+           });
+           setTimeout(() => {
+            router.push('/login') ;
+          }, 2000);
+           ;
         }
         return false;
     } catch (error) {
+        Swal.fire({
+            title:'Algo salio mal',
+            text:'vuelva a intentarlo',
+            icon:'error',
+           })
         return false;
     }
 };
