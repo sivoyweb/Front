@@ -15,7 +15,7 @@ function RegisterPage() {
           
         </div>
 
-        <div className="ml-6 bg-white rounded-full p-5">
+        <div className="m-6 bg-white rounded-full p-5">
           <Image
             src="https://res.cloudinary.com/ddzcann0m/image/upload/v1726790351/wolbf7thf78to3chhlk8.png"
             width={400}

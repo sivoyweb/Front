@@ -12,7 +12,7 @@ function Footer() {
             <footer className="bg-sivoy-blue text-white font-arialroundedmtbold p-10">
               <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-start bg-sivoy-blue py-4 space-y-6 md:space-y-0">
                 {/* Bloque izquierdo */}
-                <div className="w-full md:w-1/2 lg:w-1/3 h-64 bg-sivoy-blue p-4 rounded-lg relative">
+                <div className="w-full md:w-1/2 lg:w-1/3 h-72 bg-sivoy-blue rounded-lg relative">
                   <div className="relative w-full h-full">
                     <Image
                       src={fotoFooter}
