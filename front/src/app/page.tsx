@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faWheelchairMove, faMapLocationDot, faGlobe, faFileLines, faCircleInfo, faHandshakeAngle, faLocationDot, faMugHot} from "@fortawesome/free-solid-svg-icons"
 import { HomeButton } from "@/components/HomeButton";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import HomeGridComponent from "@/components/HomeGrid";
+import HomeGridComponent from "@/components/HomeDestinationGrid";
 
 const Home:React.FC = () => {
 

@@ -6,7 +6,7 @@ export interface ILogin {
 
   export interface IRegister{
     name: string,
-    phone: number,
+    phone: string,
     email: string,
     password: string,
     confirmPassword: string,
@@ -83,7 +83,6 @@ export interface IImage{
   id: string,
   url: string,
   publicId: string,
-
 }
 
 export interface ITravelProvider{
@@ -157,7 +156,8 @@ export interface ITravelContextType {
     logOut: () => void;
 }
 
-
 export interface ITravelCardProps {
-  travels: ITravel;
-}
+  travels: ITravel; 
+  index?: number; 
+};
+

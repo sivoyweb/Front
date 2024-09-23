@@ -3,7 +3,7 @@
 
 import { createContext, useEffect, useState } from "react"
 import { IUserContextType, IUserResponse, ILogin, IRegister } from "../interfaces/interfaces"
-import {  postLogin, postRegister } from "@/lib/server/fetchUsers";
+import { postLogin, postRegister} from "@/lib/server/fetchUsers";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 
@@ -30,9 +30,11 @@ const [isLogged, setIsLogged] = useState(false);
 const login = async (credentials: ILogin) => {
     try {
         const data = await postLogin(credentials);
+        alert(data);
         setUser(data);
         localStorage.setItem("user", JSON.stringify(data));
         localStorage.setItem("token", data.token);
+        alert("Se conecto");
         return true;
     } catch (error) {
         return false;

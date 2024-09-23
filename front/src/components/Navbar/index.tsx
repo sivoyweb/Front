@@ -15,6 +15,8 @@ import { useRouter } from "next/navigation";
 import React from "react";
 import logo from "../../../public/assets/logo.png";
 import Link from "next/link";
+import { useContext } from "react";
+import { UserContext } from "@/context/userContext";
 
 const navigation = [
   { name: "Destinos", href: "/destinations" },
@@ -29,8 +31,10 @@ const paths = {
   home: "/",
 };
 
+
 const Navbar: React.FC = () => {
   const router = useRouter();
+  const {isLogged} = useContext(UserContext);
 
   return (
           <Disclosure as="nav" className="bg-sivoy-blue text-white font-arialroundedmtbold">
@@ -84,7 +88,7 @@ const Navbar: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Menú desplegable para usuario */}
+                {isLogged &&
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 z-50">
                   <Menu as="div" className="relative ml-3">
                     <MenuButton className="relative flex rounded-full bg-dark text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -110,6 +114,7 @@ const Navbar: React.FC = () => {
                     </MenuItems>
                   </Menu>
                 </div>
+                }
               </div>
             </div>
 
