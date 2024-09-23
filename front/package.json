@@ -17,6 +17,7 @@
     "@headlessui/react": "^2.1.8",
     "@heroicons/react": "^2.1.5",
     "@svgr/webpack": "^8.1.0",
+    "axios": "^1.7.7",
     "cloudinary": "^2.5.0",
     "formik": "^2.4.6",
     "next": "^14.2.11",
