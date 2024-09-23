@@ -143,6 +143,10 @@ export interface ITravelContextType {
   travels: ITravel[];
   isLoading: boolean;
   error: string | null;
+  filteredTravels: ITravel[];
+  noResults:boolean;
+  setFilteredTravels: (travels: ITravel[]) => void;
+  setNoResults: (noResults: boolean) => void;
 }
 
 
