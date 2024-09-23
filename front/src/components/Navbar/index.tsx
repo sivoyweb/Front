@@ -17,11 +17,10 @@ import logo from "../../../public/assets/logo.png";
 import Link from "next/link";
 
 const navigation = [
-  { name: "Inicio", href: "/" },
-  { name: "Destinos", href: "destinations" },
-  { name: "Servicios a Empresas", href: "business-services" },
-  { name: "Blog", href: "blog" },
-  { name: "Academia", href: "academy" },
+  { name: "Destinos", href: "/destinations" },
+  { name: "Servicios a Empresas", href: "/business-services" },
+  { name: "Blog", href: "/blog" },
+  { name: "Academia", href: "/academy" },
 ];
 
 const paths = {
@@ -86,25 +85,26 @@ const Navbar: React.FC = () => {
                 </div>
 
                 {/* Menú desplegable para usuario */}
-                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 z-50">
                   <Menu as="div" className="relative ml-3">
                     <MenuButton className="relative flex rounded-full bg-dark text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <span className="sr-only">Open user menu</span>
+                      <span className="sr-only">Menú de Usuario
+                      </span>
                     </MenuButton>
                     <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5">
                       <MenuItem>
                         <Link href="#" className="block px-4 py-2 text-sm text-gray-700">
-                          Your Profile
+                          Mi Perfil
                         </Link>
                       </MenuItem>
                       <MenuItem>
                         <Link href="#" className="block px-4 py-2 text-sm text-gray-700">
-                          Settings
+                          Configuración
                         </Link>
                       </MenuItem>
                       <MenuItem>
                         <Link href="#" className="block px-4 py-2 text-sm text-gray-700">
-                          Sign out
+                          Cerrar Sesión
                         </Link>
                       </MenuItem>
                     </MenuItems>
