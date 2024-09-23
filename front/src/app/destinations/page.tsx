@@ -39,15 +39,15 @@ function Destinations() {
       </div>
 
       <div className="text-center">
-        <h1 className="text-2xl font-bold text-left ml-8 py-6 font-arialroundedmtbold text-sivoy-blue">Balnearios</h1>
+        <h1 className="text-2xl font-bold text-left ml-8 py-6 font-arialroundedmtbold text-sivoy-blue -mb-4">Balnearios</h1>
         <div className='col-auto justify-center mb-10'>
           <TravelGridComponent />
         </div>
-        <h1 className="text-2xl font-bold text-left ml-8 py-6 font-arialroundedmtbold text-sivoy-blue">Gastronomía</h1>
+        <h1 className="text-2xl font-bold text-left ml-8 py-6 font-arialroundedmtbold text-sivoy-blue -mb-4">Gastronomía</h1>
         <div className='col-auto justify-center mb-10'>
           <TravelGridComponent />
         </div>
-        <h1 className="text-2xl font-bold text-left ml-8 py-6 font-arialroundedmtbold text-sivoy-blue">Alojamientos</h1>
+        <h1 className="text-2xl font-bold text-left ml-8 py-6 font-arialroundedmtbold text-sivoy-blue -mb-4">Alojamientos</h1>
         <div className='col-auto justify-center mb-10'>
           <TravelGridComponent />
         </div>
