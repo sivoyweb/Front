@@ -1,10 +1,10 @@
-import DestinationsCard from "@/components/DestinationCard";
+
+import TravelGridComponent from "@/components/TravelGrid";
 import Image from "next/image";
 
 function Destinations() {
     return (
       <div>
-       {/* Imagen con inputs y botón superpuestos */}
        <div className="relative w-full h-[500px]">
         <Image
           src="http://www.sivoy.com.ar/assets/upload/slider-2.jpg"
@@ -14,7 +14,6 @@ function Destinations() {
           className="object-cover"
         />
 
-        {/* Contenedor para los inputs y botón, posicionados en el centro */}
         <div className="absolute p-8 inset-0 flex flex-row justify-center items-center z-10">
         <div className="">
           <h1 className="text-white text-4xl mb-6 text-center ">Que servicio busca?</h1>
@@ -40,15 +39,15 @@ function Destinations() {
       <div className="text-center">
          <h1 className="text-4xl font-bold text-left ml-24 py-6">Balneareos</h1>
         <div className='col-auto justify-center mb-20'>
-            <DestinationsCard />
+            <TravelGridComponent />
           </div>
           <h1 className="text-4xl font-bold text-left ml-24 py-6">Gastronomia</h1>
           <div className='col-auto justify-center mb-20'>
-            <DestinationsCard />
+            <TravelGridComponent />
             </div>
             <h1 className="text-4xl font-bold text-left ml-24 py-6">Alojamientos</h1>
             <div className='col-auto justify-center mb-20'>
-            <DestinationsCard />
+            <TravelGridComponent />
       </div>
       </div>
       </div>

@@ -115,6 +115,7 @@ export interface ITravelProvider{
   }
 
   export interface ITravel {
+    id:string,
     name: string,
     country: string,
     city: string,
@@ -138,6 +139,13 @@ export interface ITravelProvider{
 }
 
 
+export interface ITravelContextType {
+  travels: ITravel[];
+  isLoading: boolean;
+  error: string | null;
+}
+
+
   export interface IUserContextType {
     user: Partial<IUserResponse> | null;
     setUser: React.Dispatch<React.SetStateAction<Partial<IUserResponse> | null>>;
@@ -146,4 +154,9 @@ export interface ITravelProvider{
     login: (credentials: ILogin) => Promise<boolean>;
     register: (user: IRegister) => Promise<boolean>;
     logOut: () => void;
+}
+
+
+export interface ITravelCardProps {
+  travels: ITravel;
 }
