@@ -1,5 +1,6 @@
 import Image from "next/image";
 import headerblog from "@/assets/headerblog.jpg"
+import { BlogButton } from "@/components/BlogButton";
 
 type BlogPost = {
     id: number
@@ -13,25 +14,25 @@ type BlogPost = {
       id: 1,
       date: "2024-05-17",
       title: "En busca de dinosaurios en territorios cuyanos",
-      imageUrl: ""
+      imageUrl: "http://admin.sivoy.com.ar/Images/Noticias/3095/cabecera/3095517202441849PM.png"
     },
     {
       id: 2,
       date: "2023-09-15",
       title: "Trevelin, pueblo de experiencias únicas",
-      imageUrl: ""
+      imageUrl: "http://admin.sivoy.com.ar/Images/Noticias/3094/cabecera/3094916202341753PM.jpg"
     },
     {
       id: 3,
       date: "2023-07-21",
       title: "Un viaje accesible a la selva misionera",
-      imageUrl: ""
+      imageUrl:"http://admin.sivoy.com.ar/Images/Noticias/3093/cabecera/3093721202310018PM.jpg"
     },
     {
       id: 4,
       date: "2022-11-02",
       title: "Integración laboral en el sector turístico para personas sordas",
-      imageUrl: ""
+      imageUrl: "http://admin.sivoy.com.ar/Images/Noticias/3089/cabecera/3089112202291205AM.webp"
     },
   ]
 
@@ -64,9 +65,7 @@ type BlogPost = {
               <div className="p-4">
                 <p className="text-sm text-gray-500 mb-2">{post.date}</p>
                 <h2 className="text-xl font-semibold mb-4">{post.title}</h2>
-                <button className="-m-1">
-                  Leer más
-                </button>
+                <BlogButton />
               </div>
             </div>
           ))}
