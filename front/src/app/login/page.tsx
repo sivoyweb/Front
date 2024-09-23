@@ -1,3 +1,4 @@
+import ButtonRegister from "@/components/ButtonRegister";
 import Login from "@/components/Login";
 import Image from "next/image";
 
@@ -11,7 +12,8 @@ function LoginPage() {
             Ingrese su nombre de usuario y contraseña para acceder.
           </h1>
           <Login />
-          <h2 className="text-white text-4xl mb-6 text-center m-3">¿Todavía no sos parte de la comunidad de Sí, Voy!? Registrate aca: <button className=" w-auto p-3 bg-blue-500 text-white py-3 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-sivoy-green">Registrarse</button></h2>
+          <h2 className="text-white text-4xl mb-6 text-center m-3">¿Todavía no sos parte de la comunidad de Sí, Voy!?</h2> 
+          <h2 className="text-white text-4xl mb-6 text-center m-3">Registrate aca: <ButtonRegister/></h2>
         </div>
 
         <div className="m-6 bg-white rounded-full p-5">

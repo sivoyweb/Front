@@ -1,3 +1,4 @@
+import ButtonLogin from "@/components/ButtonLogin";
 import Register from "@/components/Register";
 import Image from "next/image";
 
@@ -11,7 +12,7 @@ function RegisterPage() {
           Ingrese sus datos para crear la cuenta en Sí, Voy! (* Campos Obligatorios)
           </h1>
           <Register />
-          <h2 className="text-white text-4xl mb-6 text-center m-3">Si ya tenes una cuenta en si voy ingresa aca: <button className=" w-auto p-3 bg-blue-500 text-white py-3 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-sivoy-green">Ingresar</button></h2>
+          <h2 className="text-white text-4xl mb-6 text-center m-3">Si ya tenes una cuenta en si voy ingresa aca: <ButtonLogin/></h2>
           
         </div>
 
