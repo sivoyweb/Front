@@ -42,7 +42,6 @@ const Register: React.FC = () => {
   const handleSubmit = async (values: IRegister) => {
     const resultado = await register(values);
     if (resultado){ router.push("/login");}
-    else alert("Error al crear el usuario");
   };
 
   return (
