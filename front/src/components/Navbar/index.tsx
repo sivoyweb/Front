@@ -58,7 +58,7 @@ const Navbar: React.FC = () => {
                     <Image
                       alt="Sí, voy"
                       src={logo}
-                      className="w-auto"
+                      className="w-100"
                       onClick={() => router.push(paths.home)}
                     />
                   </div>
@@ -75,6 +75,8 @@ const Navbar: React.FC = () => {
                       {item.name}
                     </Link>
                   ))}
+
+                  {!isLogged &&
                   <div className="flex space-x-4">
                     <button
                       className="hover:text-sivoy-orange text-white font-small p-2 rounded-md text-sm"
@@ -88,8 +90,9 @@ const Navbar: React.FC = () => {
                     >
                       Registro
                     </button>
+                    </div>
+                  }
                   </div>
-                </div>
 
                 {isLogged &&
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 z-50">
@@ -100,7 +103,7 @@ const Navbar: React.FC = () => {
                     </MenuButton>
                     <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5">
                       <MenuItem>
-                        <Link href="#" className="block px-4 py-2 text-sm text-gray-700">
+                        <Link href="/user-dashboard" className="block px-4 py-2 text-sm text-gray-700">
                           Mi Perfil
                         </Link>
                       </MenuItem>
