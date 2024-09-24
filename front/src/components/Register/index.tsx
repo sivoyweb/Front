@@ -13,7 +13,7 @@ const Register: React.FC = () => {
 
   const initialValues: IRegister = {
     name: '',
-    phone: 0,
+    phone: "",
     email: '',
     password: '',
     confirmPassword: '',
@@ -30,6 +30,9 @@ const Register: React.FC = () => {
       .required('El correo electrónico es obligatorio'),
     password: Yup.string()
       .min(6, 'La contraseña debe tener al menos 6 caracteres')
+      .matches(/[A-Z]/, 'Debe contener al menos una letra mayúscula')
+      .matches(/\d/, 'Debe contener al menos un número')
+      .matches(/[!@#$%^&*(),.?":{}|<>]/, 'Debe contener al menos un signo')
       .required('La contraseña es obligatoria'),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password')], 'Las contraseñas no coinciden')
@@ -38,7 +41,7 @@ const Register: React.FC = () => {
 
   const handleSubmit = async (values: IRegister) => {
     const resultado = await register(values);
-    if (resultado) router.push("/login");
+    if (resultado){ router.push("/login");}
     else alert("Error al crear el usuario");
   };
 

@@ -1,6 +1,6 @@
 import { ITravel } from "@/interfaces/interfaces";
 
-export async function fetchTravels() {
+export async function fetchTravels(): Promise<ITravel[]> {
     try {
         const response = await fetch("http://localhost:3001/travels");
 
@@ -8,11 +8,11 @@ export async function fetchTravels() {
             throw new Error(`Error al obtener los datos: ${response.status} ${response.statusText}`);
         }
 
-        const travels = response.json();
+        const travels = await response.json();
         return travels;
     } catch (error) {
         console.error("Error en fetchTravels:", error);
-        throw error; 
+        throw error;
     }
 }
 
