@@ -38,13 +38,13 @@ const Home:React.FC = () => {
       <section className="flex text-justify mt-10 ml-5">
         <div className="flex flex-col items-center w-1/2">
           <a href="https://www.linkedin.com/in/ver%C3%B3nica-lorena-martinez-78a303a6/" className="flex flex-col items-center"> 
-            <Image src={vero} alt="Foto de perfil de Verónica Martínez" className="rounded-full mb-3 w-fit h-auto" />
-            <FontAwesomeIcon icon={faLinkedin} style={{color: "#229764", fontSize: "24px"}} />
+            <Image src={vero} alt="Foto de perfil de Verónica Martínez" className="rounded-full mb-3 w-100 h-auto" />
+            <FontAwesomeIcon icon={faLinkedin} style={{color: "#229764", fontSize: "25px"}} />
           </a>
         </div>
   
         <div className="ml-4 mr-16 w-1/2">
-          <h2 className="font-arialroundedmtbold text-2xl text-sivoy-blue">¿Quiénes somos?</h2>
+          <h2 className="font-arialroundedmtbold text-2xl text-sivoy-blue mt-4">¿Quiénes somos?</h2>
           <p className="text-sivoy-blue mt-1 text-lg">Somos una empresa formada por personas con discapacidad, comprometida con la diversidad, la inclusión y el bienestar de todas las personas. Nos dedicamos a generar un puente entre la oferta y la demanda de servicios turísticos adaptados, trabajando dentro del marco de la responsabilidad social empresarial para lograr un impacto positivo en la sociedad.</p>
           <h2 className="font-arialroundedmtbold text-2xl text-sivoy-blue mt-4">Nuestra Misión</h2>
           <p className="text-sivoy-blue mt-1 text-lg"><span className="font-arialroundedmtbold">Sí, voy</span> tiene como misión generar experiencias positivas en las personas con movilidad reducida, por medio de la gestión y promoción del turismo accesible y la transformación de entornos inclusivos, para garantizar el disfrute del ocio con autonomía.</p>
