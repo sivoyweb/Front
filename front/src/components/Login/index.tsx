@@ -1,15 +1,19 @@
 "use client";
 
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { ILogin } from "../../interfaces/interfaces";
 import { useRouter } from 'next/navigation';
 import { UserContext } from '@/context/userContext';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons"; 
+
 
 const Login: React.FC = () => {
   const router = useRouter();
   const { login } = useContext(UserContext);
+  const [showPassword, setShowPassword] = useState(false);
 
   const initialValues: ILogin = {
     email: '',
@@ -28,6 +32,10 @@ const Login: React.FC = () => {
     if (resultado) router.push("/");
     else alert("Error al conectarse");
   };
+  
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  }
 
   return (
     <div className="p-10">
@@ -57,16 +65,24 @@ const Login: React.FC = () => {
                 />
               </div>
 
-              <div>
+              <div className='relative'>
                 <label htmlFor="password" className="block text-xl font-medium">
                   Contraseña
                 </label>
                 <Field
-                  type="password"
+                   type={showPassword ? "text" : "password"}
                   id="password"
                   name="password"
                   className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-sivoy-green"
                 />
+                <span onClick={togglePasswordVisibility}
+                      className='absolute inset-y-0 right-3 mt-8 flex items-center text-sm leading-5 cursor-pointer'>
+                   {showPassword ? (
+                      <FontAwesomeIcon icon={faEyeSlash} />  
+                    ) : (
+                      <FontAwesomeIcon icon={faEye} /> 
+                    )}
+                </span>
                 <ErrorMessage
                   name="password"
                   component="div"

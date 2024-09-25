@@ -1,8 +1,21 @@
 "use client";
-import { useState } from "react";
+import { IUser } from "@/interfaces/interfaces";
+import { useEffect, useState } from "react";
 
 const UserDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [user, setUser] = useState<IUser | null>(null);
+ 
+  
+  useEffect(() => {
+   const userData = typeof window !== 'undefined' ? localStorage.getItem('user') : null;
+
+   if(userData){
+    const parsedData = JSON.parse(userData);
+    setUser(parsedData);
+   }
+  }, [])
+  
 
   return (
     <div className="flex h-screen bg-gray-100 font-arialroundedmtbold text-sivoy-blue">
@@ -63,7 +76,7 @@ const UserDashboard = () => {
         <header className="flex justify-between items-center bg-white shadow p-4">
           <h1 className="text-2xl font-semibold">Perfil</h1>
           <div className="flex items-center">
-            <span className="ml-2 text-sm font-medium">Bienvenido, usuario</span>
+            <span className="ml-2 text-sm font-medium">Bienvenido, {user?.name}</span>
           </div>
         </header>
 
