@@ -1,8 +1,9 @@
 "use client"
 import { useContext, useRef, useState } from "react";
 import { TravelContext } from "@/context/travelContext";
-import { FaChevronDown } from "react-icons/fa";
 import { TravelSearchProps } from "@/interfaces/interfaces";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faChevronDown} from "@fortawesome/free-solid-svg-icons"
 
 
 const TravelSearch:React.FC<TravelSearchProps> = ({onSearchToggle}) => {
@@ -52,14 +53,14 @@ const TravelSearch:React.FC<TravelSearchProps> = ({onSearchToggle}) => {
                 ref={inputRef}
                 type="text"
                 name="ciudad"
-                placeholder="Por ej:Buenos Aires"
+                placeholder="Por ej: Buenos Aires"
                 className="px-4 py-2 w-64 rounded-md bg-white/80"
                 onKeyUp={filtrarCiudad}
               />
             </div>
             <div className="">
               <h1 className="text-white text-2xl mb-6 font-arialroundedmtbold">
-                ¿Que buscas?
+                ¿Qué buscas?
               </h1>
               <input
                 ref={cityInputRef}
@@ -75,7 +76,7 @@ const TravelSearch:React.FC<TravelSearchProps> = ({onSearchToggle}) => {
                     onClick={() => setIsOpen(!isOpen)}
                     className="ml-2 focus:outline-none"
               >
-                <FaChevronDown className="text-gray-500" />
+                <FontAwesomeIcon icon={faChevronDown} style={{ color: "#ffffffa7" }} />
               </button>
             </div>
             <div

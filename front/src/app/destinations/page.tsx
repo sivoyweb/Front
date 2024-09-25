@@ -78,7 +78,6 @@ function Destinations() {
         <div className="col-auto justify-center mb-10">
           <TravelGridComponent />
         </div>
-                        <p>Contenido normal de la página.</p>
                     </div>
                 )}
             </div>
