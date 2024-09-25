@@ -6,6 +6,11 @@ import * as Yup from 'yup';
 import { IRegister } from "../../interfaces/interfaces";
 import { useRouter } from "next/navigation";
 import { UserContext } from "../../context/userContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGooglePlusG } from '@fortawesome/free-brands-svg-icons';
+import { signIn } from 'next-auth/react';
+
+
 
 const Register: React.FC = () => {
   const router = useRouter();
@@ -44,9 +49,28 @@ const Register: React.FC = () => {
     if (resultado){ router.push("/login");}
   };
 
+  
+    const googleAuth = async () => {
+      try {
+        await signIn('google');
+      } catch (error) {
+        console.error("Error al iniciar sesion con Google:",error)
+      }
+
+
+}
+  
+
   return (
-    <div className="bg-white mt-3 p-9 px-11 rounded shadow-lg w-full max-w-md mx-4 md:mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-center">Registrarse</h1>
+    <div className="bg-white mt-3 p-9 px-11 rounded shadow-lg w-full max-w-lg mx-4 md:mx-auto ">
+      <div className='flex items-center justify-between gap-x-4 mb-10'>
+      <h1 className="text-3xl font-bold">Registrarse o</h1>
+      <button className='text-2xl flex items-center font-bold bg-white text-blue-500 py-2 px-4 rounded hover:bg-gray-200 transition-colors'
+              onClick={googleAuth}>
+      <span className="mr-2">Iniciar Sesión</span>
+      <FontAwesomeIcon icon={faGooglePlusG} />
+      </button>
+      </div>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
