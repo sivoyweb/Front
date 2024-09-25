@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { UserContext } from "../../context/userContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGooglePlusG } from '@fortawesome/free-brands-svg-icons';
-import { signIn } from 'next-auth/react';
+
 
 
 
@@ -49,24 +49,18 @@ const Register: React.FC = () => {
     if (resultado){ router.push("/login");}
   };
 
-  
-    const googleAuth = async () => {
-      try {
-        await signIn('google');
-      } catch (error) {
-        console.error("Error al iniciar sesion con Google:",error)
-      }
-
-
-}
-  
+  const handleOauth = async (event:React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    window.location.href = `http://localhost:3000/auth/google/callback`;
+  };
 
   return (
     <div className="bg-white mt-3 p-9 px-11 rounded shadow-lg w-full max-w-lg mx-4 md:mx-auto ">
+      
       <div className='flex items-center justify-between gap-x-4 mb-10'>
       <h1 className="text-3xl font-bold">Registrarse o</h1>
       <button className='text-2xl flex items-center font-bold bg-white text-blue-500 py-2 px-4 rounded hover:bg-gray-200 transition-colors'
-              onClick={googleAuth}>
+              onClick={handleOauth}>
       <span className="mr-2">Iniciar Sesión</span>
       <FontAwesomeIcon icon={faGooglePlusG} />
       </button>

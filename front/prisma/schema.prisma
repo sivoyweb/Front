@@ -1,0 +1,141 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model blogs {
+  id      String   @id(map: "PK_e113335f11c926da929a625f118") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  title   String   @db.VarChar(255)
+  content String
+  date    DateTime @default(now()) @db.Date
+  images  images[]
+}
+
+model credentials {
+  id       String   @id(map: "PK_1e38bc43be6697cdda548ad27a6") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  email    String   @db.VarChar(255)
+  password String   @db.VarChar(255)
+  images   images[]
+  users    users?
+}
+
+model disabilities {
+  id       String  @id(map: "PK_58884be04270424ac64bf98d4a8") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name     String  @unique(map: "UQ_ebafd8b767b1e8aee5e70b03645") @db.VarChar(100)
+  category String  @db.VarChar
+  userId   String? @db.Uuid
+  users    users?  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_4eae3eba2722c679727ca313977")
+}
+
+model donations {
+  id          Int      @id(map: "PK_c01355d6f6f50fc6d1b4a946abf") @default(autoincrement())
+  mount       Int
+  date        DateTime @db.Timestamp(6)
+  description String   @db.VarChar(255)
+  userId      String?  @db.Uuid
+  users       users?   @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_cfd5edc39019b9001bd86e90f77")
+}
+
+model images {
+  id           String       @id(map: "PK_1fe148074c6a1a91b63cb9ee3c9") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  url          String       @default("URL default") @db.VarChar(255)
+  publicId     String       @default("public id default") @db.VarChar(255)
+  suggestionId Int?
+  travelId     String?      @db.Uuid
+  avatarUserId String?      @db.Uuid
+  blogId       String?      @db.Uuid
+  credentials  credentials? @relation(fields: [avatarUserId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_74b5ae05ddadd8cddce155f4f2b")
+  blogs        blogs?       @relation(fields: [blogId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "FK_b73513a1d14c8f2908be932becc")
+  travels      travels?     @relation(fields: [travelId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_e7a632c82220de2bc2b05622aed")
+  suggestions  suggestions? @relation(fields: [suggestionId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_f679e54472da4b7418a7f9d2bcf")
+}
+
+model promotions {
+  id         Int      @id(map: "PK_380cecbbe3ac11f0e5a7c452c34") @default(autoincrement())
+  discount   Int
+  validUntil DateTime @db.Timestamp(6)
+  travelId   String?  @db.Uuid
+  travels    travels? @relation(fields: [travelId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_eb2378aa6fa74a5aad4fb3a3caf")
+}
+
+model providers {
+  id                Int                 @id(map: "PK_af13fc2ebf382fe0dad2e4793aa") @default(autoincrement())
+  name              String              @db.VarChar(255)
+  description       String              @db.VarChar(255)
+  travels_providers travels_providers[]
+}
+
+model reviews {
+  id       String   @id(map: "PK_231ae565c273ee700b283f15c1d") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  review   String   @db.VarChar(255)
+  stars    Int
+  userId   String?  @db.Uuid
+  travelId String?  @db.Uuid
+  users    users?   @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_7ed5659e7139fc8bc039198cc1f")
+  travels  travels? @relation(fields: [travelId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_bf9c06c532a155581fc1efd7b57")
+}
+
+model suggestions {
+  id               Int      @id(map: "PK_745bbcb037ac379969b5fc7b352") @default(autoincrement())
+  name             String   @db.VarChar(255)
+  country          String   @db.VarChar(255)
+  city             String   @db.VarChar(255)
+  date             DateTime @db.Date
+  price            Int
+  description      String   @db.VarChar(500)
+  typeService      String   @db.VarChar(255)
+  accesibilitySeal String   @db.VarChar(255)
+  state            Boolean  @default(false)
+  userId           String?  @db.Uuid
+  images           images[]
+  users            users?   @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_ea6bc51ad9de266b0c8bb46230b")
+}
+
+model travels {
+  id                                                      String              @id(map: "PK_cc2d44f93ba8f6b268978971e2b") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name                                                    String              @db.VarChar(255)
+  country                                                 String              @db.VarChar(255)
+  city                                                    String              @db.VarChar(255)
+  date                                                    DateTime            @db.Timestamp(6)
+  price                                                   Int
+  description                                             String              @db.VarChar(255)
+  serviceType                                             String              @db.VarChar(255)
+  accesibilitySeal                                        String              @db.VarChar(255)
+  stars                                                   Int
+  available                                               Boolean             @default(true)
+  providerId                                              String?             @db.Uuid
+  images                                                  images[]
+  promotions                                              promotions[]
+  reviews                                                 reviews[]
+  travels_providers_travels_providerIdTotravels_providers travels_providers?  @relation("travels_providerIdTotravels_providers", fields: [providerId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_8b1c1019b3ea185c5c0e9c1ba2e")
+  travels_providers_travels_providers_travelIdTotravels   travels_providers[] @relation("travels_providers_travelIdTotravels")
+}
+
+model travels_providers {
+  id                                            String     @id(map: "PK_4df7a0f8b290a0b8f0f2157a860") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  travelId                                      String?    @db.Uuid
+  providerId                                    Int?
+  travels_travels_providerIdTotravels_providers travels[]  @relation("travels_providerIdTotravels_providers")
+  providers                                     providers? @relation(fields: [providerId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_0a356a17f5a05e535dea7c70fdc")
+  travels_travels_providers_travelIdTotravels   travels?   @relation("travels_providers_travelIdTotravels", fields: [travelId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_8d8f2c5d765d2c29b631626c719")
+}
+
+model users {
+  id           String         @id(map: "PK_a3ffb1c0c8416b9fc6f907b7433") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name         String         @db.VarChar(50)
+  role         String         @default("user") @db.VarChar
+  phone        Int?
+  createdAt    DateTime       @db.Date
+  auth         Boolean        @default(false)
+  block        Boolean        @default(false)
+  credentialId String?        @unique(map: "REL_d6d50143a16c49c49bf467ae54") @db.Uuid
+  disabilities disabilities[]
+  donations    donations[]
+  reviews      reviews[]
+  suggestions  suggestions[]
+  credentials  credentials?   @relation(fields: [credentialId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "FK_d6d50143a16c49c49bf467ae541")
+}
