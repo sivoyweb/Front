@@ -12,6 +12,13 @@ export interface ILogin {
     confirmPassword: string,
   }
 
+  export interface IRegisterGoogle{
+    name: string,
+    token:string,
+    email: string,
+    phone: string,
+  }
+
   export interface IDisability{
     id: string,
     name: string,

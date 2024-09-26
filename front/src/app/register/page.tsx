@@ -4,9 +4,9 @@ import Image from "next/image";
 
 function RegisterPage() {
   return (
-    <div className="relative bg-sivoy-gradient">
+    <div className="relative">
 
-      <div className="relative z-10 flex justify-center items-center h-full bg-black bg-opacity-50">
+      <div className="relative z-10 flex justify-center items-center h-full bg-gray-800 bg-opacity-50">
         <div className="flex flex-col justify-center p-8">
           <h1 className="text-white text-4xl mb-6 text-center">
           Ingrese sus datos para crear la cuenta en Sí, Voy! (* Campos Obligatorios)

@@ -3,18 +3,35 @@
 import React, { useContext, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { IRegister } from "../../interfaces/interfaces";
+import { IRegister, IRegisterGoogle } from "../../interfaces/interfaces";
 import { useRouter } from "next/navigation";
 import { UserContext } from "../../context/userContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons"; 
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import Swal from 'sweetalert2';
+import { postRegister } from '@/lib/server/fetchUsers';
+import { GoogleAuthProvider, getAuth , signInWithPopup } from 'firebase/auth';
+import { initializeApp } from "firebase/app";
 
 
-
+const provider = new GoogleAuthProvider();
 
 
 
 const Register: React.FC = () => {
+  const firebaseConfig = {
+    apiKey: "AIzaSyDnzL23UH5VME4BSZhG1DB5uiD7wsinu2o",
+    authDomain: "sivoy-264f7.firebaseapp.com",
+    projectId: "sivoy-264f7",
+    storageBucket: "sivoy-264f7.appspot.com",
+    messagingSenderId: "497471545294",
+    appId: "1:497471545294:web:215c2371658bdb9443d59f",
+    measurementId: "G-ZYWMCTKXHB"
+  };
+  initializeApp(firebaseConfig);
+
+  const auth = getAuth();
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const { register } = useContext(UserContext);
@@ -55,13 +72,49 @@ const Register: React.FC = () => {
   const tooglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   }
+  const callRegisterGoogle = async() =>{
+    signInWithPopup(auth,provider)
+    .then((result)=>{
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential?.accessToken;
+      const user = result.user;
+      console.log(token)
+      console.log(user)
+      console.log(credential);
+      const newUser = {
+        name:user.displayName,
+        token:token,
+        email:user.email,
+        phone:user.phoneNumber
+      }
+      postRegister(newUser as IRegisterGoogle)
+      
+      Swal.fire({
+       title:'Registro exitoso',
+            icon:'success'
+      })
+      setTimeout(() => {
+        router.push('/');
+      }, 2000);
+    }).catch((error)=> {
+      const errorMesage = error.Message;
+      //const credential = GoogleAuthProvider.credentialFromError(error);
+      Swal.fire({
+        title: 'Algo salió mal',
+        text: `Vuelva a intentarlo:${errorMesage} `,
+        icon: 'error'
+      })
+    });
+
+    Swal.fire
+  }
 
 
   return (
-    <div className="bg-white mt-3 p-9 px-11 rounded shadow-lg w-full max-w-lg mx-4 md:mx-auto ">
+    <div className="bg-sivoy-gradient mt-3 p-9 px-11 rounded shadow-lg w-full max-w-lg mx-4 md:mx-auto ">
       
       <div className='flex items-center justify-between gap-x-4 mb-10'>
-      <h1 className="text-3xl font-bold">Registrarse o</h1>
+      <h1 className="text-3xl font-bold">Registrarse</h1>
       
       </div>
       <Formik
@@ -176,13 +229,27 @@ const Register: React.FC = () => {
               />
             </div>
 
+            <div className="flex space-x-4">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className='rounded-3xl bg-sivoy-orange py-2 px-6 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-orange-700 focus:shadow-none active:bg-orange-700 hover:bg-orange-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2'
+              >
+                {isSubmitting ? 'Registrando...' : 'Registrarse'}
+              </button>
+              
+              <button
+                className='flex items-center justify-center text-lg font-semibold text-gray-700 bg-white border border-gray-300 shadow-md rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all py-2 px-6'
+                onClick={(e) => {
+                  callRegisterGoogle();
+                  e.currentTarget.blur();
+                }}
+              >
+                <FontAwesomeIcon icon={faGoogle} className="text-xl text-gray-700 mr-2" />
+                <span className="text-base">Registrarse con Google</span>
+              </button>
+            </div>
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? 'Registrando...' : 'Registrarse'}
-            </button>
           </Form>
         )}
       </Formik>

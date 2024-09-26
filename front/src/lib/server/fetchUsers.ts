@@ -1,7 +1,7 @@
-import { ILogin, IRegister } from "../../interfaces/interfaces";
+import { ILogin, IRegister, IRegisterGoogle } from "../../interfaces/interfaces";
 
-export const postRegister = async (user: IRegister)=>{
-    const response = await fetch("http://localhost:3001/auth/signup",{
+export const postRegister = async (user: IRegister | IRegisterGoogle)=>{
+    const response = await fetch("https://api-sivoy.onrender.com/auth/signup",{
         method: "POST",
         headers:{
             "Content-Type": "application/json",
@@ -19,7 +19,7 @@ export const postRegister = async (user: IRegister)=>{
 
 
 export const postLogin = async (credentials: ILogin) =>{
-    const response = await fetch("http://localhost:3001/auth/signin",{
+    const response = await fetch("https://api-sivoy.onrender.com/auth/signin",{
         method:"POST",
         headers:{
             "Content-Type": "application/json",

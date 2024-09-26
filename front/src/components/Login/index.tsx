@@ -3,7 +3,7 @@
 import React, { useContext, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { ILogin } from "../../interfaces/interfaces";
+import { ILogin, IRegisterGoogle } from "../../interfaces/interfaces";
 import { useRouter } from 'next/navigation';
 import { UserContext } from '@/context/userContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,6 +13,8 @@ import { initializeApp } from "firebase/app";
 import { GoogleAuthProvider, getAuth , signInWithPopup } from 'firebase/auth';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import Swal from 'sweetalert2';
+import { postRegister } from '@/lib/server/fetchUsers';
+
 
 
 const provider = new GoogleAuthProvider();
@@ -66,6 +68,15 @@ const Login: React.FC = () => {
       const user = result.user;
       console.log(token)
       console.log(user)
+      console.log(credential);
+      const newUser = {
+        name:user.displayName,
+        token:token,
+        email:user.email,
+        phone:user.phoneNumber
+      }
+      postRegister(newUser as IRegisterGoogle)
+      
       Swal.fire({
        title:'Inicio de sesion exitoso',
             text:'Bienvenido',
@@ -90,17 +101,6 @@ const Login: React.FC = () => {
   return (
     <div className="p-10">
       <div className="bg-slate-50 m-5 p-8 rounded shadow-xl w-full max-w-md mx-4 md:mx-auto">
-      <button
-          className='text-2xl ml-20 mb-10 flex items-center font-bold bg-white text-blue-500 py-2 px-4 rounded hover:bg-gray-200 transition-colors'
-          onClick={(e) => {
-            callLoginGoogle();
-            e.currentTarget.blur(); 
-          }}
-        >
-          <span className="mr-2">Iniciar Sesión</span>
-          <FontAwesomeIcon icon={faGoogle} />
-      </button>
-        <h1 className="text-3xl font-bold mb-6 text-center">-</h1>
         <h1 className="text-3xl font-bold mb-6 text-center">Iniciar sesión</h1>
         <Formik
           initialValues={initialValues}
@@ -150,13 +150,25 @@ const Login: React.FC = () => {
                   className="text-red-500 text-xl mt-1"
                 />
               </div>
-
+              <div>
               <button
                 type="submit"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? 'Iniciando...' : 'Iniciar sesión'}
               </button>
+              <button
+        className='flex items-center justify-center mt-5 text-lg font-semibold text-gray-700 bg-white border border-gray-300 shadow-md rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all py-2 px-6'
+        onClick={(e) => {
+          callLoginGoogle();
+          e.currentTarget.blur();
+        }}
+      >
+        <FontAwesomeIcon icon={faGoogle} className="text-xl text-gray-700 mr-2" />
+        <span className="text-base">Iniciar sesion Google</span>
+      </button>
+
+              </div>
             </Form>
           )}
         </Formik>
