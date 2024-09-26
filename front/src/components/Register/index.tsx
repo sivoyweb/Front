@@ -33,6 +33,7 @@ const Register: React.FC = () => {
 
   const auth = getAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
   const router = useRouter();
   const { register } = useContext(UserContext);
 
@@ -72,6 +73,11 @@ const Register: React.FC = () => {
   const tooglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   }
+  const tooglePasswordVisibility2 = () => {
+    setShowPassword2(!showPassword2);
+  }
+  
+
   const callRegisterGoogle = async() =>{
     signInWithPopup(auth,provider)
     .then((result)=>{
@@ -175,7 +181,7 @@ const Register: React.FC = () => {
 
             <div className='relative'>
               <label htmlFor="password" className="block text-xl font-medium">
-                Repetir contraseña
+               Contraseña
               </label>
               <Field
                 type={showPassword ? "text" : "password"}
@@ -205,15 +211,15 @@ const Register: React.FC = () => {
                 Repetir contraseña
               </label>
               <Field
-                type={showPassword ? "text" : "password"}
+                type={showPassword2 ? "text" : "password"}
                 id="confirmPassword"
                 name="confirmPassword"
                 className="w-full p-3 pr-10 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               
-              <span onClick={tooglePasswordVisibility}
+              <span onClick={tooglePasswordVisibility2}
                     className='absolute inset-y-0 right-3  mt-7 flex items-center cursor-pointer'>
-                {showPassword ? (
+                {showPassword2 ? (
                   <FontAwesomeIcon icon={faEyeSlash} />
                 ) : (
                   <FontAwesomeIcon icon={faEye} />
