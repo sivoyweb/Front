@@ -8,9 +8,30 @@ import { useRouter } from 'next/navigation';
 import { UserContext } from '@/context/userContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons"; 
+import { initializeApp } from "firebase/app";
+
+import { GoogleAuthProvider, getAuth , signInWithPopup } from 'firebase/auth';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import Swal from 'sweetalert2';
+
+
+const provider = new GoogleAuthProvider();
 
 
 const Login: React.FC = () => {
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDnzL23UH5VME4BSZhG1DB5uiD7wsinu2o",
+    authDomain: "sivoy-264f7.firebaseapp.com",
+    projectId: "sivoy-264f7",
+    storageBucket: "sivoy-264f7.appspot.com",
+    messagingSenderId: "497471545294",
+    appId: "1:497471545294:web:215c2371658bdb9443d59f",
+    measurementId: "G-ZYWMCTKXHB"
+  };
+  const app = initializeApp(firebaseConfig);
+
+  const auth = getAuth();
   const router = useRouter();
   const { login } = useContext(UserContext);
   const [showPassword, setShowPassword] = useState(false);
@@ -37,9 +58,44 @@ const Login: React.FC = () => {
     setShowPassword(!showPassword);
   }
 
+  const callLoginGoogle = async() =>{
+    signInWithPopup(auth,provider)
+    .then((result)=>{
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential?.accessToken;
+      const user = result.user;
+      Swal.fire({
+       title:'Inicio de sesion exitoso',
+            text:'Bienvenido',
+            icon:'success'
+      })
+      setTimeout(() => {
+        router.push('/');
+      }, 2000);
+    }).catch((error)=> {
+      const errorCode = error.code;
+      const errorMesage = error.Message;
+      const email = error.email;
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      Swal.fire({
+        title: 'Algo salió mal',
+        text: 'Vuelva a intentarlo',
+        icon: 'error'
+      })
+    });
+
+    Swal.fire
+  }
+
   return (
     <div className="p-10">
       <div className="bg-slate-50 m-5 p-8 rounded shadow-xl w-full max-w-md mx-4 md:mx-auto">
+        <button className='text-2xl ml-20  mb-10 flex items-center font-bold bg-white text-blue-500 py-2 px-4 rounded hover:bg-gray-200 transition-colors'
+                onClick={callLoginGoogle}>
+      <span className="mr-2">Iniciar Sesión</span>
+      <FontAwesomeIcon icon={faGoogle} />
+      </button>
+        <h1 className="text-3xl font-bold mb-6 text-center">-</h1>
         <h1 className="text-3xl font-bold mb-6 text-center">Iniciar sesión</h1>
         <Formik
           initialValues={initialValues}
