@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 import { UserContext } from '@/context/userContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons"; 
-// import { initializeApp } from "firebase/app";
+import { initializeApp } from "firebase/app";
 
 import { GoogleAuthProvider, getAuth , signInWithPopup } from 'firebase/auth';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
@@ -20,18 +20,6 @@ const provider = new GoogleAuthProvider();
 
 const Login: React.FC = () => {
 
-<<<<<<< HEAD
-  // const firebaseConfig = {
-  //   apiKey: "AIzaSyDnzL23UH5VME4BSZhG1DB5uiD7wsinu2o",
-  //   authDomain: "sivoy-264f7.firebaseapp.com",
-  //   projectId: "sivoy-264f7",
-  //   storageBucket: "sivoy-264f7.appspot.com",
-  //   messagingSenderId: "497471545294",
-  //   appId: "1:497471545294:web:215c2371658bdb9443d59f",
-  //   measurementId: "G-ZYWMCTKXHB"
-  // };
-  // const app = initializeApp(firebaseConfig);
-=======
   const firebaseConfig = {
     apiKey: "AIzaSyDnzL23UH5VME4BSZhG1DB5uiD7wsinu2o",
     authDomain: "sivoy-264f7.firebaseapp.com",
@@ -42,7 +30,6 @@ const Login: React.FC = () => {
     measurementId: "G-ZYWMCTKXHB"
   };
   initializeApp(firebaseConfig);
->>>>>>> 2299392e9bc28b63c8b1f179a6d660fff3c5aa76
 
   const auth = getAuth();
   const router = useRouter();
@@ -87,17 +74,9 @@ const Login: React.FC = () => {
       setTimeout(() => {
         router.push('/');
       }, 2000);
-<<<<<<< HEAD
-    // }).catch((error)=> {
-      // const errorCode = error.code;
-      // const errorMesage = error.Message;
-      // const email = error.email;
-      // const credential = GoogleAuthProvider.credentialFromError(error);
-=======
     }).catch((error)=> {
       const errorMesage = error.Message;
       //const credential = GoogleAuthProvider.credentialFromError(error);
->>>>>>> 2299392e9bc28b63c8b1f179a6d660fff3c5aa76
       Swal.fire({
         title: 'Algo salió mal',
         text: `Vuelva a intentarlo:${errorMesage} `,

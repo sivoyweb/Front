@@ -1,4 +1,5 @@
 "use client"
+
 import { useContext, useRef, useState } from "react";
 import { TravelContext } from "@/context/travelContext";
 import { TravelSearchProps } from "@/interfaces/interfaces";

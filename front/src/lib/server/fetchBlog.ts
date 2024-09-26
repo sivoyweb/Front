@@ -2,7 +2,7 @@ import { IBlogArticle } from "@/interfaces/interfaces";
 
 export async function fetchBlog(): Promise<IBlogArticle[]> {
     try {
-        const response = await fetch("http://localhost:3001/blog");
+        const response = await fetch("https://api-sivoy.onrender.com/blog");
 
         if (!response.ok) {
             throw new Error(`Error al obtener los datos: ${response.status} ${response.statusText}`);
@@ -18,7 +18,7 @@ export async function fetchBlog(): Promise<IBlogArticle[]> {
 
 
 export async function fetchBlogArticleById(id: string): Promise<IBlogArticle> {
-    const response = await fetch(`http://localhost:3001/blog/${id}`);
+    const response = await fetch(`https://api-sivoy.onrender.com/blog/${id}`);
     const blogArticle = await response.json();
     return blogArticle;
 };

@@ -1,4 +1,5 @@
 "use client";
+
 import { useRouter } from 'next/navigation';
 
 export const BlogButton = () => {
@@ -35,7 +36,7 @@ export const RegisterButton = () => {
       };
 
     return ( <div>
-        <button onClick={handleClick}>Registrarse</button>
+        <button onClick={handleClick}>Registro</button>
     </div> );
 };
 

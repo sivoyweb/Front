@@ -50,7 +50,6 @@ const Home:React.FC = () => {
           <p className="text-sivoy-blue mt-1 text-lg">Somos una empresa formada por personas con discapacidad, comprometida con la diversidad, la inclusión y el bienestar de todas las personas. Nos dedicamos a generar un puente entre la oferta y la demanda de servicios turísticos adaptados, trabajando dentro del marco de la responsabilidad social empresarial para lograr un impacto positivo en la sociedad.</p>
           <h2 className="font-arialroundedmtbold text-2xl text-sivoy-blue mt-4">Nuestra Misión</h2>
           <p className="text-sivoy-blue mt-1 text-lg"><span className="font-arialroundedmtbold">Sí, voy</span> tiene como misión generar experiencias positivas en las personas con movilidad reducida, por medio de la gestión y promoción del turismo accesible y la transformación de entornos inclusivos, para garantizar el disfrute del ocio con autonomía.</p>
-          
         </div>
       </section>
       <section>

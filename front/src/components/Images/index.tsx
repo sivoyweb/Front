@@ -7,8 +7,7 @@ export default function TuDestinoImage() {
       src="https://res.cloudinary.com/dvxh2vynm/image/upload/v1727356842/si-voy/bggkk2cac4p8ypelq0sd.png" 
       alt="tu destino sin límites"
       className="absolute top-[-50px] w-3/4 h-auto"
-      width={1500}
-      height={1500}
+      fill
     />
   );
-}
+};
