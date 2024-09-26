@@ -7,6 +7,10 @@ import { IRegister } from "../../interfaces/interfaces";
 import { useRouter } from "next/navigation";
 import { UserContext } from "../../context/userContext";
 
+
+
+
+
 const Register: React.FC = () => {
   const router = useRouter();
   const { register } = useContext(UserContext);
@@ -44,9 +48,15 @@ const Register: React.FC = () => {
     if (resultado){ router.push("/login");}
   };
 
+
+
   return (
-    <div className="bg-white mt-3 p-9 px-11 rounded shadow-lg w-full max-w-md mx-4 md:mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-center">Registrarse</h1>
+    <div className="bg-white mt-3 p-9 px-11 rounded shadow-lg w-full max-w-lg mx-4 md:mx-auto ">
+      
+      <div className='flex items-center justify-between gap-x-4 mb-10'>
+      <h1 className="text-3xl font-bold">Registrarse o</h1>
+      
+      </div>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
