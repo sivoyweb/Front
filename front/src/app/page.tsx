@@ -17,7 +17,7 @@ const Home:React.FC = () => {
             <div className="relative flex justify-center">
               <Image src={tudestino} alt="tu destino sin límites" className="absolute top-[-50px] w-3/4 h-auto"/>
             </div>
-            <h1 className="relative flex justify-center h-auto  top-[-60px] font-arialroundedmtbold">
+            <h1 className="relative flex justify-center h-auto top-[-60px] font-arialroundedmtbold text-sivoy-blue">
               Información sobre turismo accesible
             </h1>
 
