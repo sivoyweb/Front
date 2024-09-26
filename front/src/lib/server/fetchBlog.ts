@@ -2,7 +2,7 @@ import { IBlogArticle } from "@/interfaces/interfaces";
 
 export async function fetchBlog(): Promise<IBlogArticle[]> {
     try {
-        const response = await fetch("https://api-sivoy.onrender.com/");
+        const response = await fetch("https://api-sivoy.onrender.com/blog");
 
         if (!response.ok) {
             throw new Error(`Error al obtener los datos: ${response.status} ${response.statusText}`);

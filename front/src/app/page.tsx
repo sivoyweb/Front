@@ -3,7 +3,7 @@ import tudestino from "../assets/tudestino.png"
 import vero from "../assets/vero.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faWheelchairMove, faMapLocationDot, faGlobe, faFileLines, faCircleInfo, faHandshakeAngle, faLocationDot, faMugHot} from "@fortawesome/free-solid-svg-icons"
-import { HomeButton } from "@/components/HomeButton";
+import { HomeButton } from "@/components/Buttons";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import HomeGridComponent from "@/components/HomeDestinationGrid";
 
@@ -16,8 +16,9 @@ const Home:React.FC = () => {
           <div className="pt-16 pr-4">
             <div className="relative flex justify-center">
               <Image src={tudestino} alt="tu destino sin límites" className="absolute top-[-50px] w-3/4 h-auto"/>
+              
             </div>
-            <h1 className="relative flex justify-center h-auto  top-[-60px] font-arialroundedmtbold">
+            <h1 className="relative flex justify-center h-auto top-[-60px] font-arialroundedmtbold text-sivoy-blue">
               Información sobre turismo accesible
             </h1>
 
@@ -33,6 +34,7 @@ const Home:React.FC = () => {
         <p className="text-lg text-sivoy-blue mt-1">Descubre los destinos accesibles mejor valorados de Argentina.</p>
 
         <HomeGridComponent />
+        
       </section>
 
       <section className="flex text-justify mt-10 ml-5">
@@ -48,7 +50,6 @@ const Home:React.FC = () => {
           <p className="text-sivoy-blue mt-1 text-lg">Somos una empresa formada por personas con discapacidad, comprometida con la diversidad, la inclusión y el bienestar de todas las personas. Nos dedicamos a generar un puente entre la oferta y la demanda de servicios turísticos adaptados, trabajando dentro del marco de la responsabilidad social empresarial para lograr un impacto positivo en la sociedad.</p>
           <h2 className="font-arialroundedmtbold text-2xl text-sivoy-blue mt-4">Nuestra Misión</h2>
           <p className="text-sivoy-blue mt-1 text-lg"><span className="font-arialroundedmtbold">Sí, voy</span> tiene como misión generar experiencias positivas en las personas con movilidad reducida, por medio de la gestión y promoción del turismo accesible y la transformación de entornos inclusivos, para garantizar el disfrute del ocio con autonomía.</p>
-          
         </div>
       </section>
       <section>

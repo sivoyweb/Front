@@ -1,6 +1,6 @@
 import Image from "next/image";
 import headerblog from "@/assets/headerblog.jpg"
-import { BlogButton } from "@/components/BlogButton";
+import { BlogButton } from "@/components/Buttons";
 
 type BlogPost = {
     id: number
