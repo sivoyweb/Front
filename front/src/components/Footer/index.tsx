@@ -9,7 +9,7 @@ function Footer() {
   const fotoFooter = "https://res.cloudinary.com/dvxh2vynm/image/upload/v1726775425/si-voy/akziw4bhnofbehkbrgij.jpg";
 
   return (
-            <footer className="bg-sivoy-blue text-white font-arialroundedmtbold p-10">
+            <footer className="bg-sivoy-blue text-white p-10">
               <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-start bg-sivoy-blue py-4 space-y-6 md:space-y-0">
                 {/* Bloque izquierdo */}
                 <div className="w-full md:w-1/2 lg:w-1/3 h-72 bg-sivoy-blue rounded-lg relative">
@@ -25,9 +25,9 @@ function Footer() {
                 </div>
 
                 {/* Bloque derecho */}
-                <div className="w-full md:w-1/2 lg:w-1/3 h-auto bg-sivoy-blue p-6 rounded-lg relative">
+                <div className="w-full md:w-1/2 lg:w-1/3 h-auto bg-sivoy-blue p-6 ml-24 rounded-lg relative">
                   <div className="relative w-full h-full">
-                    <h4 className="text-lg font-bold mb-2 text-right md:text-left">Información de Contacto</h4>
+                    <h4 className="text-lg font-arialroundedmtbold mb-2 text-right md:text-left">Información de Contacto</h4>
                     <p className="mb-1 text-right md:text-left">+54 9 2954 66 48 07</p>
                     <p className="mb-1 text-right md:text-left">info.sivoy.com.ar</p>
                     <p className="mb-1 text-right md:text-left">Argentina</p>
