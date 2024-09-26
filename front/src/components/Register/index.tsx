@@ -1,17 +1,21 @@
 "use client";
 
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { IRegister } from "../../interfaces/interfaces";
 import { useRouter } from "next/navigation";
 import { UserContext } from "../../context/userContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons"; 
+
 
 
 
 
 
 const Register: React.FC = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const { register } = useContext(UserContext);
 
@@ -47,7 +51,10 @@ const Register: React.FC = () => {
     const resultado = await register(values);
     if (resultado){ router.push("/login");}
   };
-
+  
+  const tooglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  }
 
 
   return (
@@ -115,16 +122,26 @@ const Register: React.FC = () => {
               />
             </div>
 
-            <div>
+            <div className='relative'>
               <label htmlFor="password" className="block text-xl font-medium">
-                Contraseña
+                Repetir contraseña
               </label>
               <Field
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 name="password"
-                className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 pr-10 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
+              
+              <span onClick={tooglePasswordVisibility}
+                    className='absolute inset-y-0 right-3  mt-7 flex items-center cursor-pointer'>
+                {showPassword ? (
+                  <FontAwesomeIcon icon={faEyeSlash} />
+                ) : (
+                  <FontAwesomeIcon icon={faEye} />
+                )}
+              </span>
+
               <ErrorMessage
                 name="password"
                 component="div"
@@ -132,22 +149,33 @@ const Register: React.FC = () => {
               />
             </div>
 
-            <div>
+            <div className='relative'>
               <label htmlFor="confirmPassword" className="block text-xl font-medium">
                 Repetir contraseña
               </label>
               <Field
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="confirmPassword"
                 name="confirmPassword"
-                className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 pr-10 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
+              
+              <span onClick={tooglePasswordVisibility}
+                    className='absolute inset-y-0 right-3  mt-7 flex items-center cursor-pointer'>
+                {showPassword ? (
+                  <FontAwesomeIcon icon={faEyeSlash} />
+                ) : (
+                  <FontAwesomeIcon icon={faEye} />
+                )}
+              </span>
+
               <ErrorMessage
                 name="confirmPassword"
                 component="div"
                 className="text-red-500 text-xl mt-1"
               />
             </div>
+
 
             <button
               type="submit"

@@ -94,7 +94,7 @@ const Login: React.FC = () => {
           className='text-2xl ml-20 mb-10 flex items-center font-bold bg-white text-blue-500 py-2 px-4 rounded hover:bg-gray-200 transition-colors'
           onClick={(e) => {
             callLoginGoogle();
-            e.currentTarget.blur();  // Elimina el foco
+            e.currentTarget.blur(); 
           }}
         >
           <span className="mr-2">Iniciar Sesión</span>
