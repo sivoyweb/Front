@@ -1,4 +1,4 @@
-import ButtonRegister from "@/components/ButtonRegister";
+import { RegisterButton } from "@/components/Buttons";
 import Login from "@/components/Login";
 import Image from "next/image";
 
@@ -13,7 +13,7 @@ function LoginPage() {
           </h1>
           <Login />
           <h2 className="text-white text-4xl mb-6 text-center m-3">¿Todavía no sos parte de la comunidad de Sí, Voy!?</h2> 
-          <h2 className="text-white text-4xl mb-6 text-center m-3">Registrate aca: <ButtonRegister/></h2>
+          <h2 className="text-white text-4xl mb-6 text-center m-3">Registrate aca: <RegisterButton/></h2>
         </div>
 
         <div className="m-6 bg-white rounded-full p-5">

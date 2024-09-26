@@ -3,7 +3,7 @@ import tudestino from "../assets/tudestino.png"
 import vero from "../assets/vero.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faWheelchairMove, faMapLocationDot, faGlobe, faFileLines, faCircleInfo, faHandshakeAngle, faLocationDot, faMugHot} from "@fortawesome/free-solid-svg-icons"
-import { HomeButton } from "@/components/HomeButton";
+import { HomeButton } from "@/components/Buttons";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import HomeGridComponent from "@/components/HomeDestinationGrid";
 
@@ -16,6 +16,7 @@ const Home:React.FC = () => {
           <div className="pt-16 pr-4">
             <div className="relative flex justify-center">
               <Image src={tudestino} alt="tu destino sin límites" className="absolute top-[-50px] w-3/4 h-auto"/>
+              
             </div>
             <h1 className="relative flex justify-center h-auto top-[-60px] font-arialroundedmtbold text-sivoy-blue">
               Información sobre turismo accesible
@@ -33,6 +34,7 @@ const Home:React.FC = () => {
         <p className="text-lg text-sivoy-blue mt-1">Descubre los destinos accesibles mejor valorados de Argentina.</p>
 
         <HomeGridComponent />
+        
       </section>
 
       <section className="flex text-justify mt-10 ml-5">
