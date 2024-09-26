@@ -29,7 +29,7 @@ const Login: React.FC = () => {
     appId: "1:497471545294:web:215c2371658bdb9443d59f",
     measurementId: "G-ZYWMCTKXHB"
   };
-  const app = initializeApp(firebaseConfig);
+  initializeApp(firebaseConfig);
 
   const auth = getAuth();
   const router = useRouter();
@@ -75,13 +75,11 @@ const Login: React.FC = () => {
         router.push('/');
       }, 2000);
     }).catch((error)=> {
-      const errorCode = error.code;
       const errorMesage = error.Message;
-      const email = error.email;
-      const credential = GoogleAuthProvider.credentialFromError(error);
+      //const credential = GoogleAuthProvider.credentialFromError(error);
       Swal.fire({
         title: 'Algo salió mal',
-        text: 'Vuelva a intentarlo',
+        text: `Vuelva a intentarlo:${errorMesage} `,
         icon: 'error'
       })
     });
