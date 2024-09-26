@@ -64,6 +64,8 @@ const Login: React.FC = () => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential?.accessToken;
       const user = result.user;
+      console.log(token)
+      console.log(user)
       Swal.fire({
        title:'Inicio de sesion exitoso',
             text:'Bienvenido',
@@ -90,10 +92,15 @@ const Login: React.FC = () => {
   return (
     <div className="p-10">
       <div className="bg-slate-50 m-5 p-8 rounded shadow-xl w-full max-w-md mx-4 md:mx-auto">
-        <button className='text-2xl ml-20  mb-10 flex items-center font-bold bg-white text-blue-500 py-2 px-4 rounded hover:bg-gray-200 transition-colors'
-                onClick={callLoginGoogle}>
-      <span className="mr-2">Iniciar Sesión</span>
-      <FontAwesomeIcon icon={faGoogle} />
+      <button
+          className='text-2xl ml-20 mb-10 flex items-center font-bold bg-white text-blue-500 py-2 px-4 rounded hover:bg-gray-200 transition-colors'
+          onClick={(e) => {
+            callLoginGoogle();
+            e.currentTarget.blur();  // Elimina el foco
+          }}
+        >
+          <span className="mr-2">Iniciar Sesión</span>
+          <FontAwesomeIcon icon={faGoogle} />
       </button>
         <h1 className="text-3xl font-bold mb-6 text-center">-</h1>
         <h1 className="text-3xl font-bold mb-6 text-center">Iniciar sesión</h1>
