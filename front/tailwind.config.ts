@@ -17,6 +17,9 @@ const config: Config = {
        "sivoy-green": "#1a7970",
        "sivoy-blue": "#09253E",
       },
+      screens: {
+        "4k": "2560px",
+      }
     },
   },
   plugins: [],

@@ -45,7 +45,7 @@ const Navbar: React.FC = () => {
               <div className="relative flex h-16 items-center justify-between">
                 {/* Botón del menú móvil */}
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                  <DisclosureButton className="inline-flex items-center justify-center rounded-md p-2 text-gray-400  hover:text-sivoy-orange focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <DisclosureButton className="inline-flex items-center justify-center rounded-md p-2 text-white  hover:text-sivoy-green focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sivoy-green">
                     <span className="sr-only">Open main menu</span>
                     <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                     <XMarkIcon className="hidden h-6 w-6" aria-hidden="true" />
@@ -97,7 +97,7 @@ const Navbar: React.FC = () => {
                 {isLogged &&
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 z-50">
                   <Menu as="div" className="relative ml-3">
-                    <MenuButton className="relative flex rounded-full bg-dark text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <MenuButton className="relative flex rounded-full bg-dark text-sm focus:outline-none focus:ring-2 focus:ring-sivoy-green focus:ring-offset-2">
                       <span className="sr-only">Menú de Usuario
                       </span>
                     </MenuButton>
@@ -140,13 +140,13 @@ const Navbar: React.FC = () => {
               </div>
               <div className="px-2 pb-3 pt-2">
                 <button
-                  className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:text-sivoy-orange hover:bg-gray-700"
+                  className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:text-sivoy-orange hover:bg-gray-700 max-w-fit"
                   onClick={() => router.push(paths.login)}
                 >
                   Ingresar
                 </button>
                 <button
-                  className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:text-sivoy-orange hover:bg-gray-700"
+                  className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:text-sivoy-orange mt-4 hover:bg-gray-700 max-w-fit"
                   onClick={() => router.push(paths.register)}
                 >
                   Registro
