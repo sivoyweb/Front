@@ -1,4 +1,4 @@
-import { ILogin, IRegister, IRegisterGoogle, IUserChange } from "../../interfaces/interfaces";
+import { ILogin, IloginGoogle, IRegister, IRegisterGoogle, IUserChange } from "../../interfaces/interfaces";
 
 export const postRegister = async (user: IRegister | IRegisterGoogle)=>{
     const response = await fetch("https://api-sivoy.onrender.com/auth/signup",{
@@ -18,7 +18,7 @@ export const postRegister = async (user: IRegister | IRegisterGoogle)=>{
 };
 
 
-export const postLogin = async (credentials: ILogin) =>{
+export const postLogin = async (credentials: ILogin | IloginGoogle) =>{
     const response = await fetch("https://api-sivoy.onrender.com/auth/signin",{
         method:"POST",
         headers:{
