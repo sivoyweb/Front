@@ -2,8 +2,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Metadata } from "next";
 import "./globals.css";
-import { UserProvider } from "@/context/userContext";
+
 import { TravelProvider } from "@/context/travelContext";
+import { UserProvider } from "@/context/userContext";
 
 export const metadata: Metadata = {
   title: "Sí, Voy | Turismo Accesible",

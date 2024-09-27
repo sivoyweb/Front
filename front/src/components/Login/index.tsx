@@ -1,6 +1,7 @@
+// Login.tsx
 "use client";
 
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { ILogin, IRegisterGoogle } from "../../interfaces/interfaces";
@@ -8,32 +9,16 @@ import { useRouter } from 'next/navigation';
 import { UserContext } from '@/context/userContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons"; 
-import { initializeApp } from "firebase/app";
-
-import { GoogleAuthProvider, getAuth , signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithRedirect, getRedirectResult } from 'firebase/auth';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import Swal from 'sweetalert2';
 import { postRegister } from '@/lib/server/fetchUsers';
-
-
+import { auth } from '../../../firebase.config';
+ // Ajusta la ruta según la estructura de tu proyecto
 
 const provider = new GoogleAuthProvider();
 
-
 const Login: React.FC = () => {
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyDnzL23UH5VME4BSZhG1DB5uiD7wsinu2o",
-    authDomain: "sivoy-264f7.firebaseapp.com",
-    projectId: "sivoy-264f7",
-    storageBucket: "sivoy-264f7.appspot.com",
-    messagingSenderId: "497471545294",
-    appId: "1:497471545294:web:215c2371658bdb9443d59f",
-    measurementId: "G-ZYWMCTKXHB"
-  };
-  initializeApp(firebaseConfig);
-
-  const auth = getAuth();
   const router = useRouter();
   const { login } = useContext(UserContext);
   const [showPassword, setShowPassword] = useState(false);
@@ -60,43 +45,56 @@ const Login: React.FC = () => {
     setShowPassword(!showPassword);
   }
 
-  const callLoginGoogle = async() =>{
-    signInWithPopup(auth,provider)
-    .then((result)=>{
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential?.accessToken;
-      const user = result.user;
-      console.log(token)
-      console.log(user)
-      console.log(credential);
-      const newUser = {
-        name:user.displayName,
-        token:token,
-        email:user.email,
-        phone:user.phoneNumber
-      }
-      postRegister(newUser as IRegisterGoogle)
-      
-      Swal.fire({
-       title:'Inicio de sesion exitoso',
-            text:'Bienvenido',
-            icon:'success'
-      })
-      setTimeout(() => {
-        router.push('/');
-      }, 2000);
-    }).catch((error)=> {
-      const errorMesage = error.Message;
-      //const credential = GoogleAuthProvider.credentialFromError(error);
-      Swal.fire({
-        title: 'Algo salió mal',
-        text: `Vuelva a intentarlo:${errorMesage} `,
-        icon: 'error'
-      })
-    });
-
-    Swal.fire
+  const handleLoginGoogle = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault(); // Previene el comportamiento por defecto del botón
+    signInWithRedirect(auth, provider);
   }
+
+  useEffect(() => {
+    getRedirectResult(auth)
+      .then((result) => {
+        if(result?.user){
+          const credential = GoogleAuthProvider.credentialFromResult(result);
+          const token = credential?.accessToken;
+          const user = result.user;
+          console.log('Token:', token);
+          console.log('Usuario:', user);
+          console.log('Credenciales:', credential);
+
+          const newUser = {
+            name: user.displayName,
+            token: token,
+            email: user.email,
+            phone: user.phoneNumber
+          }
+
+          postRegister(newUser as IRegisterGoogle)
+            .then(() => {
+              Swal.fire({
+                title: 'Inicio de sesión exitoso',
+                text: 'Bienvenido',
+                icon: 'success'
+              }).then(() => {
+                router.push("/"); // Redirige después de mostrar la alerta
+              });
+            })
+            .catch((error) => {
+              Swal.fire({
+                title: 'Error al registrar usuario',
+                text: `Vuelva a intentarlo: ${error.message}`,
+                icon: 'error'
+              });
+            });
+        }
+      })
+      .catch((error)=> {
+        Swal.fire({
+          title: 'Algo salió mal',
+          text: `Vuelva a intentarlo: ${error.message}`,
+          icon: 'error'
+        });
+      });
+  }, [auth, router]);
 
   return (
     <div className="p-10">
@@ -131,18 +129,20 @@ const Login: React.FC = () => {
                   Contraseña
                 </label>
                 <Field
-                   type={showPassword ? "text" : "password"}
+                  type={showPassword ? "text" : "password"}
                   id="password"
                   name="password"
                   className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-sivoy-green"
                 />
-                <span onClick={togglePasswordVisibility}
-                      className='absolute inset-y-0 right-3 mt-8 flex items-center text-sm leading-5 cursor-pointer'>
-                   {showPassword ? (
-                      <FontAwesomeIcon icon={faEyeSlash} />  
-                    ) : (
-                      <FontAwesomeIcon icon={faEye} /> 
-                    )}
+                <span 
+                  onClick={togglePasswordVisibility}
+                  className='absolute inset-y-0 right-3 mt-8 flex items-center text-sm leading-5 cursor-pointer'
+                >
+                  {showPassword ? (
+                    <FontAwesomeIcon icon={faEyeSlash} />  
+                  ) : (
+                    <FontAwesomeIcon icon={faEye} /> 
+                  )}
                 </span>
                 <ErrorMessage
                   name="password"
@@ -150,24 +150,24 @@ const Login: React.FC = () => {
                   className="text-red-500 text-xl mt-1"
                 />
               </div>
+              
               <div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Iniciando...' : 'Iniciar sesión'}
-              </button>
-              <button
-        className='flex items-center justify-center mt-5 text-lg font-semibold text-gray-700 bg-white border border-gray-300 shadow-md rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all py-2 px-6'
-        onClick={(e) => {
-          callLoginGoogle();
-          e.currentTarget.blur();
-        }}
-      >
-        <FontAwesomeIcon icon={faGoogle} className="text-xl text-gray-700 mr-2" />
-        <span className="text-base">Iniciar sesion Google</span>
-      </button>
-
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-sivoy-green text-white py-2 px-4 rounded hover:bg-sivoy-green-dark transition duration-200"
+                >
+                  {isSubmitting ? 'Iniciando...' : 'Iniciar sesión'}
+                </button>
+                
+                <button
+                  type="button" // Cambiado a 'button' para evitar que se comporte como 'submit'
+                  className='flex items-center justify-center mt-5 text-lg font-semibold text-gray-700 bg-white border border-gray-300 shadow-md rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all py-2 px-6'
+                  onClick={handleLoginGoogle}
+                >
+                  <FontAwesomeIcon icon={faGoogle} className="text-xl text-gray-700 mr-2" />
+                  <span className="text-base">Iniciar sesión con Google</span>
+                </button>
               </div>
             </Form>
           )}
