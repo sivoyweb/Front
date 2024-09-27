@@ -10,28 +10,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons"; 
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import Swal from 'sweetalert2';
-import { postRegister } from '@/lib/server/fetchUsers';
-import { GoogleAuthProvider, getAuth , signInWithPopup } from 'firebase/auth';
-import { initializeApp } from "firebase/app";
-
+import {  postRegisterGoogle } from '@/lib/server/fetchUsers';
+import { GoogleAuthProvider,  signInWithPopup } from 'firebase/auth';
+import { auth } from '../../../firebase.config';
 
 const provider = new GoogleAuthProvider();
 
 
 
 const Register: React.FC = () => {
-  const firebaseConfig = {
-    apiKey: "AIzaSyDnzL23UH5VME4BSZhG1DB5uiD7wsinu2o",
-    authDomain: "sivoy-264f7.firebaseapp.com",
-    projectId: "sivoy-264f7",
-    storageBucket: "sivoy-264f7.appspot.com",
-    messagingSenderId: "497471545294",
-    appId: "1:497471545294:web:215c2371658bdb9443d59f",
-    measurementId: "G-ZYWMCTKXHB"
-  };
-  initializeApp(firebaseConfig);
-
-  const auth = getAuth();
+ 
   const [showPassword, setShowPassword] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
   const router = useRouter();
@@ -78,42 +66,38 @@ const Register: React.FC = () => {
   }
   
 
-  const callRegisterGoogle = async() =>{
-    signInWithPopup(auth,provider)
-    .then((result)=>{
+  const callRegisterGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
       const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential?.accessToken;
+      const token = credential?.idToken;
       const user = result.user;
-      console.log(token)
-      console.log(user)
-      console.log(credential);
+  
       const newUser = {
-        name:user.displayName,
-        token:token,
-        email:user.email,
-        phone:user.phoneNumber
-      }
-      postRegister(newUser as IRegisterGoogle)
-      
+        name: user.displayName,
+        token: token,
+        email: user.email,
+        phone: user.phoneNumber,
+      };
+  
+      await postRegisterGoogle(newUser as IRegisterGoogle);
+  
       Swal.fire({
-       title:'Registro exitoso',
-            icon:'success'
-      })
+        title: 'Registro exitoso',
+        icon: 'success',
+      });
+  
       setTimeout(() => {
-        router.push('/');
+        router.push('/login');
       }, 2000);
-    }).catch((error)=> {
-      const errorMesage = error.Message;
-      //const credential = GoogleAuthProvider.credentialFromError(error);
+    } catch (error:unknown) {
       Swal.fire({
         title: 'Algo salió mal',
-        text: `Vuelva a intentarlo:${errorMesage} `,
-        icon: 'error'
-      })
-    });
-
-    Swal.fire
-  }
+        text: `Vuelva a intentarlo: ${error}`,
+        icon: 'error',
+      });
+    }
+  };
 
 
   return (

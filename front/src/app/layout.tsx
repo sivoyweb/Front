@@ -5,6 +5,7 @@ import "./globals.css";
 
 import { TravelProvider } from "@/context/travelContext";
 import { UserProvider } from "@/context/userContext";
+import SessionWrapper from "@/components/SessionWrapper";
 
 export const metadata: Metadata = {
   title: "Sí, Voy | Turismo Accesible",
@@ -19,13 +20,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-      <UserProvider>
-        <TravelProvider>
+        <SessionWrapper>
+          <UserProvider>
+           <TravelProvider>
             <Navbar />
-            {children}
+             {children}
            <Footer />
-        </TravelProvider>
-      </UserProvider>
+          </TravelProvider>
+         </UserProvider>
+       </SessionWrapper>
       </body>
     </html>
   );
