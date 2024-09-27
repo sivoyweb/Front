@@ -50,8 +50,26 @@ export const HomeButton = () => {
     return (
       <button 
         onClick={handleClick}
+        className='4k:text-2xl'
       >
         Explorar Destinos
       </button>
     );
+};
+
+export const NotFoundButton = () => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push("/");
   };
+
+  return (
+    <button
+      onClick={handleClick}
+      className='text-xl'
+    >
+      Volver al Home
+    </button>
+  )
+};
