@@ -13,8 +13,8 @@ export const HomeServicesGrid = () => {
     };
 
     return (
+        <div className="ml-5 mr-5">
         <div>
-        <div className="ml-5">
           <h2 className="font-arialroundedmtbold text-2xl text-sivoy-blue">Servicios Adicionales</h2>
           <p className="text-lg text-sivoy-blue mt-1">Todos los servicios pueden realizarse de forma presencial o virtual.</p>
         </div>

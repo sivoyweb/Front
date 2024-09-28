@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
           <Disclosure as="nav" className="bg-sivoy-blue text-white font-arialroundedmtbold">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
               <div className="relative flex h-16 items-center justify-between">
-                {/* Botón del menú móvil */}
+             
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   <DisclosureButton className="inline-flex items-center justify-center rounded-md p-2 text-white  hover:text-sivoy-green focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sivoy-green">
                     <span className="sr-only">Open main menu</span>
@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
                   </DisclosureButton>
                 </div>
 
-                {/* Logo y navegación */}
+               
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                   <div className="flex items-center">
                     <Image
@@ -64,7 +64,6 @@ const Navbar: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Navegación para pantallas grandes */}
                 <div className="hidden sm:flex sm:items-center sm:space-x-4 ml-auto">
                   {navigation.map((item) => (
                     <Link
@@ -124,7 +123,7 @@ const Navbar: React.FC = () => {
               </div>
             </div>
 
-            {/* Menú móvil colapsado */}
+          
             <DisclosurePanel className="sm:hidden">
               <div className="space-y-1 px-2 pb-3 pt-2">
                 {navigation.map((item) => (
@@ -132,7 +131,7 @@ const Navbar: React.FC = () => {
                     key={item.name}
                     as="a"
                     href={item.href}
-                    className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-sivoy-orange hover:bg-gray-700"
+                    className="block px-3 py-2 rounded-md text-base text-white hover:text-sivoy-orange hover:bg-gray-700"
                   >
                     {item.name}
                   </DisclosureButton>
@@ -140,7 +139,7 @@ const Navbar: React.FC = () => {
               </div>
               <div className="px-2 pb-3 pt-2">
                 <button
-                  className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:text-sivoy-orange hover:bg-gray-700 max-w-fit"
+                  className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:text-sivoy-orange hover:bg-gray-700 max-w-fit -mt-2"
                   onClick={() => router.push(paths.login)}
                 >
                   Ingresar
