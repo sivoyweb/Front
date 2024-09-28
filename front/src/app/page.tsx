@@ -37,8 +37,8 @@ const Home: React.FC = () => {
         <HomeGridComponent />
       </section>
 
-      <section className="flex flex-col lg:flex-row text-justify mt-2 ml-5 mr-5 lg:mr-0 4k:ml-20 4k:mr-20 4k:mt-8">
-        <div className="flex flex-col items-center lg:ml-36 2xl:ml-56 4k:ml-40">
+      <section className="flex flex-col md:flex-row text-justify mt-2 ml-5 mr-5 md:mr-8 4k:ml-20 4k:mr-20 4k:mt-8">
+        <div className="flex flex-col items-center md:ml-8 2xl:ml-56 4k:ml-40">
           <a href="https://www.linkedin.com/in/ver%C3%B3nica-lorena-martinez-78a303a6/" className="flex flex-col items-center border shadow-md rounded-3xl mt-6 hover:scale-105 duration-300 transition-transform w-72 4k:w-[400px]">
             <Image src={vero} alt="Foto de perfil de Verónica Martínez" className="rounded-full w-52 h-auto 4k:w-72" />
             <p className="font-arialroundedmtbold text-sivoy-blue text-center mt-2 4k:text-3xl">Verónica Martínez</p>
@@ -47,7 +47,7 @@ const Home: React.FC = () => {
           </a>
         </div>
 
-        <div className="mt-6 lg:ml-32 w-full lg:w-1/2 2xl:ml-80 4k:w-3/5">
+        <div className="mt-6 md:ml-16 w-full xl:w1/2 4k:w-3/5">
           <h2 className="font-arialroundedmtbold text-xl md:text-2xl text-sivoy-blue 4k:text-4xl">¿Quiénes somos?</h2>
           <p className="text-sivoy-blue mt-2 text-base md:text-lg 4k:text-2xl">
             Somos una empresa formada por personas con discapacidad, comprometida con la diversidad, la inclusión y el bienestar de todas las personas. Nos dedicamos a generar un puente entre la oferta y la demanda de servicios turísticos adaptados, trabajando dentro del marco de la responsabilidad social empresarial para lograr un impacto positivo en la sociedad.
