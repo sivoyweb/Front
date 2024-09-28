@@ -1,7 +1,21 @@
+"use client"
 import TravelGridComponent from "@/components/TravelGrid";
+import TravelSearch from "@/components/TravelSearch";
+import { TravelContext } from "@/context/travelContext";
+
 import Image from "next/image";
+import { useContext, useState } from "react";
+
+
 
 function Destinations() {
+  const { noResults , filteredTravels} = useContext(TravelContext)
+  const [isSearching, setIsSearching] = useState(false);
+  
+  const handleSearchToggle = (searching: boolean) => {
+    setIsSearching(searching);
+};
+
   return (
     <div>
       <div className="relative w-full h-[500px]">
@@ -12,47 +26,62 @@ function Destinations() {
           priority={true}
           className="object-cover"
         />
-
-        <div className="absolute p-8 inset-0 flex flex-row justify-center items-center z-10">
-          <div className="flex flex-row space-x-4 items-center">
-            <div className="">
-              <h1 className="text-white text-2xl mb-6 font-arialroundedmtbold">¿Qué servicio busca?</h1>
-              <input
-                type="text"
-                placeholder="Escribe algo..."
-                className="px-4 py-2 w-64 rounded-md bg-white/80"
-              />
-            </div>
-            <div className="">
-              <h1 className="text-white text-2xl mb-6 font-arialroundedmtbold">¿En dónde?</h1>
-              <input
-                type="text"
-                placeholder="Escribe algo..."
-                className="px-4 py-2 w-64 rounded-md bg-white/80"
-              />
-            <button className="ml-8">
-              Buscar
-            </button>
-            </div>
-          </div>
-        </div>
+        <TravelSearch  onSearchToggle={handleSearchToggle}/>
       </div>
-
       <div className="text-center">
-        <h1 className="text-2xl font-bold text-left ml-8 py-6 font-arialroundedmtbold text-sivoy-blue -mb-4">Balnearios</h1>
-        <div className='col-auto justify-center mb-10'>
+
+      {isSearching ? (
+                    noResults ? (
+                        <p>Este lugar no existe</p>
+                    ) : (
+                        <div className="flex flex-wrap justify-center">
+                            {filteredTravels.map((travel) => (
+                                <div key={travel.id} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow m-2 transition-transform duration-300 hover:scale-110">
+                                    <div className="cursor-pointer">
+                                        <Image
+                                            className="rounded-t-lg"
+                                            src={travel.images[0].url}
+                                            alt={travel.name}
+                                            width={400}
+                                            height={250}
+                                        />
+                                    </div>
+                                    <div className="p-5">
+                                        <h5 className="mb-2 text-2xl font-bold tracking-tight text-sivoy-blue font-arialroundedmtbold">
+                                            {travel.name}
+                                        </h5>
+                                        <p className="mb-3 font-normal text-sivoy-blue">
+                                            {travel.description}
+                                        </p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )
+                ) : (
+                    <div>
+       <h1 className="text-2xl font-bold text-left ml-8 py-6 font-arialroundedmtbold text-sivoy-blue -mb-4">
+          Balnearios
+        </h1>
+        <div className="col-auto justify-center mb-10">
           <TravelGridComponent />
         </div>
-        <h1 className="text-2xl font-bold text-left ml-8 py-6 font-arialroundedmtbold text-sivoy-blue -mb-4">Gastronomía</h1>
-        <div className='col-auto justify-center mb-10'>
+        <h1 className="text-2xl font-bold text-left ml-8 py-6 font-arialroundedmtbold text-sivoy-blue -mb-4">
+          Gastronomía
+        </h1>
+        <div className="col-auto justify-center mb-10">
           <TravelGridComponent />
         </div>
-        <h1 className="text-2xl font-bold text-left ml-8 py-6 font-arialroundedmtbold text-sivoy-blue -mb-4">Alojamientos</h1>
-        <div className='col-auto justify-center mb-10'>
+        <h1 className="text-2xl font-bold text-left ml-8 py-6 font-arialroundedmtbold text-sivoy-blue -mb-4">
+          Alojamientos
+        </h1>
+        <div className="col-auto justify-center mb-10">
           <TravelGridComponent />
         </div>
-      </div>
-    </div>
+                    </div>
+                )}
+            </div>
+        </div>
   );
 }
 

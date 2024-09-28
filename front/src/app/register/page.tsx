@@ -1,33 +1,30 @@
-import ButtonLogin from "@/components/ButtonLogin";
 import Register from "@/components/Register";
 import Image from "next/image";
 
-function RegisterPage() {
+export default function RegisterPage() {
   return (
-    <div className="relative bg-sivoy-gradient">
-
-      <div className="relative z-10 flex justify-center items-center h-full bg-black bg-opacity-50">
-        <div className="flex flex-col justify-center p-8">
-          <h1 className="text-white text-4xl mb-6 text-center">
-          Ingrese sus datos para crear la cuenta en Sí, Voy! (* Campos Obligatorios)
-          </h1>
+    <div className="flex justify-center min-h-screen bg-gray-100 p-8">
+      <div className="flex max-w-4xl w-full space-x-8">
+        <div className="flex-1 bg-white shadow-md rounded-lg p-8">
           <Register />
-          <h2 className="text-white text-4xl mb-6 text-center m-3">Si ya tenes una cuenta en si voy ingresa aca: <ButtonLogin/></h2>
-          
         </div>
 
-        <div className="m-6 bg-white rounded-full p-5">
-          <Image
-            src="https://res.cloudinary.com/ddzcann0m/image/upload/v1726790351/wolbf7thf78to3chhlk8.png"
-            width={400}
-            height={300}
-            alt="Sivoy"
-            className="z-10"
-          />
+        <div className="w-80 flex flex-col justify-between">
+          <div className="bg-white shadow-md p-6 mb-4 rounded-full">
+            <div className="flex flex-col items-center space-y-4">
+              <div className="w-fit bg-white rounded-full flex items-center justify-center text-gray-600">
+               <Image
+              src="https://res.cloudinary.com/ddzcann0m/image/upload/v1726790351/wolbf7thf78to3chhlk8.png"
+              width={400}
+              height={300}
+              alt="Sivoy"
+              className="z-10"
+            />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
-
-export default RegisterPage;
