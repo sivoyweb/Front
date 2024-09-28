@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import React, { useContext, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -9,19 +9,14 @@ import { UserContext } from '@/context/userContext';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons"; 
 import { initializeApp } from "firebase/app";
-
-import { GoogleAuthProvider, getAuth , signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import Swal from 'sweetalert2';
 import { postRegister } from '@/lib/server/fetchUsers';
 
-
-
 const provider = new GoogleAuthProvider();
 
-
 const Login: React.FC = () => {
-
   const firebaseConfig = {
     apiKey: "AIzaSyDnzL23UH5VME4BSZhG1DB5uiD7wsinu2o",
     authDomain: "sivoy-264f7.firebaseapp.com",
@@ -55,53 +50,47 @@ const Login: React.FC = () => {
     if (resultado) router.push("/");
     else alert("Error al conectarse");
   };
-  
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
-  }
+  };
 
-  const callLoginGoogle = async() =>{
-    signInWithPopup(auth,provider)
-    .then((result)=>{
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential?.accessToken;
-      const user = result.user;
-      console.log(token)
-      console.log(user)
-      console.log(credential);
-      const newUser = {
-        name:user.displayName,
-        token:token,
-        email:user.email,
-        phone:user.phoneNumber
-      }
-      postRegister(newUser as IRegisterGoogle)
-      
-      Swal.fire({
-       title:'Inicio de sesion exitoso',
-            text:'Bienvenido',
-            icon:'success'
-      })
-      setTimeout(() => {
-        router.push('/');
-      }, 2000);
-    }).catch((error)=> {
-      const errorMesage = error.Message;
-      //const credential = GoogleAuthProvider.credentialFromError(error);
-      Swal.fire({
-        title: 'Algo salió mal',
-        text: `Vuelva a intentarlo:${errorMesage} `,
-        icon: 'error'
-      })
-    });
+  const callLoginGoogle = async () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential?.accessToken;
+        const user = result.user;
+        const newUser = {
+          name: user.displayName,
+          token: token,
+          email: user.email,
+          phone: user.phoneNumber
+        };
+        postRegister(newUser as IRegisterGoogle);
 
-    Swal.fire
-  }
+        Swal.fire({
+          title: 'Inicio de sesión exitoso',
+          text: 'Bienvenido',
+          icon: 'success'
+        });
+        setTimeout(() => {
+          router.push('/');
+        }, 2000);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        Swal.fire({
+          title: 'Algo salió mal',
+          text: `Vuelva a intentarlo: ${errorMessage}`,
+          icon: 'error'
+        });
+      });
+  };
 
   return (
-    <div className="p-10">
-      <div className="bg-slate-50 m-5 p-8 rounded shadow-xl w-full max-w-md mx-4 md:mx-auto">
-        <h1 className="text-3xl font-bold mb-6 text-center">Iniciar sesión</h1>
+    <div className="p-5">
+      <div className="max-w-md mx-auto">
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -110,7 +99,7 @@ const Login: React.FC = () => {
           {({ isSubmitting }) => (
             <Form className="space-y-4">
               <div>
-                <label htmlFor="email" className="block text-xl font-medium">
+                <label htmlFor="email" className="block text-xl font-medium text-gray-700">
                   Email
                 </label>
                 <Field
@@ -122,52 +111,55 @@ const Login: React.FC = () => {
                 <ErrorMessage
                   name="email"
                   component="div"
-                  className="text-red-500 text-xl mt-1"
+                  className="text-red-500 text-sm mt-1"
                 />
               </div>
 
               <div className='relative'>
-                <label htmlFor="password" className="block text-xl font-medium">
+                <label htmlFor="password" className="block text-xl font-medium text-gray-700">
                   Contraseña
                 </label>
                 <Field
-                   type={showPassword ? "text" : "password"}
+                  type={showPassword ? "text" : "password"}
                   id="password"
                   name="password"
                   className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-sivoy-green"
                 />
                 <span onClick={togglePasswordVisibility}
-                      className='absolute inset-y-0 right-3 mt-8 flex items-center text-sm leading-5 cursor-pointer'>
-                   {showPassword ? (
-                      <FontAwesomeIcon icon={faEyeSlash} />  
-                    ) : (
-                      <FontAwesomeIcon icon={faEye} /> 
-                    )}
+                  className='absolute inset-y-0 right-3 top-1/2 transform -translate-y-1/2 flex items-center text-sm leading-5 cursor-pointer'>
+                  {showPassword ? (
+                    <FontAwesomeIcon icon={faEyeSlash} />
+                  ) : (
+                    <FontAwesomeIcon icon={faEye} />
+                  )}
                 </span>
                 <ErrorMessage
                   name="password"
                   component="div"
-                  className="text-red-500 text-xl mt-1"
+                  className="text-red-500 text-sm mt-1"
                 />
               </div>
-              <div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Iniciando...' : 'Iniciar sesión'}
-              </button>
-              <button
-        className='flex items-center justify-center mt-5 text-lg font-semibold text-gray-700 bg-white border border-gray-300 shadow-md rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all py-2 px-6'
-        onClick={(e) => {
-          callLoginGoogle();
-          e.currentTarget.blur();
-        }}
-      >
-        <FontAwesomeIcon icon={faGoogle} className="text-xl text-gray-700 mr-2" />
-        <span className="text-base">Iniciar sesion Google</span>
-      </button>
 
+              <div>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full mt-4 h-fit"
+                >
+                  {isSubmitting ? 'Iniciando...' : 'Iniciar sesión'}
+                </button>
+              </div>
+              <div>
+                <button
+                  className='flex items-center justify-center mt-5 text-lg font-semibold text-gray-700 bg-white border border-gray-300 shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all py-2 px-4 w-full h-fit'
+                  onClick={(e) => {
+                    callLoginGoogle();
+                    e.currentTarget.blur();
+                  }}
+                >
+                  <FontAwesomeIcon icon={faGoogle} className="text-xl text-gray-700 mr-2" />
+                  <span className="text-base">Iniciar sesión con Google</span>
+                </button>
               </div>
             </Form>
           )}
@@ -178,3 +170,5 @@ const Login: React.FC = () => {
 };
 
 export default Login;
+
+

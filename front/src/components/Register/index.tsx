@@ -174,35 +174,37 @@ const Register: React.FC = () => {
             </div>
 
             <div className='relative'>
-              <label htmlFor="password" className="block text-xl font-medium">
-                Repetir contraseña
-              </label>
-              <Field
-                type={showPassword ? "text" : "password"}
-                id="password"
-                name="password"
-                className="w-full p-3 pr-10 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              
-              <span onClick={tooglePasswordVisibility}
-                    className='absolute inset-y-0 right-3  mt-7 flex items-center cursor-pointer'>
-                {showPassword ? (
-                  <FontAwesomeIcon icon={faEyeSlash} />
-                ) : (
-                  <FontAwesomeIcon icon={faEye} />
-                )}
-              </span>
+  <label htmlFor="password" className="block text-lg font-medium">
+    Contraseña
+  </label>
+  <Field
+    type={showPassword ? "text" : "password"}
+    id="password"
+    name="password"
+    className="w-full p-3 pr-12 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+  
+  <span 
+    onClick={tooglePasswordVisibility}
+    className='absolute inset-y-0 right-3 flex items-center cursor-pointer'>
+    {showPassword ? (
+      <FontAwesomeIcon icon={faEyeSlash} />
+    ) : (
+      <FontAwesomeIcon icon={faEye} />
+    )}
+  </span>
 
-              <ErrorMessage
-                name="password"
-                component="div"
-                className="text-red-500 text-base mt-1"
-              />
-            </div>
+  <ErrorMessage
+    name="password"
+    component="div"
+    className="text-red-500 text-base mt-1"
+  />
+</div>
+
 
             <div className='relative'>
-              <label htmlFor="confirmPassword" className="block text-xl font-medium">
-                Repetir contraseña
+              <label htmlFor="confirmPassword" className="block text-lg font-medium">
+                Confirmar contraseña
               </label>
               <Field
                 type={showPassword ? "text" : "password"}
@@ -231,9 +233,9 @@ const Register: React.FC = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className='rounded-3xl bg-sivoy-orange py-2 px-6 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-orange-700 focus:shadow-none active:bg-orange-700 hover:bg-orange-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2'
+                className="-ml-1 mt-4"
               >
-                {isSubmitting ? 'Registrando...' : 'Registrarse'}
+                {isSubmitting ? 'Registrando...' : 'Registro'}
               </button>
               
               <button
