@@ -1,7 +1,7 @@
 import { ILogin, IloginGoogle, IRegister, IRegisterGoogle, IUserChange } from "../../interfaces/interfaces";
 
 export const postRegister = async (user: IRegister )=>{
-    const response = await fetch("http://localhost:3000/auth/signup/",{
+    const response = await fetch("https://api-sivoy.onrender.com/auth/signup/",{
         method: "POST",
         headers:{
             "Content-Type": "application/json",
@@ -19,7 +19,7 @@ export const postRegister = async (user: IRegister )=>{
 
 
 export const postLogin = async (credentials: ILogin ) =>{
-    const response = await fetch("http://localhost:3000/auth/signin/",{
+    const response = await fetch("https://api-sivoy.onrender.com/auth/signin/",{
         method:"POST",
         headers:{
             "Content-Type": "application/json",
@@ -32,7 +32,7 @@ export const postLogin = async (credentials: ILogin ) =>{
 };
 
 export const postRegisterGoogle = async (user: IRegisterGoogle )=>{
-    const response = await fetch("http://localhost:3000/auth/signup/google",{
+    const response = await fetch("https://api-sivoy.onrender.com/auth/signup/google",{
         method: "POST",
         headers:{
             "Content-Type": "application/json",
@@ -50,7 +50,7 @@ export const postRegisterGoogle = async (user: IRegisterGoogle )=>{
 
 
 export const postLoginGoogle = async (credentials: IloginGoogle ) =>{
-    const response = await fetch("http://localhost:3000/auth/signin/google",{
+    const response = await fetch("https://api-sivoy.onrender.com/auth/signin/google",{
         method:"POST",
         headers:{
             "Content-Type": "application/json",

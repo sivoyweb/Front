@@ -9,30 +9,32 @@ export const authOptions:NextAuthOptions = {
         })
        ], 
        callbacks: {
-        async signIn({ user, account }) {
+        async signIn({ user }) {
           try {
             // Enviar datos del usuario a tu backend en NestJS
-            const response = await fetch('http://localhost:3000/auth/signin/google', {
+            const response = await fetch('https://api-sivoy.onrender.com/auth/signin/google', {
                 method:"POST",
                 headers:{
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({name: user.name,
-                    email: user.email,
-                    token: account?.id_token, 
+                body: JSON.stringify({
+                    email: user.email, 
                     }),
             }); 
-            const contentType = response.headers.get('content-type');
-            if (contentType && contentType.includes('application/json')) {
-              const data = await response.json();
-              return data;
-            }
-            const textData = await response.text();
-            return { message: textData };
-          } catch (error: unknown) {
-            console.error('Error en signIn callback:', error);
-            return false;
+            if (!response.ok) {
+              console.error('Error al enviar datos al backend:', response.statusText);
+              return false;
           }
-        }
-    }
-}
+
+          const data = await response.json();
+          console.log(data);
+          
+          return true;
+      } catch (error) {
+          console.error('Error en signIn callback:', error);
+          return false;
+      }
+  }
+},
+// Opcional: Añade más opciones de configuración según tus necesidades
+};

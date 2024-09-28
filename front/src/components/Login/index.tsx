@@ -50,9 +50,12 @@ const Login: React.FC = () => {
   }
 
   const callLoginGoogle = async() =>{
+    
+    
     try {
 
       await signIn('google');
+     
       
     } catch (error: unknown) {
       Swal.fire({
@@ -70,10 +73,11 @@ const Login: React.FC = () => {
         icon: 'success',
       }).then(() => {
         router.push('/');
+        console.log(session);
       });
     }
   }, [session, router]);
-
+ 
   return (
     <div className="p-10">
       <div className="bg-slate-50 m-5 p-8 rounded shadow-xl w-full max-w-md mx-4 md:mx-auto">

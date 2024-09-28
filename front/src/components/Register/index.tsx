@@ -3,18 +3,14 @@
 import React, { useContext, useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { IRegister, IRegisterGoogle } from "../../interfaces/interfaces";
+import { IRegister } from "../../interfaces/interfaces";
 import { useRouter } from "next/navigation";
 import { UserContext } from "../../context/userContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons"; 
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-import Swal from 'sweetalert2';
-import {  postRegisterGoogle } from '@/lib/server/fetchUsers';
-import { GoogleAuthProvider,  signInWithPopup } from 'firebase/auth';
-import { auth } from '../../../firebase.config';
 
-const provider = new GoogleAuthProvider();
+
+
 
 
 
@@ -65,39 +61,6 @@ const Register: React.FC = () => {
     setShowPassword2(!showPassword2);
   }
   
-
-  const callRegisterGoogle = async () => {
-    try {
-      const result = await signInWithPopup(auth, provider);
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential?.idToken;
-      const user = result.user;
-  
-      const newUser = {
-        name: user.displayName,
-        token: token,
-        email: user.email,
-        phone: user.phoneNumber,
-      };
-  
-      await postRegisterGoogle(newUser as IRegisterGoogle);
-  
-      Swal.fire({
-        title: 'Registro exitoso',
-        icon: 'success',
-      });
-  
-      setTimeout(() => {
-        router.push('/login');
-      }, 2000);
-    } catch (error:unknown) {
-      Swal.fire({
-        title: 'Algo salió mal',
-        text: `Vuelva a intentarlo: ${error}`,
-        icon: 'error',
-      });
-    }
-  };
 
 
   return (
@@ -226,17 +189,7 @@ const Register: React.FC = () => {
                 {isSubmitting ? 'Registrando...' : 'Registrarse'}
               </button>
               
-              <button
-                className='flex items-center justify-center text-lg font-semibold text-gray-700 bg-white border border-gray-300 shadow-md rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all py-2 px-6'
-                onClick={(e) => {
-                  callRegisterGoogle();
-                  e.currentTarget.blur();
-                }}
-              >
-                <FontAwesomeIcon icon={faGoogle} className="text-xl text-gray-700 mr-2" />
-                <span className="text-base">Registrarse con Google</span>
-              </button>
-            </div>
+              </div>
 
           </Form>
         )}
