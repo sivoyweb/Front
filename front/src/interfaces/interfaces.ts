@@ -98,10 +98,20 @@ export interface ITravelProvider{
     travelProviders: ITravelProvider[];
   }
 
+  export interface IReviewGet {
+    id: string;
+    user: IUser;
+    travel: ITravel;
+    review: string;
+    stars: number;
+    date: Date;
+    visible: boolean;
+  }
+
   export interface IReview{
-    id: string
-    user: IUser,
-    travel: ITravel,
+    id?: string
+    userId: string,
+    travelId: string,
     review: string,
     stars: number;
   }
@@ -119,7 +129,6 @@ export interface ITravelProvider{
     country: string,
     city: string,
     date: Date,
-    price: number,
     description: string,
     serviceType: string,
     accesibilitySeal: string,
@@ -129,6 +138,11 @@ export interface ITravelProvider{
     promotions: IPromotion[],
     provider: ITravelProvider;
     userHistory: IUser,
+    email: string,
+    address: string,
+    openingHours: string,
+    website: string,
+    phone: string,
   }
 
 
@@ -168,3 +182,7 @@ export interface ITravelCardProps {
   index?: number; 
 };
 
+
+export interface ICarouselProps {
+  items: IImage[];
+}

@@ -2,7 +2,7 @@ import { ITravel } from "@/interfaces/interfaces";
 
 export async function fetchTravels(): Promise<ITravel[]> {
     try {
-        const response = await fetch("http://localhost:3001/travels");
+        const response = await fetch("https://api-sivoy.onrender.com/travels");
 
         if (!response.ok) {
             throw new Error(`Error al obtener los datos: ${response.status} ${response.statusText}`);
@@ -18,7 +18,7 @@ export async function fetchTravels(): Promise<ITravel[]> {
 
 
 export async function fetchTravelById(id: string): Promise<ITravel> {
-    const response = await fetch(`http://localhost:3001/travels/${id}`);
+    const response = await fetch(`https://api-sivoy.onrender.com/travels/${id}`);
     const travel = await response.json();
     return travel;
 }
