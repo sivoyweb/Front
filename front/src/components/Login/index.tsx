@@ -143,27 +143,7 @@ const Login: React.FC = () => {
       </button>
       </div>
 
-              <div>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full mt-4 h-fit"
-                >
-                  {isSubmitting ? 'Iniciando...' : 'Iniciar sesión'}
-                </button>
-              </div>
-              <div>
-                <button
-                  className='flex items-center justify-center mt-5 text-lg font-semibold text-gray-700 bg-white border border-gray-300 shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all py-2 px-4 w-full h-fit'
-                  onClick={(e) => {
-                    callLoginGoogle();
-                    e.currentTarget.blur();
-                  }}
-                >
-                  <FontAwesomeIcon icon={faGoogle} className="text-xl text-gray-700 mr-2" />
-                  <span className="text-base">Iniciar sesión con Google</span>
-                </button>
-              </div>
+            
             </Form>
           )}
         </Formik>
