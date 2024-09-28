@@ -2,7 +2,7 @@
 import React, { useState, useContext } from 'react';
 import Rating from 'react-rating';
 import axios from 'axios';
-import { IReview } from '@/interfaces/interfaces';
+import { IReviewProps } from '@/interfaces/interfaces';
 import { UserContext } from '@/context/userContext';
 
 interface ReviewComponentProps {
@@ -26,7 +26,7 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
       return;
     }
 
-    const data: IReview = {
+    const data: IReviewProps = {
       review,
       stars: rating,
       userId,

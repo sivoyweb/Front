@@ -31,6 +31,7 @@ const login = async (credentials: ILogin) => {
     try {
         const data = await postLogin(credentials);
         setUser(data);
+        console.log(data);
         localStorage.setItem("user", JSON.stringify(data));
         localStorage.setItem("token", data.token);
         Swal.fire({
@@ -39,8 +40,19 @@ const login = async (credentials: ILogin) => {
             icon:'success'
            });
         return true;
-    } catch (error) {
-        return false;
+    } catch (error: unknown) { 
+      let errorMessage = 'Algo salió mal';
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+  
+      Swal.fire({
+        title: 'No se pudo iniciar sesión',
+        text: errorMessage,
+        icon: 'error'
+      });
+      return false;
+        
     }    
 };
 
@@ -67,14 +79,20 @@ const register = async (user: IRegister) => {
         });
         return false;
       }
-    } catch (error) {
+    } catch (error: unknown) { 
+      let errorMessage = 'Algo salió mal';
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+  
       Swal.fire({
-        title: 'Algo salió mal',
-        text: 'Vuelva a intentarlo',
-        icon: 'error',
+        title: 'No se pudo Registrar el usuario',
+        text: errorMessage,
+        icon: 'error'
       });
       return false;
-    }
+        
+    }    
   };
 
 

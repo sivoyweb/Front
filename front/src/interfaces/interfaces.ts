@@ -12,13 +12,19 @@ export interface ILogin {
     confirmPassword: string,
   }
 
+  export interface IRegisterGoogle{
+    name: string,
+    token:string,
+    email: string,
+    phone: string,
+  }
+
   export interface IDisability{
     id: string,
     name: string,
     category: string,
     user: IUser,
   }
-  
 
   export interface IDonation{
     id: string,
@@ -26,6 +32,13 @@ export interface ILogin {
     mount: number,
     date: Date,
     description: string,
+  }
+
+  export interface IloginGoogle{
+    name:string
+    token:string
+    phone:string
+    email:string
   }
 
   export interface ISuggestion{
@@ -46,6 +59,15 @@ export interface ILogin {
 
   export interface IRole{
 
+  }
+  export interface IUserChange{
+    name:string
+    email:string
+    phone:string
+    password:string
+    avatar:string
+    disability:IDisability
+    id:string
   }
 
 
@@ -70,32 +92,37 @@ export interface ILogin {
     confirmPassword: string,
   }
 
-  export interface ICredential{
-    id: string,
-    email: string,
-    password: string,
-    avatar: IImage,
-    user: IUser,
-  }
+export interface ICredential {
+  id: string,
+  email: string,
+  password: string,
+  avatar: IImage,
+  user: IUser,
+}
 
-
-export interface IImage{
+export interface IImage {
   id: string,
   url: string,
   publicId: string,
 }
 
-export interface ITravelProvider{
+export interface IImageBlog {
+  id: string,
+  url: string,
+  publicId: string,
+}
+
+export interface ITravelProvider {
   id: string,
   travel: ITravel;
   provider: IProvider;
 }
 
-  export interface IProvider{
-    id: string,
-    name: string;
-    description: string;
-    travelProviders: ITravelProvider[];
+export interface IProvider {
+  id: string,
+  name: string;
+  description: string;
+  travelProviders: ITravelProvider[];
   }
 
   export interface IReviewGet {
@@ -108,7 +135,7 @@ export interface ITravelProvider{
     visible: boolean;
   }
 
-  export interface IReview{
+  export interface IReviewProps{
     id?: string
     userId: string,
     travelId: string,
@@ -150,8 +177,46 @@ export interface ITravelProvider{
     login:boolean;
     user: Partial<IUser> | null;
     token: string;
+  }
+export interface IReview{
+  id: string,
+  user: IUser,
+  travel: ITravel,
+  review: string,
+  stars: number;
 }
 
+export interface IPromotion{
+  id: string,
+  travel: ITravel,
+  discount: number,
+  validUntil: Date,
+}
+
+export interface ITravel {
+  id:string,
+  name: string,
+  country: string,
+  city: string,
+  date: Date,
+  price: number,
+  description: string,
+  serviceType: string,
+  accesibilitySeal: string,
+  reviews: IReview[],
+  images: IImage[],
+  stars: number,
+  promotions: IPromotion[],
+  provider: ITravelProvider;
+  userHistory: IUser,
+}
+
+
+export interface IUserResponse {
+  login:boolean;
+  user: Partial<IUser> | null;
+  token: string;
+}
 
 export interface ITravelContextType {
   travels: ITravel[];
@@ -167,14 +232,14 @@ export interface TravelSearchProps {
   onSearchToggle: (searching: boolean) => void;
 }
 
-  export interface IUserContextType {
-    user: Partial<IUserResponse> | null;
-    setUser: React.Dispatch<React.SetStateAction<Partial<IUserResponse> | null>>;
-    isLogged: boolean;
-    setIsLogged: (isLogged: boolean) => void;
-    login: (credentials: ILogin) => Promise<boolean>;
-    register: (user: IRegister) => Promise<boolean>;
-    logOut: () => void;
+export interface IUserContextType {
+  user: Partial<IUserResponse> | null;
+  setUser: React.Dispatch<React.SetStateAction<Partial<IUserResponse> | null>>;
+  isLogged: boolean;
+  setIsLogged: (isLogged: boolean) => void;
+  login: (credentials: ILogin) => Promise<boolean>;
+  register: (user: IRegister) => Promise<boolean>;
+  logOut: () => void;
 }
 
 export interface ITravelCardProps {
@@ -185,4 +250,12 @@ export interface ITravelCardProps {
 
 export interface ICarouselProps {
   items: IImage[];
+}
+export interface IBlogArticle {
+  id: string;
+  title: string;
+  content: string;
+  images: IImageBlog[];
+  date: string;
+  visible: boolean;
 }

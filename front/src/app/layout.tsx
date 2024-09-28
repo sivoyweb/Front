@@ -2,8 +2,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Metadata } from "next";
 import "./globals.css";
-import { UserProvider } from "@/context/userContext";
+
 import { TravelProvider } from "@/context/travelContext";
+import { UserProvider } from "@/context/userContext";
+import SessionWrapper from "@/components/SessionWrapper";
 
 
 export const metadata: Metadata = {
@@ -19,13 +21,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-      <UserProvider>
-        <TravelProvider>
+          <UserProvider>
+        <SessionWrapper>
+           <TravelProvider>
             <Navbar />
-            {children}
+             {children}
            <Footer />
-        </TravelProvider>
-      </UserProvider>
+          </TravelProvider>
+       </SessionWrapper>
+         </UserProvider>
       </body>
     </html>
   );
