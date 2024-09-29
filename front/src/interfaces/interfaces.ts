@@ -34,6 +34,13 @@ export interface ILogin {
     description: string,
   }
 
+  export interface IloginGoogle{
+    name:string
+    token:string
+    phone:string
+    email:string
+  }
+
   export interface ISuggestion{
     id: string,
     user: IUser,
@@ -52,6 +59,15 @@ export interface ILogin {
 
   export interface IRole{
 
+  }
+  export interface IUserChange{
+    name:string
+    email:string
+    phone:string
+    password:string
+    avatar:string
+    disability:IDisability
+    id:string
   }
 
 
