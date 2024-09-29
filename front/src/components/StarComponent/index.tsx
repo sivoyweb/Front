@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react';
 import Rating from 'react-rating';
 import axios from 'axios';
 import { IReviewProps } from '@/interfaces/interfaces';
-import { UserContext } from '@/context/userContext';
+import { TravelContext } from '@/context/travelContext';
 
 interface ReviewComponentProps {
   travelId: string;
@@ -12,35 +12,47 @@ interface ReviewComponentProps {
 const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
   const [rating, setRating] = useState<number>(0);
   const [review, setReview] = useState<string>("");
-  const { user } = useContext(UserContext);
-  const userId = user?.user?.id; // Recuperamos el userId desde el contexto
+  const { refreshTravels } = useContext(TravelContext);
 
   const handleSubmit = async () => {
-    if (!userId) {
-      console.error("El userId no está definido.");
-      return;
-    }
-    
     if (!review || rating === 0) {
       console.error("Faltan valores de reseña o calificación.");
       return;
     }
-
     const data: IReviewProps = {
       review,
       stars: rating,
-      userId,
       travelId,
     };
 
-    console.log("Datos que se envían al backend:", data);
-
+    
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.error('No se encontró el token de autenticación.');
+      return;
+    }
+    
+    
     try {
-      const response = await axios.post('https://api-sivoy.onrender.com/travels/reviews', data);
+      const response = await axios.post(
+        'https://api-sivoy.onrender.com/travels/reviews',
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+      console.log("Datos que se envían al backend:", data);
       console.log("Reseña enviada exitosamente:", response.data);
-      // Opcional: Puedes limpiar el formulario aquí si lo deseas
+
+      // Limpiar el formulario
       setReview("");
       setRating(0);
+
+      // Llamar a refreshTravels para actualizar la información de travels
+      await refreshTravels();
+
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error("Error al enviar la reseña:", error.message);

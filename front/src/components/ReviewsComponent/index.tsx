@@ -1,39 +1,34 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { IReviewGet } from "@/interfaces/interfaces";
+import React, { useState } from "react";
+import Rating from "react-rating"; // Asegúrate de tener react-rating instalado
+import { IReviewT } from "@/interfaces/interfaces"; // Corrige la importación
 
-// Interfaz para definir el tipo de reseña
-
-
-interface ReviewAccordionProps {
-  travelId: string;
+interface ReviewsComponentProps {
+  reviews: IReviewT[]; // El tipo correcto es un array de IReviewT
 }
 
-const ReviewsComponent: React.FC<ReviewAccordionProps> = ({ travelId }) => {
-  const [reviews, setReviews] = useState<IReviewGet[]>([]);
+const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ reviews }) => {
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
+  const [openReview, setOpenReview] = useState<string | null>(null);
 
-  useEffect(() => {
-    // Función para obtener las reseñas
-    const fetchReviews = async () => {
-      try {
-        const response = await axios.get(
-          `https://api-sivoy.onrender.com/travels/${travelId}/reviews`
-        );
-        setReviews(response.data);
-      } catch (error) {
-        console.error("Error al obtener las reseñas:", error);
-      }
-    };
-
-    fetchReviews();
-  }, [travelId]);
-
-  // Función para alternar el acordeón
   const toggleAccordion = () => {
     setIsAccordionOpen(!isAccordionOpen);
   };
+
+  const toggleReview = (reviewId: string) => {
+    setOpenReview((prevId) => (prevId === reviewId ? null : reviewId));
+  };
+
+  const starStyle = {
+    color: "#ffd700",
+  };
+
+  const emptyStarStyle = {
+    color: "#d1d5db", // color de la estrella vacía
+  };
+
+  // Comprobar los datos de las reseñas
+  console.log("Datos de reseñas recibidos:", reviews);
 
   return (
     <div id="accordion-nested-parent" data-accordion="collapse">
@@ -72,26 +67,49 @@ const ReviewsComponent: React.FC<ReviewAccordionProps> = ({ travelId }) => {
       >
         <div className="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
           <p className="mb-4 text-gray-500 dark:text-gray-400">
-            A continuación, se muestran las reseñas dejadas por los usuarios para
-            este viaje.
+            A continuación, se muestran las reseñas dejadas por los usuarios para este viaje.
           </p>
 
-          {/* Mapeamos las reseñas */}
           {reviews.length > 0 ? (
             reviews.map((review) => (
-              <div
-                key={review.id}
-                className="border p-4 mb-4 rounded-lg dark:bg-gray-800"
-              >
-                <p className="text-lg font-bold text-gray-700 dark:text-white">
-                  {review.user.name}
-                </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  {review.stars} estrellas
-                </p>
-                <p className="mt-2 text-gray-600 dark:text-gray-300">
-                  {review.review}
-                </p>
+              <div key={review.id}>
+                <button
+                  type="button"
+                  className="flex items-center justify-between w-full p-4 mb-2 font-medium text-gray-700 dark:text-white border border-gray-200 rounded focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:bg-gray-800"
+                  onClick={() => toggleReview(review.id)}
+                >
+                  <span>{review.date}</span>
+                  <svg
+                    className={`w-3 h-3 transform ${
+                      openReview === review.id ? "rotate-180" : ""
+                    }`}
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 10 6"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M9 5 5 1 1 5"
+                    />
+                  </svg>
+                </button>
+                {openReview === review.id && (
+                  <div className="p-4 mb-4 border border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+                    <p>
+                      {/* Renderizar las estrellas de forma no interactiva */}
+                      <Rating
+                        initialRating={review.stars}
+                        readonly
+                        emptySymbol={<i className="fa-regular fa-star" style={emptyStarStyle} />}
+                        fullSymbol={<i className="fa-solid fa-star" style={starStyle} />}
+                      />
+                    </p>
+                    <p className="mt-2">{review.review}</p>
+                  </div>
+                )}
               </div>
             ))
           ) : (

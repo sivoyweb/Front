@@ -9,11 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@fortawesome/fontawesome-free": "^6.6.0",
-=======
     "@auth/prisma-adapter": "^2.5.2",
->>>>>>> 32b10cfe2959785316e05b9298e8eb5ac2109857
+    "@fortawesome/fontawesome-free": "^6.6.0",
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
@@ -27,26 +24,19 @@
     "axios": "^1.7.7",
     "firebase": "^10.13.2",
     "formik": "^2.4.6",
-<<<<<<< HEAD
+    "jwt-decode": "^4.0.0",
     "leaflet": "^1.9.4",
-    "next": "^14.2.11",
+    "next": "^14.2.13",
+    "next-auth": "^4.24.8",
+    "next-cloudinary": "^6.13.0",
     "next-svg": "^1.0.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.3.0",
     "react-leaflet": "^4.2.1",
     "react-rating": "^2.0.5",
-    "react-slick": "^0.30.2",
-=======
-    "jwt-decode": "^4.0.0",
-    "next": "^14.2.13",
-    "next-auth": "^4.24.8",
-    "next-cloudinary": "^6.13.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-icons": "^5.3.0",
     "react-router-dom": "^6.26.2",
->>>>>>> 32b10cfe2959785316e05b9298e8eb5ac2109857
+    "react-slick": "^0.30.2",
     "sharp": "^0.33.5",
     "slick-carousel": "^1.8.1",
     "sweetalert2": "^11.14.1",

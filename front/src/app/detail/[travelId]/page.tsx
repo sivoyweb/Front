@@ -13,6 +13,7 @@ async function TravelDetail({params}:{params:{travelId:string}}) {
       {id: "2",url:"https://r4.wallpaperflare.com/wallpaper/106/85/265/austria-bosque-lago-naturaleza-wallpaper-48fcd1d9b00c50cb8f6ed85f83761f5b.jpg", publicId:"lago"},
       {id: "3",url:"https://r4.wallpaperflare.com/wallpaper/504/836/940/architecture-bridges-building-cities-wallpaper-2e0c7c16d4188ed546fdbcacf6ed39ec.jpg", publicId:"templo"}
     ];
+
     const address = "Balneario San Cayetano";
     return ( 
         <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-8 pb-8 pt-1">
@@ -47,14 +48,14 @@ async function TravelDetail({params}:{params:{travelId:string}}) {
             <p className="text-xl font-semibold text-gray-900 mb-6 w-[90%] mx-auto"> {travels.phone}</p>
             </div>
             <StarComponent travelId={travels.id}/>
+            <MapsComponet address={address}/>
             <div >
             <div className="relative w-[90%] mx-auto">
               <CarouselTravels items={imagenes} />
             </div>
-            <MapsComponet address={address}/>
             </div>
             <div>
-              <ReviewsComponent travelId={travels.id}/>
+              <ReviewsComponent reviews={travels.reviews}/>
             </div>
           </div>
         </div>

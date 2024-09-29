@@ -135,9 +135,11 @@ export interface IProvider {
     visible: boolean;
   }
 
+
+
+
   export interface IReviewProps{
     id?: string
-    userId: string,
     travelId: string,
     review: string,
     stars: number;
@@ -159,7 +161,7 @@ export interface IProvider {
     description: string,
     serviceType: string,
     accesibilitySeal: string,
-    reviews: IReview[],
+    reviews: IReviewT[],
     images: IImage[],
     stars: number,
     promotions: IPromotion[],
@@ -193,23 +195,6 @@ export interface IPromotion{
   validUntil: Date,
 }
 
-export interface ITravel {
-  id:string,
-  name: string,
-  country: string,
-  city: string,
-  date: Date,
-  price: number,
-  description: string,
-  serviceType: string,
-  accesibilitySeal: string,
-  reviews: IReview[],
-  images: IImage[],
-  stars: number,
-  promotions: IPromotion[],
-  provider: ITravelProvider;
-  userHistory: IUser,
-}
 
 
 export interface IUserResponse {
@@ -226,15 +211,26 @@ export interface ITravelContextType {
   noResults:boolean;
   setFilteredTravels: (travels: ITravel[]) => void;
   setNoResults: (noResults: boolean) => void;
+  refreshTravels: () => Promise<void>;
 }
 
 export interface TravelSearchProps {
   onSearchToggle: (searching: boolean) => void;
 }
 
+export interface IUserProps{
+auth: boolean,
+block: false,
+createdAt: string,
+credential: ICredential,
+id: string,
+name: string,
+phone: string
+}
+
 export interface IUserContextType {
-  user: Partial<IUserResponse> | null;
-  setUser: React.Dispatch<React.SetStateAction<Partial<IUserResponse> | null>>;
+  user: Partial<IUserProps> | null;
+  setUser: React.Dispatch<React.SetStateAction<Partial<IUserProps> | null>>;
   isLogged: boolean;
   setIsLogged: (isLogged: boolean) => void;
   login: (credentials: ILogin) => Promise<boolean>;
@@ -258,4 +254,18 @@ export interface IBlogArticle {
   images: IImageBlog[];
   date: string;
   visible: boolean;
+}
+
+ export interface IReviewT {
+  id:string,
+  review:string,
+  stars: number,
+  date: string,
+  visible?: boolean;
+ }
+
+export interface ITravelReview{
+  id: string,
+  name: string,
+  reviews: IReviewT[],
 }
