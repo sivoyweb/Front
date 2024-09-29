@@ -32,21 +32,22 @@ const paths = {
 };
 
 const AuthButtons: React.FC<{ router: ReturnType<typeof useRouter> }> = ({ router }) => (
-  <div className="flex space-x-4">
+  <div className="flex sm:flex-row flex-col space-y-2 sm:space-y-0 sm:space-x-4">
     <button
-      className="hover:text-sivoy-orange text-white font-small p-2 rounded-md text-sm"
+      className="hover:text-sivoy-orange text-white font-small text-sm ml-4 mr-80 mb-2"
       onClick={() => router.push(paths.login)}
     >
       Ingresar
     </button>
     <button
-      className="hover:text-sivoy-orange text-white font-small p-2 rounded-md text-sm"
+      className="hover:text-sivoy-orange text-white font-small text-sm ml-4 mr-80 mb-2"
       onClick={() => router.push(paths.register)}
     >
       Registro
     </button>
   </div>
 );
+
 
 const Navbar: React.FC = () => {
   const { data: session } = useSession();
@@ -62,7 +63,7 @@ const Navbar: React.FC = () => {
 
 
   return (
-    <Disclosure as="nav" className="bg-sivoy-blue text-white font-arialroundedmtbold -ml-16 -mr-16">
+    <Disclosure as="nav" className="bg-sivoy-blue text-white font-arialroundedmtbold sm:-ml-16 sm:-mr-16">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           {/* Botón del menú móvil */}
@@ -158,7 +159,7 @@ const Navbar: React.FC = () => {
           ))}
         </div>
         {/* Mostrar botones si session.user no existe */}
-        {!session?.user && <AuthButtons router={router} />}
+        {!session?.user && <AuthButtons router={router}/>}
         {/* Mostrar botón de cerrar sesión si session.user existe */}
         {session?.user && (
           <button
