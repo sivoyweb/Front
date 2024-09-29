@@ -11,9 +11,13 @@ export const postRegister = async (user: IRegister )=>{
   const contentType = response.headers.get('content-type');
   if (contentType && contentType.includes('application/json')) {
     const data = await response.json();
+    
+    
     return data;
   }
   const textData = await response.text();
+ 
+  
   return { message: textData };
 };
 
@@ -27,8 +31,8 @@ export const postLogin = async (credentials: ILogin ) =>{
         body: JSON.stringify(credentials),
     });
     const data = await response.json();
-    return data;
     console.log(data)
+    return data;
 };
 
 export const postRegisterGoogle = async (user: IRegisterGoogle )=>{

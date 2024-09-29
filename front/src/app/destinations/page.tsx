@@ -32,7 +32,7 @@ function Destinations() {
 
       {isSearching ? (
                     noResults ? (
-                        <p>Este lugar no existe</p>
+                        <p className=" text-2xl font-bold m-6 mb-20">El lugar que usted busca no lo encontramos</p>
                     ) : (
                         <div className="flex flex-wrap justify-center">
                             {filteredTravels.map((travel) => (
