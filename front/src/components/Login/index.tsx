@@ -114,7 +114,7 @@ const Login: React.FC = () => {
                   className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-sivoy-green"
                 />
                 <span onClick={togglePasswordVisibility}
-                  className='absolute inset-y-0 right-3 top-1/2 transform -translate-y-1/2 flex items-center text-sm leading-5 cursor-pointer'>
+                  className='absolute inset-y-0 mt-4 right-3 top-1/2 transform -translate-y-1/2 flex items-center text-sm leading-5 cursor-pointer'>
                   {showPassword ? (
                     <FontAwesomeIcon icon={faEyeSlash} />
                   ) : (

@@ -139,7 +139,7 @@ const Register: React.FC = () => {
   
   <span 
     onClick={tooglePasswordVisibility}
-    className='absolute inset-y-0 right-3 flex items-center cursor-pointer'>
+    className='absolute inset-y-0 mt-7 right-3 flex items-center cursor-pointer'>
     {showPassword ? (
       <FontAwesomeIcon icon={faEyeSlash} />
     ) : (
