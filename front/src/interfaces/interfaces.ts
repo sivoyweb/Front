@@ -152,7 +152,7 @@ export interface ITravel {
   accesibilitySeal: string,
   reviews: IReview[],
   images: IImage[],
-  stars: number,
+  averageStars: number,
   promotions: IPromotion[],
   provider: ITravelProvider;
   userHistory: IUser,

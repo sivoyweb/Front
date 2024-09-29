@@ -4,7 +4,7 @@ import vero from "../assets/vero.png"
 import linkedin from "@/assets/linkedin.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleInfo, faHandshakeAngle, faLocationDot, faMugHot } from "@fortawesome/free-solid-svg-icons"
-import { HomeButton } from "@/components/Buttons";
+import { DonationButton, HomeButton } from "@/components/Buttons";
 import HomeGridComponent from "@/components/HomeDestinationGrid";
 import { HomeServicesGrid } from "@/components/HomeServicesGrid";
 import { AlliancesGrid } from "@/components/AlliancesGrid";
@@ -24,6 +24,7 @@ const Home: React.FC = () => {
 
             <div className="flex align-middle justify-center mt-24 4k:mt-48">
               <HomeButton />
+              <DonationButton />
             </div>
           </div>
         </div>
@@ -37,8 +38,8 @@ const Home: React.FC = () => {
         <HomeGridComponent />
       </section>
 
-      <section className="flex flex-col md:flex-row text-justify mt-2 ml-5 mr-5 md:mr-8 4k:ml-20 4k:mr-20 4k:mt-8">
-        <div className="flex flex-col items-center md:ml-8 2xl:ml-56 4k:ml-40">
+      <section className="flex flex-col md:flex-row text-justify mt-2 mr-5 md:mr-8 4k:ml-20 4k:mr-20 4k:mt-8">
+        <div className="flex flex-col items-center ml-6">
           <a href="https://www.linkedin.com/in/ver%C3%B3nica-lorena-martinez-78a303a6/" className="flex flex-col items-center border shadow-md rounded-3xl mt-6 hover:scale-105 duration-300 transition-transform w-72 4k:w-[400px]">
             <Image src={vero} alt="Foto de perfil de Verónica Martínez" className="rounded-full w-52 h-auto 4k:w-72" />
             <p className="font-arialroundedmtbold text-sivoy-blue text-center mt-2 4k:text-3xl">Verónica Martínez</p>
