@@ -83,7 +83,7 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
         fullSymbol={<i className="fa-solid fa-star fa-2x" style={starStyle} />}
       />
 
-      <p className="mt-2">Calificación actual: {rating} estrellas</p>
+      <p className="mt-2">Nivel de satisfaccion: {rating} estrellas</p>
 
       <button
         onClick={handleSubmit}

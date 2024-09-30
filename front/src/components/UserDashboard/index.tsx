@@ -40,8 +40,8 @@ const UserDashboard = () => {
         return (
           <div className="bg-white rounded-lg shadow-lg p-6">
             <h2 className="text-xl font-semibold mb-4">Perfil</h2>
-            <p className="text-gray-600">Nombre: {user?.user?.name}</p>
-            <p className="text-gray-600">Email: {user?.user?.email}</p>
+            <p className="text-gray-600">Nombre: {user?.name}</p>
+            <p className="text-gray-600">Email: {user?.credential?.email}</p>
           </div>
         );
       case 'favorites':
@@ -68,8 +68,8 @@ const UserDashboard = () => {
             </div>
             {!isEditing ? (
               <>
-                <p className="text-gray-600">Nombre: {user?.user?.name}</p>
-                <p className="text-gray-600">Email: {user?.user?.email}</p>
+                <p className="text-gray-600">Nombre: {user?.name}</p>
+                <p className="text-gray-600">Email: {user?.credential?.email}</p>
                 <p className="text-gray-600">Teléfono: ------</p>
                 <p className="text-gray-600">Avatar: ------</p>
               </>
@@ -83,7 +83,7 @@ const UserDashboard = () => {
                     onChange={handleChange}
                     type="text"
                     className="mt-1 p-2 border border-gray-300 rounded w-full"
-                    defaultValue={user?.token}
+                    defaultValue={user?.name}
                   />
                 </div>
                 <div>
@@ -94,7 +94,7 @@ const UserDashboard = () => {
                     onChange={handleChange}
                     type="email"
                     className="mt-1 p-2 border border-gray-300 rounded w-full"
-                    defaultValue={user?.user?.email}
+                    defaultValue={user?.credential?.email}
                   />
                 </div>
                 <div>
@@ -204,7 +204,7 @@ const UserDashboard = () => {
           <h1 className="text-2xl font-semibold">Perfil</h1>
           <div className="flex items-center">
             <span className="ml-2 text-sm font-medium">
-              Bienvenido, {user?.user?.name}
+              Bienvenido, {user?.name}
             </span>
           </div>
         </header>

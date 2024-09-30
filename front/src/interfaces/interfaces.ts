@@ -256,16 +256,50 @@ export interface IBlogArticle {
   visible: boolean;
 }
 
+interface IUserReviews{
+id:string,
+name: string,
+role: string,
+phone: string,
+createdAt: string,
+auth: boolean,
+block: boolean,
+}
+
  export interface IReviewT {
   id:string,
   review:string,
   stars: number,
   date: string,
   visible?: boolean;
+  user:IUserReviews;
  }
+
+
 
 export interface ITravelReview{
   id: string,
   name: string,
   reviews: IReviewT[],
+}
+
+export interface ITravelsProps{
+  id: string,
+  name: string,
+  country: string,
+  city: string,
+  date: Date,
+  description: string,
+  serviceType: string,
+  accesibilitySeal: string,
+  averageStars: number,
+  website: string,
+  phone: string,
+  email: string,
+  address: string,
+  openingHours: string,
+  aviable: true,
+  reviews: IReviewT[],
+  images: IImage[],
+  provider: null,
 }
