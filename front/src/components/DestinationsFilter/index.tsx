@@ -15,7 +15,7 @@ function DestinationsFilter({ travels }: ITravelCardProps) {
   };
 
   return (
-    <div className="w-full overflow-hidden">
+    <div className="w-full overflow-x-hidden">
       <div className="relative w-full h-[300px] md:h-[500px]">
         <Image
           src="http://www.sivoy.com.ar/assets/upload/slider-2.jpg"
@@ -29,8 +29,8 @@ function DestinationsFilter({ travels }: ITravelCardProps) {
       <div className="text-center px-4 md:px-8 lg:px-12">
         {isSearching ? (
           noResults ? (
-            <p className="text-xl md:text-2xl font-arialroundedmtbold m-6 mb-20">
-              El lugar que usted busca no lo encontramos
+            <p className="text-xl md:text-2xl m-6 mb-20">
+              No hay coincidencias con esta búsqueda.
             </p>
           ) : (
             <div className="flex flex-wrap justify-center">

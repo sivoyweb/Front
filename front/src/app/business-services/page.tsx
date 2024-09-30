@@ -15,7 +15,7 @@ const BusinessServices = () => {
                 <div className="order-2 md:order-2 space-y-6 mt-16">
                     <h2 className="font-arialroundedmtbold text-2xl text-sivoy-blue">Asesoramiento en Turismo Accesible</h2>
                     <p className="text-lg">
-                        ¿Tenés una Agencia de viajes o sos Operador Turístico? Te ayudamos a elaborar
+                        ¿Tienes una Agencia de viajes o eres Operador Turístico? Te ayudamos a elaborar
                         itinerarios o rutas de viajes adaptadas a necesidades específicas individuales o grupales.
                     </p>
                     <p className="text-lg font-arialroundedmtbold text-sivoy-blue">¿Qué beneficios obtendrás?</p>
@@ -24,9 +24,9 @@ const BusinessServices = () => {
                         <li>Eliminas la estacionalidad del sector.</li>
                     </ul>
                     <p>
-                        Ampliá tu oferta a un segmento que conocemos a la perfección,{" "}
+                        Amplía tu oferta a un segmento que conocemos a la perfección,{" "}
                         <Link href="#contacto" className="text-blue-600 underline">
-                            consultanos.
+                            consúltanos.
                         </Link>
                     </p>
                 </div>
@@ -46,7 +46,7 @@ const BusinessServices = () => {
                 <div className="space-y-6">
                     <h2 className="font-arialroundedmtbold text-2xl text-sivoy-blue">Consultoría en Diseño Universal</h2>
                     <p className="text-lg">
-                        ¿Tenés un Hotel o una Empresa del sector turístico? Te gustaría contar con instalaciones accesibles
+                        ¿Tienes un Hotel o una Empresa del sector turístico? Te gustaría contar con instalaciones accesibles
                         y atender a múltiples clientes.
                     </p>
                     <p className="text-lg font-arialroundedmtbold text-sivoy-blue">¿Qué obtendrás?</p>
@@ -55,9 +55,9 @@ const BusinessServices = () => {
                         <li>Te diferenciarás de la competencia.</li>
                     </ul>
                     <p>
-                        Comenzá la transformación,{" "}
+                        Comienza la transformación,{" "}
                         <a href="#contacto" className="text-blue-600 underline">
-                            consultanos.
+                            consúltanos.
                         </a>
                     </p>
                 </div>
@@ -77,7 +77,7 @@ const BusinessServices = () => {
                 <div className="order-2 md:order-2 space-y-6 mt-10">
                     <h2 className="font-arialroundedmtbold text-2xl text-sivoy-blue">Capacitación en Turismo Accesible</h2>
                     <p className="text-lg">
-                        ¿Contás con personal a cargo y querés brindar una atención inclusiva? Formamos a tu equipo sobre la
+                        ¿Cuentas con personal a cargo y quieres brindar una atención inclusiva? Formamos a tu equipo sobre la
                         importancia del trato adecuado a personas con discapacidad.
                     </p>
                     <p className="text-lg font-arialroundedmtbold text-sivoy-blue">¿Qué obtendrás?</p>
@@ -86,9 +86,9 @@ const BusinessServices = () => {
                         <li>Mejorarás la calidad del servicio.</li>
                     </ul>
                     <p>
-                        Invertí en formación,{" "}
+                        Invierte en formación,{" "}
                         <a href="#contacto" className="text-blue-600 underline">
-                            consultanos.
+                            consúltanos.
                         </a>
                     </p>
                 </div>
