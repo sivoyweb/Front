@@ -78,13 +78,13 @@ export const DonationButton = () => {
   const router = useRouter ();
 
   const handleClick = () => {
-    router.push("/");
+    router.push("/donations");
   };
 
   return (
     <button
       onClick={handleClick}
-      className='bg-sivoy-gradient 4k:text-2xl'
+      className='bg-sivoy-gradient 4k:text-2xl ml-6'
     >
       Ayúdanos a Crecer
     </button>

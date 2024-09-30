@@ -10,7 +10,7 @@ function HomeGridComponent() {
 
     const topTravels = travels
         .sort((a: ITravel, b: ITravel) => b.averageStars - a.averageStars)
-        .slice(0, 6);
+        .slice(0, 5);
 
     return (
         <div className="flex justify-center mr-6 py-8">
@@ -21,6 +21,6 @@ function HomeGridComponent() {
             </div>
         </div>
     );
-}
+};
 
 export default HomeGridComponent;

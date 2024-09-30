@@ -10,10 +10,6 @@ function HomeDestinationCard({ travels, index }: ITravelCardProps) {
         router.push(`/detail/${travels.id}`);
     };
 
-    const truncatedName = travels.name.length > 15 
-    ? travels.name.slice(0, 22) + "..." 
-    : travels.name;
-
     const imageIndex = travels.images.length > 0 ? (index ?? 0) % travels.images.length : 0;
     const imagen = travels.images[imageIndex];
 
@@ -32,11 +28,11 @@ function HomeDestinationCard({ travels, index }: ITravelCardProps) {
                 </div>
                 <div className="p-4">
                     <div onClick={handleClick} className="cursor-pointer">
-                        <div className="mb-1 gap-1 flex items-center justify-between">
+                        <div className="mb-1 gap-1 flex justify-between">
                         <h5 className="mb-1 text-sm text-sivoy-blue font-arialroundedmtbold">
-                                {truncatedName}
+                                {travels.name}
                             </h5>
-                            <div className="mb-1 gap-1 flex items-center">
+                            <div className="mb-1 gap-1 flex items-top mt-1">
                                 <svg 
                                     xmlns="http://www.w3.org/2000/svg"         
                                     className="icon icon-tabler icon-tabler-star" 

@@ -19,9 +19,10 @@ import { UserContext } from "@/context/userContext";
 import { signOut, useSession } from "next-auth/react";
 
 const navigation = [
+  { name: "Ayúdanos a Crecer", href: "/donations"},
   { name: "Destinos", href: "/destinations" },
-  { name: "Servicios a Empresas", href: "/business-services" },
   { name: "Blog", href: "/blog" },
+  { name: "Servicios a Empresas", href: "/business-services" },
   { name: "Academia", href: "/academy" },
 ];
 

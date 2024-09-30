@@ -34,7 +34,6 @@ function Footer() {
           </div>
         </div>
 
-        
         <div className="w-full md:w-1/3 lg:w-1/3 pl-6 pr-6 bg-sivoy-blue rounded-lg">
           <h4 className="text-base font-arialroundedmtbold mb-2 text-center md:text-left">Información de Contacto</h4>
           <div className="text-center md:text-left text-sm">
@@ -42,6 +41,7 @@ function Footer() {
             <p className="mb-1">info.sivoy.com.ar</p>
             <p className="mb-1">Argentina</p>
           </div>
+        
 
           
           <div className="mt-4 flex justify-center md:justify-start space-x-6">
