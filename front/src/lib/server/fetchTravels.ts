@@ -1,4 +1,4 @@
-import { ITravel } from "@/interfaces/interfaces";
+import { ITravel, ITravelsProps } from "@/interfaces/interfaces";
 
 export async function fetchTravels(): Promise<ITravel[]> {
     try {
@@ -17,7 +17,7 @@ export async function fetchTravels(): Promise<ITravel[]> {
 }
 
 
-export async function fetchTravelById(id: string): Promise<ITravel> {
+export async function fetchTravelById(id: string): Promise<ITravelsProps> {
     const response = await fetch(`https://api-sivoy.onrender.com/travels/${id}`);
     const travel = await response.json();
     return travel;
