@@ -52,6 +52,7 @@ export interface ILogin {
   export interface IRole{
 
   }
+  
   export interface IUserChange{
     name:string
     email:string
@@ -145,6 +146,7 @@ export interface IProvider {
   }
 
   export interface ITravel {
+    filter(arg0: (travel: any) => boolean): unknown;
     id:string,
     name: string,
     country: string,
@@ -254,6 +256,12 @@ export interface IBlogArticle {
   visible: boolean;
 }
 
+export interface IBlogArticleProps {
+  blogArticles: IBlogArticle; 
+  index?: number; 
+  image?: IImageBlog;
+};
+
 interface IUserReviews{
 id:string,
 name: string,
@@ -300,10 +308,4 @@ export interface ITravelsProps{
   reviews: IReviewT[],
   images: IImage[],
   provider: null,
-}
-
-
-export interface IRegisterResult {
-  token?: string;
-  error?: string;
 }

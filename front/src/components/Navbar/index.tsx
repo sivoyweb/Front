@@ -35,13 +35,13 @@ const paths = {
 const AuthButtons: React.FC<{ router: ReturnType<typeof useRouter> }> = ({ router }) => (
   <div className="flex sm:flex-row flex-col space-y-2 sm:space-y-0 sm:space-x-4">
     <button
-      className="hover:bg-sivoy-orange text-white font-small text-sm py-2 px-4 w-full sm:w-auto rounded-md bg-transparent border border-white"
+      className="hover:bg-sivoy-orange text-white font-small text-sm py-2 px-4 w-full sm:w-auto rounded-md bg-transparent border border-white hover:border-transparent focus:border-transparent"
       onClick={() => router.push(paths.login)}
     >
       Ingresar
     </button>
     <button
-      className="hover:bg-sivoy-orange text-white font-small text-sm py-2 px-4 w-full sm:w-auto rounded-md bg-transparent border border-white"
+      className="hover:bg-sivoy-orange text-white font-small text-sm py-2 px-4 w-full sm:w-auto rounded-md bg-transparent border border-white hover:border-transparent focus:border-transparent"
       onClick={() => router.push(paths.register)}
     >
       Registro

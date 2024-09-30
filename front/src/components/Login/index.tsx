@@ -12,15 +12,9 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import Swal from 'sweetalert2';
 import { signIn, useSession } from 'next-auth/react';
 
-
-
-
-
-
 const Login: React.FC = () => {
   
   const {data: session} = useSession();
-
   const router = useRouter();
   const { login } = useContext(UserContext);
   const [showPassword, setShowPassword] = useState(false);
@@ -47,13 +41,8 @@ const Login: React.FC = () => {
   };
 
   const callLoginGoogle = async() =>{
-    
-    
     try {
-
       await signIn('google');
-     
-      
     } catch (error: unknown) {
       Swal.fire({
         title: 'Algo salió mal',
@@ -76,8 +65,8 @@ const Login: React.FC = () => {
   }, [session, router]);
  
   return (
-    <div className="p-5">
-      <div className="max-w-md mx-auto">
+    <div className="">
+      <div className="">
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -86,7 +75,7 @@ const Login: React.FC = () => {
           {({ isSubmitting }) => (
             <Form className="space-y-4">
               <div>
-                <label htmlFor="email" className="block text-xl font-medium text-gray-700">
+                <label htmlFor="email" className="block text-lg font-medium text-gray-700">
                   Email
                 </label>
                 <Field
@@ -103,7 +92,7 @@ const Login: React.FC = () => {
               </div>
 
               <div className='relative'>
-                <label htmlFor="password" className="block text-xl font-medium text-gray-700">
+                <label htmlFor="password" className="block text-lg font-medium text-gray-700">
                   Contraseña
                 </label>
                 <Field
@@ -126,31 +115,34 @@ const Login: React.FC = () => {
                   className="text-red-500 text-sm mt-1"
                 />
               </div>
-              <div>
-              <button
-                type="submit"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Iniciando...' : 'Iniciar sesión'}
-              </button>
-              <button
-        className='flex items-center justify-center mt-5 text-lg font-semibold text-gray-700 bg-white border border-gray-300 shadow-md rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all py-2 px-6'
-        onClick={callLoginGoogle}
-      >
-        <FontAwesomeIcon icon={faGoogle} className="text-xl text-gray-700 mr-2" />
-        <span className="text-base">Iniciar sesion Google</span>
-      </button>
-      </div>
 
-            
+              <div className="flex space-x-4 mt-8 justify-center">
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className=""
+                >
+                  {isSubmitting ? 'Iniciando...' : 'Iniciar sesión'}
+                </button>
+                <button
+                  className='rounded-2xl flex items-center justify-center text-lg font-semibold text-gray-700 bg-white border border-gray-300 shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all py-2 px-6'
+                  onClick={callLoginGoogle}
+                >
+                  <FontAwesomeIcon icon={faGoogle} className="text-xl text-gray-700 mr-2" />
+                  <span className="text-base">Iniciar sesión con Google</span>
+                </button>
+              </div>
+
             </Form>
           )}
         </Formik>
+      </div>
+
+      <div className="mt-6 text-right">
+        <a href="/forgot-password" className="text-sivoy-blue hover:underline">¿Olvidaste tu Contraseña?</a>
       </div>
     </div>
   );
 };
 
 export default Login;
-
-
