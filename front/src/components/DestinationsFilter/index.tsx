@@ -1,14 +1,17 @@
 "use client";
 import { useContext, useState } from "react";
 import { TravelContext } from "@/context/travelContext";
-import { ITravelCardProps } from "@/interfaces/interfaces";
 import TravelSearch from "@/components/TravelSearch";
 import Image from "next/image";
 import TravelGridComponent from "@/components/TravelGrid";
 
-function DestinationsFilter({ travels }: ITravelCardProps) {
-  const { noResults, filteredTravels } = useContext(TravelContext);
+function DestinationsFilter() {
+  const { travels, noResults } = useContext(TravelContext);
   const [isSearching, setIsSearching] = useState(false);
+
+  const balneariosTravels = travels.filter(travel => travel.serviceType === 'Balneario');
+  const gastronomiaTravels = travels.filter(travel => travel.serviceType === 'Gastronomia');
+  const alojamientosTravels = travels.filter(travel => travel.serviceType === 'Alojamiento');
 
   const handleSearchToggle = (searching: boolean) => {
     setIsSearching(searching);
@@ -34,7 +37,7 @@ function DestinationsFilter({ travels }: ITravelCardProps) {
             </p>
           ) : (
             <div className="flex flex-wrap justify-center">
-              {filteredTravels.map((travel) => (
+              {travels.map((travel) => (
                 <div
                   key={travel.id}
                   className="w-full sm:w-[90%] md:w-[45%] lg:w-[30%] max-w-sm bg-white border border-gray-200 rounded-lg shadow m-2 transition-transform duration-300 hover:scale-105"
@@ -66,19 +69,19 @@ function DestinationsFilter({ travels }: ITravelCardProps) {
               Balnearios
             </h1>
             <div className="flex justify-center mb-2 px-4">
-              <TravelGridComponent />
+              <TravelGridComponent travels={balneariosTravels} />
             </div>
             <h1 className="text-xl md:text-2xl font-bold text-left py-6 font-arialroundedmtbold text-sivoy-blue mb-2 -ml-12">
               Gastronomía
             </h1>
             <div className="flex justify-center mb-2 px-4">
-              <TravelGridComponent />
+              <TravelGridComponent travels={gastronomiaTravels} />
             </div>
             <h1 className="text-xl md:text-2xl font-bold text-left py-6 font-arialroundedmtbold text-sivoy-blue mb-2 -ml-12">
               Alojamientos
             </h1>
             <div className="flex justify-center mb-2 px-4">
-              <TravelGridComponent />
+              <TravelGridComponent travels={alojamientosTravels} />
             </div>
           </div>
         )}
