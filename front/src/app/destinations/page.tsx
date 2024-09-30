@@ -1,7 +1,13 @@
 import DestinationsFilter from "@/components/DestinationsFilter";
 
+
 function Destinations() {
-  return <DestinationsFilter />;
+  return (
+    <div>
+  <DestinationsFilter/>
+  </div>
+);
+
 }
 
 export default Destinations;
