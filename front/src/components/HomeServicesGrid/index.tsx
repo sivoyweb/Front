@@ -63,7 +63,7 @@ export const HomeServicesGrid = () => {
                   <FontAwesomeIcon icon={faFileLines} size="2xl" style={{ color: "#229764" }} />
                 </span>
                 <h4 className="mb-4 text-lg font-arialroundedmtbold text-sivoy-blue">Capacitaciones</h4>
-                <p className="text-sivoy-blue">
+                <p className="text-sivoy-blue xl:mt-11">
                   Capacitaciones en diseño universal y en trato adecuado a personas con movilidad reducida.
                 </p>
               </div>
