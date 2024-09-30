@@ -146,7 +146,7 @@ export interface IProvider {
   }
 
   export interface ITravel {
-    filter(arg0: (travel: any) => boolean): unknown;
+    filter(arg0: (travel: unknown) => boolean): unknown;
     id:string,
     name: string,
     country: string,
