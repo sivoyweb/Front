@@ -303,3 +303,9 @@ export interface ITravelsProps{
   images: IImage[],
   provider: null,
 }
+
+
+export interface IRegisterResult {
+  token?: string;
+  error?: string;
+}

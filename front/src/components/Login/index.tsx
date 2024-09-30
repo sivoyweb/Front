@@ -40,7 +40,6 @@ const Login: React.FC = () => {
   const handleSubmit = async (values: ILogin) => {
     const resultado = await login(values);
     if (resultado) router.push("/");
-    else alert("Error al conectarse");
   };
 
   const togglePasswordVisibility = () => {
