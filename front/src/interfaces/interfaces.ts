@@ -198,8 +198,7 @@ export interface IUserResponse {
 
 export interface IDonation {
   title: string,
-  quantity: 0,
-  unit_price: 0,
+  unit_price: number,
   description: string,
 }
 
