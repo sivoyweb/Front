@@ -1,18 +1,21 @@
 "use client";
-import React, { useState, useContext } from 'react';
-import Rating from 'react-rating';
-import axios from 'axios';
-import { IReviewProps } from '@/interfaces/interfaces';
-import { TravelContext } from '@/context/travelContext';
+import React, { useState, useContext } from "react";
+import Rating from "react-rating";
+import axios from "axios";
+import { IReviewProps } from "@/interfaces/interfaces";
+import { TravelContext } from "@/context/travelContext";
+import { UserContext } from "@/context/userContext"; // Asegúrate de importar tu UserContext
 
 interface ReviewComponentProps {
   travelId: string;
 }
 
 const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
+  const { refreshTravels } = useContext(TravelContext);
+  const { isLogged } = useContext(UserContext); // Obtener el estado de autenticación
+
   const [rating, setRating] = useState<number>(0);
   const [review, setReview] = useState<string>("");
-  const { refreshTravels } = useContext(TravelContext);
 
   const handleSubmit = async () => {
     if (!review || rating === 0) {
@@ -25,22 +28,20 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
       travelId,
     };
 
-    
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
-      console.error('No se encontró el token de autenticación.');
+      console.error("No se encontró el token de autenticación.");
       return;
     }
-    
-    
+
     try {
       const response = await axios.post(
-        'https://api-sivoy.onrender.com/travels/reviews',
+        "https://api-sivoy.onrender.com/travels/reviews",
         data,
         {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
       console.log("Datos que se envían al backend:", data);
@@ -50,7 +51,6 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
       setRating(0);
 
       await refreshTravels();
-
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error("Error al enviar la reseña:", error.message);
@@ -60,8 +60,13 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
     }
   };
 
-  const starStyle = { color: 'gold' };
-  const emptyStarStyle = { color: 'lightgray' };
+  // Verifica si el usuario está logueado, si no lo está, muestra un mensaje o redirige
+  if (!isLogged) {
+    return <p className="text-center text-2xl">Debes iniciar sesión para dejar una reseña.</p>;
+  }
+
+  const starStyle = { color: "gold" };
+  const emptyStarStyle = { color: "lightgray" };
 
   return (
     <div className="flex flex-col items-center">
@@ -81,7 +86,7 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
         fullSymbol={<i className="fa-solid fa-star fa-2x" style={starStyle} />}
       />
 
-      <p className="mt-2">Nivel de satisfaccion: {rating} estrellas</p>
+      <p className="mt-2">Nivel de satisfacción: {rating} estrellas</p>
 
       <button
         onClick={handleSubmit}
