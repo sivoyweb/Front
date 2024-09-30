@@ -9,11 +9,6 @@ import { UserContext } from "../../context/userContext";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons"; 
 
-
-
-
-
-
 const Register: React.FC = () => {
  
   const [showPassword, setShowPassword] = useState(false);
@@ -65,9 +60,6 @@ const Register: React.FC = () => {
 
   return (
     <div>      
-      <div className='flex items-center justify-between gap-x-4 mb-6'>
-        <h1 className="text-2xl font-arialroundedmtbold text-sivoy-blue">Registro</h1>
-      </div>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -196,6 +188,7 @@ const Register: React.FC = () => {
           </Form>
         )}
       </Formik>
+      
     </div>
   );
 };
