@@ -1,22 +1,38 @@
 "use client"
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import { postDonation } from "@/lib/server/fetchDonations";
 
 export default function DonationsForm() {
     const [amount, setAmount] = useState('');
     const [message, setMessage] = useState('');
+    const [preferenceId, setPreferenceId] = useState<string | null>(null); 
+
     const router = useRouter();
 
-    const handleSubmit = (e: { preventDefault: () => void; }) => {
-        e.preventDefault();
-        console.log('Monto:', amount);
-        console.log('Mensaje:', message);
-        
-       
-        router.push('/checkout');
+    useEffect(() => {
+        initMercadoPago(process.env.NEXT_PUBLIC_YOUR_PUBLIC_KEY || '', {
+            locale: "es-AR",
+        });
+    }, []);
 
-        // Resetea los campos del formulario
+    const handleSubmit = async (e: { preventDefault: () => void; }) => {
+        e.preventDefault();
+
+
+        const id = await postDonation({
+            quantity: 0,
+            description: "",
+            title: "",
+            unit_price: 0,
+        });
+        if (id) {
+            setPreferenceId(id);
+            router.push('/checkout');
+        }
+
         setAmount('');
         setMessage('');
     };
@@ -44,9 +60,15 @@ export default function DonationsForm() {
                     rows={4}
                 />
             </div>
-            <button type="submit" className="w-full">
+            <button type="submit" className="w-full" onClick={handleSubmit}>
                 Donar
             </button>
+            
+            {preferenceId && (
+                <Wallet 
+                    initialization={{ preferenceId: preferenceId }} 
+                />
+            )}
         </form>
     );
 }

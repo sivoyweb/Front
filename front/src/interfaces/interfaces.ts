@@ -26,14 +26,6 @@ export interface ILogin {
     user: IUser,
   }
 
-  export interface IDonation{
-    id: string,
-    user: IUser,
-    mount: number,
-    date: Date,
-    description: string,
-  }
-
   export interface IloginGoogle{
     name:string
     token:string
@@ -172,6 +164,7 @@ export interface IProvider {
     openingHours: string,
     website: string,
     phone: string,
+    averageStars: number,
   }
 
 
@@ -195,12 +188,17 @@ export interface IPromotion{
   validUntil: Date,
 }
 
-
-
 export interface IUserResponse {
   login:boolean;
   user: Partial<IUser> | null;
   token: string;
+}
+
+export interface IDonation {
+  title: string,
+  quantity: 0,
+  unit_price: 0,
+  description: string,
 }
 
 export interface ITravelContextType {

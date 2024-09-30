@@ -36,7 +36,7 @@ const Home: React.FC = () => {
         <HomeGridComponent />
       </section>
 
-      <section className="flex flex-col md:flex-row text-justify mt-2 mr-5 md:mr-8 4k:ml-20 4k:mr-20 4k:mt-8">
+      <section className="flex flex-col md:flex-row text-justify mt-2 mr-5 md:mr-8 lg:-mt-2 4k:ml-20 4k:mr-20 4k:mt-8">
         <div className="flex flex-col items-center ml-6">
           <a href="https://www.linkedin.com/in/ver%C3%B3nica-lorena-martinez-78a303a6/" className="flex flex-col items-center border shadow-md rounded-3xl mt-6 hover:scale-105 duration-300 transition-transform w-72 4k:w-[400px]">
             <Image src={vero} alt="Foto de perfil de Verónica Martínez" className="rounded-full w-52 h-auto 4k:w-72" />
@@ -63,7 +63,7 @@ const Home: React.FC = () => {
         <div className="m-4 font-arialroundedmtbold text-sivoy-blue text-sm 4k:m-8 4k:text-3xl">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-4 lg:grid-cols-4">
             <div className="flex flex-col items-center justify-center w-full h-full p-4 sm:p-6 lg:p-8 rounded-2xl 4k:p-12">
-            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-info-circle" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#df5430" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-info-circle" width="41" height="41" viewBox="0 0 24 24" stroke-width="1.5" stroke="#df5430" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
   <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
   <path d="M12 9h.01" />
@@ -115,7 +115,7 @@ const Home: React.FC = () => {
       </section>
 
       <section>
-        <h2 className="font-arialroundedmtbold text-2xl text-sivoy-blue ml-4 mb-4 4k:text-5xl 4k:ml-8">Nuestras alianzas</h2>
+        <h2 className="font-arialroundedmtbold text-2xl text-sivoy-blue ml-4 mb-4 4k:text-5xl 4k:ml-8 xl:ml-5">Nuestras alianzas</h2>
         <AlliancesGrid />
       </section>
     </div>
