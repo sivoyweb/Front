@@ -31,7 +31,6 @@ export const postLogin = async (credentials: ILogin ) =>{
         body: JSON.stringify(credentials),
     });
     const data = await response.json();
-    console.log(data)
     return data;
 };
 
@@ -62,7 +61,6 @@ export const postLoginGoogle = async (credentials: IloginGoogle ) =>{
         body: JSON.stringify(credentials),
     });
     const data = await response.json();
-    console.log(data)
     return data;
 };
 
