@@ -19,13 +19,14 @@ const TravelSearch:React.FC<TravelSearchProps> = ({onSearchToggle}) => {
   
 
   const filtrarCiudad = () => {
-    if (inputRef.current) {
-      const texto = inputRef.current.value.toLowerCase();
+    if (inputRef.current || selectedService !== 'Seleccione un servicio') {
+      const texto = inputRef.current?.value.toLowerCase() || '';
       const resultado = travels.filter((travel) =>
-        travel.city.toLowerCase().includes(texto)
+        travel.city.toLowerCase().includes(texto) &&
+      (selectedService === 'Seleccione un servicio' || travel.serviceType === selectedService)
       );
       setFilteredTravels(resultado);
-      onSearchToggle(texto.length > 0); 
+      onSearchToggle(texto.length > 0 || selectedService !== 'Seleccione un servicio'); 
 
       if (resultado.length === 0) {
         setNoResults(true);
@@ -38,6 +39,7 @@ const TravelSearch:React.FC<TravelSearchProps> = ({onSearchToggle}) => {
   const handleServiceClick = (service:string) => {
     setSelectedService(service);
     setIsOpen(false);
+    filtrarCiudad();
   }
 
 

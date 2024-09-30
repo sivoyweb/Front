@@ -60,7 +60,8 @@ const login = async (credentials: ILogin) => {
 const register = async (user: IRegister) => {
     try {
       const data = await postRegister(user);
-      if (data && data.message === 'User created successfully') {
+      
+      if (data.token) {
         Swal.fire({
           title: 'Registro exitoso',
           text: 'Inicie Sesión',

@@ -8,10 +8,14 @@ import HomeDestinationCard from "../HomeDestinationCard";
 function HomeGridComponent() {
     const { travels } = useContext(TravelContext);
 
+    const topTravels = travels
+        .sort((a: ITravel, b: ITravel) => b.averageStars - a.averageStars)
+        .slice(0, 6);
+
     return (
         <div className="flex justify-center mr-6 py-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5 4k:grid-cols-7 gap-4 4k:gap-8">
-                {travels.map((travel: ITravel, index: number) => (
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-10 2xl:grid-cols-6 4k:grid-cols-7 gap-4 4k:gap-8">
+                {topTravels.map((travel: ITravel, index: number) => (
                     <HomeDestinationCard travels={travel} key={travel.id} index={index} />
                 ))}
             </div>

@@ -73,3 +73,20 @@ export const NotFoundButton = () => {
     </button>
   )
 };
+
+export const DonationButton = () => {
+  const router = useRouter ();
+
+  const handleClick = () => {
+    router.push("/");
+  };
+
+  return (
+    <button
+      onClick={handleClick}
+      className='bg-sivoy-gradient 4k:text-2xl'
+    >
+      Ayúdanos a Crecer
+    </button>
+  );
+}

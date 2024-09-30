@@ -2,9 +2,7 @@ import Image from "next/image";
 import tudestino from "../assets/tudestino.png"
 import vero from "../assets/vero.png"
 import linkedin from "@/assets/linkedin.png"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleInfo, faHandshakeAngle, faLocationDot, faMugHot } from "@fortawesome/free-solid-svg-icons"
-import { HomeButton } from "@/components/Buttons";
+import { DonationButton, HomeButton } from "@/components/Buttons";
 import HomeGridComponent from "@/components/HomeDestinationGrid";
 import { HomeServicesGrid } from "@/components/HomeServicesGrid";
 import { AlliancesGrid } from "@/components/AlliancesGrid";
@@ -24,6 +22,7 @@ const Home: React.FC = () => {
 
             <div className="flex align-middle justify-center mt-24 4k:mt-48">
               <HomeButton />
+              <DonationButton />
             </div>
           </div>
         </div>
@@ -37,8 +36,8 @@ const Home: React.FC = () => {
         <HomeGridComponent />
       </section>
 
-      <section className="flex flex-col md:flex-row text-justify mt-2 ml-5 mr-5 md:mr-8 4k:ml-20 4k:mr-20 4k:mt-8">
-        <div className="flex flex-col items-center md:ml-8 2xl:ml-56 4k:ml-40">
+      <section className="flex flex-col md:flex-row text-justify mt-2 mr-5 md:mr-8 4k:ml-20 4k:mr-20 4k:mt-8">
+        <div className="flex flex-col items-center ml-6">
           <a href="https://www.linkedin.com/in/ver%C3%B3nica-lorena-martinez-78a303a6/" className="flex flex-col items-center border shadow-md rounded-3xl mt-6 hover:scale-105 duration-300 transition-transform w-72 4k:w-[400px]">
             <Image src={vero} alt="Foto de perfil de Verónica Martínez" className="rounded-full w-52 h-auto 4k:w-72" />
             <p className="font-arialroundedmtbold text-sivoy-blue text-center mt-2 4k:text-3xl">Verónica Martínez</p>
@@ -64,22 +63,47 @@ const Home: React.FC = () => {
         <div className="m-4 font-arialroundedmtbold text-sivoy-blue text-sm 4k:m-8 4k:text-3xl">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-4 lg:grid-cols-4">
             <div className="flex flex-col items-center justify-center w-full h-full p-4 sm:p-6 lg:p-8 rounded-2xl 4k:p-12">
-              <FontAwesomeIcon icon={faCircleInfo} style={{ color: "#df5430" }} className="text-2xl mb-2 4k:text-5xl" />
+            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-info-circle" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#df5430" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+  <path d="M12 9h.01" />
+  <path d="M11 12h1v4h1" />
+</svg>
               <h4 className="text-center">Información sobre destinos accesibles</h4>
             </div>
 
             <div className="flex flex-col items-center justify-center w-full h-full p-4 sm:p-6 lg:p-8 rounded-2xl 4k:p-12">
-              <FontAwesomeIcon icon={faMugHot} style={{ color: "#df5430" }} className="text-2xl mb-2 4k:text-5xl" />
+            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-coffee" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#df5430" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M3 14c.83 .642 2.077 1.017 3.5 1c1.423 .017 2.67 -.358 3.5 -1c.83 -.642 2.077 -1.017 3.5 -1c1.423 -.017 2.67 .358 3.5 1" />
+            <path d="M8 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2" />
+            <path d="M12 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2" />
+            <path d="M3 10h14v5a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-5z" />
+            <path d="M16.746 16.726a3 3 0 1 0 .252 -5.555" />
+            </svg>
               <h4 className="text-center">Tips / Consejos y artículos de interés</h4>
             </div>
 
             <div className="flex flex-col items-center justify-center w-full h-full p-4 sm:p-6 lg:p-8 rounded-2xl 4k:p-12">
-              <FontAwesomeIcon icon={faHandshakeAngle} style={{ color: "#df5430" }} className="text-2xl mb-2 4k:text-5xl" />
+            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-heart-handshake" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#df5430" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
+  <path d="M12 6l-3.293 3.293a1 1 0 0 0 0 1.414l.543 .543c.69 .69 1.81 .69 2.5 0l1 -1a3.182 3.182 0 0 1 4.5 0l2.25 2.25" />
+  <path d="M12.5 15.5l2 2" />
+  <path d="M15 13l2 2" />
+</svg>
               <h4 className="text-center">Colaboración interactiva de viajeros</h4>
             </div>
 
             <div className="flex flex-col items-center justify-center w-full h-full p-4 sm:p-6 lg:p-8 rounded-2xl 4k:p-12">
-              <FontAwesomeIcon icon={faLocationDot} style={{ color: "#df5430" }} className="text-2xl mb-2 4k:text-5xl" />
+            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-map-pin-2" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#df5430" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M12 18.5l-3 -1.5l-6 3v-13l6 -3l6 3l6 -3v7" />
+  <path d="M9 4v13" />
+  <path d="M15 7v5" />
+  <path d="M21.121 20.121a3 3 0 1 0 -4.242 0c.418 .419 1.125 1.045 2.121 1.879c1.051 -.89 1.759 -1.516 2.121 -1.879z" />
+  <path d="M19 18v.01" />
+</svg>
               <h4 className="text-center">Georeferenciación y localización de destinos y productos turísticos</h4>
             </div>
           </div>
