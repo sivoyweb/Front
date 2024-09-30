@@ -25,7 +25,7 @@ const Academia = () => {
               href="/home"
               className="bg-sivoy-orange text-white py-3 px-6 rounded-full hover:scale-105 transition ease-in-out duration-400 inline-block"
             >
-              Inscribite Ahora
+              Inscríbete Ahora
             </Link>
           </div>
           <div className="w-full lg:w-auto">

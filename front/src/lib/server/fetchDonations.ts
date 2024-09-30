@@ -10,7 +10,8 @@ export const postDonation = async (preference: IDonation) => {
     });
     
     if (!response.ok) {
-        throw new Error(`Error en la petición: ${response.statusText}`);
+        const errorData = await response.json(); // Intenta obtener el mensaje de error del cuerpo de la respuesta
+        throw new Error(`Error en la petición: ${response.statusText} - ${JSON.stringify(errorData)}`);
     }
 
     const data = await response.json();

@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { ITravelCardProps } from "@/interfaces/interfaces";
 import Image from "next/image";
@@ -19,8 +19,8 @@ function TravelCard({ travels }: ITravelCardProps) {
       : travels.description;
 
   return (
-    <div className='flex justify-center mb-6'> {/* Aumentamos el espacio entre tarjetas con mb-6 */}
-      <div className="w-64 bg-white rounded-lg shadow transition-transform duration-300 hover:scale-105">
+    <div className='flex justify-center mb-6'>
+      <div className="w-80 bg-white rounded-lg shadow transition-transform duration-300 hover:scale-105"> {/* Aumenta el ancho aquí */}
         <div onClick={handleClick} className="cursor-pointer">
           <div className="relative w-full h-48">
             <Image 
@@ -34,7 +34,6 @@ function TravelCard({ travels }: ITravelCardProps) {
         <div className="p-4">
           <div onClick={handleClick} className="cursor-pointer">
             <div className="mb-1 gap-1 flex justify-between">
-              {/* Título justificado a la izquierda */}
               <h5 className="mb-1 text-lg text-sivoy-blue font-arialroundedmtbold"> 
                 {travels.name}
               </h5>
