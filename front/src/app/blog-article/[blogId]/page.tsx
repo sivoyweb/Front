@@ -1,36 +1,12 @@
-import Image from "next/image"
-import { fetchBlogArticleById } from "@/lib/server/fetchBlog";
+// app/blog/[id]/page.tsx
+import { BlogArticleContainer } from "@/components/BlogArticleContainer";
 
-async function BlogArticle({params}:{params:{blogId:string}}) {
-  const blogArticle = await fetchBlogArticleById(params.blogId)
-  const image = blogArticle.images[0];
-
+const BlogArticlePage = () => {
   return (
-    <article className="max-w-3xl mx-auto px-4 py-8">
+    <div className="container mx-auto p-4">
+      <BlogArticleContainer />
+    </div>
+  );
+};
 
-      <div className="mb-8">
-        <Image
-          src= {image.url}
-          alt= {blogArticle.title}
-          width={800}
-          height={400}
-          className="rounded-lg shadow-md"
-        />
-      </div>
-
-      <h1 className="text-3xl md:text-4xl font-bold mb-4 font-arialroundedmtbold">
-        {blogArticle.title}
-      </h1>
-
-      <h2 className="text-xl md:text-4xl font-bold mb-4 font-arialroundedmtbold">
-        {blogArticle.date}
-      </h2>
-
-      <div className="prose prose-lg">
-        <p>{blogArticle.content}</p>
-      </div>
-    </article>
-  )
-}
-
-export default BlogArticle;
+export default BlogArticlePage;
