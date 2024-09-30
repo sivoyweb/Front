@@ -2,7 +2,7 @@
 "use client"
 
 import { createContext, useEffect, useState } from "react"
-import { IUserContextType, IUserResponse, ILogin, IRegister } from "../interfaces/interfaces"
+import { IUserContextType, ILogin, IRegister, IUserProps } from "../interfaces/interfaces"
 import { postLogin, postRegister} from "@/lib/server/fetchUsers";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
@@ -23,15 +23,16 @@ export const UserContext = createContext<IUserContextType>({
 
 export const UserProvider = ({children}:{children: React.ReactNode})=>{
 const router = useRouter();
-const [user, setUser] = useState<Partial<IUserResponse> | null>(null);
+const [user, setUser] = useState<Partial<IUserProps> | null>(null);
 const [isLogged, setIsLogged] = useState(false);
 
 
 const login = async (credentials: ILogin) => {
     try {
         const data = await postLogin(credentials);
-        setUser(data);
-        console.log(data);
+        const dataUser = data.userFinal;
+        setUser(dataUser);
+        console.log(dataUser);
         localStorage.setItem("user", JSON.stringify(data));
         localStorage.setItem("token", data.token);
         Swal.fire({
