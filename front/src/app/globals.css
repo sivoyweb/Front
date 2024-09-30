@@ -1,6 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import '~slick-carousel/slick/slick.css';
+@import '~slick-carousel/slick/slick-theme.css';
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+@import "leaflet/dist/leaflet.css";
 
 
 @font-face {
@@ -20,9 +24,16 @@
 }
 
 body {
-  margin: 0;
   padding: 0;
   background-color: #ffffff;
+  transition: all 0.5s ease; 
+}
+
+@media only screen and (min-width: 800px) {
+  body {
+    margin-left: 4em;
+    margin-right: 4em;
+  }
 }
 
 button {
@@ -34,7 +45,6 @@ button {
   color: white; 
   transition: all 0.3s ease; 
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-left: 0.5rem;
 }
 
 button:hover {

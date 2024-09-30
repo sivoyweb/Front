@@ -6,40 +6,47 @@ import { useRouter } from "next/navigation";
 
 function TravelCard({ travels }: ITravelCardProps) {
   const router = useRouter();
-  
+
   const handleClick = () => {
     router.push(`/detail/${travels.id}`);
   };
 
-
   const imagen = travels.images[0];
 
-  return (
-    <div className='flex justify-center'>
-      <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow m-2 transition-transform duration-300 hover:scale-110">
+  const shortDescription =
+    travels.description.length > 100
+      ? travels.description.slice(0, 100) + "..."
+      : travels.description;
 
+  return (
+    <div className='flex justify-center mb-6'>
+      <div className="w-80 bg-white rounded-lg shadow transition-transform duration-300 hover:scale-105"> {/* Aumenta el ancho aquí */}
         <div onClick={handleClick} className="cursor-pointer">
-          <Image 
-            className="rounded-t-lg" 
-            src={imagen.url} 
-            alt={travels.name} 
-            width={400} 
-            height={250} 
-          />
-        </div>
-        <div className="p-5">
-          <div onClick={handleClick} className="cursor-pointer">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-sivoy-blue font-arialroundedmtbold">
-              {travels.name}
-            </h5>
+          <div className="relative w-full h-48">
+            <Image 
+              className="rounded-t-lg object-cover" 
+              src={imagen.url} 
+              alt={travels.name} 
+              layout="fill" 
+            />
           </div>
-          <p className="mb-3 font-normal text-sivoy-blue">
-            {travels.description}
+        </div>
+        <div className="p-4">
+          <div onClick={handleClick} className="cursor-pointer">
+            <div className="mb-1 gap-1 flex justify-between">
+              <h5 className="mb-1 text-lg text-sivoy-blue font-arialroundedmtbold"> 
+                {travels.name}
+              </h5>
+            </div>
+          </div>
+          <p className="text-sm text-sivoy-blue mt-2 text-left">
+            {shortDescription}
           </p>
-          <button
-            onClick={handleClick}
+          <button 
+            onClick={handleClick} 
+            className="mt-4 px-2 py-1 text-sm"
           >
-            Detalles
+            Ver Más
           </button>
         </div>
       </div>

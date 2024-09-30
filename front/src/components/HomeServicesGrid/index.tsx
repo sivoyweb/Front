@@ -19,9 +19,9 @@ export const HomeServicesGrid = () => {
           <p className="text-lg text-sivoy-blue mt-1">Todos los servicios pueden realizarse de forma presencial o virtual.</p>
         </div>
       
-        <div className="m-4">
+        <div className="mt-4 mb-4">
           <div className="mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 4k:grid-cols-6 gap-6">
-            <div className="relative isolate m-1" onClick={handleClick}>
+            <div className="relative isolate mt-1 mb-1" onClick={handleClick}>
               <div className="top-full left-0 w-full h-full p-8 bg-gray-100 rounded-2xl transition-transform hover:scale-105 duration-300">
                 <span className="inline-block mb-4 pt-2 pr-2">
                   <FontAwesomeIcon icon={faWheelchairMove} size="2xl" style={{ color: "#229764" }} />
@@ -33,7 +33,7 @@ export const HomeServicesGrid = () => {
               </div>
             </div>
       
-            <div className="relative isolate m-1" onClick={handleClick}>
+            <div className="relative isolate mt-1 mb-1" onClick={handleClick}>
               <div className="top-full left-0 w-full h-full p-8 bg-gray-100 rounded-2xl transition-transform hover:scale-105 duration-300">
                 <span className="inline-block mb-4 pt-2 pr-2">
                   <FontAwesomeIcon icon={faMapLocationDot} size="2xl" style={{ color: "#229764" }} />
@@ -45,7 +45,7 @@ export const HomeServicesGrid = () => {
               </div>
             </div>
       
-            <div className="relative isolate m-1" onClick={handleClick}>
+            <div className="relative isolate mt-1 mb-1" onClick={handleClick}>
               <div className="top-full left-0 w-full h-full p-8 bg-gray-100 rounded-2xl transition-transform hover:scale-110 duration-300">
                 <span className="inline-block mb-4 pt-2 pr-2">
                   <FontAwesomeIcon icon={faGlobe} size="2xl" style={{ color: "#229764" }} />
@@ -57,13 +57,13 @@ export const HomeServicesGrid = () => {
               </div>
             </div>
       
-            <div className="relative isolate m-1 transition-transform hover:scale-105 duration-300" onClick={handleClick}>
+            <div className="relative isolate mt-1 mb-1 transition-transform hover:scale-105 duration-300" onClick={handleClick}>
               <div className="top-full left-0 w-full h-full p-8 bg-gray-100 rounded-2xl">
                 <span className="inline-block mb-4 pt-2 pr-2">
                   <FontAwesomeIcon icon={faFileLines} size="2xl" style={{ color: "#229764" }} />
                 </span>
                 <h4 className="mb-4 text-lg font-arialroundedmtbold text-sivoy-blue">Capacitaciones</h4>
-                <p className="text-sivoy-blue">
+                <p className="text-sivoy-blue xl:mt-11">
                   Capacitaciones en diseño universal y en trato adecuado a personas con movilidad reducida.
                 </p>
               </div>

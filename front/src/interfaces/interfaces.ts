@@ -26,14 +26,6 @@ export interface ILogin {
     user: IUser,
   }
 
-  export interface IDonation{
-    id: string,
-    user: IUser,
-    mount: number,
-    date: Date,
-    description: string,
-  }
-
   export interface IloginGoogle{
     name:string
     token:string
@@ -60,6 +52,7 @@ export interface ILogin {
   export interface IRole{
 
   }
+  
   export interface IUserChange{
     name:string
     email:string
@@ -125,8 +118,65 @@ export interface IProvider {
   travelProviders: ITravelProvider[];
   }
 
+  export interface IReviewGet {
+    id: string;
+    user: IUser;
+    travel: ITravel;
+    review: string;
+    stars: number;
+    date: Date;
+    visible: boolean;
+  }
+
+
+
+
+  export interface IReviewProps{
+    id?: string
+    travelId: string,
+    review: string,
+    stars: number;
+  }
+
+  export interface IPromotion{
+    id: string,
+    travel: ITravel,
+    discount: number,
+    validUntil: Date,
+  }
+
+  export interface ITravel {
+    filter(arg0: (travel: unknown) => boolean): unknown;
+    id:string,
+    name: string,
+    country: string,
+    city: string,
+    date: Date,
+    description: string,
+    serviceType: string,
+    accesibilitySeal: string,
+    reviews: IReviewT[],
+    images: IImage[],
+    stars: number,
+    promotions: IPromotion[],
+    provider: ITravelProvider;
+    userHistory: IUser,
+    email: string,
+    address: string,
+    openingHours: string,
+    website: string,
+    phone: string,
+    averageStars: number,
+  }
+
+
+  export interface IUserResponse {
+    login:boolean;
+    user: Partial<IUser> | null;
+    token: string;
+  }
 export interface IReview{
-  id: string
+  id: string,
   user: IUser,
   travel: ITravel,
   review: string,
@@ -140,29 +190,16 @@ export interface IPromotion{
   validUntil: Date,
 }
 
-export interface ITravel {
-  id:string,
-  name: string,
-  country: string,
-  city: string,
-  date: Date,
-  price: number,
-  description: string,
-  serviceType: string,
-  accesibilitySeal: string,
-  reviews: IReview[],
-  images: IImage[],
-  stars: number,
-  promotions: IPromotion[],
-  provider: ITravelProvider;
-  userHistory: IUser,
-}
-
-
 export interface IUserResponse {
   login:boolean;
   user: Partial<IUser> | null;
   token: string;
+}
+
+export interface IDonation {
+  title: string,
+  unit_price: number,
+  description: string,
 }
 
 export interface ITravelContextType {
@@ -173,15 +210,26 @@ export interface ITravelContextType {
   noResults:boolean;
   setFilteredTravels: (travels: ITravel[]) => void;
   setNoResults: (noResults: boolean) => void;
+  refreshTravels: () => Promise<void>;
 }
 
 export interface TravelSearchProps {
   onSearchToggle: (searching: boolean) => void;
 }
 
+export interface IUserProps{
+auth: boolean,
+block: false,
+createdAt: string,
+credential: ICredential,
+id: string,
+name: string,
+phone: string
+}
+
 export interface IUserContextType {
-  user: Partial<IUserResponse> | null;
-  setUser: React.Dispatch<React.SetStateAction<Partial<IUserResponse> | null>>;
+  user: Partial<IUserProps> | null;
+  setUser: React.Dispatch<React.SetStateAction<Partial<IUserProps> | null>>;
   isLogged: boolean;
   setIsLogged: (isLogged: boolean) => void;
   login: (credentials: ILogin) => Promise<boolean>;
@@ -194,6 +242,10 @@ export interface ITravelCardProps {
   index?: number; 
 };
 
+
+export interface ICarouselProps {
+  items: IImage[];
+}
 export interface IBlogArticle {
   id: string;
   title: string;
@@ -201,4 +253,58 @@ export interface IBlogArticle {
   images: IImageBlog[];
   date: string;
   visible: boolean;
+}
+
+export interface IBlogArticleProps {
+  blogArticles: IBlogArticle; 
+  index?: number; 
+  image?: IImageBlog;
+};
+
+interface IUserReviews{
+id:string,
+name: string,
+role: string,
+phone: string,
+createdAt: string,
+auth: boolean,
+block: boolean,
+}
+
+ export interface IReviewT {
+  id:string,
+  review:string,
+  stars: number,
+  date: string,
+  visible?: boolean;
+  user:IUserReviews;
+ }
+
+
+
+export interface ITravelReview{
+  id: string,
+  name: string,
+  reviews: IReviewT[],
+}
+
+export interface ITravelsProps{
+  id: string,
+  name: string,
+  country: string,
+  city: string,
+  date: Date,
+  description: string,
+  serviceType: string,
+  accesibilitySeal: string,
+  averageStars: number,
+  website: string,
+  phone: string,
+  email: string,
+  address: string,
+  openingHours: string,
+  aviable: true,
+  reviews: IReviewT[],
+  images: IImage[],
+  provider: null,
 }

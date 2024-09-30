@@ -2,21 +2,6 @@
 
 import { useRouter } from 'next/navigation';
 
-export const BlogButton = () => {
-  const router = useRouter();
-
-  const handleClick = () => {
-    router.push('/blog-article');
-  };
-
-  return (
-    <button 
-      onClick={handleClick}
-    >
-      Leer Más
-    </button>
-  );
-};
 
 export const LoginButton = () => {
     const router = useRouter();
@@ -73,3 +58,20 @@ export const NotFoundButton = () => {
     </button>
   )
 };
+
+export const DonationButton = () => {
+  const router = useRouter ();
+
+  const handleClick = () => {
+    router.push("/donations");
+  };
+
+  return (
+    <button
+      onClick={handleClick}
+      className='bg-sivoy-gradient 4k:text-2xl ml-6'
+    >
+      Ayúdanos a Crecer
+    </button>
+  );
+}

@@ -11,9 +11,13 @@ export const postRegister = async (user: IRegister )=>{
   const contentType = response.headers.get('content-type');
   if (contentType && contentType.includes('application/json')) {
     const data = await response.json();
+    
+    
     return data;
   }
   const textData = await response.text();
+ 
+  
   return { message: textData };
 };
 
@@ -28,7 +32,6 @@ export const postLogin = async (credentials: ILogin ) =>{
     });
     const data = await response.json();
     return data;
-    console.log(data)
 };
 
 export const postRegisterGoogle = async (user: IRegisterGoogle )=>{
@@ -58,7 +61,6 @@ export const postLoginGoogle = async (credentials: IloginGoogle ) =>{
         body: JSON.stringify(credentials),
     });
     const data = await response.json();
-    console.log(data)
     return data;
 };
 
