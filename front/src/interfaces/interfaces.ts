@@ -170,6 +170,8 @@ export interface IProvider {
   }
 
 
+
+
   export interface IUserResponse {
     login:boolean;
     user: Partial<IUser> | null;
@@ -213,7 +215,7 @@ export interface ITravelContextType {
   refreshTravels: () => Promise<void>;
 }
 
-export interface TravelSearchProps {
+export interface ITravelSearchProps {
   onSearchToggle: (searching: boolean) => void;
 }
 
