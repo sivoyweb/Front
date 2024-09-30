@@ -46,11 +46,9 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
       console.log("Datos que se envían al backend:", data);
       console.log("Reseña enviada exitosamente:", response.data);
 
-      // Limpiar el formulario
       setReview("");
       setRating(0);
 
-      // Llamar a refreshTravels para actualizar la información de travels
       await refreshTravels();
 
     } catch (error) {

@@ -11,7 +11,7 @@ export const TravelContext = createContext<ITravelContextType>({
     noResults: false,
     setFilteredTravels: () => {},
     setNoResults: () => {},
-    refreshTravels: async () => {},  // Añadimos la función en el contexto
+    refreshTravels: async () => {}, 
 });
 
 export const TravelProvider = ({ children }: { children: React.ReactNode }) => {
@@ -32,14 +32,13 @@ export const TravelProvider = ({ children }: { children: React.ReactNode }) => {
         }
     };
 
-    // Función para refrescar los datos
     const refreshTravels = async () => {
-        setIsLoading(true);  // Mostramos loading mientras traemos los datos
-        await fetchData();    // Llamamos a la función que trae los datos y actualiza el estado
+        setIsLoading(true);  
+        await fetchData();   
     };
 
     useEffect(() => {
-        fetchData();  // Cargamos los datos inicialmente
+        fetchData(); 
     }, []);
 
     return (
@@ -51,7 +50,7 @@ export const TravelProvider = ({ children }: { children: React.ReactNode }) => {
             noResults, 
             setFilteredTravels, 
             setNoResults, 
-            refreshTravels  // Pasamos la función como parte del contexto
+            refreshTravels 
         }}>
             {children}
         </TravelContext.Provider>

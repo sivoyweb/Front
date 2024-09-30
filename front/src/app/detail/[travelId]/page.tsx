@@ -9,23 +9,6 @@ import StarRating from "@/components/RatingComponent";
 async function TravelDetail({ params }: { params: { travelId: string } }) {
   const travels = await fetchTravelById(params.travelId);
   const imagen = travels.images[0];
-  const imagenes = [
-    {
-      id: "1",
-      url: "https://r4.wallpaperflare.com/wallpaper/29/716/942/bosque-invierno-lago-paisaje-wallpaper-32b12220bd161e1bda58e2e510c8c942.jpg",
-      publicId: "nieve",
-    },
-    {
-      id: "2",
-      url: "https://r4.wallpaperflare.com/wallpaper/106/85/265/austria-bosque-lago-naturaleza-wallpaper-48fcd1d9b00c50cb8f6ed85f83761f5b.jpg",
-      publicId: "lago",
-    },
-    {
-      id: "3",
-      url: "https://r4.wallpaperflare.com/wallpaper/504/836/940/architecture-bridges-building-cities-wallpaper-2e0c7c16d4188ed546fdbcacf6ed39ec.jpg",
-      publicId: "templo",
-    },
-  ];
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-6 pb-8 pt-6">
@@ -81,7 +64,7 @@ async function TravelDetail({ params }: { params: { travelId: string } }) {
         </div>
 
         <div className="w-full lg:w-[80%] mx-auto mt-8">
-          <CarouselTravels items={imagenes} />
+          <CarouselTravels items={travels.images} />
         </div>
 
         <div className="w-full lg:w-[80%] mx-auto mt-8">

@@ -2,14 +2,14 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Rating from "react-rating";
 import axios from "axios";
-import { ITravelReview } from "@/interfaces/interfaces"; // Asegúrate de importar la nueva interfaz
+import { ITravelReview } from "@/interfaces/interfaces";
 
 interface ReviewsComponentProps {
   travelId: string;
 }
 
 const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
-  const [travelReview, setTravelReview] = useState<ITravelReview | null>(null); // Usamos ITravelReview
+  const [travelReview, setTravelReview] = useState<ITravelReview | null>(null);
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
   const [openReview, setOpenReview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -22,7 +22,7 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
       const response = await axios.get<ITravelReview>(
         `https://api-sivoy.onrender.com/travels/${travelId}/reviews`
       );
-      setTravelReview(response.data); // Almacenamos los datos del viaje con las reseñas
+      setTravelReview(response.data);
     } catch (error) {
       setError("No se pudieron cargar las reseñas. Inténtalo de nuevo más tarde.");
     } finally {
@@ -50,7 +50,6 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
     color: "#d1d5db",
   };
 
-  // Asegúrate de que travelReview y su array de reseñas estén disponibles antes de intentar mapearlas
   const reviews = travelReview?.reviews || [];
 
   return (

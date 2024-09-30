@@ -47,7 +47,6 @@ const CarouselTravels: React.FC<ICarouselProps> = ({ items }) => {
         ))}
       </div>
 
-      {/* Botones de navegación */}
       <button
         type="button"
         className="absolute top-1/2 left-4 transform -translate-y-1/2 z-10 bg-white/30 hover:bg-white/50 rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-white"
@@ -90,7 +89,6 @@ const CarouselTravels: React.FC<ICarouselProps> = ({ items }) => {
         </svg>
       </button>
 
-      {/* Indicadores */}
       <div className="absolute z-10 flex justify-center w-full space-x-2 bottom-5">
         {items.map((_, index) => (
           <button
