@@ -17,7 +17,7 @@ function DestinationsFilter() {
   const handleSearchToggle = (searching: boolean) => {
     setIsSearching(searching);
   };
-  console.log(travels)
+  
 
   return (
     <div className="w-full overflow-x-hidden">
@@ -32,6 +32,7 @@ function DestinationsFilter() {
         <TravelSearch onSearchToggle={handleSearchToggle} />
       </div>
       <div className="text-center px-4 md:px-8 lg:px-12">
+        
         {isSearching ? (
           filteredTravels.length === 0 ? ( // Comprobar si no hay resultados
             <p className="text-xl md:text-2xl m-6 mb-20">
