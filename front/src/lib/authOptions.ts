@@ -11,7 +11,7 @@ export const authOptions:NextAuthOptions = {
        callbacks: {
         async signIn({ user }) {
           try {
-            // Enviar datos del usuario a tu backend en NestJS
+            
             const response = await fetch('https://api-sivoy.onrender.com/auth/signin/google', {
                 method:"POST",
                 headers:{
@@ -29,6 +29,11 @@ export const authOptions:NextAuthOptions = {
           const data = await response.json();
           console.log(data);
           
+          
+          
+        
+          
+          
           return true;
       } catch (error) {
           console.error('Error en signIn callback:', error);
@@ -36,5 +41,5 @@ export const authOptions:NextAuthOptions = {
       }
   }
 },
-// Opcional: Añade más opciones de configuración según tus necesidades
+
 };

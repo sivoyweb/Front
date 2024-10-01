@@ -6,6 +6,8 @@ import { IUserContextType, ILogin, IRegister, IUserProps } from "../interfaces/i
 import { postLogin, postRegister} from "@/lib/server/fetchUsers";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
+
 
 
 export const UserContext = createContext<IUserContextType>({
@@ -25,6 +27,7 @@ export const UserProvider = ({children}:{children: React.ReactNode})=>{
 const router = useRouter();
 const [user, setUser] = useState<Partial<IUserProps> | null>(null);
 const [isLogged, setIsLogged] = useState(false);
+const {data:session} = useSession()
 
 
 const login = async (credentials: ILogin) => {
@@ -40,6 +43,9 @@ const login = async (credentials: ILogin) => {
       
       localStorage.setItem("user", JSON.stringify(data));
       localStorage.setItem("token", data.token);
+
+     
+      
       
       Swal.fire({
           title: 'Inicio de sesión exitoso',
@@ -62,6 +68,24 @@ const login = async (credentials: ILogin) => {
       return false;        
   }    
 };
+
+useEffect(() => {
+ 
+  const token = localStorage.getItem("token");
+  const TokenGoogle = localStorage.getItem("TokenGoogle");
+
+ 
+  if (session?.user) {
+    localStorage.setItem("TokenGoogle", "true");
+  }
+
+  
+  if (token || TokenGoogle) {
+    setIsLogged(true);
+  } else {
+    setIsLogged(false); 
+  }
+}, [user, session]); 
 
 const register = async (user: IRegister) => {
   try {
@@ -112,6 +136,8 @@ const register = async (user: IRegister) => {
 const logOut = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
+    localStorage.removeItem("TokenGoogle");
+    signOut()
     setUser(null);
     setIsLogged(false);
 };

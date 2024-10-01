@@ -1,11 +1,20 @@
 "use client"
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context/userContext";
-import { IRegister } from "@/interfaces/interfaces";
+import { IRegister, IUserChange } from "@/interfaces/interfaces";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
+import { changeData } from "@/lib/server/fetchUsers";
+
 const UserDashboard = () => {
+  
+  const { isLogged } = useContext(UserContext);
+  const router = useRouter()
   const [formData, setFormData] = useState<IRegister>({
     name:'',
     email:'',
@@ -18,6 +27,29 @@ const UserDashboard = () => {
   const [isEditing, setIsEditing] = useState(false); 
   const { user } = useContext(UserContext);
   const [showPassword, setShowPassword] = useState(false);
+  const {data:session} = useSession();
+
+  useEffect(() => {
+    if(!isLogged){
+      Swal.fire({
+        titleText:"Necesitas estar logueado",
+        icon:"warning"
+      });
+      setTimeout(() => {
+        router.push('/login')
+      }, 2000);
+    }
+  },[isLogged,router])
+  
+  const handleSubmit = async(values:IUserChange) => {
+    const response = await changeData(values);
+    if(response){
+      Swal.fire({
+        title:"cambios giardados con exito",
+        icon:'success'
+      })
+    }
+  }
 
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -38,10 +70,11 @@ const UserDashboard = () => {
     switch (activeSection) {
       case 'profile':
         return (
+          
           <div className="bg-white rounded-lg shadow-lg p-6">
             <h2 className="text-xl font-semibold mb-4">Perfil</h2>
-            <p className="text-gray-600">Nombre: {user?.name}</p>
-            <p className="text-gray-600">Email: {user?.credential?.email}</p>
+            <p className="text-gray-600">Nombre: {user?.name || session?.user?.name}</p>
+            <p className="text-gray-600">Email: {user?.credential?.email || session?.user?.email}</p>
           </div>
         );
       case 'favorites':
@@ -56,7 +89,7 @@ const UserDashboard = () => {
         );
       case 'account':
         return (
-          <div className="bg-white rounded-lg shadow-lg p-6">
+          <div className="bg-white rounded-lg shadow-lg p-6 mb-20">
             <div className="flex justify-between items-center">
               <h2 className="text-xl font-semibold mb-4">Cuenta</h2>
               <button
@@ -68,10 +101,10 @@ const UserDashboard = () => {
             </div>
             {!isEditing ? (
               <>
-                <p className="text-gray-600">Nombre: {user?.name}</p>
-                <p className="text-gray-600">Email: {user?.credential?.email}</p>
-                <p className="text-gray-600">Teléfono: ------</p>
-                <p className="text-gray-600">Avatar: ------</p>
+                <p className="text-gray-600">Nombre: {user?.name || session?.user?.name}</p>
+                <p className="text-gray-600">Email: {user?.credential?.email || session?.user?.email}</p>
+               {!session?.user ? <p className="text-gray-600">Teléfono:{user?.phone} </p> : null}
+                
               </>
             ) : (
               <form className="space-y-4">
@@ -106,6 +139,17 @@ const UserDashboard = () => {
                     type="tel"
                     className="mt-1 p-2 border border-gray-300 rounded w-full"
                     placeholder="Ingresa tu número de teléfono"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Discapacidad</label>
+                  <input
+                    name="disability"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    type="text"
+                    className="mt-1 p-2 border border-gray-300 rounded w-full"
+                    placeholder="Ingrese su discapacidad"
                   />
                 </div>
                 <div className="relative">
@@ -203,10 +247,19 @@ const UserDashboard = () => {
         <header className="flex justify-between items-center bg-white shadow p-4">
           <h1 className="text-2xl font-semibold">Perfil</h1>
           <div className="flex items-center">
-            <span className="ml-2 text-sm font-medium">
-              Bienvenido, {user?.name}
-            </span>
-          </div>
+            
+             <Image
+             alt="imagen de perfil"
+             src=  { typeof user?.credential?.avatar === 'string'
+             ? user.credential.avatar
+             : typeof session?.user?.image === 'string'
+             ? session.user.image
+             : '/path-to-default-avatar.jpg'
+            }
+             width={50}  
+             height={50} 
+             className="rounded-full" />
+                   </div>
         </header>
 
         <main className="mt-8">
