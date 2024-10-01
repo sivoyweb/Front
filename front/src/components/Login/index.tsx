@@ -62,6 +62,7 @@ const Login: React.FC = () => {
         console.log(session);
       });
     }
+   
   }, [session, router]);
  
   return (

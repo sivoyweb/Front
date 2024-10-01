@@ -146,7 +146,7 @@ export interface IProvider {
   }
 
   export interface ITravel {
-    filter(arg0: (travel: any) => boolean): unknown;
+    filter(arg0: (travel: unknown) => boolean): unknown;
     id:string,
     name: string,
     country: string,
@@ -168,6 +168,8 @@ export interface IProvider {
     phone: string,
     averageStars: number,
   }
+
+
 
 
   export interface IUserResponse {
@@ -213,7 +215,7 @@ export interface ITravelContextType {
   refreshTravels: () => Promise<void>;
 }
 
-export interface TravelSearchProps {
+export interface ITravelSearchProps {
   onSearchToggle: (searching: boolean) => void;
 }
 
