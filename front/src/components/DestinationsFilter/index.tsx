@@ -18,7 +18,7 @@ function DestinationsFilter() {
   };
 
   return (
-    <div className="w-full overflow-x-hidden">
+    <div>
       <div className="relative w-full h-[300px] md:h-[500px]">
         <Image
           src="http://www.sivoy.com.ar/assets/upload/slider-2.jpg"
