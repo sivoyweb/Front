@@ -149,7 +149,7 @@ const Navbar: React.FC = () => {
         </div>
         {/* Mostrar botones si session.user no existe */}
         {(!session?.user && !isLogged) && <AuthButtons router={router}/>}
-        {/* Mostrar botón de cerrar sesión si session.user existe */}
+     
        
       </DisclosurePanel>
     </Disclosure>
