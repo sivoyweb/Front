@@ -235,7 +235,7 @@ export interface IUserContextType {
   login: (credentials: ILogin) => Promise<boolean>;
   register: (user: IRegister) => Promise<boolean>;
   logOut: () => void;
-  changeUserData:(credentials:IUserChange)=> Promise<boolean>;
+
 }
 
 export interface ITravelCardProps {

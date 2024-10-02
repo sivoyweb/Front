@@ -1,34 +1,45 @@
 "use client"
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context/userContext";
-
-
+import { v2 as cloudinary } from 'cloudinary';
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { changeData } from "@/lib/server/fetchUsers";
 
+ // Configuration
+ cloudinary.config({ 
+  cloud_name: 'dvxh2vynm', 
+  api_key: '122398321264764', 
+  api_secret: 'b2o85mmDn_nkgJAXq3V2-M8cH_E' 
+});
+
 const UserDashboard = () => {
-  
-  const { isLogged , changeUserData } = useContext(UserContext);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { isLogged } = useContext(UserContext);
   const router = useRouter()
+ 
+  
   const [formData, setFormData] = useState({
     name:'',
     phone:'',
-    disability:'',
+    disability:[],
     credential: {
       avatar: {
         url: '',
         publicId: '',
       },
     },
+    id:''
    });
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeSection, setActiveSection] = useState('profile');
   const [isEditing, setIsEditing] = useState(false); 
   const { user } = useContext(UserContext);
   const {data:session} = useSession();
+  console.log(user?.id);
+  
 
  
   useEffect(() => {
@@ -43,27 +54,55 @@ const UserDashboard = () => {
     }
   },[isLogged,router])
   
-  const handleSubmit = async (e:React.ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); 
-    if () {
-      Swal.fire({
-        title: "Cambios guardados con éxito",
-        icon: 'success',
-      });
-    } else {
-      Swal.fire({
-        title: "Error",
-        text: "No se pudieron guardar los cambios.",
-        icon: 'error',
-      });
-    }
-  };
+    setIsSubmitting(true);
+
+try {
+  await changeData(formData);
+  Swal.fire({
+    title: "Cambios guardados con éxito",
+    icon: 'success',
+  });
+} catch (error) {
+  Swal.fire({
+    title: "Error",
+    text: "No se pudieron guardar los cambios.",
+    icon: 'error',
+  });
+} finally{
+  setIsSubmitting(false);
+}
+};
 
   
   const handleChange = async (e:React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, files } = e.target;
-
+    const { name, value } = e.target;
+    setFormData((prevData)=> ({
+      ...prevData,
+      [name]:name=== "disability" ? value.split(",") : value,
+    }));
   };
+
+  const handleFileChange = async(e: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = e.target;
+  
+    if (files && files.length > 0) {
+      const file = files[0];
+      
+      if(file && file.type.startsWith("image/")){ 
+    //const response = await cloudinary.uploader.upload(file)
+    //console.log(response);
+    
+  }else{
+    Swal.fire({
+      title: "Error",
+      text: "Solo se permiten archivos de imagen.",
+      icon: 'error',
+    });
+  }
+}
+};
 
 
 
@@ -109,7 +148,8 @@ const UserDashboard = () => {
                 
               </>
             ) : (
-              <form className="space-y-4">
+              <form className="space-y-4"
+                    onSubmit={handleSubmit}>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Nombre</label>
                   <input
@@ -149,14 +189,16 @@ const UserDashboard = () => {
                   <label className="block text-sm font-medium text-gray-700">Avatar</label>
                   <input
                     type="file"
+                    onChange={handleFileChange}
                     className="mt-1 p-2 border border-gray-300 rounded w-full"
                   />
                 </div>
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="mt-4 text-white px-4 py-2 hover:text-gray-700"
                 >
-                  Guardar cambios
+                 {isSubmitting ? "Guardando..." : "Guardar cambios"}
                 </button>
               </form>
             )}
