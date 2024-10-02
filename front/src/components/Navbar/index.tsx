@@ -147,7 +147,7 @@ const Navbar: React.FC = () => {
             </DisclosureButton>
           ))}
         </div>
-        {/* Mostrar botones si session.user no existe */}
+      
         {(!session?.user && !isLogged) && <AuthButtons router={router}/>}
      
        
