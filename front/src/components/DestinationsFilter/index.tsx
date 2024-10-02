@@ -21,7 +21,7 @@ function DestinationsFilter() {
 
   return (
     <div className="w-full overflow-x-hidden">
-      <div className="relative w-full h-[300px] md:h-[500px]">
+      <div className="relative h-[300px] md:h-[500px]">
         <Image
           src="http://www.sivoy.com.ar/assets/upload/slider-2.jpg"
           alt="Login"
@@ -46,19 +46,19 @@ function DestinationsFilter() {
           )
         ) : (
           <div>
-            <h1 className="text-xl md:text-2xl font-bold text-left py-6 font-arialroundedmtbold text-sivoy-blue mb-2 -ml-12">
+            <h1 className="text-xl md:text-2xl font-bold text-left py-6 font-arialroundedmtbold text-sivoy-blue mb-2 lg:-ml-12 lg:flex lg:justify-start md:flex md:justify-center">
               Balnearios
             </h1>
             <div className="flex justify-center mb-2 px-4">
               <TravelGridComponent travels={balneariosTravels} />
             </div>
-            <h1 className="text-xl md:text-2xl font-bold text-left py-6 font-arialroundedmtbold text-sivoy-blue mb-2 -ml-12">
+            <h1 className="text-xl md:text-2xl font-bold text-left py-6 font-arialroundedmtbold text-sivoy-blue mb-2 lg:-ml-12 lg:flex lg:justify-start md:flex md:justify-center">
               Gastronomía
             </h1>
             <div className="flex justify-center mb-2 px-4">
               <TravelGridComponent travels={gastronomiaTravels} />
             </div>
-            <h1 className="text-xl md:text-2xl font-bold text-left py-6 font-arialroundedmtbold text-sivoy-blue mb-2 -ml-12">
+            <h1 className="text-xl md:text-2xl font-bold text-left py-6 font-arialroundedmtbold text-sivoy-blue mb-2 lg:-ml-12 lg:flex lg:justify-start md:flex md:justify-center">
               Alojamientos
             </h1>
             <div className="flex justify-center mb-2 px-4">

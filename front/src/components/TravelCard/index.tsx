@@ -20,13 +20,13 @@ function TravelCard({ travels }: ITravelCardProps) {
 
   return (
     <div className='flex justify-center mb-6'>
-      <div className="w-80 bg-white rounded-lg shadow transition-transform duration-300 hover:scale-105"> {/* Aumenta el ancho aquí */}
+      <div className=" bg-white rounded-lg shadow transition-transform duration-300 hover:scale-105"> {/* Aumenta el ancho aquí */}
         <div onClick={handleClick} className="cursor-pointer">
           <div className="relative w-full h-48">
             <Image 
               className="rounded-t-lg object-cover" 
               src={imagen.url} 
-              alt={travels.name} 
+              alt={travels.name}
               layout="fill" 
             />
           </div>
