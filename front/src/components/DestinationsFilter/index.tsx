@@ -11,7 +11,7 @@ function DestinationsFilter() {
 
   // Filtrar los viajes por tipo de servicio (cuando no se está buscando)
   const balneariosTravels = travels.filter(travel => travel.serviceType === 'Balneario');
-  const gastronomiaTravels = travels.filter(travel => travel.serviceType === 'Gastronomia');
+  const gastronomiaTravels = travels.filter(travel => travel.serviceType === 'Gastronomía');
   const alojamientosTravels = travels.filter(travel => travel.serviceType === 'Alojamiento');
 
   const handleSearchToggle = (searching: boolean) => {
