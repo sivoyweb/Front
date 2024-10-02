@@ -1,4 +1,5 @@
 "use client";
+
 import React, { createContext, useEffect, useState } from "react";
 import { ITravel, ITravelContextType } from "../interfaces/interfaces";
 import { fetchTravels } from "../lib/server/fetchTravels";

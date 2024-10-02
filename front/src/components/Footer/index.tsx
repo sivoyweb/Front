@@ -13,7 +13,7 @@ function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-center md:justify-start bg-sivoy-blue text-white space-y-4 md:space-y-0 md:space-x-8">
             
             <div className="text-center md:text-left">
-              <h3 className="font-arialroundedmtbold text-base">Valeria Rodriguez Fontenla</h3>
+              <h3 className="font-arialroundedmtbold text-base">Valeria Rodríguez Fontenla</h3>
               <p className="text-sm mb-2">Gerente Comercial</p>
               <p className="text-sivoy-green text-sm">info@sivoy.com.ar</p>
               <p className="text-sivoy-green text-sm">+54 9 11 5047-5104</p>
@@ -25,7 +25,7 @@ function Footer() {
 
             
             <div className="text-center md:text-left">
-              <h3 className="font-arialroundedmtbold text-base">Verónica Martinez</h3>
+              <h3 className="font-arialroundedmtbold text-base">Verónica Martínez</h3>
               <p className="text-sm mb-2">Directora</p>
               <p className="text-sivoy-green text-sm">info@sivoy.com.ar</p>
               <p className="text-sivoy-green text-sm">+54 9 2954 664807</p>
