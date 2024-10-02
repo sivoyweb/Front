@@ -98,7 +98,7 @@ const Navbar: React.FC = () => {
                 {item.name}
               </Link>
             ))}
-           {!session?.user  && <AuthButtons router={router}/>}
+           {(!session?.user && !isLogged)  && <AuthButtons router={router}/>}
           </div>
 
           {isLogged && (
