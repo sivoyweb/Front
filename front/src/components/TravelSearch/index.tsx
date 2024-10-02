@@ -11,7 +11,7 @@ const TravelSearch: React.FC<ITravelSearchProps> = ({ onSearchToggle }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedService, setSelectedService] = useState('Seleccione un servicio');
-  const services = ["Balneario", "Gastronomía", "Alojamiento"];
+  const services = ["Balneario", "Gastronomía", "Alojamiento","Transporte","Entretenimiento","Cultura","Naturaleza","Turismo de Aventura","Comercio","Educacion","Deportes","Tecnologia","Profesionales","Lugar de Interes","Experiencias","Arte","Bienestar","Moda","Otro"];
 
 
   const resetFields = () => {
@@ -45,27 +45,27 @@ const TravelSearch: React.FC<ITravelSearchProps> = ({ onSearchToggle }) => {
   };
   
   const handleSearch = () => {
-    filtrarTravels(); // Ejecuta la búsqueda cuando se presiona el botón
-    onSearchToggle(true); // Indicar que se está buscando
+    filtrarTravels(); 
+    onSearchToggle(true); 
   };
   
-  // Eliminar filtrarTravels de estas funciones
+ 
   const handleInputChange = () => {
-    // Solo actualiza el valor del campo de ciudad, pero no filtra automáticamente
-    onSearchToggle(false); // No estamos buscando hasta que se presione el botón
+    
+    onSearchToggle(false); 
   };
   
   const handleServiceClick = (service: string) => {
     setSelectedService(service);
     setIsOpen(false);
-    onSearchToggle(false); // No estamos buscando hasta que se presione el botón
+    onSearchToggle(false); 
     console.log("Servicio Seleccionado:", service);
   };
   return (
     <div className="absolute p-8 inset-0 flex flex-col justify-center items-center z-10">
     <div className="flex flex-row space-x-4 items-center">
   
-      {/* Campo de Servicio (a la izquierda) */}
+      
       <div>
         <h1 className="text-white text-2xl mb-6 font-arialroundedmtbold">
           ¿Qué buscas?
@@ -88,7 +88,7 @@ const TravelSearch: React.FC<ITravelSearchProps> = ({ onSearchToggle }) => {
           </button>
         </div>
   
-        {/* Menú Desplegable */}
+       
         {isOpen && (
           <div className="absolute z-10 mt-1 w-64 bg-white border border-gray-300 rounded-md shadow-lg">
             <ul>
@@ -106,7 +106,7 @@ const TravelSearch: React.FC<ITravelSearchProps> = ({ onSearchToggle }) => {
         )}
       </div>
   
-      {/* Campo de Ciudad (a la derecha) */}
+     
       <div>
         <h1 className="text-white text-2xl mb-6 font-arialroundedmtbold">
           ¿Dónde quieres ir?
@@ -123,7 +123,7 @@ const TravelSearch: React.FC<ITravelSearchProps> = ({ onSearchToggle }) => {
       </div>
     </div>
   
-    {/* Botón de Búsqueda */}
+    
     <div className="mt-6">
       <button
         className="px-6 py-2 text-white"
