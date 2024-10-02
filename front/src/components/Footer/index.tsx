@@ -6,9 +6,38 @@ import Link from "next/link";
 
 function Footer() {
   return (
-    <footer className="bg-sivoy-blue text-white p-10 -ml-16 -mr-16">
-      <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-start space-y-10 md:space-y-0">
+    <footer className="bg-sivoy-blue text-white py-10 -ml-16 -mr-16 w-screen ">
+      <div className="container mx-auto flex flex-col md:flex-row justify-around items-start space-y-10 md:space-y-0">
         
+        {/* Información de contacto a la izquierda */}
+        <div className="w-full md:w-1/3 lg:w-1/3 pl-6 pr-6 bg-sivoy-blue rounded-lg">
+          <h4 className="text-base font-arialroundedmtbold mb-2 text-center md:text-left">Información de Contacto</h4>
+          <div className="text-center md:text-left text-sm">
+            <p className="mb-1">+54 9 2954 66 48 07</p>
+            <p className="mb-1">info.sivoy.com.ar</p>
+            <p className="mb-1">Argentina</p>
+          </div>
+          
+          <div className="mt-4 flex justify-center md:justify-start space-x-6">
+            <Link href="https://whatsapp.com" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faWhatsapp} size="1x" />
+            </Link>
+            <Link href="https://www.facebook.com/sivoy.com.ar/" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faFacebook} size="1x" />
+            </Link>
+            <Link href="https://www.linkedin.com/company/si-voy/" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faLinkedin} size="1x" />
+            </Link>
+            <Link href="https://www.instagram.com/sivoy.accesible/?hl=es-la" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faInstagram} size="1x" />
+            </Link>
+            <Link href="https://www.youtube.com/channel/UCKzAGfo-XL5qUa_NamBRwfw" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faYoutube} size="1x" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Información de la directora y gerente */}
         <div className="w-full md:w-1/2 lg:w-1/3">
           <div className="flex flex-col md:flex-row items-center justify-center md:justify-start bg-sivoy-blue text-white space-y-4 md:space-y-0 md:space-x-8">
             
@@ -34,38 +63,18 @@ function Footer() {
           </div>
         </div>
 
-        <div className="w-full md:w-1/3 lg:w-1/3 pl-6 pr-6 bg-sivoy-blue rounded-lg">
-          <h4 className="text-base font-arialroundedmtbold mb-2 text-center md:text-left">Información de Contacto</h4>
+        {/* Nueva columna - Centro de Ayuda */}
+        <div className="w-full md:w-1/3 lg:w-1/3 pl-56 pr-6 bg-sivoy-blue rounded-lg">
+          <h4 className="text-base font-arialroundedmtbold mb-2 text-center md:text-left">Centro de Ayuda</h4>
           <div className="text-center md:text-left text-sm">
-            <p className="mb-1">+54 9 2954 66 48 07</p>
-            <p className="mb-1">info.sivoy.com.ar</p>
-            <p className="mb-1">Argentina</p>
-          </div>
-        
-
-          
-          <div className="mt-4 flex justify-center md:justify-start space-x-6">
-            <Link href="https://whatsapp.com" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faWhatsapp} size="1x" />
-            </Link>
-            <Link href="https://www.facebook.com/sivoy.com.ar/" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faFacebook} size="1x" />
-            </Link>
-            <Link href="https://www.linkedin.com/company/si-voy/" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faLinkedin} size="1x" />
-            </Link>
-            <Link href="https://www.instagram.com/sivoy.accesible/?hl=es-la" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faInstagram} size="1x" />
-            </Link>
-            <Link href="https://www.youtube.com/channel/UCKzAGfo-XL5qUa_NamBRwfw" target="_blank" rel="noopener noreferrer">
-              <FontAwesomeIcon icon={faYoutube} size="1x" />
-            </Link>
+            <p className="mb-1">Preguntas frecuentes</p>
+            <p className="mb-1">Comparte esta Iniciativa</p>
           </div>
         </div>
+
       </div>
     </footer>
   );
 }
 
 export default Footer;
-
