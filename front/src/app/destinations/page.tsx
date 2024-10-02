@@ -3,9 +3,9 @@ import DestinationsFilter from "@/components/DestinationsFilter";
 
 function Destinations() {
   return (
-    <div>
+    <section>
   <DestinationsFilter/>
-  </div>
+  </section>
 );
 
 }

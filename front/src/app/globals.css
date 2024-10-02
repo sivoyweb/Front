@@ -24,9 +24,8 @@
 }
 
 body {
-  padding: 0;
   background-color: #ffffff;
-  transition: all 0.5s ease; 
+  transition: all 0.5s ease;
 }
 
 @media only screen and (min-width: 800px) {

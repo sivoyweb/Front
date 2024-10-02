@@ -21,15 +21,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-          <UserProvider>
         <SessionWrapper>
+          <UserProvider>
            <TravelProvider>
             <Navbar />
              {children}
            <Footer />
           </TravelProvider>
-       </SessionWrapper>
          </UserProvider>
+       </SessionWrapper>
       </body>
     </html>
   );
