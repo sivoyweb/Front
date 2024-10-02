@@ -9,9 +9,8 @@ function DestinationsFilter() {
   const { travels, filteredTravels } = useContext(TravelContext);
   const [isSearching, setIsSearching] = useState(false);
 
-  // Filtrar los viajes por tipo de servicio (cuando no se está buscando)
   const balneariosTravels = travels.filter(travel => travel.serviceType === 'Balneario');
-  const gastronomiaTravels = travels.filter(travel => travel.serviceType === 'Gastronomia');
+  const gastronomiaTravels = travels.filter(travel => travel.serviceType === 'Gastronomía');
   const alojamientosTravels = travels.filter(travel => travel.serviceType === 'Alojamiento');
 
   const handleSearchToggle = (searching: boolean) => {
@@ -34,13 +33,12 @@ function DestinationsFilter() {
       <div className="text-center px-4 md:px-8 lg:px-12">
         
         {isSearching ? (
-          filteredTravels.length === 0 ? ( // Comprobar si no hay resultados
+          filteredTravels.length === 0 ? (
             <p className="text-xl md:text-2xl m-6 mb-20">
               No encontramos el lugar que usted busca.
             </p>
           ) : (
             <div className="flex flex-wrap justify-center">
-              {/* Utiliza TravelGridComponent para renderizar los resultados filtrados */}
               <TravelGridComponent travels={filteredTravels} />
             </div>
           )
