@@ -1,9 +1,7 @@
 "use client"
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context/userContext";
-import { IRegister, IUserChange } from "@/interfaces/interfaces";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+
 
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
@@ -13,22 +11,26 @@ import { changeData } from "@/lib/server/fetchUsers";
 
 const UserDashboard = () => {
   
-  const { isLogged } = useContext(UserContext);
+  const { isLogged , changeUserData } = useContext(UserContext);
   const router = useRouter()
-  const [formData, setFormData] = useState<IRegister>({
+  const [formData, setFormData] = useState({
     name:'',
-    email:'',
-    password:'',
     phone:'',
-    confirmPassword:''
+    disability:'',
+    credential: {
+      avatar: {
+        url: '',
+        publicId: '',
+      },
+    },
    });
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeSection, setActiveSection] = useState('profile');
   const [isEditing, setIsEditing] = useState(false); 
   const { user } = useContext(UserContext);
-  const [showPassword, setShowPassword] = useState(false);
   const {data:session} = useSession();
 
+ 
   useEffect(() => {
     if(!isLogged){
       Swal.fire({
@@ -41,28 +43,28 @@ const UserDashboard = () => {
     }
   },[isLogged,router])
   
-  const handleSubmit = async(values:IUserChange) => {
-    const response = await changeData(values);
-    if(response){
+  const handleSubmit = async (e:React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault(); 
+    if () {
       Swal.fire({
-        title:"cambios giardados con exito",
-        icon:'success'
-      })
+        title: "Cambios guardados con éxito",
+        icon: 'success',
+      });
+    } else {
+      Swal.fire({
+        title: "Error",
+        text: "No se pudieron guardar los cambios.",
+        icon: 'error',
+      });
     }
-  }
+  };
 
   
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {name , value} = e.target;
-    setFormData({
-      ...formData,
-      [name]:value,
-    });
-  }
+  const handleChange = async (e:React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, files } = e.target;
 
-  const toogleVisibility = () => {
-    setShowPassword(!showPassword)
   };
+
 
 
   const renderSection = () => {
@@ -119,17 +121,7 @@ const UserDashboard = () => {
                     defaultValue={user?.name}
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Email</label>
-                  <input
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    type="email"
-                    className="mt-1 p-2 border border-gray-300 rounded w-full"
-                    defaultValue={user?.credential?.email}
-                  />
-                </div>
+              
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Teléfono</label>
                   <input
@@ -145,33 +137,12 @@ const UserDashboard = () => {
                   <label className="block text-sm font-medium text-gray-700">Discapacidad</label>
                   <input
                     name="disability"
-                    value={formData.phone}
+                    value={formData.disability}
                     onChange={handleChange}
                     type="text"
                     className="mt-1 p-2 border border-gray-300 rounded w-full"
                     placeholder="Ingrese su discapacidad"
                   />
-                </div>
-                <div className="relative">
-                  <label className="block text-sm font-medium text-gray-700">Contraseña</label>
-                  <input
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    type={showPassword ? "text" : "password"}
-                    className="mt-1 p-2 border border-gray-300 rounded w-full pr-10"
-                    placeholder="Ingresa tu nueva contraseña"
-                  />
-                  <span 
-                    onClick={toogleVisibility}
-                    className="absolute inset-y-0 right-3 mt-5 flex items-center cursor-pointer"
-                  >
-                    {showPassword ? (
-                      <FontAwesomeIcon icon={faEyeSlash} />
-                    ) : (
-                      <FontAwesomeIcon icon={faEye} />
-                    )}
-                  </span>
                 </div>
 
                 <div>

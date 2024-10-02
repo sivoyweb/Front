@@ -50,12 +50,20 @@ export const postLoginGoogle = async (credentials: IloginGoogle ) =>{
 
 
 export const changeData = async(user:IUserChange) => {
+    const formData = new FormData();
+    formData.append('name', user.name);
+    formData.append('phone', user.phone);
+    formData.append('disability', JSON.stringify(user.disability));
+    if (user.credential?.avatar?.url) {
+        formData.append('avatar', user.credential.avatar.url);
+      }
+
     const response = await fetch(`https://api-sivoy.onrender.com/users/${user.id}`,{
         method:"PUT",
         headers:{
             "Content-Type":"application/json",
         },
-        body:JSON.stringify(user),
+        body:formData,
     });
     if (!response.ok) {
         const errorData = await response.json();

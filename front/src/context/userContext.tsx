@@ -2,8 +2,8 @@
 "use client"
 
 import { createContext, useEffect, useState } from "react"
-import { IUserContextType, ILogin, IRegister, IUserProps } from "../interfaces/interfaces"
-import { postLogin, postRegister} from "@/lib/server/fetchUsers";
+import { IUserContextType, ILogin, IRegister, IUserProps, IUserChange } from "../interfaces/interfaces"
+import { changeData, postLogin, postRegister} from "@/lib/server/fetchUsers";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
@@ -19,6 +19,7 @@ export const UserContext = createContext<IUserContextType>({
     login: async () => false,
     register: async () => false,
     logOut: () => {},
+    changeUserData:async()=> false
 });
 
 
@@ -158,6 +159,23 @@ useEffect(()=>{
     setUser(null);
 }, []);
 
+
+
+const changeUserData = async(credentials:IUserChange): Promise<boolean>=> {
+  try {
+    const data = await changeData(credentials);
+    if(data){
+      setUser(data);
+      return true;
+      
+    }
+    return false
+  } catch (error:unknown) {
+      console.error('Error al cambiar los datos del usuario:', error);
+      return false;
+  }
+}
+
 return (
     <UserContext.Provider
     value={
@@ -168,6 +186,7 @@ return (
         login,
         register,
         logOut,
+        changeUserData
     }}
     >{children}</UserContext.Provider>
 )
