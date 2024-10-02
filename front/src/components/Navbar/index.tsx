@@ -98,18 +98,7 @@ const Navbar: React.FC = () => {
                 {item.name}
               </Link>
             ))}
-
-            {/* Mostrar botones si session.user no existe */}
-            {!session?.user && <AuthButtons router={router} />}
-            {/* Mostrar botón de cerrar sesión si session.user existe */}
-            {session?.user && (
-              <button
-                onClick={handleLogout}
-                className="hover:text-sivoy-orange text-white font-small p-2 rounded-md text-sm"
-              >
-                Cerrar Sesión
-              </button>
-            )}
+           {(!session?.user && !isLogged)  && <AuthButtons router={router}/>}
           </div>
 
           {isLogged && (
@@ -158,17 +147,10 @@ const Navbar: React.FC = () => {
             </DisclosureButton>
           ))}
         </div>
-        {/* Mostrar botones si session.user no existe */}
-        {!session?.user && <AuthButtons router={router}/>}
-        {/* Mostrar botón de cerrar sesión si session.user existe */}
-        {session?.user && (
-          <button
-            onClick={handleLogout}
-            className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-white hover:text-sivoy-orange hover:bg-gray-700"
-          >
-            Cerrar Sesión
-          </button>
-        )}
+      
+        {(!session?.user && !isLogged) && <AuthButtons router={router}/>}
+     
+       
       </DisclosurePanel>
     </Disclosure>
   );
