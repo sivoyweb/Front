@@ -310,3 +310,11 @@ export interface ITravelsProps{
   images: IImage[],
   provider: null,
 }
+
+
+export interface AccordionItemProps {
+  question: string;
+  answer: string;
+  isOpen: boolean;
+  onToggle: () => void;
+}
