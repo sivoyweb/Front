@@ -13,7 +13,7 @@ export default function RegisterPage() {
 
         {/* Columna derecha - Logo de Sivoy */}
         <div className="hidden lg:flex items-center justify-center w-full lg:w-80 p-4 relative">
-          <div className="absolute inset-0 bg-sivoy-gradient opacity-80 rounded-e-3xl"></div>
+          <div className="absolute inset-0 bg-sivoy-gradient  rounded-e-3xl"></div>
           <div className="bg-white shadow-md rounded-full p-4 relative z-10">
             <Image
               src="https://res.cloudinary.com/ddzcann0m/image/upload/v1726790351/wolbf7thf78to3chhlk8.png"
