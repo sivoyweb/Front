@@ -45,7 +45,7 @@ const UserDashboard = () => {
     const response = await changeData(values);
     if(response){
       Swal.fire({
-        title:"cambios giardados con exito",
+        title:"cambios giardados con éxito",
         icon:'success'
       })
     }
