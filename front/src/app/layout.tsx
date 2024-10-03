@@ -25,7 +25,9 @@ export default function RootLayout({
           <UserProvider>
            <TravelProvider>
             <Navbar />
-             {children}
+              <div className="lg:ml-16 lg:mr-16">
+                {children}
+              </div>
            <Footer />
           </TravelProvider>
          </UserProvider>

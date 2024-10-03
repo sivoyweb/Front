@@ -63,7 +63,7 @@ const Navbar: React.FC = () => {
 
 
   return (
-    <Disclosure as="nav" className="bg-sivoy-blue text-white font-arialroundedmtbold sm:-ml-16 sm:-mr-16">
+    <Disclosure as="nav" className="bg-sivoy-blue text-white font-arialroundedmtbold w-screen">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           {/* Botón del menú móvil */}

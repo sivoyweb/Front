@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { ITravelCardProps } from "@/interfaces/interfaces";
 import Image from "next/image";
@@ -19,15 +19,16 @@ function TravelCard({ travels }: ITravelCardProps) {
       : travels.description;
 
   return (
-    <div className='flex justify-center mb-6'>
-      <div className=" bg-white rounded-lg shadow transition-transform duration-300 hover:scale-105"> {/* Aumenta el ancho aquí */}
+    <div className='flex justify-center mb-6 rounded-lg'>
+      <div className="bg-white rounded-lg shadow transition-transform duration-300 hover:scale-105 max-w-md w-full"> {/* Ajusta el ancho aquí */}
         <div onClick={handleClick} className="cursor-pointer">
-          <div className="relative w-full h-48">
+          <div className="relative w-full h-48 overflow-hidden rounded-lg"> {/* Asegura que la imagen no sobresalga */}
             <Image 
-              className="rounded-t-lg object-cover" 
+              className="rounded-t-lg object-cover w-full h-full scale-110"  // Ajuste para ocupar todo el espacio con zoom
               src={imagen.url} 
               alt={travels.name}
               layout="fill" 
+              objectFit="cover" // Asegura que la imagen mantenga su proporción
             />
           </div>
         </div>
@@ -44,7 +45,7 @@ function TravelCard({ travels }: ITravelCardProps) {
           </p>
           <button 
             onClick={handleClick} 
-            className="mt-4 px-2 py-1 text-sm"
+            className="mt-4"
           >
             Ver Más
           </button>
