@@ -21,15 +21,15 @@ export const BlogArticle = ({ article }: BlogArticleProps) => {
         )}
       </div>
 
-      <h1 className="text-3xl md:text-4xl font-bold mb-4 font-arialroundedmtbold">
+      <h1 className="text-3xl md:text-4xl font-bold mb-4 font-arialroundedmtbold text-sivoy-blue">
         {article.title}
       </h1>
 
-      <h2 className="text-sm md:text-lg mb-4">
+      <h2 className="text-sm md:text-lg mb-4 text-gray-500">
         {article.date}
       </h2>
 
-      <div className="prose prose-lg text-justify">
+      <div className="prose prose-lg text-justify text-sivoy-blue">
   <p>{article.content}</p>
 </div>
     </article>

@@ -28,13 +28,6 @@ body {
   transition: all 0.5s ease;
 }
 
-@media only screen and (min-width: 800px) {
-  body {
-    margin-left: 4em;
-    margin-right: 4em;
-  }
-}
-
 button {
   border-radius: 1rem;
   background-color: #df5430; 

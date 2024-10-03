@@ -1,14 +1,13 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+import { initMercadoPago } from "@mercadopago/sdk-react";
 import { postDonation } from "@/lib/server/fetchDonations";
 
 export default function DonationsForm() {
   const [name, setName] = useState(""); // Campo para el nombre del donante
   const [amount, setAmount] = useState("");
   const [message, setMessage] = useState("");
-  const [preference_id, setPreferenceId] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false); // Estado para manejar el envío
   const [errorMessage, setErrorMessage] = useState<string | null>(null); // Mensajes de error
 
@@ -37,9 +36,12 @@ export default function DonationsForm() {
         unit_price: Number(amount), // Monto de la donación
       };
 
+      // Obtener el preference_id
       const preference_id = await postDonation(donationData);
+
       if (preference_id) {
-        setPreferenceId(preference_id);
+        // Redirigir a Mercado Pago después de obtener el preference_id
+        window.location.href = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${preference_id}`;
       }
 
       // Limpiar campos
@@ -60,8 +62,8 @@ export default function DonationsForm() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="name">
-          Nombre del donante:
+        <label className="block text-sivoy-blue mb-2" htmlFor="name">
+          Nombre del donante
         </label>
         <input
           type="text"
@@ -74,8 +76,8 @@ export default function DonationsForm() {
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="amount">
-          Monto:
+        <label className="block text-sivoy-blue mb-2" htmlFor="amount">
+          Monto
         </label>
         <input
           type="number"
@@ -88,8 +90,8 @@ export default function DonationsForm() {
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 mb-2" htmlFor="message">
-          Mensaje:
+        <label className="block text-sivoy-blue mb-2" htmlFor="message">
+          Mensaje
         </label>
         <textarea
           id="message"
@@ -104,18 +106,11 @@ export default function DonationsForm() {
 
       <button
         type="submit"
-        className="w-full bg-blue-500 text-white p-2 rounded"
+        className="w-full"
         disabled={isSubmitting}
       >
         {isSubmitting ? "Procesando..." : "Donar"}
       </button>
-
-      {preference_id && typeof preference_id === "string" && (
-        <Wallet
-          initialization={{ preferenceId: preference_id }}
-          customization={{ texts: { valueProp: "smart_option" } }}
-        />
-      )}
     </form>
   );
 }

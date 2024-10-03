@@ -4,13 +4,17 @@ import { faFacebook, faInstagram, faLinkedin, faWhatsapp, faYoutube } from "@for
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
+
 function Footer() {
+
+
+
   return (
-    <footer className="bg-sivoy-blue text-white py-10 -ml-16 -mr-16 w-screen ">
-      <div className="container mx-auto flex flex-col md:flex-row justify-around items-start space-y-10 md:space-y-0">
+    <footer className="bg-sivoy-blue text-white py-10 w-screen">
+      <div className="container mx-auto flex flex-col md:flex-row justify-between items-start space-y-10 md:space-y-0">
         
         {/* Información de contacto a la izquierda */}
-        <div className="w-full md:w-1/3 lg:w-1/3 pl-6 pr-6 bg-sivoy-blue rounded-lg">
+        <div className="w-full md:w-1/3 lg:w-1/3 py-4 bg-sivoy-blue rounded-lg">
           <h4 className="text-base font-arialroundedmtbold mb-2 text-center md:text-left">Información de Contacto</h4>
           <div className="text-center md:text-left text-sm">
             <p className="mb-1">+54 9 2954 66 48 07</p>
@@ -38,7 +42,7 @@ function Footer() {
         </div>
 
         {/* Información de la directora y gerente */}
-        <div className="w-full md:w-1/2 lg:w-1/3">
+        <div className="w-full md:w-1/2 lg:w-1/3 p-4">
           <div className="flex flex-col md:flex-row items-center justify-center md:justify-start bg-sivoy-blue text-white space-y-4 md:space-y-0 md:space-x-8">
             
             <div className="text-center md:text-left">
@@ -64,13 +68,13 @@ function Footer() {
         </div>
 
         {/* Nueva columna - Centro de Ayuda */}
-        <div className="w-full md:w-1/3 lg:w-1/3 pl-56 pr-6 bg-sivoy-blue rounded-lg">
-          <h4 className="text-base font-arialroundedmtbold mb-2 text-center md:text-left">Centro de Ayuda</h4>
-          <div className="text-center md:text-left text-sm">
-            <p className="mb-1">Preguntas frecuentes</p>
+        <section className="w-full md:w-1/3 lg:w-1/3 p-4 bg-sivoy-blue">
+          <h4 className="text-base font-arialroundedmtbold mb-2 text-center md:text-right">Centro de Ayuda</h4>
+          <div className="text-center md:text-right text-sm">
+            <a className="mb-1 hover:underline" href="/faq">Preguntas frecuentes</a>
             <p className="mb-1">Comparte esta Iniciativa</p>
           </div>
-        </div>
+        </section>
 
       </div>
     </footer>
