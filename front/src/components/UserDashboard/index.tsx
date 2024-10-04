@@ -20,7 +20,7 @@ const UserDashboard = () => {
   const [formData, setFormData] = useState({
     name:user?.name || '',
     phone:user?.phone || '',
-    disability:[{
+    disabilities:[{
       category:'',
       name:'',
     }],
@@ -34,7 +34,7 @@ const UserDashboard = () => {
     
    });
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [activeSection, setActiveSection] = useState('profile');
+  const [activeSection, setActiveSection] = useState('account');
   const [isEditing, setIsEditing] = useState(false); 
   
   const {data:session} = useSession();
@@ -56,31 +56,49 @@ const UserDashboard = () => {
   
   const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); 
-    setIsSubmitting(true);
-
-try {
-  if(user){
-
-    await axios.put(`https://api-sivoy.onrender.com/users/${user.id}`,formData,{
-      headers:{
-        Authorization:`Bearer ${token}`
+    Swal.fire({
+    title: '¿Estás seguro de los cambios?',
+    text: "Revisa los campos antes de continuar.",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Sí, guardar cambios',
+    cancelButtonText: 'Cancelar',
+    reverseButtons: true
+    }).then(async(result)=> {
+      if(result.isConfirmed){
+        setIsSubmitting(true);
+        try {
+          if(user){
+        
+            await axios.put(`https://api-sivoy.onrender.com/users/${user.id}`,formData,{
+              headers:{
+                Authorization:`Bearer ${token}`
+              }
+            });
+          }
+          Swal.fire({
+            title: "Cambios guardados con éxito",
+            icon: 'success',
+          });
+        } catch (error) {
+          console.error(error)
+          Swal.fire({
+            title: "Error",
+            text: "No se pudieron guardar los cambios.",
+            icon: 'error',
+          });
+        } finally{
+          setIsSubmitting(false);
       }
-    })
-  }
-  Swal.fire({
-    title: "Cambios guardados con éxito",
-    icon: 'success',
-  });
-} catch (error) {
-  console.error(error)
-  Swal.fire({
-    title: "Error",
-    text: "No se pudieron guardar los cambios.",
-    icon: 'error',
-  });
-} finally{
-  setIsSubmitting(false);
-}
+    }else if(result.dismiss === Swal.DismissReason.cancel){
+      Swal.fire({
+        title:"Cambios cancelados",
+        icon:'info',
+      });
+    }
+    });
+
+
 };
 
   
@@ -96,7 +114,7 @@ try {
     const { value } = e.target;
   
     setFormData((prevData) => {
-      const updatedDisability = [...prevData.disability];
+      const updatedDisability = [...prevData.disabilities];
       updatedDisability[index] = {
         ...updatedDisability[index],
         [field]: value, 
@@ -174,7 +192,7 @@ try {
                 </div>
                 <div>
   <label className="block text-sm font-medium text-gray-700">Discapacidad</label>
-  {formData.disability.map((disability, index) => (
+  {formData.disabilities.map((disability, index) => (
     <div key={index} className="flex space-x-2">
       <input
         name={`disability-category-${index}`}
