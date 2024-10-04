@@ -1,12 +1,7 @@
-// components/BlogArticle.tsx
 import Image from "next/image";
-import { IBlogArticle } from "@/interfaces/interfaces";
+import { IBlogArticleProps } from "@/interfaces/interfaces";
 
-interface BlogArticleProps {
-  article: IBlogArticle;
-}
-
-export const BlogArticle = ({ article }: BlogArticleProps) => {
+export const BlogArticle = ({ article }: IBlogArticleProps) => {
   return (
     <article className="max-w-3xl mx-auto px-4 py-8">
       <div className="mb-8">
