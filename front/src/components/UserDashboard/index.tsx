@@ -1,44 +1,44 @@
 "use client"
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context/userContext";
-import { v2 as cloudinary } from 'cloudinary';
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { changeData } from "@/lib/server/fetchUsers";
+//import { changeData } from "@/lib/server/fetchUsers";
+import { CldUploadWidget, CloudinaryUploadWidgetInfo } from 'next-cloudinary';
+import axios from "axios";
 
- // Configuration
- cloudinary.config({ 
-  cloud_name: 'dvxh2vynm', 
-  api_key: '122398321264764', 
-  api_secret: 'b2o85mmDn_nkgJAXq3V2-M8cH_E' 
-});
+
 
 const UserDashboard = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { isLogged } = useContext(UserContext);
+  const { isLogged,user } = useContext(UserContext);
   const router = useRouter()
- 
+ const token = localStorage.getItem('token');
   
   const [formData, setFormData] = useState({
-    name:'',
-    phone:'',
-    disability:[],
+    name:user?.name || '',
+    phone:user?.phone || '',
+    disability:[{
+      category:'',
+      name:'',
+    }],
     credential: {
       avatar: {
         url: '',
         publicId: '',
       },
     },
-    id:''
+    id:user?.id,
+    
    });
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeSection, setActiveSection] = useState('profile');
   const [isEditing, setIsEditing] = useState(false); 
-  const { user } = useContext(UserContext);
+  
   const {data:session} = useSession();
-  console.log(user?.id);
+  
   
 
  
@@ -59,12 +59,20 @@ const UserDashboard = () => {
     setIsSubmitting(true);
 
 try {
-  await changeData(formData);
+  if(user){
+
+    await axios.put(`https://api-sivoy.onrender.com/users/${user.id}`,formData,{
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
+    })
+  }
   Swal.fire({
     title: "Cambios guardados con éxito",
     icon: 'success',
   });
 } catch (error) {
+  console.error(error)
   Swal.fire({
     title: "Error",
     text: "No se pudieron guardar los cambios.",
@@ -84,40 +92,31 @@ try {
     }));
   };
 
-  const handleFileChange = async(e: React.ChangeEvent<HTMLInputElement>) => {
-    const { files } = e.target;
+  const handleChangeDisability = (e: React.ChangeEvent<HTMLInputElement>, index: number, field: string) => {
+    const { value } = e.target;
   
-    if (files && files.length > 0) {
-      const file = files[0];
-      
-      if(file && file.type.startsWith("image/")){ 
-    //const response = await cloudinary.uploader.upload(file)
-    //console.log(response);
-    
-  }else{
-    Swal.fire({
-      title: "Error",
-      text: "Solo se permiten archivos de imagen.",
-      icon: 'error',
+    setFormData((prevData) => {
+      const updatedDisability = [...prevData.disability];
+      updatedDisability[index] = {
+        ...updatedDisability[index],
+        [field]: value, 
+      };
+  
+      return {
+        ...prevData,
+        disability: updatedDisability,
+      };
     });
-  }
-}
-};
+  };
+
+ 
 
 
 
   const renderSection = () => {
     
     switch (activeSection) {
-      case 'profile':
-        return (
-          
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-semibold mb-4">Perfil</h2>
-            <p className="text-gray-600">Nombre: {user?.name || session?.user?.name}</p>
-            <p className="text-gray-600">Email: {user?.credential?.email || session?.user?.email}</p>
-          </div>
-        );
+     
       case 'favorites':
         return (
           <div className="bg-white rounded-lg shadow-lg p-6">
@@ -174,29 +173,72 @@ try {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Discapacidad</label>
-                  <input
-                    name="disability"
-                    value={formData.disability}
-                    onChange={handleChange}
-                    type="text"
-                    className="mt-1 p-2 border border-gray-300 rounded w-full"
-                    placeholder="Ingrese su discapacidad"
-                  />
-                </div>
+  <label className="block text-sm font-medium text-gray-700">Discapacidad</label>
+  {formData.disability.map((disability, index) => (
+    <div key={index} className="flex space-x-2">
+      <input
+        name={`disability-category-${index}`}
+        value={disability.category}
+        onChange={(e) => handleChangeDisability(e, index, 'category')}
+        type="text"
+        className="mt-1 p-2 border border-gray-300 rounded w-full"
+        placeholder="Ingrese categoría"
+      />
+      <input
+        name={`disability-name-${index}`}
+        value={disability.name}
+        onChange={(e) => handleChangeDisability(e, index, 'name')}
+        type="text"
+        className="mt-1 p-2 border border-gray-300 rounded w-full"
+        placeholder="Ingrese nombre"
+      />
+    </div>
+  ))}
+</div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Avatar</label>
-                  <input
-                    type="file"
-                    onChange={handleFileChange}
-                    className="mt-1 p-2 border border-gray-300 rounded w-full"
-                  />
+                  <CldUploadWidget uploadPreset="siVoyPreset"
+                                   onSuccess={(result)=>{
+
+                                    
+
+                                    const uploadedImage = result?.info as CloudinaryUploadWidgetInfo;
+                                    if(uploadedImage){ 
+                                      
+                                      
+                                    setFormData((prevData)=>({
+                                      ...prevData,
+                                      credential:{
+                                        ...prevData.credential,
+                                        avatar:{
+                                          url:uploadedImage.secure_url || '',
+                                          publicId:uploadedImage.public_id || '',
+                                        },
+                                      },
+                                    }));
+                                    Swal.fire({
+                                      title:"Imagen subida con exito",
+                                      icon:"success"
+                                    })
+                                  }else{
+                                    Swal.fire({
+                                      title:"Error al subir la imagen",
+                                      icon:"error"
+                                      
+                                    })
+                                  }
+                                   }}>
+                  {({open})=>{
+                    return <button className='focus text-xs px-3 py-2' 
+                                    onClick={()=>open()}>Subir imagen</button>
+                  }}
+                  </CldUploadWidget>
                 </div>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="mt-4 text-white px-4 py-2 hover:text-gray-700"
+                  className="mt-4 text-white px-4 py-2 hover:text-gray-700 text-align-right ml-auto block"
                 >
                  {isSubmitting ? "Guardando..." : "Guardar cambios"}
                 </button>
@@ -209,6 +251,7 @@ try {
         return <p>Selecciona una opción del menú.</p>;
     }
   };
+  console.log(formData)
 
   return (
     <div className="flex h-screen bg-gray-100 font-arialroundedmtbold text-sivoy-blue">
@@ -226,15 +269,7 @@ try {
           </button>
         </div>
         <nav className="mt-10">
-          <a
-            href="#"
-            onClick={() => setActiveSection('profile')}
-            className={`block py-2.5 px-4 rounded transition-all duration-200 hover:bg-sivoy-blue ${
-              !sidebarOpen ? "opacity-0 w-0" : "opacity-100 w-full"
-            }`}
-          >
-            Perfil
-          </a>
+         
           <a
             href="#"
             onClick={() => setActiveSection('favorites')}
@@ -260,15 +295,10 @@ try {
         <header className="flex justify-between items-center bg-white shadow p-4">
           <h1 className="text-2xl font-semibold">Perfil</h1>
           <div className="flex items-center">
-            
+          
              <Image
              alt="imagen de perfil"
-             src=  { typeof user?.credential?.avatar === 'string'
-             ? user.credential.avatar
-             : typeof session?.user?.image === 'string'
-             ? session.user.image
-             : '/path-to-default-avatar.jpg'
-            }
+             src={user?.credential?.avatar.url || session?.user?.image || ''}
              width={50}  
              height={50} 
              className="rounded-full" />

@@ -2,6 +2,7 @@ import axios from "axios";
 import { ILogin, IloginGoogle, IRegister, IUserChange } from "../../interfaces/interfaces";
 
 
+
 export const postRegister = async (user: IRegister )=>{
     const response = await fetch("https://api-sivoy.onrender.com/auth/signup/",{
         method: "POST",
@@ -51,6 +52,7 @@ export const postLoginGoogle = async (credentials: IloginGoogle ) =>{
 
 export const changeData = async (user: IUserChange )=>{
     try {
+        console.log("User ID:", user.id);
          await axios.put(`https://api-sivoy.onrender.com/users/${user.id}`,user)
         
     } catch (error) {
