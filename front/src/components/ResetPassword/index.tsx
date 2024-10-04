@@ -1,40 +1,94 @@
-"use client"
-import { useState } from 'react';
-import axios from 'axios';
+"use client";
+import { useState } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
+
+interface ResetPasswordDTO {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  resetCode: string;
+}
 
 export default function ResetPassword() {
-  const [code, setCode] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [resetCode, setResetCode] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const response = await axios.put('/api/auth/reset-password', {
-        code,
-        newPassword,
-        confirmPassword,
+
+    if (newPassword !== confirmPassword) {
+      Swal.fire({
+        icon: "error",
+        title: "Las contraseñas no coinciden",
+        text: "Por favor, asegúrese de que las contraseñas coincidan.",
       });
+      return;
+    }
+
+    const resetPasswordData: ResetPasswordDTO = {
+      email,
+      password: newPassword,
+      confirmPassword,
+      resetCode,
+    };
+
+    setIsLoading(true); 
+
+    try {
+      const response = await axios.put(
+        "https://api-sivoy.onrender.com/auth/reset-password",
+        resetPasswordData
+      );
+
+      Swal.fire({
+        icon: "success",
+        title: "Contraseña cambiada con éxito",
+        text: response.data.message || "Tu contraseña ha sido actualizada.",
+      });
+
       setMessage(response.data.message);
     } catch (error) {
-      setMessage('Error resetting password');
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Hubo un error al intentar restablecer la contraseña.",
+      });
+      setMessage("Error al restablecer la contraseña.");
+    } finally {
+      setIsLoading(false); 
     }
   };
 
   return (
     <div className="flex flex-col items-center p-6 border rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold mb-6">Paso 3: Ingrese el código y nueva contraseña</h1>
+      <h1 className="text-2xl font-bold mb-6">Paso 3: Ingrese el código, email y nueva contraseña</h1>
+
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
+        <h2 className="text-xl text-center">Ingresa el email de la cuenta:</h2>
+        <input
+          type="email"
+          placeholder="Ingrese su correo electrónico"
+          className="border border-gray-300 p-2 rounded w-full"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          disabled={isLoading} 
+        />
+        <h2 className="text-xl text-center">Ingresa el codigo para cambiar la contraseña:</h2>
         <input
           type="text"
           placeholder="Ingrese el código de restablecimiento"
           className="border border-gray-300 p-2 rounded w-full"
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
+          value={resetCode}
+          onChange={(e) => setResetCode(e.target.value)}
+          disabled={isLoading} 
         />
-        
+        <h2 className="text-xl text-center">Ingresa la contraseña nueva:</h2>
         <div className="relative w-full">
           <input
             type={showPassword ? "text" : "password"}
@@ -42,16 +96,18 @@ export default function ResetPassword() {
             className="border border-gray-300 p-2 rounded w-full"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
+            disabled={isLoading}
           />
-          <button 
-            type="button" 
-            className="absolute inset-y-0 right-0 flex items-center pr-3 bg-transparent hover:bg-transparent border-none shadow-sky-50"
+          <button
+            type="button"
+            className="absolute inset-y-0 right-0 flex items-center pr-3 bg-transparent hover:bg-transparent border-none shadow-sky-50 focus:bg-transparent"
             onClick={() => setShowPassword(!showPassword)}
+            disabled={isLoading} 
           >
             {showPassword ? "🙈" : "👁️"}
           </button>
         </div>
-
+        <h2 className="text-xl text-center">Confirma la contraseña nueva:</h2>
         <div className="relative w-full">
           <input
             type={showPassword ? "text" : "password"}
@@ -59,22 +115,27 @@ export default function ResetPassword() {
             className="border border-gray-300 p-2 rounded w-full"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
+            disabled={isLoading} 
           />
-          <button 
-            type="button" 
-            className="absolute inset-y-0 right-0 flex items-center pr-3 bg-transparent hover:bg-transparent"
+          <button
+            type="button"
+            className="absolute inset-y-0 right-0 flex items-center pr-3 bg-transparent hover:bg-transparent border-none shadow-sky-50 focus:bg-transparent"
             onClick={() => setShowPassword(!showPassword)}
+            disabled={isLoading} 
           >
             {showPassword ? "🙈" : "👁️"}
           </button>
         </div>
 
-        <button 
-          type="submit" 
-          className="">
-          Restablecer contraseña
+        <button
+          type="submit"
+          className="bg-blue-500 text-white font-bold p-2 rounded"
+          disabled={isLoading} 
+        >
+          {isLoading ? "Restableciendo..." : "Restablecer contraseña"}
         </button>
       </form>
+
       {message && <p className="mt-4 text-red-500">{message}</p>}
     </div>
   );

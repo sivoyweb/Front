@@ -44,9 +44,6 @@ const login = async (credentials: ILogin) => {
       localStorage.setItem("user", JSON.stringify(data));
       localStorage.setItem("token", data.token);
 
-     
-      
-      
       Swal.fire({
           title: 'Inicio de sesión exitoso',
           text: 'Bienvenido',
@@ -90,7 +87,7 @@ useEffect(() => {
 const register = async (user: IRegister) => {
   try {
     const data = await postRegister(user);
-    
+    console.log(data)
     if (data && data.message === 'User created successfully') {
       Swal.fire({
         title: 'Registro exitoso',
@@ -101,7 +98,7 @@ const register = async (user: IRegister) => {
       setTimeout(() => {
         router.push('/login');
       }, 2000);
-
+      console.log(data)
       return true;
     } else if (data.error === 'email already in use') {
       Swal.fire({

@@ -4,13 +4,12 @@ import ResetPassword from "@/components/ResetPassword";
 
 function ForgotPassword() {
   return (
-    <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-10 space-y-10 lg:space-y-0 p-6">
-      {/* Paso 1 */}
+    <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-10 space-y-10 lg:space-y-0 p-6 min-h-screen">
+
       <div className="lg:w-1/3 w-full">
         <ResetPasswordRequest />
       </div>
 
-      {/* Paso 2 */}
       <div className="lg:w-1/3 w-full">
       <div className="flex flex-col items-center p-6 border rounded-lg shadow-md">
       <h1 className="text-2xl font-bold mb-6">Paso 2: Verifique su correo</h1>
@@ -21,7 +20,6 @@ function ForgotPassword() {
     </div>
       </div>
 
-      {/* Paso 3 */}
       <div className="lg:w-1/3 w-full">
         <ResetPassword />
       </div>
