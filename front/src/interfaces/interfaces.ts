@@ -55,11 +55,9 @@ export interface ILogin {
   
   export interface IUserChange{
     name:string
-    email:string
     phone:string
-    password:string
-    avatar:string
-    disability:IDisability
+    credential:{avatar:{url:string,publicId:string}}
+    disability:IDisability[]
     id:string
   }
 
@@ -237,6 +235,7 @@ export interface IUserContextType {
   login: (credentials: ILogin) => Promise<boolean>;
   register: (user: IRegister) => Promise<boolean>;
   logOut: () => void;
+
 }
 
 export interface ITravelCardProps {
