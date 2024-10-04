@@ -13,7 +13,7 @@ function ForgotPassword() {
       <div className="lg:w-1/3 w-full">
       <div className="flex flex-col items-center p-6 border rounded-lg shadow-md">
       <h1 className="text-2xl font-bold mb-6">Paso 2: Verifique su correo</h1>
-      <p className="text-lg text-center">
+      <p className="text-2xl text-center">
         Hemos enviado un código de restablecimiento a su correo electrónico. Busque el correo de 
         <strong> si.voy.web</strong> y copie el código de verificación.
       </p>

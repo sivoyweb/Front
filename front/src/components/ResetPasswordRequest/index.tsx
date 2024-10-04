@@ -50,13 +50,13 @@ export default function ResetPasswordRequest() {
         />
         <button 
           type="submit" 
-          className="bg-blue-500 text-white font-bold p-2 rounded"
+          className=""
           disabled={isLoading} 
         >
           {isLoading ? "Enviando..." : "Enviar código de restablecimiento"}
         </button>
       </form>
-      {message && <p className="mt-4 text-red-500">{message}</p>}
+      {message && <p className="mt-4 text-green-700">El código para cambiar la contraseña fue enviado</p>}
     </div>
   );
 }

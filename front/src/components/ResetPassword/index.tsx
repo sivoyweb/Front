@@ -67,14 +67,14 @@ export default function ResetPassword() {
 
   return (
     <div className="flex flex-col items-center p-6 border rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold mb-6">Paso 3: Ingrese el código, email y nueva contraseña</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center">Paso 3: Ingrese el email, código y nueva contraseña</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
         <h2 className="text-xl text-center">Ingresa el email de la cuenta:</h2>
         <input
           type="email"
           placeholder="Ingrese su correo electrónico"
-          className="border border-gray-300 p-2 rounded w-full"
+          className="border border-gray-900 p-2 rounded w-full"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={isLoading} 
@@ -83,7 +83,7 @@ export default function ResetPassword() {
         <input
           type="text"
           placeholder="Ingrese el código de restablecimiento"
-          className="border border-gray-300 p-2 rounded w-full"
+          className="border border-gray-900 p-2 rounded w-full"
           value={resetCode}
           onChange={(e) => setResetCode(e.target.value)}
           disabled={isLoading} 
@@ -93,7 +93,7 @@ export default function ResetPassword() {
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Ingrese nueva contraseña"
-            className="border border-gray-300 p-2 rounded w-full"
+            className="border border-gray-900 p-2 rounded w-full text-gray-800"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
             disabled={isLoading}
@@ -112,7 +112,7 @@ export default function ResetPassword() {
           <input
             type={showPassword ? "text" : "password"}
             placeholder="Confirme nueva contraseña"
-            className="border border-gray-300 p-2 rounded w-full"
+            className="border border-gray-900 p-2 rounded w-full"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
             disabled={isLoading} 
@@ -129,14 +129,14 @@ export default function ResetPassword() {
 
         <button
           type="submit"
-          className="bg-blue-500 text-white font-bold p-2 rounded"
+          className=""
           disabled={isLoading} 
         >
           {isLoading ? "Restableciendo..." : "Restablecer contraseña"}
         </button>
       </form>
 
-      {message && <p className="mt-4 text-red-500">{message}</p>}
+      {message && <p className="mt-4 text-green-700">Contraseña cambiada con éxito</p>}
     </div>
   );
 }

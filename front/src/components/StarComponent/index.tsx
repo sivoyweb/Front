@@ -44,7 +44,6 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
           },
         }
       );
-      console.log("Datos que se envían al backend:", data);
       console.log("Reseña enviada exitosamente:", response.data);
 
       setReview("");
@@ -54,15 +53,19 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error("Error al enviar la reseña:", error.message);
+        console.log("Datos que se envían al backend:", data);
       } else {
         console.error("Error inesperado:", error);
       }
     }
   };
 
-  // Verifica si el usuario está logueado, si no lo está, muestra un mensaje o redirige
   if (!isLogged) {
-    return <p className="text-center text-2xl">Debes iniciar sesión para dejar una reseña.</p>;
+    return (
+      <p className="text-center text-2xl">
+        Debes iniciar sesión para dejar una reseña.
+      </p>
+    );
   }
 
   const starStyle = { color: "gold" };
@@ -82,7 +85,9 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
       <Rating
         initialRating={rating}
         onClick={(rate: number) => setRating(rate)}
-        emptySymbol={<i className="fa-regular fa-star fa-2x" style={emptyStarStyle} />}
+        emptySymbol={
+          <i className="fa-regular fa-star fa-2x" style={emptyStarStyle} />
+        }
         fullSymbol={<i className="fa-solid fa-star fa-2x" style={starStyle} />}
       />
 

@@ -20,15 +20,15 @@ function TravelCard({ travels }: ITravelCardProps) {
 
   return (
     <div className='flex justify-center mb-6 rounded-lg'>
-      <div className="bg-white rounded-lg shadow transition-transform duration-300 hover:scale-105 max-w-md w-full"> {/* Ajusta el ancho aquí */}
+      <div className="bg-white rounded-lg shadow transition-transform duration-300 hover:scale-105 max-w-md w-full"> 
         <div onClick={handleClick} className="cursor-pointer">
-          <div className="relative w-full h-48 overflow-hidden rounded-lg"> {/* Asegura que la imagen no sobresalga */}
+          <div className="relative w-full h-48 overflow-hidden rounded-lg"> 
             <Image 
-              className="rounded-t-lg object-cover w-full h-full scale-110"  // Ajuste para ocupar todo el espacio con zoom
+              className="rounded-t-lg object-cover w-full h-full scale-110"  
               src={imagen.url} 
               alt={travels.name}
               layout="fill" 
-              objectFit="cover" // Asegura que la imagen mantenga su proporción
+              objectFit="cover" 
             />
           </div>
         </div>
