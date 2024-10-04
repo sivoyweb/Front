@@ -258,10 +258,8 @@ export interface IBlogArticle {
 }
 
 export interface IBlogArticleProps {
-  blogArticles: IBlogArticle; 
-  index?: number; 
-  image?: IImageBlog;
-};
+  article: IBlogArticle;
+}
 
 interface IUserReviews{
 id:string,
@@ -312,9 +310,20 @@ export interface ITravelsProps{
 }
 
 
-export interface AccordionItemProps {
+export interface IAccordionItemProps {
   question: string;
   answer: string;
   isOpen: boolean;
   onToggle: () => void;
+}
+
+export interface IFAQ {
+  id: string,
+  question: string,
+  answer: string,
+  visible: true
+}
+
+export interface IFAQProps {
+  question: IFAQ
 }

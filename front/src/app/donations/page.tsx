@@ -14,13 +14,13 @@ export default function Donations() {
             
             <section className="flex flex-col md:flex-row md:justify-between gap-16 mb-16">
   {/* Sección de Hacer una Donación */}
-  <section className="w-full max-w-md bg-white mt-4 p-8 border border-gray-300 rounded-lg shadow-lg mx-auto">
-    <h2 className="text-2xl font-arialroundedmtbold text-center mb-6 text-sivoy-blue">Hacer una Donación</h2>
-    <p className="text-base leading-6 text-sivoyblue text-center mb-6">
-      Tu contribución nos ayuda a seguir adelante con nuestra misión. ¡Gracias por hacer la diferencia!
-    </p>
-    <DonationsForm />
-  </section>
+            <section className="w-full max-w-md bg-white mt-4 p-8 border border-gray-300 rounded-lg shadow-lg mx-auto">
+              <h2 className="text-2xl font-arialroundedmtbold text-center mb-6 text-sivoy-blue">Hacer una Donación</h2>
+              <p className="text-base leading-6 text-sivoyblue text-center mb-6">
+                Tu contribución nos ayuda a seguir adelante con nuestra misión. ¡Gracias por hacer la diferencia!
+              </p>
+              <DonationsForm />
+            </section>
 
   {/* Sección de Otras Colaboraciones */}
   <section className="w-full max-w-md bg-white mt-4 p-8 border border-gray-300 rounded-lg shadow-lg mx-auto">
