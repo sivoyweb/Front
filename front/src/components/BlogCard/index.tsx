@@ -26,7 +26,7 @@ export const BlogCard = ({ blogArticles, image }: IBlogArticleProps) => {
             </div>
             <div className="p-4">
                 <p className="text-sm text-gray-500 mb-2">{blogArticles.date}</p>
-                <h2 className="text-xl font-semibold mb-4">{blogArticles.title}</h2>
+                <h2 className="text-xl font-semibold mb-4 text-sivoy-blue">{blogArticles.title}</h2>
                 <button onClick={handleClick}>
                     Leer Más
                 </button>

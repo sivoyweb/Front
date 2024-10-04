@@ -55,11 +55,9 @@ export interface ILogin {
   
   export interface IUserChange{
     name:string
-    email:string
     phone:string
-    password:string
-    avatar:string
-    disability:IDisability
+    credential:{avatar:{url:string,publicId:string}}
+    disability:IDisability[]
     id:string
   }
 
@@ -237,6 +235,7 @@ export interface IUserContextType {
   login: (credentials: ILogin) => Promise<boolean>;
   register: (user: IRegister) => Promise<boolean>;
   logOut: () => void;
+
 }
 
 export interface ITravelCardProps {
@@ -258,10 +257,8 @@ export interface IBlogArticle {
 }
 
 export interface IBlogArticleProps {
-  blogArticles: IBlogArticle; 
-  index?: number; 
-  image?: IImageBlog;
-};
+  article: IBlogArticle;
+}
 
 interface IUserReviews{
 id:string,
@@ -309,4 +306,23 @@ export interface ITravelsProps{
   reviews: IReviewT[],
   images: IImage[],
   provider: null,
+}
+
+
+export interface IAccordionItemProps {
+  question: string;
+  answer: string;
+  isOpen: boolean;
+  onToggle: () => void;
+}
+
+export interface IFAQ {
+  id: string,
+  question: string,
+  answer: string,
+  visible: true
+}
+
+export interface IFAQProps {
+  question: IFAQ
 }

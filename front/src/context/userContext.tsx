@@ -155,6 +155,10 @@ useEffect(()=>{
     setUser(null);
 }, []);
 
+
+
+
+
 return (
     <UserContext.Provider
     value={
@@ -165,6 +169,7 @@ return (
         login,
         register,
         logOut,
+  
     }}
     >{children}</UserContext.Provider>
 )

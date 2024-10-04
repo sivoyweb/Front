@@ -1,34 +1,47 @@
 "use client"
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context/userContext";
-import { IRegister, IUserChange } from "@/interfaces/interfaces";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { changeData } from "@/lib/server/fetchUsers";
+//import { changeData } from "@/lib/server/fetchUsers";
+import { CldUploadWidget, CloudinaryUploadWidgetInfo } from 'next-cloudinary';
+import axios from "axios";
+
+
 
 const UserDashboard = () => {
-  
-  const { isLogged } = useContext(UserContext);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { isLogged,user } = useContext(UserContext);
   const router = useRouter()
-  const [formData, setFormData] = useState<IRegister>({
-    name:'',
-    email:'',
-    password:'',
-    phone:'',
-    confirmPassword:''
+ const token = localStorage.getItem('token');
+  
+  const [formData, setFormData] = useState({
+    name:user?.name || '',
+    phone:user?.phone || '',
+    disability:[{
+      category:'',
+      name:'',
+    }],
+    credential: {
+      avatar: {
+        url: '',
+        publicId: '',
+      },
+    },
+    id:user?.id,
+    
    });
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeSection, setActiveSection] = useState('profile');
   const [isEditing, setIsEditing] = useState(false); 
-  const { user } = useContext(UserContext);
-  const [showPassword, setShowPassword] = useState(false);
+  
   const {data:session} = useSession();
+  
+  
 
+ 
   useEffect(() => {
     if(!isLogged){
       Swal.fire({
@@ -41,42 +54,69 @@ const UserDashboard = () => {
     }
   },[isLogged,router])
   
-  const handleSubmit = async(values:IUserChange) => {
-    const response = await changeData(values);
-    if(response){
-      Swal.fire({
-        title:"cambios giardados con exito",
-        icon:'success'
-      })
-    }
+  const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); 
+    setIsSubmitting(true);
+
+try {
+  if(user){
+
+    await axios.put(`https://api-sivoy.onrender.com/users/${user.id}`,formData,{
+      headers:{
+        Authorization:`Bearer ${token}`
+      }
+    })
   }
+  Swal.fire({
+    title: "Cambios guardados con éxito",
+    icon: 'success',
+  });
+} catch (error) {
+  console.error(error)
+  Swal.fire({
+    title: "Error",
+    text: "No se pudieron guardar los cambios.",
+    icon: 'error',
+  });
+} finally{
+  setIsSubmitting(false);
+}
+};
 
   
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const {name , value} = e.target;
-    setFormData({
-      ...formData,
-      [name]:value,
-    });
-  }
-
-  const toogleVisibility = () => {
-    setShowPassword(!showPassword)
+  const handleChange = async (e:React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevData)=> ({
+      ...prevData,
+      [name]:name=== "disability" ? value.split(",") : value,
+    }));
   };
+
+  const handleChangeDisability = (e: React.ChangeEvent<HTMLInputElement>, index: number, field: string) => {
+    const { value } = e.target;
+  
+    setFormData((prevData) => {
+      const updatedDisability = [...prevData.disability];
+      updatedDisability[index] = {
+        ...updatedDisability[index],
+        [field]: value, 
+      };
+  
+      return {
+        ...prevData,
+        disability: updatedDisability,
+      };
+    });
+  };
+
+ 
+
 
 
   const renderSection = () => {
     
     switch (activeSection) {
-      case 'profile':
-        return (
-          
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-semibold mb-4">Perfil</h2>
-            <p className="text-gray-600">Nombre: {user?.name || session?.user?.name}</p>
-            <p className="text-gray-600">Email: {user?.credential?.email || session?.user?.email}</p>
-          </div>
-        );
+     
       case 'favorites':
         return (
           <div className="bg-white rounded-lg shadow-lg p-6">
@@ -107,7 +147,8 @@ const UserDashboard = () => {
                 
               </>
             ) : (
-              <form className="space-y-4">
+              <form className="space-y-4"
+                    onSubmit={handleSubmit}>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Nombre</label>
                   <input
@@ -119,17 +160,7 @@ const UserDashboard = () => {
                     defaultValue={user?.name}
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700">Email</label>
-                  <input
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    type="email"
-                    className="mt-1 p-2 border border-gray-300 rounded w-full"
-                    defaultValue={user?.credential?.email}
-                  />
-                </div>
+              
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Teléfono</label>
                   <input
@@ -142,51 +173,75 @@ const UserDashboard = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Discapacidad</label>
-                  <input
-                    name="disability"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    type="text"
-                    className="mt-1 p-2 border border-gray-300 rounded w-full"
-                    placeholder="Ingrese su discapacidad"
-                  />
-                </div>
-                <div className="relative">
-                  <label className="block text-sm font-medium text-gray-700">Contraseña</label>
-                  <input
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    type={showPassword ? "text" : "password"}
-                    className="mt-1 p-2 border border-gray-300 rounded w-full pr-10"
-                    placeholder="Ingresa tu nueva contraseña"
-                  />
-                  <span 
-                    onClick={toogleVisibility}
-                    className="absolute inset-y-0 right-3 mt-5 flex items-center cursor-pointer"
-                  >
-                    {showPassword ? (
-                      <FontAwesomeIcon icon={faEyeSlash} />
-                    ) : (
-                      <FontAwesomeIcon icon={faEye} />
-                    )}
-                  </span>
-                </div>
+  <label className="block text-sm font-medium text-gray-700">Discapacidad</label>
+  {formData.disability.map((disability, index) => (
+    <div key={index} className="flex space-x-2">
+      <input
+        name={`disability-category-${index}`}
+        value={disability.category}
+        onChange={(e) => handleChangeDisability(e, index, 'category')}
+        type="text"
+        className="mt-1 p-2 border border-gray-300 rounded w-full"
+        placeholder="Ingrese categoría"
+      />
+      <input
+        name={`disability-name-${index}`}
+        value={disability.name}
+        onChange={(e) => handleChangeDisability(e, index, 'name')}
+        type="text"
+        className="mt-1 p-2 border border-gray-300 rounded w-full"
+        placeholder="Ingrese nombre"
+      />
+    </div>
+  ))}
+</div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Avatar</label>
-                  <input
-                    type="file"
-                    className="mt-1 p-2 border border-gray-300 rounded w-full"
-                  />
+                  <CldUploadWidget uploadPreset="siVoyPreset"
+                                   onSuccess={(result)=>{
+
+                                    
+
+                                    const uploadedImage = result?.info as CloudinaryUploadWidgetInfo;
+                                    if(uploadedImage){ 
+                                      
+                                      
+                                    setFormData((prevData)=>({
+                                      ...prevData,
+                                      credential:{
+                                        ...prevData.credential,
+                                        avatar:{
+                                          url:uploadedImage.secure_url || '',
+                                          publicId:uploadedImage.public_id || '',
+                                        },
+                                      },
+                                    }));
+                                    Swal.fire({
+                                      title:"Imagen subida con exito",
+                                      icon:"success"
+                                    })
+                                  }else{
+                                    Swal.fire({
+                                      title:"Error al subir la imagen",
+                                      icon:"error"
+                                      
+                                    })
+                                  }
+                                   }}>
+                  {({open})=>{
+                    return <button className='focus text-xs px-3 py-2' 
+                                    onClick={()=>open()}>Subir imagen</button>
+                  }}
+                  </CldUploadWidget>
                 </div>
                 <button
                   onClick={handleSubmit}
                   type="submit"
-                  className="mt-4 text-white px-4 py-2 hover:text-gray-700"
+                  disabled={isSubmitting}
+                  className="mt-4 text-white px-4 py-2 hover:text-gray-700 text-align-right ml-auto block"
                 >
-                  Guardar cambios
+                 {isSubmitting ? "Guardando..." : "Guardar cambios"}
                 </button>
               </form>
             )}
@@ -197,6 +252,7 @@ const UserDashboard = () => {
         return <p>Selecciona una opción del menú.</p>;
     }
   };
+  console.log(formData)
 
   return (
     <div className="flex h-screen bg-gray-100 font-arialroundedmtbold text-sivoy-blue">
@@ -214,15 +270,7 @@ const UserDashboard = () => {
           </button>
         </div>
         <nav className="mt-10">
-          <a
-            href="#"
-            onClick={() => setActiveSection('profile')}
-            className={`block py-2.5 px-4 rounded transition-all duration-200 hover:bg-sivoy-blue ${
-              !sidebarOpen ? "opacity-0 w-0" : "opacity-100 w-full"
-            }`}
-          >
-            Perfil
-          </a>
+         
           <a
             href="#"
             onClick={() => setActiveSection('favorites')}
@@ -248,15 +296,10 @@ const UserDashboard = () => {
         <header className="flex justify-between items-center bg-white shadow p-4">
           <h1 className="text-2xl font-semibold">Perfil</h1>
           <div className="flex items-center">
-            
+          
              <Image
              alt="imagen de perfil"
-             src=  { typeof user?.credential?.avatar === 'string'
-             ? user.credential.avatar
-             : typeof session?.user?.image === 'string'
-             ? session.user.image
-             : '/path-to-default-avatar.jpg'
-            }
+             src={user?.credential?.avatar.url || session?.user?.image || ''}
              width={50}  
              height={50} 
              className="rounded-full" />
