@@ -326,3 +326,8 @@ export interface IFAQ {
 export interface IFAQProps {
   question: IFAQ
 }
+
+export interface Disability {
+  category: string;
+  name: string;
+}

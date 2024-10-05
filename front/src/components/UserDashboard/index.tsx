@@ -5,25 +5,52 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-//import { changeData } from "@/lib/server/fetchUsers";
 import { CldUploadWidget, CloudinaryUploadWidgetInfo } from 'next-cloudinary';
 import axios from "axios";
 
 
+interface Credential {
+  avatar: {
+    url: string;
+    publicId: string;
+  };
+}
+interface FormData {
+  name: string;
+  phone: string;
+  disabilities: string[];
+  credential: Credential;
+  isRepresentative: boolean;
+  id: string | undefined; 
+}
+
 
 const UserDashboard = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [token, setToken] = useState<string | null>(null);
   const { isLogged,user } = useContext(UserContext);
   const router = useRouter()
- const token = localStorage.getItem('token');
+
+
+  const disabilitiesOption=[
+    { category: 'Visual', selected: false },
+    { category: 'Auditiva', selected: false },
+    { category: 'Motora', selected: false },
+    { category: 'Fisica', selected: false },
+    { category: 'Sensorial', selected: false },
+    { category: 'Cognitiva', selected: false },
+    { category: 'Psicosocial', selected: false },
+  ]
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    setToken(storedToken);
+  }, []);
   
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name:user?.name || '',
     phone:user?.phone || '',
-    disabilities:[{
-      category:'',
-      name:'',
-    }],
+    disabilities:[],
     credential: {
       avatar: {
         url: '',
@@ -31,11 +58,14 @@ const UserDashboard = () => {
       },
     },
     id:user?.id,
+    isRepresentative:false
     
    });
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeSection, setActiveSection] = useState('account');
   const [isEditing, setIsEditing] = useState(false); 
+  const [selectedDisabilities, setSelectedDisabilities] = useState<string[]>([]);
+  const [isDisabilityListOpen, setIsDisabilityListOpen] = useState(false);
   
   const {data:session} = useSession();
   
@@ -56,6 +86,9 @@ const UserDashboard = () => {
   
   const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); 
+
+  
+    
     Swal.fire({
     title: '¿Estás seguro de los cambios?',
     text: "Revisa los campos antes de continuar.",
@@ -110,24 +143,44 @@ const UserDashboard = () => {
     }));
   };
 
-  const handleChangeDisability = (e: React.ChangeEvent<HTMLInputElement>, index: number, field: string) => {
-    const { value } = e.target;
   
-    setFormData((prevData) => {
-      const updatedDisability = [...prevData.disabilities];
-      updatedDisability[index] = {
-        ...updatedDisability[index],
-        [field]: value, 
-      };
+
+  const handleToggleDisability = (disability: string) => {
+    setSelectedDisabilities((prev)=>{
+      if(prev.includes(disability)){
+        return prev.filter((item) => item !== disability);
+      } else {
+        return [...prev, disability];
+      }
+    });
+    setFormData((prev: FormData) => {
+      const { disabilities } = prev;
+  
+      
+      const newDisabilities = disabilities.includes(disability)
+        ? disabilities.filter(d => d !== disability) 
+        : [...disabilities, disability]; 
+       
   
       return {
-        ...prevData,
-        disability: updatedDisability,
+        ...prev,
+        disabilities: newDisabilities,
       };
     });
+    
   };
 
- 
+  const handleRepresentativeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      isRepresentative: checked, 
+    }));
+  };
+  
+
+  const toggleDisabilityList = () => setIsDisabilityListOpen(!isDisabilityListOpen);
+
 
 
 
@@ -135,16 +188,7 @@ const UserDashboard = () => {
     
     switch (activeSection) {
      
-      case 'favorites':
-        return (
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-semibold mb-4">Lugares Favoritos</h2>
-            <ul>
-              <li className="text-gray-600">Lugar 1: ------</li>
-              <li className="text-gray-600">Lugar 2: ------</li>
-            </ul>
-          </div>
-        );
+      
       case 'account':
         return (
           <div className="bg-white rounded-lg shadow-lg p-6 mb-20">
@@ -162,6 +206,7 @@ const UserDashboard = () => {
                 <p className="text-gray-600">Nombre: {user?.name || session?.user?.name}</p>
                 <p className="text-gray-600">Email: {user?.credential?.email || session?.user?.email}</p>
                {!session?.user ? <p className="text-gray-600">Teléfono:{user?.phone} </p> : null}
+               <p className="text-gray-600">Representante: {formData.isRepresentative ? "Sí" : "No"}</p>
                 
               </>
             ) : (
@@ -191,31 +236,68 @@ const UserDashboard = () => {
                   />
                 </div>
                 <div>
-  <label className="block text-sm font-medium text-gray-700">Discapacidad</label>
-  {formData.disabilities.map((disability, index) => (
-    <div key={index} className="flex space-x-2">
-      <input
-        name={`disability-category-${index}`}
-        value={disability.category}
-        onChange={(e) => handleChangeDisability(e, index, 'category')}
-        type="text"
-        className="mt-1 p-2 border border-gray-300 rounded w-full"
-        placeholder="Ingrese categoría"
-      />
-      <input
-        name={`disability-name-${index}`}
-        value={disability.name}
-        onChange={(e) => handleChangeDisability(e, index, 'name')}
-        type="text"
-        className="mt-1 p-2 border border-gray-300 rounded w-full"
-        placeholder="Ingrese nombre"
-      />
+                  <label className="flex items-center">
+                    <input
+                      type="checkbox"
+                      name="isRepresentative"
+                      checked={formData.isRepresentative}
+                      onChange={handleRepresentativeChange} 
+                      className="mr-2"
+                    />
+                    Soy representante de alguien más
+                  </label>
+                </div>
+                <div className="flex gap-4">
+  {/*categories*/}
+  <div className="w-full max-w-xs flex flex-col gap-1">
+    <label htmlFor="disabilities" className="w-fit pl-0.5 text-sm text-neutral-600 dark:text-neutral-300">Discapacidad</label>
+    <div className="relative">
+    <button
+  type="button"
+  role="combobox"
+  onClick={toggleDisabilityList}
+  className="inline-flex w-full items-center justify-between gap-2 whitespace-nowrap border-0 bg-transparent px-4 py-2 text-sm font-medium capitalize tracking-wide text-neutral-600 transition hover:bg-gray-200 focus:bg-gray-300 focus:outline-none"
+  aria-haspopup="listbox"
+  aria-controls="namesList"
+>
+  <span className="text-sm w-full font-normal text-start overflow-hidden text-ellipsis whitespace-nowrap">
+    {selectedDisabilities.length > 0 ? selectedDisabilities.join(', ') : "Seleccione una opción"}
+  </span>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5">
+    <path fillRule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd"/>
+  </svg>
+</button>
+
+      <input id="disabilities" name="disabilities" type="text"  hidden value={selectedDisabilities.join(',')} />
+      <ul id="disabilitiesList"
+      className={`absolute z-10 left-0 top-11 flex max-h-44 w-full flex-col overflow-hidden overflow-y-auto border-neutral-300 bg-neutral-50 py-1.5 dark:border-neutral-700 dark:bg-neutral-900 border rounded-md transition-height ${
+        isDisabilityListOpen ? 'visible-list' : 'hidden-list'
+      }`} role="listbox">
+
+        {disabilitiesOption.map(option => (
+              <li key={option.category} role="option">
+                <label className="combobox-label">
+                  <input
+                    type="checkbox"
+                    checked={formData.disabilities.includes(option.category)}
+                    onChange={() => handleToggleDisability(option.category)}
+                  />
+                  <span>{option.category}</span>
+                </label>
+              </li>
+            ))}
+      </ul>
     </div>
-  ))}
+  </div>
+
+  
+ 
 </div>
 
+
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Avatar</label>
+                  <label className="block text-sm font-medium text-gray-700 mt-12 ">Avatar</label>
                   <CldUploadWidget uploadPreset="siVoyPreset"
                                    onSuccess={(result)=>{
 
@@ -289,15 +371,7 @@ const UserDashboard = () => {
         </div>
         <nav className="mt-10">
          
-          <a
-            href="#"
-            onClick={() => setActiveSection('favorites')}
-            className={`block py-2.5 px-4 rounded transition-all duration-200 hover:bg-sivoy-blue ${
-              !sidebarOpen ? "opacity-0 w-0" : "opacity-100 w-full"
-            }`}
-          >
-            Favoritos
-          </a>
+         
           <a
             href="#"
             onClick={() => setActiveSection('account')}
