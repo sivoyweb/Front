@@ -8,7 +8,7 @@ export const BlogArticle = ({ article }: IBlogArticleProps) => {
         {article.images && article.images.length > 0 && (
           <Image
             src={article.images[0].url}
-            alt={article.title}
+            alt={article.images[0].alt || "Imagen del artículo"} // Uso del alt de la imagen
             width={800}
             height={400}
             className="rounded-lg shadow-md"
@@ -25,8 +25,8 @@ export const BlogArticle = ({ article }: IBlogArticleProps) => {
       </h2>
 
       <div className="prose prose-lg text-justify text-sivoy-blue">
-  <p>{article.content}</p>
-</div>
+        <p>{article.content}</p>
+      </div>
     </article>
   );
 };

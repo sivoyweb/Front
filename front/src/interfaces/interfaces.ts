@@ -257,7 +257,7 @@ export interface IBlogArticle {
 }
 
 export interface IBlogArticleProps {
-  blogArticles: IBlogArticle;
+  article: IBlogArticle;
 }
 
 interface IUserReviews{
