@@ -1,8 +1,10 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import Rating from "react-rating";
 import axios from "axios";
-import { ITravelReview } from "@/interfaces/interfaces";
+import Swal from "sweetalert2";
+import { ITravelReview, IReviewT } from "@/interfaces/interfaces";
+import { UserContext } from "@/context/userContext";
 
 interface ReviewsComponentProps {
   travelId: string;
@@ -10,10 +12,12 @@ interface ReviewsComponentProps {
 
 const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
   const [travelReview, setTravelReview] = useState<ITravelReview | null>(null);
-  const [isAccordionOpen, setIsAccordionOpen] = useState(false);
+  const [isAccordionOpen, setIsAccordionOpen] = useState(true);
   const [openReview, setOpenReview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [editingReview, setEditingReview] = useState<IReviewT | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { user } = useContext(UserContext);
 
   const fetchReviews = useCallback(async () => {
     setLoading(true);
@@ -24,7 +28,9 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
       );
       setTravelReview(response.data);
     } catch (error) {
-      setError("No se pudieron cargar las reseñas. Inténtalo de nuevo más tarde.");
+      setError(
+        "No se pudieron cargar las reseñas. Inténtalo de nuevo más tarde."
+      );
     } finally {
       setLoading(false);
     }
@@ -42,14 +48,61 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
     setOpenReview((prevId) => (prevId === reviewId ? null : reviewId));
   };
 
-  const starStyle = {
-    color: "#ffd700",
+  const handleDelete = async (reviewId: string) => {
+    const token = localStorage.getItem("token");
+    try {
+      await axios.delete(
+        `https://api-sivoy.onrender.com/travels/reviews/${reviewId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      Swal.fire(
+        "Reseña eliminada",
+        "La reseña ha sido eliminada correctamente",
+        "success"
+      );
+      fetchReviews();
+    } catch (error) {
+      Swal.fire(
+        "Error",
+        "No se pudo eliminar la reseña. Inténtelo de nuevo.",
+        "error"
+      );
+    }
   };
 
-  const emptyStarStyle = {
-    color: "#d1d5db",
+  const handleEdit = async () => {
+    const token = localStorage.getItem("token");
+    if (!editingReview) return;
+    try {
+      const { id, review, stars } = editingReview;
+      await axios.put(
+        `https://api-sivoy.onrender.com/travels/reviews/${id}`,
+        { review, stars },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      Swal.fire(
+        "Reseña actualizada",
+        "La reseña ha sido actualizada correctamente",
+        "success"
+      );
+      setEditingReview(null);
+      fetchReviews();
+    } catch (error) {
+      Swal.fire(
+        "Error",
+        "No se pudo actualizar la reseña. Inténtelo de nuevo.",
+        "error"
+      );
+    }
   };
-
   const reviews = travelReview?.reviews || [];
 
   return (
@@ -57,7 +110,7 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
       <h2 id="accordion-collapse-heading-1">
         <button
           type="button"
-          className="flex items-center justify-between w-full p-5 font-medium text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 gap-3"
+          className="flex items-center justify-between bg-white w-full p-5 font-medium text-black text-xl border border-b-0 border-sivoy-blue shadow-blue-950 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-sivoy-orange focus:bg-sivoy-orange dark:hover:bg-gray-800 gap-3"
           onClick={toggleAccordion}
           aria-expanded={isAccordionOpen}
           aria-controls="accordion-collapse-body-1"
@@ -88,65 +141,128 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
         aria-labelledby="accordion-collapse-heading-1"
       >
         <div className="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-          <p className="mb-4 text-gray-500 dark:text-gray-400">
-            A continuación, se muestran las reseñas dejadas por los usuarios para este viaje.
+          <p className="mb-4 text-black text-xl dark:text-black">
+            A continuación, se muestran las reseñas dejadas por los usuarios
+            para este viaje.
           </p>
 
-          <button
-            onClick={fetchReviews}
-            className="mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            disabled={loading}
-          >
+          <button onClick={fetchReviews} className="mb-4" disabled={loading}>
             {loading ? "Cargando..." : "Actualizar Reseñas"}
           </button>
 
           {error && <p className="text-red-500">{error}</p>}
 
           {reviews.length > 0 ? (
-            reviews.map((review) => (
-              <div key={review.id}>
-                <button
-                  type="button"
-                  className="flex items-center justify-between w-full p-4 mb-2 font-medium text-gray-700 dark:text-white border border-gray-200 rounded focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:bg-gray-800"
-                  onClick={() => toggleReview(review.id)}
-                >
-                  <span>{review.user.name}</span>
-                  <svg
-                    className={`w-3 h-3 transform ${
-                      openReview === review.id ? "rotate-180" : ""
-                    }`}
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 10 6"
+            reviews.map((review) =>
+              review.visible ? (
+                <div key={review.id}>
+                  <button
+                    type="button"
+                    className="flex items-center justify-between w-full p-4 mb-2 bg-white font-medium text-black text-xl border border-b-0 border-sivoy-blue rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-sivoy-orange focus:bg-sivoy-orange dark:hover:bg-gray-800 gap-3"
+                    onClick={() => toggleReview(review.id)}
                   >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9 5 5 1 1 5"
-                    />
-                  </svg>
-                </button>
-                {openReview === review.id && (
-                  <div className="p-4 mb-4 border border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                    <p>
-                      <Rating
-                        initialRating={review.stars}
-                        readonly
-                        emptySymbol={<i className="fa-regular fa-star" style={emptyStarStyle} />}
-                        fullSymbol={<i className="fa-solid fa-star" style={starStyle} />}
+                    <span>{review.user.name}</span>
+                    <svg
+                      className={`w-3 h-3 transform ${
+                        openReview === review.id ? "rotate-180" : ""
+                      }`}
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 10 6"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M9 5 5 1 1 5"
                       />
-                    </p>
-                    <p className="mt-2">{review.review}</p>
-                  </div>
-                )}
-              </div>
-            ))
+                    </svg>
+                  </button>
+                  {openReview === review.id && (
+                    <div className="p-4 mb-4 border border-gray-400 dark:border-gray-700 dark:bg-gray-900">
+                      {editingReview?.id === review.id ? (
+                        <div>
+                          <textarea
+                            value={editingReview.review}
+                            onChange={(e) =>
+                              setEditingReview({
+                                ...editingReview,
+                                review: e.target.value,
+                              })
+                            }
+                            className="w-full p-2 mb-2 border border-gray-800 rounded"
+                          />
+                          <Rating
+                            initialRating={editingReview.stars}
+                            onClick={(value: number) =>
+                              setEditingReview({
+                                ...editingReview,
+                                stars: value,
+                              })
+                            }
+                            emptySymbol={
+                              <i
+                                className="fa-regular fa-star"
+                                style={{ color: "#000000" }}
+                              />
+                            }
+                            fullSymbol={
+                              <i
+                                className="fa-solid fa-star"
+                                style={{ color: "#ffd700" }}
+                              />
+                            }
+                          />
+                          <div>
+                            <button onClick={handleEdit} className="mt-4 ">
+                              Guardar cambios
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          <p>
+                            <Rating
+                              initialRating={review.stars}
+                              readonly
+                              emptySymbol={
+                                <i
+                                  className="fa-regular fa-star"
+                                  style={{ color: "#8e8f92" }}
+                                />
+                              }
+                              fullSymbol={
+                                <i
+                                  className="fa-solid fa-star"
+                                  style={{ color: "#ffd700" }}
+                                />
+                              }
+                            />
+                          </p>
+                          <p className="mt-2">{review.review}</p>
+                        </>
+                      )}
+                      {review.user.id === user?.id && (
+                        <div className="flex justify-end mt-2">
+                          <button
+                            onClick={() => setEditingReview(review)}
+                            className="mr-2"
+                          >
+                            Editar
+                          </button>
+                          <button onClick={() => handleDelete(review.id)}>
+                            Eliminar
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              ) : null
+            )
           ) : (
-            <p className="text-gray-500 dark:text-gray-400">
-              No hay reseñas disponibles para este viaje.
-            </p>
+            <p>No hay reseñas para este viaje.</p>
           )}
         </div>
       </div>
