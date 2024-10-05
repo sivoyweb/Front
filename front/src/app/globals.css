@@ -64,3 +64,16 @@ button:disabled {
     0 20px 25px rgba(26, 121, 112, 0.3), 
     inset 0 1px 3px rgba(26, 121, 112, 0.4);
 }
+.transition-height {
+  transition: max-height 0.3s ease-in-out;
+}
+
+.hidden-list {
+  max-height: 0;
+  overflow: hidden;
+}
+
+.visible-list {
+  max-height: 200px; /* o el máximo que desees */
+}
+

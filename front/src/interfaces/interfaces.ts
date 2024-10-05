@@ -327,6 +327,11 @@ export interface IFAQProps {
   question: IFAQ
 }
 
+export interface Disability {
+  category: string;
+  name: string;
+}
+
 export interface IAlliances {
   id: string,
   name: string, 
@@ -341,3 +346,5 @@ export interface IAlliancesImage {
   alt: string,
   active: boolean
 }
+
+

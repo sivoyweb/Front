@@ -3,7 +3,7 @@ import React from "react";
 import Rating from "react-rating";
 
 interface StarRatingProps {
-  rating: number; 
+  rating: number;
 }
 
 const StarRating: React.FC<StarRatingProps> = ({ rating }) => {
@@ -18,12 +18,14 @@ const StarRating: React.FC<StarRatingProps> = ({ rating }) => {
   return (
     <div>
       <Rating
-  initialRating={rating}
-  readonly
-  emptySymbol={<i className="fa-regular fa-star" style={emptyStarStyle} />}
-  fullSymbol={<i className="fa-solid fa-star" style={starStyle} />}
-  fractions={4}
-/>
+        initialRating={rating}
+        readonly
+        emptySymbol={
+          <i className="fa-regular fa-star" style={emptyStarStyle} />
+        }
+        fullSymbol={<i className="fa-solid fa-star" style={starStyle} />}
+        fractions={4}
+      />
     </div>
   );
 };
