@@ -1,7 +1,4 @@
 import Image from "next/image";
-import tudestino from "../assets/tudestino.png"
-import vero from "../assets/vero.png"
-import linkedin from "@/assets/linkedin.png"
 import { DonationButton, HomeButton } from "@/components/Buttons";
 import HomeGridComponent from "@/components/HomeDestinationGrid";
 import { HomeServicesGrid } from "@/components/HomeServicesGrid";
@@ -10,17 +7,17 @@ import { AlliancesGrid } from "@/components/AlliancesGrid";
 const Home: React.FC = () => {
   return (
     <div className="">
-      <header className="mt-4 ml-5 mr-5 relative before:content-none min-h-[400px] w-[calc(100% - 2rem)] bg-[url(../assets/chalten.jpg)] bg-center bg-cover bg-opacity-50 rounded-3xl z-10 p-8 md:p-16 4k:min-h-[800px] 4k:p-24">
-        <div className="grid">
-          <div className="pt-16 pr-4">
+      <header className="mt-4 ml-5 mr-5 relative before:content-none min-h-[400px] w-[calc(100% - 2rem)] bg-[url(https://res.cloudinary.com/dvxh2vynm/image/upload/v1727356843/si-voy/syuqltykbpevhst6c1uo.jpg)] bg-center bg-cover bg-opacity-50 rounded-3xl z-10 p-8 md:p-16 4k:min-h-[800px] 4k:p-24">
+        <div className="grid bg-white bg-opacity-50 p-6 rounded-3xl mt-4">
+          <div className="pt-16 pr-4 ">
             <div className="relative flex justify-center">
-              <Image src={tudestino} alt="tu destino sin límites" className="absolute top-[-90px] w-3/4 h-auto max-sm:top-[-20px] 4k:top-[-70px] 4k:w-1/2"/>
+              <Image src="https://res.cloudinary.com/dvxh2vynm/image/upload/v1728048849/si-voy/fuqtn20z0bhsqh8trwlm.png" alt="tu destino sin límites" className="absolute top-[-60px] 2xl:top-[-90px] w-3/4 h-auto max-sm:top-[-20px] 4k:top-[-70px] 4k:w-1/2 mt-2" width={400} height={400}/>
             </div>
-            <h1 className="relative flex justify-center h-auto top-[-90px] font-arialroundedmtbold text-sivoy-blue max-sm:text-sm 4k:top-[-100px] 4k:text-4xl">
+            <h1 className="relative flex justify-center h-auto top-[-90px] font-arialroundedmtbold text-sivoy-blue max-sm:text-sm 4k:top-[-100px] 4k:text-4xl my-4">
               Información sobre turismo accesible
             </h1>
 
-            <div className="flex align-middle justify-center mt-24 4k:mt-48">
+            <div className="flex align-middle justify-center mt-10 4k:mt-48">
               <HomeButton />
               <DonationButton />
             </div>
@@ -36,23 +33,27 @@ const Home: React.FC = () => {
         <HomeGridComponent />
       </section>
 
-      <section className="flex flex-col md:flex-row text-justify -mt-6 mr-9 md:mr-8 lg:mt-2 4k:ml-20 4k:mr-20 4k:mt-8">
-        <div className="flex flex-col items-center ml-6 mt-4">
-          <a href="https://www.linkedin.com/in/ver%C3%B3nica-lorena-martinez-78a303a6/" className="flex flex-col items-center border shadow-md rounded-3xl mt-6 hover:scale-105 duration-300 transition-transform w-72 4k:w-[400px]">
-            <Image src={vero} alt="Foto de perfil de Verónica Martínez" className="rounded-full w-52 h-auto 4k:w-72" />
+      <section className="flex flex-col md:flex-row text-justify mr-9 md:mr-8 lg:mt-4 4k:ml-20 4k:mr-20 4k:mt-4 mt-8">
+        <div className="flex flex-col items-center ml-6">
+          <a href="https://www.linkedin.com/in/ver%C3%B3nica-lorena-martinez-78a303a6/" className="flex flex-col items-center border shadow-md rounded-3xl hover:scale-105 duration-300 transition-transform w-72 4k:w-[400px]">
+            <Image src="https://res.cloudinary.com/dvxh2vynm/image/upload/v1727356842/si-voy/grgrankhq13zbd3l1msc.png" alt="Foto de perfil de Verónica Martínez" className="" 
+            width={180}
+            height={180}/>
             <p className="font-arialroundedmtbold text-sivoy-blue text-center mt-2 4k:text-3xl">Verónica Martínez</p>
             <p className="text-sivoy-blue text-center 4k:text-2xl">Directora</p>
-            <Image src={linkedin} alt="logo linkedin" className="w-28 4k:w-40" />
+            <Image src="https://res.cloudinary.com/dvxh2vynm/image/upload/v1728048850/si-voy/dgywowgy47drvtjlylo1.png" alt="logo linkedin" className=""
+            width={160}
+            height={160}/>
           </a>
         </div>
 
-        <div className="mt-6 ml-4 md:ml-16 w-full xl:w1/2 4k:w-3/5">
+        <div className="ml-4 md:ml-16 w-full xl:w1/2 4k:w-3/5 ">
   <h2 className="font-arialroundedmtbold text-xl md:text-2xl text-sivoy-blue 4k:text-4xl">¿Quiénes somos?</h2>
   <p className="text-sivoy-blue mt-2 text-base md:text-lg 4k:text-2xl">
     Somos una empresa formada por personas con discapacidad, comprometida con la diversidad, la inclusión y el bienestar de todas las personas. Nos dedicamos a generar un puente entre la oferta y la demanda de servicios turísticos adaptados, trabajando dentro del marco de la responsabilidad social empresarial para lograr un impacto positivo en la sociedad.
   </p>
 
-  <h2 className="font-arialroundedmtbold text-xl md:text-2xl text-sivoy-blue mt-10 4k:text-4xl">Misión y Visión</h2>
+  <h2 className="font-arialroundedmtbold text-xl md:text-2xl text-sivoy-blue mt-6 4k:text-4xl">Misión y Visión</h2>
   <p className="text-sivoy-blue mt-2 text-base md:text-lg 4k:text-2xl">
     <span className="font-arialroundedmtbold">Sí, voy</span> tiene como misión generar experiencias positivas en las personas con movilidad reducida, por medio de la gestión y promoción del turismo accesible y la transformación de entornos inclusivos, para garantizar el disfrute del ocio con autonomía. Nuestra visión es convertirnos en la plataforma líder en turismo accesible en América Latina, promoviendo una cultura inclusiva y garantizando que todos tengan acceso a experiencias turísticas enriquecedoras.
     </p>

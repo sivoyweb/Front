@@ -1,9 +1,11 @@
 "use client"
 
-import React, { useState } from 'react';
-import { AccordionItemProps } from '@/interfaces/interfaces';
+import React, { useState, useEffect } from 'react';
+import { IAccordionItemProps } from '@/interfaces/interfaces';
+import { IFAQ } from '@/interfaces/interfaces';
+import { fetchFAQ } from '@/lib/server/fetchFAQ';// Asegúrate de importar la función correctamente
 
-const AccordionItem: React.FC<AccordionItemProps> = ({ question, answer, isOpen, onToggle }) => {
+const AccordionItem: React.FC<IAccordionItemProps> = ({ question, answer, isOpen, onToggle }) => {
   return (
     <div className="border-b">
       <div
@@ -20,33 +22,26 @@ const AccordionItem: React.FC<AccordionItemProps> = ({ question, answer, isOpen,
 
 const FAQAccordion: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [faqs, setFaqs] = useState<IFAQ[]>([]); // Estado para almacenar las FAQs
 
-  const faqs = [
-    {
-      question: "¿Cómo puedo saber si un destino es accesible?",
-      answer: "En nuestra plataforma, cada destino listado incluye una descripción detallada de sus características de accesibilidad. Puedes filtrar los resultados según tus necesidades específicas."
-    },
-    {
-      question: "¿Qué tipos de discapacidades cubre SI VOY?",
-      answer: "Nos enfocamos en una amplia gama de discapacidades, incluyendo discapacidades físicas, visuales, auditivas, y cognitivas. Cada destino tiene información específica sobre las facilidades disponibles."
-    },
-    {
-      question: "¿Cómo puedo contribuir con SI VOY?",
-      answer: "Puedes colaborar con nosotros como voluntario, donando, o compartiendo información sobre destinos accesibles. Contacta con nosotros a través de nuestro formulario de contacto o redes sociales."
-    },
-    {
-      question: "¿SI VOY solo cubre destinos en Argentina?",
-      answer: "Aunque comenzamos en Argentina, estamos expandiendo nuestra base de datos para incluir destinos en toda América Latina."
-    },
-    {
-      question: "¿Puedo sugerir un destino accesible?",
-      answer: "¡Por supuesto! Si conoces un lugar que debería estar en nuestra plataforma, utiliza la opción de 'Sugerir un Destino' en nuestro sitio web y envíanos la información detallada."
-    },
-  ];
+  // Función para obtener las FAQs desde el backend
+  useEffect(() => {
+    const getFaqs = async () => {
+      try {
+        const fetchedFaqs = await fetchFAQ();
+        setFaqs(fetchedFaqs); // Actualiza el estado con las FAQs traídas
+      } catch (error) {
+        console.error('Error fetching FAQs:', error);
+      }
+    };
+
+    getFaqs(); // Llama a la función al montar el componente
+  }, []);
 
   return (
     <div className="max-w-2xl mx-auto">
       <h2 className="text-2xl font-arialroundedmtbold mt-8 mb-4 text-sivoy-blue">Preguntas Frecuentes</h2>
+      <div className='md:text-lg'>
       {faqs.map((faq, index) => (
         <AccordionItem
           key={index}
@@ -56,6 +51,7 @@ const FAQAccordion: React.FC = () => {
           onToggle={() => setOpenIndex(openIndex === index ? null : index)}
         />
       ))}
+      </div>
     </div>
   );
 };

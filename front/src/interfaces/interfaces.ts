@@ -55,11 +55,9 @@ export interface ILogin {
   
   export interface IUserChange{
     name:string
-    email:string
     phone:string
-    password:string
-    avatar:string
-    disability:IDisability
+    credential:{avatar:{url:string,publicId:string}}
+    disability:IDisability[]
     id:string
   }
 
@@ -100,9 +98,8 @@ export interface IImage {
 }
 
 export interface IImageBlog {
-  id: string,
   url: string,
-  publicId: string,
+  alt?: string
 }
 
 export interface ITravelProvider {
@@ -199,9 +196,10 @@ export interface IUserResponse {
 }
 
 export interface IDonation {
-  title: string,
+  email: string,
+  name: string,
   unit_price: number,
-  description: string,
+  description?: string,
 }
 
 export interface ITravelContextType {
@@ -237,6 +235,7 @@ export interface IUserContextType {
   login: (credentials: ILogin) => Promise<boolean>;
   register: (user: IRegister) => Promise<boolean>;
   logOut: () => void;
+
 }
 
 export interface ITravelCardProps {
@@ -258,10 +257,8 @@ export interface IBlogArticle {
 }
 
 export interface IBlogArticleProps {
-  blogArticles: IBlogArticle; 
-  index?: number; 
-  image?: IImageBlog;
-};
+  article: IBlogArticle;
+}
 
 interface IUserReviews{
 id:string,
@@ -310,3 +307,44 @@ export interface ITravelsProps{
   images: IImage[],
   provider: null,
 }
+
+
+export interface IAccordionItemProps {
+  question: string;
+  answer: string;
+  isOpen: boolean;
+  onToggle: () => void;
+}
+
+export interface IFAQ {
+  id: string,
+  question: string,
+  answer: string,
+  visible: true
+}
+
+export interface IFAQProps {
+  question: IFAQ
+}
+
+export interface Disability {
+  category: string;
+  name: string;
+}
+
+export interface IAlliances {
+  id: string,
+  name: string, 
+  visible: boolean,
+  image: IAlliancesImage
+}
+
+export interface IAlliancesImage {
+  id: string,
+  url: string,
+  publicId: string,
+  alt: string,
+  active: boolean
+}
+
+

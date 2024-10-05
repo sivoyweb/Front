@@ -81,7 +81,7 @@ const Navbar: React.FC = () => {
               <Image
                 alt="Sí, voy"
                 src={logo}
-                className="w-100"
+                className="w-100 cursor-pointer"
                 onClick={() => router.push(paths.home)}
               />
             </div>

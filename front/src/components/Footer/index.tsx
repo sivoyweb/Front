@@ -3,11 +3,11 @@
 import { faFacebook, faInstagram, faLinkedin, faWhatsapp, faYoutube } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
-
+import toast, { Toaster } from 'react-hot-toast';
 
 function Footer() {
 
-
+  const notify = () => toast('Enlace copiado al portapapeles');
 
   return (
     <footer className="bg-sivoy-blue text-white py-10 w-screen">
@@ -52,11 +52,9 @@ function Footer() {
               <p className="text-sivoy-green text-sm">+54 9 11 5047-5104</p>
               <p className="text-sivoy-green text-sm">Buenos Aires</p>
             </div>
-
             
             <div className="hidden md:block border-l border-sivoy-green h-24"></div>
 
-            
             <div className="text-center md:text-left">
               <h3 className="font-arialroundedmtbold text-base">Verónica Martínez</h3>
               <p className="text-sm mb-2">Directora</p>
@@ -69,14 +67,38 @@ function Footer() {
 
         {/* Nueva columna - Centro de Ayuda */}
         <section className="w-full md:w-1/3 lg:w-1/3 p-4 bg-sivoy-blue">
-          <h4 className="text-base font-arialroundedmtbold mb-2 text-center md:text-right">Centro de Ayuda</h4>
-          <div className="text-center md:text-right text-sm">
-            <a className="mb-1 hover:underline" href="/faq">Preguntas frecuentes</a>
-            <p className="mb-1">Comparte esta Iniciativa</p>
+          <h4 className="text-base font-arialroundedmtbold mb-2 text-start md:text-right">Centro de Ayuda</h4>
+          <div className="flex flex-col text-center md:text-right text-sm leading-relaxed space-y-1">
+            <a className="hover:underline" href="/about">Sobre Nosotros</a>
+            <a className="hover:underline" href="/faq">Preguntas frecuentes</a>
+            <button 
+              className="hover:underline focus:outline-none text-right text-sm leading-relaxed"
+              style={{ 
+                backgroundColor: 'transparent', 
+                border: 'none', 
+                padding: 0, 
+                cursor: 'pointer', 
+                boxShadow: 'none',
+                width: 'auto',
+                outline: 'none' // Agregar esto para eliminar el contorno
+              }}
+              onClick={() => {
+                navigator.clipboard.writeText('https://front-eta-teal.vercel.app/')
+                  .then(() => {
+                    notify(); // Llama a notify() aquí
+                  })
+                  .catch((err) => {
+                    console.error('Error al copiar el enlace', err);
+                  });
+              }}
+            >
+              Comparte esta Iniciativa
+            </button>
           </div>
         </section>
 
       </div>
+      <Toaster position="top-center" /> {/* Asegúrate de incluir el Toaster aquí */}
     </footer>
   );
 }

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 
 export default function OtherDonationsForm() {
   const [name, setName] = useState(""); // Campo para el nombre
+  const [email, setEmail] = useState(""); // Campo para el correo electrónico
   const [helpType, setHelpType] = useState(""); // Campo para el tipo de ayuda
   const [message, setMessage] = useState(""); // Campo para el mensaje
   const [isSubmitting, setIsSubmitting] = useState(false); // Estado para el envío
@@ -17,6 +18,7 @@ export default function OtherDonationsForm() {
 
     try {
       setName("");
+      setEmail("");
       setHelpType("");
       setMessage("");
     } catch (error: unknown) {
@@ -43,8 +45,22 @@ export default function OtherDonationsForm() {
       </div>
 
       <div className="mb-4">
+        <label className="block text-sivoy-blue mb-2" htmlFor="email">
+          Correo Electrónico
+        </label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          className="w-full p-2 border border-gray-300 rounded"
+        />
+      </div>
+
+      <div className="mb-4">
         <label className="block text-sivoy-blue mb-2" htmlFor="helpType">
-          Tipo de ayuda
+          Tipo de Ayuda
         </label>
         <select
           id="helpType"
@@ -65,7 +81,7 @@ export default function OtherDonationsForm() {
 
       <div className="mb-4">
         <label className="block text-sivoy-blue mb-2" htmlFor="message">
-          Mensaje
+          Mensaje (Opcional)
         </label>
         <textarea
           id="message"
