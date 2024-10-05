@@ -12,7 +12,7 @@ export const BlogGrid: React.FC<BlogGridProps> = ({ blogArticles }) => {
             {blogArticles.map((blogArticle) => (
                 <BlogCard 
                     key={blogArticle.id} 
-                    blogArticles={blogArticle} // Pasar todo el objeto del artículo, sin separar `image`
+                    article={blogArticle} // Pasar todo el objeto del artículo, sin separar `image`
                 />
             ))}
         </div>
