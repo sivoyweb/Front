@@ -17,8 +17,8 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
   const [loading, setLoading] = useState(false);
   const [editingReview, setEditingReview] = useState<IReviewT | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [saving, setSaving] = useState(false); // Estado de carga para guardar cambios
-  const [showMyReview, setShowMyReview] = useState(false); // Estado para ver solo mi reseña
+  const [saving, setSaving] = useState(false);
+  const [showMyReview, setShowMyReview] = useState(false);
   const { user } = useContext(UserContext);
 
   const fetchReviews = useCallback(async () => {
@@ -79,7 +79,7 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
   const handleEdit = async () => {
     const token = localStorage.getItem("token");
     if (!editingReview) return;
-    setSaving(true); // Activar estado de guardado
+    setSaving(true);
     try {
       const { id, review, stars } = editingReview;
       await axios.put(
@@ -105,13 +105,12 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
         "error"
       );
     } finally {
-      setSaving(false); // Desactivar estado de guardado
+      setSaving(false);
     }
   };
 
   const reviews = travelReview?.reviews || [];
 
-  // Filtrar la reseña del usuario actual
   const myReview = reviews.find((review) => review.user.id === user?.id);
 
   return (

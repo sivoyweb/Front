@@ -50,7 +50,6 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
       );
       console.log("Reseña enviada exitosamente:", response.data);
 
-      // Mostrar alerta de éxito usando SweetAlert2
       Swal.fire(
         "¡Reseña creada!",
         "Tu reseña ha sido enviada exitosamente.",
