@@ -22,7 +22,9 @@ async function TravelDetail({ params }: { params: { travelId: string } }) {
         />
         <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center text-white p-6 bg-black/60 rounded-lg shadow-lg w-4/5 lg:w-3/5">
           <h2 className="text-xl lg:text-2xl mb-2">{travels.serviceType}</h2>
-          <h1 className="py-2 text-3xl lg:text-4xl font-bold">{travels.name}</h1>
+          <h1 className="py-2 text-3xl lg:text-4xl font-bold">
+            {travels.name}
+          </h1>
           <h2 className="text-lg lg:text-xl mt-3">
             {travels.country} - {travels.city}
           </h2>
@@ -52,7 +54,7 @@ async function TravelDetail({ params }: { params: { travelId: string } }) {
             </div>
             <div>
               <h2 className="text-xl font-semibold">Calificacion</h2>
-              <StarRating rating={travels.averageStars}/>
+              <StarRating rating={travels.averageStars} />
             </div>
           </div>
         </div>
