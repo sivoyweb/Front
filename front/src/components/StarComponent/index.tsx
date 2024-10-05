@@ -2,9 +2,10 @@
 import React, { useState, useContext } from "react";
 import Rating from "react-rating";
 import axios from "axios";
+import Swal from "sweetalert2";
 import { IReviewProps } from "@/interfaces/interfaces";
 import { TravelContext } from "@/context/travelContext";
-import { UserContext } from "@/context/userContext"; // Asegúrate de importar tu UserContext
+import { UserContext } from "@/context/userContext";
 
 interface ReviewComponentProps {
   travelId: string;
@@ -12,16 +13,18 @@ interface ReviewComponentProps {
 
 const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
   const { refreshTravels } = useContext(TravelContext);
-  const { isLogged } = useContext(UserContext); // Obtener el estado de autenticación
+  const { isLogged } = useContext(UserContext);
 
   const [rating, setRating] = useState<number>(0);
   const [review, setReview] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async () => {
     if (!review || rating === 0) {
       console.error("Faltan valores de reseña o calificación.");
       return;
     }
+
     const data: IReviewProps = {
       review,
       stars: rating,
@@ -34,6 +37,7 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
       return;
     }
 
+    setLoading(true);
     try {
       const response = await axios.post(
         "https://api-sivoy.onrender.com/travels/reviews",
@@ -48,15 +52,24 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
 
       setReview("");
       setRating(0);
-
       await refreshTravels();
     } catch (error) {
       if (axios.isAxiosError(error)) {
+        if (error.response?.status === 400) {
+          Swal.fire(
+            "Reseña duplicada",
+            "Solo puedes hacer una reseña por cada destino.",
+            "error"
+          );
+        } else {
+          Swal.fire("Error", "Ocurrió un error al enviar la reseña.", "error");
+        }
         console.error("Error al enviar la reseña:", error.message);
-        console.log("Datos que se envían al backend:", data);
       } else {
         console.error("Error inesperado:", error);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -93,11 +106,8 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
 
       <p className="mt-2">Nivel de satisfacción: {rating} estrellas</p>
 
-      <button
-        onClick={handleSubmit}
-        className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
-      >
-        Enviar reseña
+      <button onClick={handleSubmit} className="mt-4" disabled={loading}>
+        {loading ? "Enviando..." : "Enviar reseña"}
       </button>
     </div>
   );

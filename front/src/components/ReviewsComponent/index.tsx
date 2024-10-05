@@ -1,9 +1,10 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 import Rating from "react-rating";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { ITravelReview, IReviewT } from "@/interfaces/interfaces";
+import { UserContext } from "@/context/userContext";
 
 interface ReviewsComponentProps {
   travelId: string;
@@ -16,6 +17,7 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
   const [loading, setLoading] = useState(false);
   const [editingReview, setEditingReview] = useState<IReviewT | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { user } = useContext(UserContext);
 
   const fetchReviews = useCallback(async () => {
     setLoading(true);
@@ -151,79 +153,58 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
           {error && <p className="text-red-500">{error}</p>}
 
           {reviews.length > 0 ? (
-            reviews.map((review) => (
-              <div key={review.id}>
-                <button
-                  type="button"
-                  className="flex items-center justify-between w-full p-4 mb-2 bg-white font-medium text-black text-xl border border-b-0 border-sivoy-blue rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-sivoy-orange focus:bg-sivoy-orange dark:hover:bg-gray-800 gap-3"
-                  onClick={() => toggleReview(review.id)}
-                >
-                  <span>{review.user.name}</span>
-                  <svg
-                    className={`w-3 h-3 transform ${
-                      openReview === review.id ? "rotate-180" : ""
-                    }`}
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 10 6"
+            reviews.map((review) =>
+              review.visible ? (
+                <div key={review.id}>
+                  <button
+                    type="button"
+                    className="flex items-center justify-between w-full p-4 mb-2 bg-white font-medium text-black text-xl border border-b-0 border-sivoy-blue rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-sivoy-orange focus:bg-sivoy-orange dark:hover:bg-gray-800 gap-3"
+                    onClick={() => toggleReview(review.id)}
                   >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9 5 5 1 1 5"
-                    />
-                  </svg>
-                </button>
-                {openReview === review.id && (
-                  <div className="p-4 mb-4 border border-gray-400 dark:border-gray-700 dark:bg-gray-900">
-                    {editingReview?.id === review.id ? (
-                      <div>
-                        <textarea
-                          value={editingReview.review}
-                          onChange={(e) =>
-                            setEditingReview({
-                              ...editingReview,
-                              review: e.target.value,
-                            })
-                          }
-                          className="w-full p-2 mb-2 border border-gray-800 rounded"
-                        />
-                        <Rating
-                          initialRating={editingReview.stars}
-                          onClick={(value: number) =>
-                            setEditingReview({ ...editingReview, stars: value })
-                          }
-                          emptySymbol={
-                            <i
-                              className="fa-regular fa-star"
-                              style={{ color: "#000000" }}
-                            />
-                          }
-                          fullSymbol={
-                            <i
-                              className="fa-solid fa-star"
-                              style={{ color: "#ffd700" }}
-                            />
-                          }
-                        />
+                    <span>{review.user.name}</span>
+                    <svg
+                      className={`w-3 h-3 transform ${
+                        openReview === review.id ? "rotate-180" : ""
+                      }`}
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 10 6"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M9 5 5 1 1 5"
+                      />
+                    </svg>
+                  </button>
+                  {openReview === review.id && (
+                    <div className="p-4 mb-4 border border-gray-400 dark:border-gray-700 dark:bg-gray-900">
+                      {editingReview?.id === review.id ? (
                         <div>
-                          <button onClick={handleEdit} className="mt-4 ">
-                            Guardar cambios
-                          </button>
-                        </div>
-                      </div>
-                    ) : (
-                      <>
-                        <p>
+                          <textarea
+                            value={editingReview.review}
+                            onChange={(e) =>
+                              setEditingReview({
+                                ...editingReview,
+                                review: e.target.value,
+                              })
+                            }
+                            className="w-full p-2 mb-2 border border-gray-800 rounded"
+                          />
                           <Rating
-                            initialRating={review.stars}
-                            readonly
+                            initialRating={editingReview.stars}
+                            onClick={(value: number) =>
+                              setEditingReview({
+                                ...editingReview,
+                                stars: value,
+                              })
+                            }
                             emptySymbol={
                               <i
                                 className="fa-regular fa-star"
-                                style={{ color: "#d1d5db" }}
+                                style={{ color: "#000000" }}
                               />
                             }
                             fullSymbol={
@@ -233,32 +214,55 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
                               />
                             }
                           />
-                        </p>
-                        <p className="mt-2">{review.review}</p>
-                      </>
-                    )}
-                    <div className="flex mt-4">
-                      <button
-                        className="bg-sivoy-blue text-white p-2 rounded mr-2"
-                        onClick={() => handleDelete(review.id)}
-                      >
-                        Eliminar
-                      </button>
-                      <button
-                        className="bg-sivoy-green text-white p-2 rounded"
-                        onClick={() => setEditingReview(review)}
-                      >
-                        Editar
-                      </button>
+                          <div>
+                            <button onClick={handleEdit} className="mt-4 ">
+                              Guardar cambios
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          <p>
+                            <Rating
+                              initialRating={review.stars}
+                              readonly
+                              emptySymbol={
+                                <i
+                                  className="fa-regular fa-star"
+                                  style={{ color: "#8e8f92" }}
+                                />
+                              }
+                              fullSymbol={
+                                <i
+                                  className="fa-solid fa-star"
+                                  style={{ color: "#ffd700" }}
+                                />
+                              }
+                            />
+                          </p>
+                          <p className="mt-2">{review.review}</p>
+                        </>
+                      )}
+                      {review.user.id === user?.id && (
+                        <div className="flex justify-end mt-2">
+                          <button
+                            onClick={() => setEditingReview(review)}
+                            className="mr-2"
+                          >
+                            Editar
+                          </button>
+                          <button onClick={() => handleDelete(review.id)}>
+                            Eliminar
+                          </button>
+                        </div>
+                      )}
                     </div>
-                  </div>
-                )}
-              </div>
-            ))
+                  )}
+                </div>
+              ) : null
+            )
           ) : (
-            <p className="text-black dark:text-gray-400">
-              No hay reseñas disponibles para este viaje.
-            </p>
+            <p>No hay reseñas para este viaje.</p>
           )}
         </div>
       </div>

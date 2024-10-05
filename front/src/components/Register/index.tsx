@@ -76,12 +76,12 @@ const Register: React.FC = () => {
                 name="name"
                 className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <ErrorMessage
-                name="name"
-                component="div"
-                className="text-red-500 text-base mt-1"
-              />
             </div>
+            <ErrorMessage
+              name="name"
+              component="div"
+              className="text-red-500 text-base mt-1"
+            />
 
             <div>
               <label htmlFor="email" className="block text-lg">
@@ -93,12 +93,12 @@ const Register: React.FC = () => {
                 name="email"
                 className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <ErrorMessage
-                name="email"
-                component="div"
-                className="text-red-500 text-base mt-1"
-              />
             </div>
+            <ErrorMessage
+              name="email"
+              component="div"
+              className="text-red-500 text-base mt-1"
+            />
 
             <div>
               <label htmlFor="phone" className="block text-lg">
@@ -110,12 +110,12 @@ const Register: React.FC = () => {
                 name="phone"
                 className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              <ErrorMessage
-                name="phone"
-                component="div"
-                className="text-red-500 text-base mt-1"
-              />
             </div>
+            <ErrorMessage
+              name="phone"
+              component="div"
+              className="text-red-500 text-base mt-1"
+            />
 
             <div className="relative">
               <label htmlFor="password" className="block text-lg font-medium">
@@ -130,7 +130,7 @@ const Register: React.FC = () => {
 
               <span
                 onClick={tooglePasswordVisibility}
-                className="absolute inset-y-0 mt-7 right-3 flex items-center cursor-pointer"
+                className="absolute z-10 inset-y-0 mt-7 right-3 flex items-center cursor-pointer"
               >
                 {showPassword ? (
                   <FontAwesomeIcon icon={faEyeSlash} />
@@ -156,27 +156,24 @@ const Register: React.FC = () => {
                 type={showPassword2 ? "text" : "password"}
                 id="confirmPassword"
                 name="confirmPassword"
-                className="w-full p-3 pr-10 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 pr-12 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-
-              <div>
-                <span
-                  onClick={tooglePasswordVisibility2}
-                  className="absolute inset-y-0 right-3  mt-7 flex items-center cursor-pointer"
-                >
-                  {showPassword2 ? (
-                    <FontAwesomeIcon icon={faEyeSlash} />
-                  ) : (
-                    <FontAwesomeIcon icon={faEye} />
-                  )}
-                </span>
-              </div>
-              <ErrorMessage
-                name="confirmPassword"
-                component="div"
-                className="text-red-500 text-base mt-1"
-              />
+              <span
+                onClick={tooglePasswordVisibility2}
+                className="absolute z-10 inset-y-0 right-3  mt-7 flex items-center cursor-pointer"
+              >
+                {showPassword2 ? (
+                  <FontAwesomeIcon icon={faEyeSlash} />
+                ) : (
+                  <FontAwesomeIcon icon={faEye} />
+                )}
+              </span>
             </div>
+            <ErrorMessage
+              name="confirmPassword"
+              component="div"
+              className="text-red-500 text-base mt-1"
+            />
             <div className="flex space-x-4">
               <button
                 type="submit"
