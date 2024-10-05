@@ -50,6 +50,12 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
       );
       console.log("Reseña enviada exitosamente:", response.data);
 
+      Swal.fire(
+        "¡Reseña creada!",
+        "Tu reseña ha sido enviada exitosamente.",
+        "success"
+      );
+
       setReview("");
       setRating(0);
       await refreshTravels();
@@ -72,7 +78,6 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
       setLoading(false);
     }
   };
-
   if (!isLogged) {
     return (
       <p className="text-center text-2xl">

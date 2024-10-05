@@ -17,6 +17,8 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
   const [loading, setLoading] = useState(false);
   const [editingReview, setEditingReview] = useState<IReviewT | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [showMyReview, setShowMyReview] = useState(false);
   const { user } = useContext(UserContext);
 
   const fetchReviews = useCallback(async () => {
@@ -77,6 +79,7 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
   const handleEdit = async () => {
     const token = localStorage.getItem("token");
     if (!editingReview) return;
+    setSaving(true);
     try {
       const { id, review, stars } = editingReview;
       await axios.put(
@@ -101,9 +104,14 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
         "No se pudo actualizar la reseña. Inténtelo de nuevo.",
         "error"
       );
+    } finally {
+      setSaving(false);
     }
   };
+
   const reviews = travelReview?.reviews || [];
+
+  const myReview = reviews.find((review) => review.user.id === user?.id);
 
   return (
     <div id="accordion-nested-parent" data-accordion="collapse">
@@ -146,14 +154,24 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
             para este viaje.
           </p>
 
-          <button onClick={fetchReviews} className="mb-4" disabled={loading}>
-            {loading ? "Cargando..." : "Actualizar Reseñas"}
-          </button>
+          <div className="mb-4">
+            <button onClick={fetchReviews} disabled={loading} className="mr-4">
+              {loading ? "Cargando..." : "Actualizar Reseñas"}
+            </button>
+            {myReview && (
+              <button
+                onClick={() => setShowMyReview((prev) => !prev)}
+                className=""
+              >
+                {showMyReview ? "Ver Todas" : "Mi Reseña"}
+              </button>
+            )}
+          </div>
 
           {error && <p className="text-red-500">{error}</p>}
 
           {reviews.length > 0 ? (
-            reviews.map((review) =>
+            (showMyReview && myReview ? [myReview] : reviews).map((review) =>
               review.visible ? (
                 <div key={review.id}>
                   <button
@@ -215,33 +233,35 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
                             }
                           />
                           <div>
-                            <button onClick={handleEdit} className="mt-4 ">
-                              Guardar cambios
+                            <button
+                              onClick={handleEdit}
+                              className="mt-4"
+                              disabled={saving}
+                            >
+                              {saving ? "Guardando..." : "Guardar Cambios"}
                             </button>
                           </div>
                         </div>
                       ) : (
-                        <>
-                          <p>
-                            <Rating
-                              initialRating={review.stars}
-                              readonly
-                              emptySymbol={
-                                <i
-                                  className="fa-regular fa-star"
-                                  style={{ color: "#8e8f92" }}
-                                />
-                              }
-                              fullSymbol={
-                                <i
-                                  className="fa-solid fa-star"
-                                  style={{ color: "#ffd700" }}
-                                />
-                              }
-                            />
-                          </p>
-                          <p className="mt-2">{review.review}</p>
-                        </>
+                        <div>
+                          <p>{review.review}</p>
+                          <Rating
+                            readonly
+                            initialRating={review.stars}
+                            emptySymbol={
+                              <i
+                                className="fa-regular fa-star"
+                                style={{ color: "#000000" }}
+                              />
+                            }
+                            fullSymbol={
+                              <i
+                                className="fa-solid fa-star"
+                                style={{ color: "#ffd700" }}
+                              />
+                            }
+                          />
+                        </div>
                       )}
                       {review.user.id === user?.id && (
                         <div className="flex justify-end mt-2">
@@ -251,7 +271,10 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
                           >
                             Editar
                           </button>
-                          <button onClick={() => handleDelete(review.id)}>
+                          <button
+                            onClick={() => handleDelete(review.id)}
+                            className=""
+                          >
                             Eliminar
                           </button>
                         </div>
@@ -262,7 +285,7 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
               ) : null
             )
           ) : (
-            <p>No hay reseñas para este viaje.</p>
+            <p>No hay reseñas disponibles.</p>
           )}
         </div>
       </div>
