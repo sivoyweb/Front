@@ -5,9 +5,10 @@ import { initMercadoPago } from "@mercadopago/sdk-react";
 import { postDonation } from "@/lib/server/fetchDonations";
 
 export default function DonationsForm() {
-  const [name, setName] = useState(""); // Campo para el nombre del donante
+  const [name, setName] = useState(""); // Nombre y apellido del donante
+  const [email, setEmail] = useState(""); // Correo del donante
   const [amount, setAmount] = useState("");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(""); // Mensaje opcional
   const [isSubmitting, setIsSubmitting] = useState(false); // Estado para manejar el envío
   const [errorMessage, setErrorMessage] = useState<string | null>(null); // Mensajes de error
 
@@ -31,9 +32,10 @@ export default function DonationsForm() {
 
     try {
       const donationData = {
-        description: message, // Mensaje como descripción
-        title: name, // Nombre del donante como título
+        name, // Nombre y apellido
+        email, // Correo
         unit_price: Number(amount), // Monto de la donación
+        description: message || "", // Mensaje como descripción, opcional
       };
 
       // Obtener el preference_id
@@ -46,6 +48,7 @@ export default function DonationsForm() {
 
       // Limpiar campos
       setName("");
+      setEmail("");
       setAmount("");
       setMessage("");
     } catch (error: unknown) {
@@ -63,7 +66,7 @@ export default function DonationsForm() {
     <form onSubmit={handleSubmit}>
       <div className="mb-4">
         <label className="block text-sivoy-blue mb-2" htmlFor="name">
-          Nombre del donante
+          Nombre y Apellido
         </label>
         <input
           type="text"
@@ -76,8 +79,22 @@ export default function DonationsForm() {
       </div>
 
       <div className="mb-4">
+        <label className="block text-sivoy-blue mb-2" htmlFor="email">
+          Correo electrónico
+        </label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          className="w-full p-2 border border-gray-300 rounded"
+        />
+      </div>
+
+      <div className="mb-4">
         <label className="block text-sivoy-blue mb-2" htmlFor="amount">
-          Monto
+          Monto de la Donación
         </label>
         <input
           type="number"
@@ -91,7 +108,7 @@ export default function DonationsForm() {
 
       <div className="mb-4">
         <label className="block text-sivoy-blue mb-2" htmlFor="message">
-          Mensaje
+          Mensaje (Opcional)
         </label>
         <textarea
           id="message"
@@ -114,3 +131,4 @@ export default function DonationsForm() {
     </form>
   );
 }
+

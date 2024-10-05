@@ -4,24 +4,25 @@ import Image from "next/image";
 import { IBlogArticleProps } from "@/interfaces/interfaces";
 import { useRouter } from "next/navigation";
 
-export const BlogCard = ({ blogArticles, image }: IBlogArticleProps) => {
+export const BlogCard = ({ blogArticles }: IBlogArticleProps) => {
     const router = useRouter();
 
     const handleClick = () => {
         router.push(`/blog-article/${blogArticles.id}`);
     };
 
-    // Manejo de imagen para evitar errores
-    const imageUrl = image?.url || "/path/to/placeholder/image.jpg"; // Agregar un placeholder si image es undefined
+    // Manejo de imagen y alt para evitar errores
+    const imageUrl = blogArticles.images[0]?.url || "/path/to/placeholder/image.jpg";
+    const imageAlt = blogArticles.images[0]?.alt || "Imagen del blog"; // Tomar alt desde IImageBlog
 
     return (
         <div className="bg-white rounded-lg shadow-md overflow-hidden hover:scale-105 transition-transform">
-            <div className="relative w-full h-[200px]"> {/* Contenedor con tamaño fijo */}
+            <div className="relative w-full h-[200px]">
                 <Image
                     src={imageUrl}
-                    alt={blogArticles.title} // Verifica que blogArticles no sea undefined
-                    fill // Llenar el contenedor
-                    className="object-cover" // Mantener la relación de aspecto
+                    alt={imageAlt} // Usar el alt de la primera imagen o un texto por defecto
+                    fill
+                    className="object-cover"
                 />
             </div>
             <div className="p-4">

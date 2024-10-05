@@ -98,9 +98,8 @@ export interface IImage {
 }
 
 export interface IImageBlog {
-  id: string,
   url: string,
-  publicId: string,
+  alt?: string
 }
 
 export interface ITravelProvider {
@@ -197,9 +196,10 @@ export interface IUserResponse {
 }
 
 export interface IDonation {
-  title: string,
+  email: string,
+  name: string,
   unit_price: number,
-  description: string,
+  description?: string,
 }
 
 export interface ITravelContextType {
@@ -257,7 +257,7 @@ export interface IBlogArticle {
 }
 
 export interface IBlogArticleProps {
-  article: IBlogArticle;
+  blogArticles: IBlogArticle;
 }
 
 interface IUserReviews{
@@ -331,3 +331,20 @@ export interface Disability {
   category: string;
   name: string;
 }
+
+export interface IAlliances {
+  id: string,
+  name: string, 
+  visible: boolean,
+  image: IAlliancesImage
+}
+
+export interface IAlliancesImage {
+  id: string,
+  url: string,
+  publicId: string,
+  alt: string,
+  active: boolean
+}
+
+
