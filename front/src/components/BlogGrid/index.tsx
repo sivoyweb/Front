@@ -1,4 +1,3 @@
-// components/BlogGrid.tsx
 
 import { IBlogArticle } from "@/interfaces/interfaces";
 import { BlogCard } from "../BlogCard";
@@ -13,10 +12,10 @@ export const BlogGrid: React.FC<BlogGridProps> = ({ blogArticles }) => {
             {blogArticles.map((blogArticle) => (
                 <BlogCard 
                     key={blogArticle.id} 
-                    blogArticles={blogArticle} 
-                    image={blogArticle.images[0] || { url: "/path/to/placeholder/image.jpg" }} // Placeholder si no hay imagen
+                    article={blogArticle} // Pasar todo el objeto del artículo, sin separar `image`
                 />
             ))}
         </div>
     );
 };
+
