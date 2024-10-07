@@ -1,45 +1,91 @@
-"use client"
+"use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import Slider from "react-slick";
+import { fetchAlliances } from "@/lib/server/fetchAlliances";
+import { IAlliances } from "@/interfaces/interfaces";
 
 export const AlliancesGrid = () => {
+  const [alliances, setAlliances] = useState<IAlliances[]>([]);
 
-    const handleClick = (url: string) => {
-        window.location.href = url;
+  useEffect(() => {
+    const getAlliances = async () => {
+      try {
+        const data = await fetchAlliances();
+        setAlliances(data);
+      } catch (error) {
+        console.error("Error al obtener las alianzas:", error);
+      }
     };
 
-    return (
-<div className="mb-4 mt-4">
-  <div className="mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-    
-    <div className="relative isolate mb-1 mt-1" onClick={() => handleClick('https://wow.viajow.com/ES/')}>
-      <div className="w-full h-auto p-8 bg-white rounded-2xl transition-transform hover:scale-105 duration-300 flex justify-center items-center">
-        <Image src="https://res.cloudinary.com/dvxh2vynm/image/upload/v1728050123/si-voy/sjlove1p5rllm5jrzsuw.png" alt="viajow" className="max-w-full max-h-full" 
-         width={200} height={200}/>
-      </div>
-    </div>
+    getAlliances();
+  }, []);
 
-    <div className="relative isolate mb-1 mt-1" onClick={() => handleClick('https://nouneventos.com.ar/')}>
-      <div className="w-full h-auto p-8 bg-white rounded-2xl transition-transform hover:scale-105 duration-300 flex justify-center items-center">
-        <Image src="https://res.cloudinary.com/dvxh2vynm/image/upload/v1728048851/si-voy/xgfkuxstcfyohp7yn5uc.jpg" alt="noun" className="max-w-full max-h-full"
-         width={200} height={200} />
-      </div>
-    </div>
-    
-    <div className="relative isolate mb-1 mt-1" onClick={() => handleClick('https://www.porigualmas.org')}>
-      <div className="w-full h-auto p-8 bg-white rounded-2xl transition-transform hover:scale-105 duration-300 flex justify-center items-center 2xl:mt-8 md:mt-8 sm:mt-8">
-        <Image src="https://res.cloudinary.com/dvxh2vynm/image/upload/v1728048850/si-voy/lxkel2joeydyhibfsswy.png" alt="por igual más" className="max-w-full max-h-full"
-         width={200} height={200} />
-      </div>
-    </div>
+  const handleClick = (url: string) => {
+    if (url) {
+      window.open(url, "_blank");
+    }
+  };
 
-    <div className="relative isolate mb-1 mt-1" onClick={() => handleClick('https://margatour.com.ar/')}>
-      <div className="w-full h-auto p-8 bg-white rounded-2xl transition-transform hover:scale-105 duration-300 flex justify-center items-center">
-        <Image src="https://res.cloudinary.com/dvxh2vynm/image/upload/v1728048850/si-voy/kehgxpes6a7zrpdfjnlh.png" alt="margatour" className="max-w-full max-h-full"
-        width={200} height={200} />
-      </div>
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+  return (
+    <div className="mb-4 mt-4">
+      <Slider {...settings}>
+        {alliances.map((alliance) => (
+          <div
+            key={alliance.id}
+            className="relative isolate mb-1 mt-1 cursor-pointer"
+            onClick={() => handleClick(alliance.url)}
+          >
+            <div className="w-full h-auto p-8 bg-white rounded-2xl transition-transform hover:scale-105 duration-300 flex justify-center items-center">
+              {alliance.image.url ? (
+                <Image
+                  src={alliance.image.url as string}
+                  alt={alliance.name}
+                  className="max-w-full max-h-full"
+                  width={200}
+                  height={200}
+                />
+              ) : (
+                <div className="w-48 h-48 bg-gray-300 flex items-center justify-center">
+                  <span>Sin imagen</span>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </Slider>
     </div>
-  </div>
-</div>
-    );
+  );
 };
