@@ -23,7 +23,7 @@ export const postDonation = async (preference: IDonation) => {
         // Si prefieres redirigir al usuario al pago desde aquí
         if (payment_url) {
             window.location.href = payment_url; // Redirige al usuario al URL de pago
-        }
+        };
 
         return preference_id;
     } catch (error) {

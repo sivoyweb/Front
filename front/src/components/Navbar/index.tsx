@@ -13,7 +13,6 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useContext } from "react";
-import logo from "../../../public/assets/logo.png";
 import Link from "next/link";
 import { UserContext } from "@/context/userContext";
 import { signOut, useSession } from "next-auth/react";
@@ -80,9 +79,11 @@ const Navbar: React.FC = () => {
             <div className="flex items-center">
               <Image
                 alt="Sí, voy"
-                src={logo}
+                src="https://res.cloudinary.com/dvxh2vynm/image/upload/v1728307822/si-voy/uy3ojsyrrlildxkxhwc9.png"
                 className="w-100 cursor-pointer"
                 onClick={() => router.push(paths.home)}
+                width={150}
+                height={150}
               />
             </div>
           </div>

@@ -32,10 +32,10 @@ export default function DonationsForm() {
 
     try {
       const donationData = {
-        name, // Nombre y apellido
-        email, // Correo
-        unit_price: Number(amount), // Monto de la donación
-        description: message || "", // Mensaje como descripción, opcional
+        name, 
+        email, 
+        unit_price: Number(amount), 
+        description: message || "",
       };
 
       // Obtener el preference_id
