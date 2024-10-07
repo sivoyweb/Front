@@ -118,7 +118,7 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
       <h2 id="accordion-collapse-heading-1">
         <button
           type="button"
-          className="flex items-center justify-between bg-white w-full p-5 font-medium text-black text-xl border border-b-0 border-sivoy-blue shadow-blue-950 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-sivoy-orange focus:bg-sivoy-orange dark:hover:bg-gray-800 gap-3"
+          className="flex items-center justify-between bg-white w-full p-5 font-medium text-black text-xl border border-b-0 border-sivoy-blue shadow-blue-950 rounded-t-xl focus:ring-4 focus:ring-gray-200  hover:bg-sivoy-orange focus:bg-sivoy-orange gap-3"
           onClick={toggleAccordion}
           aria-expanded={isAccordionOpen}
           aria-controls="accordion-collapse-body-1"
@@ -148,8 +148,8 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
         className={`${isAccordionOpen ? "block" : "hidden"}`}
         aria-labelledby="accordion-collapse-heading-1"
       >
-        <div className="p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-          <p className="mb-4 text-black text-xl dark:text-black">
+        <div className="p-5 border border-b-0 border-gray-200 ">
+          <p className="mb-4 text-black text-xl">
             A continuación, se muestran las reseñas dejadas por los usuarios
             para este viaje.
           </p>
@@ -176,7 +176,7 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
                 <div key={review.id}>
                   <button
                     type="button"
-                    className="flex items-center justify-between w-full p-4 mb-2 bg-white font-medium text-black text-xl border border-b-0 border-sivoy-blue rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-sivoy-orange focus:bg-sivoy-orange dark:hover:bg-gray-800 gap-3"
+                    className="flex items-center justify-between w-full p-4 mb-2 bg-white font-medium text-black text-xl border border-b-0 border-sivoy-blue rounded-t-xl focus:ring-4 focus:ring-gray-200 hover:bg-sivoy-orange focus:bg-sivoy-orange  gap-3"
                     onClick={() => toggleReview(review.id)}
                   >
                     <span>{review.user.name}</span>
@@ -198,7 +198,7 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
                     </svg>
                   </button>
                   {openReview === review.id && (
-                    <div className="p-4 mb-4 border border-gray-400 dark:border-gray-700 dark:bg-gray-900">
+                    <div className="p-4 mb-4 border border-gray-400">
                       {editingReview?.id === review.id ? (
                         <div>
                           <textarea
