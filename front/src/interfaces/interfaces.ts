@@ -232,6 +232,7 @@ export interface IUserContextType {
   login: (credentials: ILogin) => Promise<boolean>;
   register: (user: IRegister) => Promise<boolean>;
   logOut: () => void;
+  updateUser: (updatedUser: IUserChange) => void;
 
 }
 
