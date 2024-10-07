@@ -1,3 +1,5 @@
+import { ProjectsSection } from "@/components/Projects";
+
 const AboutUsPage = () => {
   return (
     <div className="max-w-4xl mx-auto p-8 text-justify">
@@ -23,16 +25,7 @@ const AboutUsPage = () => {
       </section>
 
       <div className="flex flex-col md:flex-row justify-between gap-16 mb-8">
-        <section className="flex-1">
-          <h2 className="text-2xl font-arialroundedmtbold text-sivoy-blue mb-4">Proyectos</h2>
-          <ul className="list-disc list-inside text-gray-700">
-            <li><span className="font-arialroundedmtbold">Podcast Turismo Accesible en Argentina:</span> una verdadera guía audiovisual en formato accesible de todos los destinos accesibles de nuestro país.</li>
-            <li><span className="font-arialroundedmtbold">Capacitaciones en Accesibilidad:</span> Ofrecemos talleres y programas de formación para empresas del sector turístico, ayudándolas a adaptar sus servicios para ser más inclusivos.</li>
-            <li><span className="font-arialroundedmtbold">Eventos Inclusivos:</span> Organizamos eventos y actividades recreativas adaptadas, fomentando la participación de personas con discapacidad.</li>
-            <li><span className="font-arialroundedmtbold">Tu destino sin Límites:</span> Un proyecto en curso para crear un sello de accesibilidad para prestadores turísticos de toda América Latina.</li>
-            <li><span className="font-arialroundedmtbold">Vivilo:</span> mostramos experiencias y aventuras en primera persona para inspirar.</li>
-          </ul>
-        </section>
+        < ProjectsSection />
         <section className="flex-1">
           <h2 className="text-2xl font-arialroundedmtbold text-sivoy-blue mb-4">Logros</h2>
           <ul className="list-disc list-inside text-gray-700">
