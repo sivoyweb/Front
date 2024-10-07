@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import sendHelpEmail from "@/lib/server/fetchSendHelp" 
+import sendHelpEmail from "@/lib/server/fetchSendHelp";
 import { ISendHelp } from "@/interfaces/interfaces";
 
-export default function OtherDonationsForm() {
+export default function ContactForm() {
   const [name, setName] = useState(""); 
   const [email, setEmail] = useState(""); 
-  const [helpType, setHelpType] = useState(""); 
+  const [subject, setSubject] = useState(""); 
   const [message, setMessage] = useState(""); 
   const [isSubmitting, setIsSubmitting] = useState(false); 
   const [errorMessage, setErrorMessage] = useState<string | null>(null); 
@@ -22,20 +22,20 @@ export default function OtherDonationsForm() {
     const formData: ISendHelp = {
       name,
       email,
-      helpType,
+      helpType: subject, // Asunto
       message: message || "", // Mensaje opcional
     };
 
     try {
       await sendHelpEmail(formData); // Llamada a la función modularizada
-      alert("¡Tu ayuda fue enviada con éxito!");
+      alert("¡Tu mensaje fue enviado con éxito!");
       // Limpiar los campos del formulario después del envío exitoso
       setName("");
       setEmail("");
-      setHelpType("");
+      setSubject("");
       setMessage("");
     } catch (error) {
-      setErrorMessage((error as Error).message || "Error al enviar el correo");
+      setErrorMessage((error as Error).message || "Error al enviar el mensaje");
     } finally {
       setIsSubmitting(false);
     }
@@ -73,26 +73,19 @@ export default function OtherDonationsForm() {
         />
       </div>
 
-      {/* Campo de tipo de ayuda */}
+      {/* Campo de asunto */}
       <div className="mb-4">
-        <label className="block text-sivoy-blue mb-2" htmlFor="helpType">
-          Tipo de ayuda
+        <label className="block text-sivoy-blue mb-2" htmlFor="subject">
+          Asunto
         </label>
-        <select
-          id="helpType"
-          value={helpType}
-          onChange={(e) => setHelpType(e.target.value)}
+        <input
+          type="text"
+          id="subject"
+          value={subject}
+          onChange={(e) => setSubject(e.target.value)}
           required
           className="w-full p-2 border border-gray-300 rounded"
-        >
-          <option value="">Selecciona una opción</option>
-          <option value="donacion-recurrente">Donación Recurrente</option>
-          <option value="en-especie">Donación en Especie</option>
-          <option value="corporativa">Donación Corporativa</option>
-          <option value="voluntario">Inscríbete como Voluntario</option>
-          <option value="trabajo">Trabaja con Nosotros</option>
-          <option value="otro">Otro</option>
-        </select>
+        />
       </div>
 
       {/* Campo de mensaje */}
@@ -116,7 +109,7 @@ export default function OtherDonationsForm() {
         className="w-full text-white p-2"
         disabled={isSubmitting}
       >
-        {isSubmitting ? "Procesando..." : "Contáctate con Nosotros"}
+        {isSubmitting ? "Procesando..." : "Enviar Mensaje"}
       </button>
     </form>
   );
