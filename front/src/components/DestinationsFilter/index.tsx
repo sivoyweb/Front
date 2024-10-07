@@ -43,7 +43,7 @@ function DestinationsFilter() {
               No encontramos el lugar que usted busca.
             </p>
           ) : (
-            <div className="flex flex-wrap justify-center">
+            <div className="flex flex-wrap justify-center mt-12">
               <TravelGridComponent travels={filteredTravels} />
             </div>
           )
