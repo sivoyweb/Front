@@ -95,6 +95,8 @@ export interface IImage {
   id: string,
   url: string,
   publicId: string,
+  alt: string,
+  active: boolean
 }
 
 export interface IImageBlog {
