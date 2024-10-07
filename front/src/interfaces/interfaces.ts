@@ -90,7 +90,7 @@ export interface ICredential {
 
 export interface IImage {
   id: string,
-  url: string,
+  url: string | null,
   publicId: string,
   alt: string,
   active: boolean
