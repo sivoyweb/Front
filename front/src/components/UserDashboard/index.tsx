@@ -28,7 +28,7 @@ interface FormData {
 const UserDashboard = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [token, setToken] = useState<string | null>(null);
-  const { isLogged,user } = useContext(UserContext);
+  const { isLogged,user ,updateUser} = useContext(UserContext);
   const router = useRouter()
 
 
@@ -46,6 +46,8 @@ const UserDashboard = () => {
     const storedToken = localStorage.getItem('token');
     setToken(storedToken);
   }, []);
+ 
+  
   
   const [formData, setFormData] = useState<FormData>({
     name:user?.name || '',
@@ -86,8 +88,6 @@ const UserDashboard = () => {
   
   const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); 
-
-  
     
     Swal.fire({
     title: '¿Estás seguro de los cambios?',
@@ -103,11 +103,17 @@ const UserDashboard = () => {
         try {
           if(user){
         
-            await axios.put(`https://api-sivoy.onrender.com/users/${user.id}`,formData,{
+           const response = await axios.put(`https://api-sivoy.onrender.com/users/${user.id}`,formData,{
               headers:{
                 Authorization:`Bearer ${token}`
               }
             });
+
+            if(response.data && response.data.user){
+              updateUser(response.data.user)
+            }
+           
+            
           }
           Swal.fire({
             title: "Cambios guardados con éxito",
@@ -352,7 +358,7 @@ const UserDashboard = () => {
         return <p>Selecciona una opción del menú.</p>;
     }
   };
-  console.log(formData)
+  
 
   return (
     <div className="flex h-screen bg-gray-100 font-arialroundedmtbold text-sivoy-blue">
@@ -361,7 +367,7 @@ const UserDashboard = () => {
           sidebarOpen ? "w-64" : "w-20"
         } transition-all duration-300`}
       >
-        <div className="p-4">
+        <div className="p-2">
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
             className="focus:outline-none"
@@ -391,7 +397,7 @@ const UserDashboard = () => {
           
              <Image
              alt="imagen de perfil"
-             src={user?.credential?.avatar.url || session?.user?.image || ''}
+             src={user?.credential?.avatar?.url || session?.user?.image || 'https://res.cloudinary.com/dvxh2vynm/image/upload/v1728334581/si-voy/szowukpqhmcvstu6n67x.jpg'}
              width={50}  
              height={50} 
              className="rounded-full" />

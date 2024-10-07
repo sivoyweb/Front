@@ -37,7 +37,7 @@ const CarouselTravels: React.FC<ICarouselProps> = ({ items }) => {
             }`}
           >
             <Image
-              src={item.url}
+              src={item?.url || ''}
               alt={item.publicId}
               layout="fill"
               objectFit="cover"

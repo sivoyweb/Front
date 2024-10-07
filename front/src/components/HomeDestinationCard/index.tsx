@@ -17,12 +17,12 @@ function HomeDestinationCard({ travels, index }: ITravelCardProps) {
 <div className='flex justify-center'>
     <div className="w-64 md:w-96 lg:w-[28rem] bg-white rounded-lg shadow transition-transform duration-300 hover:scale-105">
         <div onClick={handleClick} className="cursor-pointer">
-            <div className="relative w-full h-36 md:h-40 lg:h-44"> {/* Reducción de la altura */}
-                <Image 
+            <div className="relative w-full h-36 md:h-40 lg:h-44"> 
+                <Image
                     className="rounded-t-lg object-cover" 
-                    src={imagen.url} 
+                    src={imagen?.url || ''} 
                     alt={travels.name} 
-                    layout="fill" // Para que la imagen cubra todo el contenedor
+                    layout="fill" 
                 />
             </div>
         </div>
