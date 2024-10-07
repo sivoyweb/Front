@@ -1,4 +1,5 @@
 import Image from "next/image";
+import tudestino from "../../public/assets/tudestino.png"
 import { DonationButton, HomeButton } from "@/components/Buttons";
 import HomeGridComponent from "@/components/HomeDestinationGrid";
 import { HomeServicesGrid } from "@/components/HomeServicesGrid";
@@ -11,7 +12,7 @@ const Home: React.FC = () => {
         <div className="grid bg-white bg-opacity-50 p-6 rounded-3xl mt-4">
           <div className="pt-16 pr-4 ">
             <div className="relative flex justify-center">
-              <Image src="https://res.cloudinary.com/dvxh2vynm/image/upload/v1728048849/si-voy/fuqtn20z0bhsqh8trwlm.png" alt="tu destino sin límites" className="absolute top-[-60px] 2xl:top-[-90px] w-3/4 h-auto max-sm:top-[-20px] 4k:top-[-70px] 4k:w-1/2 mt-2" width={400} height={400}/>
+              <Image src={tudestino} alt="tu destino sin límites" className="absolute top-[-60px] 2xl:top-[-90px] w-3/4 h-auto max-sm:top-[-20px] 4k:top-[-70px] 4k:w-1/2 mt-2"/>
             </div>
             <h1 className="relative flex justify-center h-auto top-[-90px] font-arialroundedmtbold text-sivoy-blue max-sm:text-sm 4k:top-[-100px] 4k:text-4xl my-4">
               Información sobre turismo accesible

@@ -1,4 +1,3 @@
-
 export interface ILogin {
     email: string;
     password: string;
@@ -60,8 +59,6 @@ export interface ILogin {
     disability:IDisability[]
     id:string
   }
-
-
 
   export interface IUser{
     id?: string,
@@ -168,14 +165,12 @@ export interface IProvider {
     averageStars: number,
   }
 
+export interface IUserResponse {
+  login:boolean;
+  user: Partial<IUser> | null;
+  token: string;
+}
 
-
-
-  export interface IUserResponse {
-    login:boolean;
-    user: Partial<IUser> | null;
-    token: string;
-  }
 export interface IReview{
   id: string,
   user: IUser,
@@ -310,7 +305,6 @@ export interface ITravelsProps{
   provider: null,
 }
 
-
 export interface IAccordionItemProps {
   question: string;
   answer: string;
@@ -349,4 +343,18 @@ export interface IAlliancesImage {
   active: boolean
 }
 
+export interface IProjects {
+  id: string,
+  name: string,
+  description: string,
+  visible: boolean,
+}
 
+export interface ITeam {
+  id: string,
+  name: string,
+  description: string,
+  linkedin: string,
+  visible: boolean,
+  image: IImage[]  
+}
