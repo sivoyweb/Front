@@ -1,4 +1,5 @@
 import { ProjectsSection } from "@/components/Projects";
+import { TeamSection } from "@/components/Team"
 
 const AboutUsPage = () => {
   return (
@@ -42,6 +43,7 @@ const AboutUsPage = () => {
         <p className="text-gray-700 mt-4">
           Contamos con un equipo dedicado de voluntarios que apoyan en la investigación, mapeo de destinos y organización de eventos.
         </p>
+        <TeamSection /> 
       </section>
     </div>
   );

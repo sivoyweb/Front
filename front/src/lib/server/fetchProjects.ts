@@ -8,11 +8,11 @@ export async function fetchProjects(): Promise<IProjects[]> {
             throw new Error(`Error al obtener los datos: ${response.status} ${response.statusText}`);
         }
 
-        const faqQuestions = await response.json();
-        return faqQuestions;
+        const projects = await response.json();
+        return projects;
         
     } catch (error) {
-        console.error("Error en fetchFAQ:", error);
+        console.error("Error en fetchProjects:", error);
         throw error;
     }
 };
