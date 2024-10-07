@@ -77,3 +77,5 @@ button:disabled {
   max-height: 200px; /* o el máximo que desees */
 }
 
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";

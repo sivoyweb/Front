@@ -3,7 +3,7 @@ import tudestino from "../../public/assets/tudestino.png"
 import HomeGridComponent from "@/components/HomeDestinationGrid";
 import { DonationButton, HomeButton } from "@/components/Buttons";
 import { HomeServicesGrid } from "@/components/HomeServicesGrid";
-import { AlliancesGrid } from "@/components/AlliancesGrid";
+import { AlliancesGrid } from "@/components/CarouselAlliances";
 
 const Home: React.FC = () => {
   return (
@@ -119,7 +119,9 @@ const Home: React.FC = () => {
 
       <section>
         <h2 className="font-arialroundedmtbold text-2xl text-sivoy-blue ml-4 mb-4 4k:text-5xl 4k:ml-8 xl:ml-5">Nuestras alianzas</h2>
-        <AlliancesGrid />
+      <div className="mb-16">
+<AlliancesGrid />
+      </div>
       </section>
     </div>
   );

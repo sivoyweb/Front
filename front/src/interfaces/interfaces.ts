@@ -90,7 +90,7 @@ export interface ICredential {
 
 export interface IImage {
   id: string,
-  url?: string | null,
+  url: string | null,
   publicId: string,
   alt: string,
   active: boolean
@@ -328,7 +328,8 @@ export interface Disability {
 
 export interface IAlliances {
   id: string,
-  name: string, 
+  name: string,
+  url: string, 
   visible: boolean,
   image: IImage
 }
@@ -347,4 +348,11 @@ export interface ITeam {
   linkedin: string,
   visible: boolean,
   image: IImage,
+}
+
+export interface ISendHelp {
+  helpType: string,
+  name: string,
+  message?: string,
+  email: string
 }

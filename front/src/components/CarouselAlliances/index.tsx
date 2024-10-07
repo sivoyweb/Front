@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import Slider from "react-slick";
+import Slider from "react-slick"; // Importamos el carrusel
 import { fetchAlliances } from "@/lib/server/fetchAlliances";
 import { IAlliances } from "@/interfaces/interfaces";
 
@@ -29,28 +29,28 @@ export const AlliancesGrid = () => {
   };
 
   const settings = {
-    dots: true,
-    infinite: true,
+    dots: true, // Muestra puntos de navegación
+    infinite: true, // Carrusel infinito
     speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
+    slidesToShow: 4, // Número de slides visibles al mismo tiempo
+    slidesToScroll: 1, // Número de slides que se desplazan a la vez
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1024, // Para pantallas medianas
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 600, // Para pantallas pequeñas
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
       {
-        breakpoint: 480,
+        breakpoint: 480, // Para pantallas muy pequeñas
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -61,7 +61,7 @@ export const AlliancesGrid = () => {
 
   return (
     <div className="mb-4 mt-4">
-      <Slider {...settings}>
+      <Slider {...settings}> {/* Agregamos el carrusel */}
         {alliances.map((alliance) => (
           <div
             key={alliance.id}
@@ -71,7 +71,7 @@ export const AlliancesGrid = () => {
             <div className="w-full h-auto p-8 bg-white rounded-2xl transition-transform hover:scale-105 duration-300 flex justify-center items-center">
               {alliance.image.url ? (
                 <Image
-                  src={alliance.image.url as string}
+                  src={alliance.image.url}
                   alt={alliance.name}
                   className="max-w-full max-h-full"
                   width={200}
