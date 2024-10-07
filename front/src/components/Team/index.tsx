@@ -27,7 +27,7 @@ export const TeamSection = () => {
         <div key={member.id} className="flex flex-col items-center">
           <a
             href={member.linkedin}
-            className="flex flex-col items-center border shadow-md rounded-3xl hover:scale-105 duration-300 transition-transform w-72 4k:w-[400px]"
+            className="flex flex-col items-center border shadow-md rounded-3xl hover:scale-105 duration-300 transition-transform w-full max-w-xs p-4"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -52,11 +52,11 @@ export const TeamSection = () => {
               {member.description}
             </p>
             <Image
-              src="https://res.cloudinary.com/dvxh2vynm/image/upload/v1728048850/si-voy/dgywowgy47drvtjlylo1.png"
+              src="https://res.cloudinary.com/dvxh2vynm/image/upload/v1728048850/si-voy/dgywowgy47drvtjlylo1.png" // Cambia esto por la ruta correcta
               alt="logo linkedin"
-              width={80}
-              height={80}
-              className=""
+              width={40} // Cambia el tamaño si es necesario
+              height={40} // Cambia el tamaño si es necesario
+              className="mt-2"
             />
           </a>
         </div>

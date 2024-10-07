@@ -250,7 +250,7 @@ const UserDashboard = () => {
                 <div className="flex gap-4">
   {/*categories*/}
   <div className="w-full max-w-xs flex flex-col gap-1">
-    <label htmlFor="disabilities" className="w-fit pl-0.5 text-sm text-neutral-600 dark:text-neutral-300">Discapacidad</label>
+    <label htmlFor="disabilities" className="w-fit pl-0.5 text-sm text-neutral-600">Discapacidad</label>
     <div className="relative">
     <button
   type="button"
@@ -270,7 +270,7 @@ const UserDashboard = () => {
 
       <input id="disabilities" name="disabilities" type="text"  hidden value={selectedDisabilities.join(',')} />
       <ul id="disabilitiesList"
-      className={`absolute z-10 left-0 top-11 flex max-h-44 w-full flex-col overflow-hidden overflow-y-auto border-neutral-300 bg-neutral-50 py-1.5 dark:border-neutral-700 dark:bg-neutral-900 border rounded-md transition-height ${
+      className={`absolute z-10 left-0 top-11 flex max-h-44 w-full flex-col overflow-hidden overflow-y-auto border-neutral-300 bg-neutral-50 py-1.5 border rounded-md transition-height ${
         isDisabilityListOpen ? 'visible-list' : 'hidden-list'
       }`} role="listbox">
 
