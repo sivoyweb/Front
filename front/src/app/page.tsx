@@ -43,8 +43,8 @@ const Home: React.FC = () => {
             <p className="font-arialroundedmtbold text-sivoy-blue text-center mt-2 4k:text-3xl">Verónica Martínez</p>
             <p className="text-sivoy-blue text-center 4k:text-2xl">Directora</p>
             <Image src="https://res.cloudinary.com/dvxh2vynm/image/upload/v1728048850/si-voy/dgywowgy47drvtjlylo1.png" alt="logo linkedin" className=""
-            width={160}
-            height={160}/>
+            width={80}
+            height={80}/>
           </a>
         </div>
 
