@@ -11,8 +11,7 @@ const TravelSearch: React.FC<ITravelSearchProps> = ({ onSearchToggle }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedService, setSelectedService] = useState('Seleccione un servicio');
-  const services = ["Balneario", "Gastronomía", "Alojamiento","Transporte","Entretenimiento","Cultura","Naturaleza","Turismo de Aventura","Comercio","Educacion","Deportes","Tecnologia","Profesionales","Lugar de Interes","Experiencias","Arte","Bienestar","Moda","Otro"];
-
+  const services = ["Balnearios", "Gastronomía", "Alojamientos", "Ocio y Recreación", "Actividades Culturales", "Transporte", "Experiencias", "Servicios Personales", "Otro"];
 
   const resetFields = () => {
     setSelectedService('Seleccione un servicio');
@@ -20,7 +19,6 @@ const TravelSearch: React.FC<ITravelSearchProps> = ({ onSearchToggle }) => {
       inputRef.current.value = '';
     }
   };
-  // Función para filtrar viajes
   
   const filtrarTravels = () => {
     const textoCiudad = inputRef.current?.value.toLowerCase() || '';

@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 
-
-
 export const AlliancesGrid = () => {
 
     const handleClick = (url: string) => {

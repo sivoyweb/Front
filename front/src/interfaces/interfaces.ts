@@ -330,15 +330,7 @@ export interface IAlliances {
   id: string,
   name: string, 
   visible: boolean,
-  image: IAlliancesImage
-}
-
-export interface IAlliancesImage {
-  id: string,
-  url: string,
-  publicId: string,
-  alt: string,
-  active: boolean
+  image: IImage
 }
 
 export interface IProjects {
