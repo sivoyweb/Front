@@ -1,29 +1,29 @@
 export interface ILogin {
     email: string;
     password: string;
-  }
+}
 
-  export interface IRegister{
-    name: string,
-    phone: string,
-    email: string,
-    password: string,
-    confirmPassword: string,
-  }
+export interface IRegister{
+  name: string,
+  phone: string,
+  email: string,
+  password: string,
+  confirmPassword: string,
+}
 
-  export interface IRegisterGoogle{
-    name: string,
-    token:string,
-    email: string,
-    phone: string,
-  }
+export interface IRegisterGoogle{
+  name: string,
+  token:string,
+  email: string,
+  phone: string,
+}
 
-  export interface IDisability{
-    id: string,
-    name: string,
-    category: string,
-    user: IUser,
-  }
+export interface IDisability{
+  id: string,
+  name: string,
+  category: string,
+  user: IUser,
+}
 
   export interface IloginGoogle{
     name:string
@@ -90,7 +90,7 @@ export interface ICredential {
 
 export interface IImage {
   id: string,
-  url: string,
+  url?: string | null,
   publicId: string,
   alt: string,
   active: boolean
@@ -267,16 +267,14 @@ auth: boolean,
 block: boolean,
 }
 
- export interface IReviewT {
+export interface IReviewT {
   id:string,
   review:string,
   stars: number,
   date: string,
   visible?: boolean;
   user:IUserReviews;
- }
-
-
+}
 
 export interface ITravelReview{
   id: string,
@@ -356,5 +354,5 @@ export interface ITeam {
   description: string,
   linkedin: string,
   visible: boolean,
-  image: IImage[]  
+  image: IImage,
 }
