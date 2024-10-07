@@ -90,7 +90,7 @@ export interface ICredential {
 
 export interface IImage {
   id: string,
-  url?: string | null,
+  url: string | null,
   publicId: string,
   alt: string,
   active: boolean
@@ -232,6 +232,7 @@ export interface IUserContextType {
   login: (credentials: ILogin) => Promise<boolean>;
   register: (user: IRegister) => Promise<boolean>;
   logOut: () => void;
+  updateUser: (updatedUser: IUserChange) => void;
 
 }
 
@@ -330,15 +331,7 @@ export interface IAlliances {
   id: string,
   name: string, 
   visible: boolean,
-  image: IAlliancesImage
-}
-
-export interface IAlliancesImage {
-  id: string,
-  url: string,
-  publicId: string,
-  alt: string,
-  active: boolean
+  image: IImage
 }
 
 export interface IProjects {

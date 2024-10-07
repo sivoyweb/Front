@@ -16,7 +16,6 @@ export async function fetchTravels(): Promise<ITravel[]> {
     }
 }
 
-
 export async function fetchTravelById(id: string): Promise<ITravelsProps> {
     const response = await fetch(`https://api-sivoy.onrender.com/travels/${id}`);
     const travel = await response.json();

@@ -14,7 +14,7 @@ async function TravelDetail({ params }: { params: { travelId: string } }) {
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-6 pb-8 pt-6">
       <div className="relative w-full h-[450px] lg:h-[550px]">
         <Image
-          src={imagen.url}
+          src={imagen?.url || ''}
           alt={travels.name}
           fill
           priority={true}

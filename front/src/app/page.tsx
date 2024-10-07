@@ -1,7 +1,7 @@
 import Image from "next/image";
 import tudestino from "../../public/assets/tudestino.png"
-import { DonationButton, HomeButton } from "@/components/Buttons";
 import HomeGridComponent from "@/components/HomeDestinationGrid";
+import { DonationButton, HomeButton } from "@/components/Buttons";
 import { HomeServicesGrid } from "@/components/HomeServicesGrid";
 import { AlliancesGrid } from "@/components/AlliancesGrid";
 
