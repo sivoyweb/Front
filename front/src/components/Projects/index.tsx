@@ -15,7 +15,7 @@ export const ProjectsSection = () => {
     };
 
     getProjects();
-  }, []);3
+  }, []);
 
   return (
     <section className="flex-1">

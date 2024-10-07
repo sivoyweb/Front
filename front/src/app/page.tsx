@@ -3,7 +3,7 @@ import tudestino from "../../public/assets/tudestino.png"
 import HomeGridComponent from "@/components/HomeDestinationGrid";
 import { DonationButton, HomeButton } from "@/components/Buttons";
 import { HomeServicesGrid } from "@/components/HomeServicesGrid";
-import { AlliancesGrid } from "@/components/CarouselAlliances";
+import { AlliancesGrid } from "@/components/AlliancesGrid"
 
 const Home: React.FC = () => {
   return (

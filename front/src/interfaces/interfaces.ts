@@ -244,6 +244,7 @@ export interface ITravelCardProps {
 export interface ICarouselProps {
   items: IImage[];
 }
+
 export interface IBlogArticle {
   id: string;
   title: string;
