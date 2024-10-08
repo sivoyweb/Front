@@ -302,7 +302,7 @@ const UserDashboard = () => {
 
 
 
-                <div>
+                {!session && <div>
                   <label className="block text-sm font-medium text-gray-700 mt-12 ">Avatar</label>
                   <CldUploadWidget uploadPreset="siVoyPreset"
                                    onSuccess={(result)=>{
@@ -340,8 +340,8 @@ const UserDashboard = () => {
                                     onClick={()=>open()}>Subir imagen</button>
                   }}
                   </CldUploadWidget>
-                </div>
-                <button
+                </div>}
+               <button
                   
                   type="submit"
                   disabled={isSubmitting}
