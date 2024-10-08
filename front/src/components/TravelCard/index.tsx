@@ -25,7 +25,7 @@ function TravelCard({ travels }: ITravelCardProps) {
           <div className="relative w-full h-48 overflow-hidden rounded-lg"> 
             <Image 
               className="rounded-t-lg object-cover w-full h-full scale-110"  
-              src={imagen.url} 
+              src={imagen?.url || ''} 
               alt={travels.name}
               layout="fill" 
               objectFit="cover" 

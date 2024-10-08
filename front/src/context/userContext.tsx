@@ -6,6 +6,7 @@ import {
   ILogin,
   IRegister,
   IUserProps,
+  IUserChange,
 } from "../interfaces/interfaces";
 import { postLogin, postRegister } from "@/lib/server/fetchUsers";
 import Swal from "sweetalert2";
@@ -20,6 +21,7 @@ export const UserContext = createContext<IUserContextType>({
   login: async () => false,
   register: async () => false,
   logOut: () => {},
+  updateUser:()=> {}
 });
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
@@ -37,7 +39,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
       const dataUser = data.userFinal;
       setUser(dataUser);
-      console.log(dataUser);
+      
 
       localStorage.setItem("user", JSON.stringify(data));
       localStorage.setItem("token", data.token);
@@ -71,13 +73,9 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     if (session?.user) {
       localStorage.setItem("TokenGoogle", "true");
     }
-
-    if (token || TokenGoogle) {
-      setIsLogged(true);
-    } else {
-      setIsLogged(false);
+      setIsLogged(!!(token || TokenGoogle));
     }
-  }, [user, session]);
+  , [session]);
 
   const register = async (user: IRegister) => {
     try {
@@ -92,7 +90,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         setTimeout(() => {
           router.push("/login");
         }, 2000);
-        console.log(data);
+        
         return true;
       } else if (data.error === "email already in use") {
         Swal.fire({
@@ -102,7 +100,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         });
         return false;
       } else {
-        console.log(data);
+       
         Swal.fire({
           title: "Algo salió mal",
           text: "Vuelva a intentarlo",
@@ -125,6 +123,20 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const updateUser = (updatedUser:IUserChange) => {
+    const currentUserString = localStorage.getItem("user");
+    if (currentUserString) {
+      const currentUser = JSON.parse(currentUserString);
+      const newUser = {
+        ...currentUser, 
+        ...updatedUser,  
+      };  
+      
+      setUser(newUser);     
+      localStorage.setItem("user", JSON.stringify(newUser));
+      console.log("Usuario actualizado y guardado en localStorage:", newUser);
+  }
+}
   const logOut = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
@@ -133,6 +145,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     setUser(null);
     setIsLogged(false);
   };
+  
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -149,10 +162,11 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     }
     setUser(null);
   }, []);
+  
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, isLogged, setIsLogged, login, register, logOut }}
+      value={{ user, setUser, isLogged, setIsLogged, login, register, logOut,updateUser }}
     >
       {children}
     </UserContext.Provider>
