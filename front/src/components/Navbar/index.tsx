@@ -23,8 +23,6 @@ export default function Navbar() {
   const { isLogged, user, logOut } = useContext(UserContext);
   const { data:session } = useSession() 
 
-  console.log(user)
-
   const handleLogout = () => {
     logOut();
     signOut();

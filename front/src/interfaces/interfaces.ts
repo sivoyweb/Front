@@ -371,3 +371,10 @@ export interface ISendHelp {
   message?: string,
   email: string
 }
+
+export interface IContact {
+  subject: string,
+  name: string,
+  message: string,
+  email: string
+}
