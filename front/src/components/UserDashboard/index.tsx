@@ -188,6 +188,7 @@ const UserDashboard = () => {
   const toggleDisabilityList = () => setIsDisabilityListOpen(!isDisabilityListOpen);
 
 
+console.log(formData);
 
 
   const renderSection = () => {

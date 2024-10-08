@@ -10,12 +10,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import Swal from "sweetalert2";
-import { signIn, useSession } from "next-auth/react";
+import {  getSession, signIn, useSession } from "next-auth/react";
 
 const Login: React.FC = () => {
   const { data: session } = useSession();
   const router = useRouter();
-  const { login } = useContext(UserContext);
+  const { login,loginWithGoogle } = useContext(UserContext);
   const [showPassword, setShowPassword] = useState(false);
 
   const initialValues: ILogin = {
@@ -41,7 +41,33 @@ const Login: React.FC = () => {
 
   const callLoginGoogle = async () => {
     try {
+      // Inicia sesión con Google
       await signIn("google");
+  
+      // Espera a obtener la sesión del usuario
+      const session = await getSession();
+      
+      if (session && session.user) {
+        // Crea el objeto credentials con los datos de la sesión de Google
+        const credentials = {
+          email: session.user.email || '',
+          name: session.user.name || '',
+          phone: '', // Si no tienes phone en la respuesta de Google, podrías asignar un valor vacío
+          token: '' // Este campo lo maneja el backend después
+        };
+  
+        // Llama a loginWithGoogle con los datos de Google
+        const loginSuccess = await loginWithGoogle(credentials);
+        console.log("esta es la info :" , loginSuccess);
+        
+        
+        if (loginSuccess) {
+          // Realiza acciones adicionales si es necesario
+          console.log("Inicio de sesión exitoso con Google");
+        }
+      } else {
+        throw new Error("No se pudo obtener la sesión de Google");
+      }
     } catch (error: unknown) {
       Swal.fire({
         title: "Algo salió mal",

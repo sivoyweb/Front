@@ -246,6 +246,7 @@ export interface IUserContextType {
   register: (user: IRegister) => Promise<boolean>;
   logOut: () => void;
   updateUser: (updatedUser: IUserChange) => void;
+  loginWithGoogle: (credentials: IloginGoogle) => Promise<boolean>;
 
 }
 
