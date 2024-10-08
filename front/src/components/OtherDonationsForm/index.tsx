@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import sendHelpEmail from "@/lib/server/fetchSendHelp" 
+import sendHelpEmail from "@/lib/server/fetchSendHelp"; 
 import { ISendHelp } from "@/interfaces/interfaces";
+import Swal from "sweetalert2";
 
 export default function OtherDonationsForm() {
   const [name, setName] = useState(""); 
@@ -18,24 +19,36 @@ export default function OtherDonationsForm() {
     setIsSubmitting(true);
     setErrorMessage(null);
 
-    // Crear el objeto con los datos del formulario según ISendHelp
     const formData: ISendHelp = {
       name,
       email,
       helpType,
-      message: message || "", // Mensaje opcional
+      message: message || "", 
     };
 
     try {
-      await sendHelpEmail(formData); // Llamada a la función modularizada
-      alert("¡Tu ayuda fue enviada con éxito!");
-      // Limpiar los campos del formulario después del envío exitoso
+      await sendHelpEmail(formData); 
+      // Alerta de éxito
+      await Swal.fire({
+        icon: 'success',
+        title: '¡Éxito!',
+        text: '¡Tu ayuda fue enviada con éxito!',
+        confirmButtonText: 'Aceptar',
+      });
+
       setName("");
       setEmail("");
       setHelpType("");
       setMessage("");
     } catch (error) {
+      // Alerta de error
       setErrorMessage((error as Error).message || "Error al enviar el correo");
+      await Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: errorMessage || 'Ocurrió un error al enviar el correo.',
+        confirmButtonText: 'Aceptar',
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -73,7 +86,6 @@ export default function OtherDonationsForm() {
         />
       </div>
 
-      {/* Campo de tipo de ayuda */}
       <div className="mb-4">
         <label className="block text-sivoy-blue mb-2" htmlFor="helpType">
           Tipo de ayuda
@@ -98,7 +110,7 @@ export default function OtherDonationsForm() {
       {/* Campo de mensaje */}
       <div className="mb-4">
         <label className="block text-sivoy-blue mb-2" htmlFor="message">
-          Mensaje
+          Mensaje (Obligatorio)
         </label>
         <textarea
           id="message"
@@ -120,4 +132,4 @@ export default function OtherDonationsForm() {
       </button>
     </form>
   );
-}
+};

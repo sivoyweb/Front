@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import NavbarComponent from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Metadata } from "next";
 import "./globals.css";
@@ -24,7 +24,7 @@ export default function RootLayout({
         <SessionWrapper>
           <UserProvider>
            <TravelProvider>
-            <Navbar />
+            <NavbarComponent />
               <div className="lg:ml-16 lg:mr-16">
                 {children}
               </div>

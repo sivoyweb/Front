@@ -71,6 +71,7 @@ function Footer() {
           <div className="flex flex-col text-center md:text-right text-sm leading-relaxed space-y-1">
             <a className="hover:underline" href="/about">Sobre Nosotros</a>
             <a className="hover:underline" href="/faq">Preguntas frecuentes</a>
+            <a className="hover:underline" href="/contact-us">Contáctanos</a>
             <button 
               className="hover:underline focus:outline-none text-right text-sm leading-relaxed"
               style={{ 

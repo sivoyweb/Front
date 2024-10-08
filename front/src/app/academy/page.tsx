@@ -22,10 +22,10 @@ const Academia = () => {
               cualquier lugar y únete a la revolución del turismo accesible.
             </p>
             <Link
-              href="/home"
+              href="/contact-us"
               className="bg-sivoy-orange text-white py-3 px-6 rounded-full hover:scale-105 transition ease-in-out duration-400 inline-block"
             >
-              Inscríbete Ahora
+              Consulta aquí
             </Link>
           </div>
           <div className="w-full lg:w-auto">

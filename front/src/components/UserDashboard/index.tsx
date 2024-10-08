@@ -36,7 +36,7 @@ const UserDashboard = () => {
     { category: 'Visual', selected: false },
     { category: 'Auditiva', selected: false },
     { category: 'Motora', selected: false },
-    { category: 'Fisica', selected: false },
+    { category: 'Física', selected: false },
     { category: 'Sensorial', selected: false },
     { category: 'Cognitiva', selected: false },
     { category: 'Psicosocial', selected: false },
@@ -397,7 +397,7 @@ const UserDashboard = () => {
           
              <Image
              alt="imagen de perfil"
-             src={user?.credential?.avatar?.url || session?.user?.image || 'https://res.cloudinary.com/dvxh2vynm/image/upload/v1728334581/si-voy/szowukpqhmcvstu6n67x.jpg'}
+             src={user?.credential?.avatar.url || session?.user?.image || ''}
              width={50}  
              height={50} 
              className="rounded-full" />
