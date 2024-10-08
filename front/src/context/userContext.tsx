@@ -46,7 +46,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
       Swal.fire({
         title: "Inicio de sesión Exitoso",
-        text: "Bienvenido",
+        text: `Bienvenido ${dataUser.name}`,
         icon: "success",
       });
 

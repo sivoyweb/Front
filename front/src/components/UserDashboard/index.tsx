@@ -28,7 +28,7 @@ interface FormData {
 const UserDashboard = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [token, setToken] = useState<string | null>(null);
-  const { isLogged,user ,updateUser} = useContext(UserContext);
+  const { user ,updateUser} = useContext(UserContext);
   const router = useRouter()
 
 
@@ -75,7 +75,7 @@ const UserDashboard = () => {
 
  
   useEffect(() => {
-    if(!isLogged){
+    if(!user && !session){
       Swal.fire({
         titleText:"Necesitas estar logueado",
         icon:"warning"
@@ -84,7 +84,7 @@ const UserDashboard = () => {
         router.push('/login')
       }, 2000);
     }
-  },[isLogged,router])
+  },[user,session,router])
   
   const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); 
@@ -242,7 +242,7 @@ const UserDashboard = () => {
                   />
                 </div>
                 <div>
-                  <label className="flex items-center">
+                  <label className="flex items-center mt-7">
                     <input
                       type="checkbox"
                       name="isRepresentative"
@@ -254,51 +254,54 @@ const UserDashboard = () => {
                   </label>
                 </div>
                 <div className="flex gap-4">
-  {/*categories*/}
-  <div className="w-full max-w-xs flex flex-col gap-1">
-    <label htmlFor="disabilities" className="w-fit pl-0.5 text-sm text-neutral-600">Discapacidad</label>
-    <div className="relative">
+ {/*categories*/}
+<div className="w-full max-w-xs flex flex-col gap-1 mt-5 mb-5">
+  <label htmlFor="disabilities" className="w-fit pl-0.5 text-sm text-neutral-600">Discapacidad</label>
+  <div className="relative">
     <button
-  type="button"
-  role="combobox"
-  onClick={toggleDisabilityList}
-  className="inline-flex w-full items-center justify-between gap-2 whitespace-nowrap border-0 bg-transparent px-4 py-2 text-sm font-medium capitalize tracking-wide text-neutral-600 transition hover:bg-gray-200 focus:bg-gray-300 focus:outline-none"
-  aria-haspopup="listbox"
-  aria-controls="namesList"
->
-  <span className="text-sm w-full font-normal text-start overflow-hidden text-ellipsis whitespace-nowrap">
-    {selectedDisabilities.length > 0 ? selectedDisabilities.join(', ') : "Seleccione una opción"}
-  </span>
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5">
-    <path fillRule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd"/>
-  </svg>
-</button>
+      type="button"
+      role="combobox"
+      onClick={toggleDisabilityList}
+      className="inline-flex w-full items-center justify-between gap-2 whitespace-nowrap border-0 bg-transparent px-4 py-2 text-sm font-medium capitalize tracking-wide text-neutral-600 transition hover:bg-gray-200 focus:bg-gray-300 focus:outline-none"
+      aria-haspopup="listbox"
+      aria-controls="namesList"
+    >
+      <span className="text-sm w-full font-normal text-start overflow-hidden text-ellipsis whitespace-nowrap">
+        {selectedDisabilities.length > 0 ? selectedDisabilities.join(', ') : "Seleccione una opción"}
+      </span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5">
+        <path fillRule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
+      </svg>
+    </button>
 
-      <input id="disabilities" name="disabilities" type="text"  hidden value={selectedDisabilities.join(',')} />
-      <ul id="disabilitiesList"
-      className={`absolute z-10 left-0 top-11 flex max-h-44 w-full flex-col overflow-hidden overflow-y-auto border-neutral-300 bg-neutral-50 py-1.5 border rounded-md transition-height ${
+    <input id="disabilities" name="disabilities" type="text" hidden value={selectedDisabilities.join(',')} />
+    <ul id="disabilitiesList"
+      className={`absolute z-10 left-0 top-full flex max-h-44 w-full flex-col overflow-hidden overflow-y-auto border-neutral-300 bg-neutral-50 py-1.5 rounded-md transition-height ${
         isDisabilityListOpen ? 'visible-list' : 'hidden-list'
-      }`} role="listbox">
-
-        {disabilitiesOption.map(option => (
-              <li key={option.category} role="option">
-                <label className="combobox-label">
-                  <input
-                    type="checkbox"
-                    checked={formData.disabilities.includes(option.category)}
-                    onChange={() => handleToggleDisability(option.category)}
-                  />
-                  <span>{option.category}</span>
-                </label>
-              </li>
-            ))}
-      </ul>
-    </div>
+      }`}
+      role="listbox"
+      
+    >
+      {disabilitiesOption.map(option => (
+        <li key={option.category} role="option">
+          <label className="combobox-label flex items-center gap-2">
+            <input
+              type="checkbox"
+              checked={formData.disabilities.includes(option.category)}
+              onChange={() => handleToggleDisability(option.category)}
+            />
+            <span>{option.category}</span>
+          </label>
+        </li>
+      ))}
+    </ul>
   </div>
+</div>
 
   
  
 </div>
+
 
 
 

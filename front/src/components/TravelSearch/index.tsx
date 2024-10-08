@@ -10,7 +10,7 @@ const TravelSearch: React.FC<ITravelSearchProps> = ({ onSearchToggle }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedService, setSelectedService] = useState('Seleccione un servicio');
-  const services = ["Balneario", "Gastronomía", "Alojamiento", "Ocio y Recreación", "Actividades Culturales", "Transporte", "Experiencias", "Servicios Personales", "Otro"];
+  const services = ['Balneario', 'Gastronomía','Alojamiento', 'Ocio y recreación','Actividades culturales','Medios de transporte', 'Experiencias', 'Servicios personales', 'Otro'];
 
   const resetFields = () => {
     setSelectedService('Seleccione un servicio');

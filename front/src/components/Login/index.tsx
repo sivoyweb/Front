@@ -58,7 +58,7 @@ const Login: React.FC = () => {
         icon: "success",
       }).then(() => {
         router.push("/");
-        console.log(session);
+      
       });
     }
   }, [session, router]);
