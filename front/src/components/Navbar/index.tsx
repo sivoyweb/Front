@@ -90,7 +90,7 @@ export default function Navbar() {
                     />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
+                <DropdownMenuContent align="end" className='bg-white mr-2'>
                   <DropdownMenuItem>
                     <Link href="/user-dashboard">Mi Perfil</Link>
                   </DropdownMenuItem>
