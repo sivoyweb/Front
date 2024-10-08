@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import React, { useContext } from "react";
 import { UserContext } from "@/context/userContext";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
@@ -20,7 +20,10 @@ export default function Navbar() {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null); 
-  const { isLogged, user, logOut } = useContext(UserContext); 
+  const { isLogged, user, logOut } = useContext(UserContext);
+  const { data:session } = useSession() 
+
+  console.log(user)
 
   const handleLogout = () => {
     logOut();
@@ -77,16 +80,16 @@ export default function Navbar() {
             </div>
           </div>
           <div className="hidden md-lg:block">
-            {isLogged ? (
+            {isLogged || session ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button className="relative h-8 w-8 rounded-full custom-button hover:bg-sivoy-blue">
                     <Image
-                      src={user?.avatar || "https://res.cloudinary.com/dvxh2vynm/image/upload/v1728360008/si-voy/zcomkrjmtznorb7qdtl0.png"} // Usa el avatar del usuario o uno por defecto
+                      src={user?.credential?.avatar.url|| session?.user?.image || "https://res.cloudinary.com/dvxh2vynm/image/upload/v1728360008/si-voy/zcomkrjmtznorb7qdtl0.png"} 
                       alt="User avatar"
                       className="rounded-full mt-2"
-                      width={40}
-                      height={40}
+                      width={46}
+                      height={46}
                     />
                   </Button>
                 </DropdownMenuTrigger>
@@ -145,7 +148,7 @@ export default function Navbar() {
               <div className="flex items-center px-5">
                 <div className="flex-shrink-0">
                   <Image
-                    src={user?.avatar || "https://res.cloudinary.com/dvxh2vynm/image/upload/v1728360008/si-voy/zcomkrjmtznorb7qdtl0.png"} // Usa el avatar del usuario o uno por defecto
+                    src={user?.credential?.avatar.url || session?.user?.image || "https://res.cloudinary.com/dvxh2vynm/image/upload/v1728360008/si-voy/zcomkrjmtznorb7qdtl0.png"} 
                     alt="User avatar"
                     className="rounded-full"
                     width={40}
@@ -153,8 +156,8 @@ export default function Navbar() {
                   />
                 </div>
                 <div className="ml-3">
-                  <div className="text-base font-medium">{user?.name || "Usuario"}</div> {/* Muestra el nombre del usuario */}
-                  <div className="text-sm font-medium text-gray-400">{user?.email || "usuario@ejemplo.com"}</div> {/* Muestra el correo del usuario */}
+                  <div className="text-base font-medium">{user?.name || session?.user?.name || "Usuario"}</div> 
+                  <div className="text-sm font-medium text-gray-400">{user?.credential?.email || session?.user?.email || "usuario@ejemplo.com"}</div> 
                 </div>
               </div>
             ) : (
