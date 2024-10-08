@@ -15,7 +15,7 @@ function DestinationsFilter() {
   const alojamientosTravels = travels.filter(travel => travel.serviceType === 'Alojamiento');
   const ocioTravels = travels.filter(travel => travel.serviceType === "Ocio y recreación");
   const culturaTravels = travels.filter(travel => travel.serviceType === "Actividades culturales");
-  const transporteTravels = travels.filter(travel => travel.serviceType === "Medios de rransporte");
+  const transporteTravels = travels.filter(travel => travel.serviceType === "Medios de transporte");
   const experienciasTravels = travels.filter(travel => travel.serviceType === "Experiencias");
   const serviciosPersonalesTravels = travels.filter(travel => travel.serviceType === "Servicios personales");
   const otroTravels = travels.filter(travel => travel.serviceType === "Otro");

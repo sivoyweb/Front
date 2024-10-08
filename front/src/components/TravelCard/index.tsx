@@ -13,11 +13,6 @@ function TravelCard({ travels }: ITravelCardProps) {
 
   const imagen = travels.images[0];
 
-  const shortDescription =
-    travels.description.length > 100
-      ? travels.description.slice(0, 100) + "..."
-      : travels.description;
-
   return (
     <div className='flex justify-center mb-6 rounded-lg'>
       <div className="bg-white rounded-lg shadow transition-transform duration-300 hover:scale-105 max-w-md w-full"> 
@@ -32,23 +27,26 @@ function TravelCard({ travels }: ITravelCardProps) {
             />
           </div>
         </div>
-        <div className="p-4">
+        <div className="p-4 flex flex-col h-[200px] justify-between">
           <div onClick={handleClick} className="cursor-pointer">
-            <div className="mb-1 gap-1 flex justify-between">
-              <h5 className="mb-1 text-lg text-sivoy-blue font-arialroundedmtbold"> 
+            <div className="text-start">
+              <h5 className="mb-1 text-lg text-sivoy-blue font-arialroundedmtbold line-clamp"> 
                 {travels.name}
               </h5>
             </div>
+            <p className="text-base text-sivoy-blue mt-2 text-left line-clamp-3">
+              {travels.description}
+            </p>
           </div>
-          <p className="text-sm text-sivoy-blue mt-2 text-left">
-            {shortDescription}
-          </p>
-          <button 
-            onClick={handleClick} 
-            className="mt-4"
-          >
-            Ver Más
-          </button>
+          <a className="flex justify-end items-center font-arialroundedmtbold text-sivoy-green" href={`/detail/${travels.id}`}>
+    Ver Más
+    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevrons-right" width="20" height="44" viewBox="0 0 24 24" strokeWidth="3" stroke="#1a7970" fill="none" strokeLinecap="round" strokeLinejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M7 7l5 5l-5 5" />
+        <path d="M13 7l5 5l-5 5" />
+    </svg>
+</a>
+
         </div>
       </div>
     </div>

@@ -40,10 +40,10 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-4 max-w-md mx-auto">
+    <form onSubmit={handleSubmit} className="mb-4 max-w-xl mx-auto">
       <div className="mb-4">
       <h2 className="text-2xl font-arialroundedmtbold text-sivoy-blue text-center mb-6">Formulario de Contacto</h2>
-        <label className="block text-sivoy-blue mb-2" htmlFor="name">
+        <label className="block text-sivoy-blue text-lg mb-2" htmlFor="name">
           Nombre
         </label>
         <input
@@ -52,12 +52,12 @@ export default function ContactForm() {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-          className="w-full p-2 border border-gray-300 rounded"
+          className="w-full py-2 border border-gray-300 rounded"
         />
       </div>
 
       <div className="mb-4">
-        <label className="block text-sivoy-blue mb-2" htmlFor="email">
+        <label className="block text-sivoy-blue text-lg mb-2" htmlFor="email">
           Correo Electrónico
         </label>
         <input
@@ -71,7 +71,7 @@ export default function ContactForm() {
       </div>
 
       <div className="mb-4">
-        <label className="block text-sivoy-blue mb-2" htmlFor="subject">
+        <label className="block text-sivoy-blue mb-2 text-lg" htmlFor="subject">
           Asunto
         </label>
         <input
@@ -85,7 +85,7 @@ export default function ContactForm() {
       </div>
 
       <div className="mb-4">
-        <label className="block text-sivoy-blue mb-2" htmlFor="message">
+        <label className="block text-sivoy-blue mb-2 text-lg" htmlFor="message">
           Mensaje
         </label>
         <textarea

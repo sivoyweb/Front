@@ -36,7 +36,7 @@ const Home: React.FC = () => {
 
       <section className="flex flex-col md:flex-row text-justify mr-9 md:mr-8 lg:mt-4 4k:ml-20 4k:mr-20 4k:mt-4 mt-8">
         <div className="flex flex-col items-center ml-6">
-          <a href="https://www.linkedin.com/in/ver%C3%B3nica-lorena-martinez-78a303a6/" className="flex flex-col items-center border shadow-md rounded-3xl hover:scale-105 duration-300 transition-transform w-72 4k:w-[400px]">
+          <a href="https://www.linkedin.com/in/ver%C3%B3nica-lorena-martinez-78a303a6/" className="flex flex-col items-center border shadow-md rounded-3xl hover:scale-105 duration-300 transition-transform w-72 4k:w-[400px] lg:h-80 pt-4">
             <Image src="https://res.cloudinary.com/dvxh2vynm/image/upload/v1727356842/si-voy/grgrankhq13zbd3l1msc.png" alt="Foto de perfil de Verónica Martínez" className="" 
             width={180}
             height={180}/>
