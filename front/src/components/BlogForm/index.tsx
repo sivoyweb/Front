@@ -42,8 +42,7 @@ const BlogForm: React.FC = () => {
     onSubmit: async (values, { resetForm }) => {
       try {
         const formData = { ...values, images: uploadedImages }; // Añadir las imágenes subidas al formulario
-        const response = await axios.post("/api/blogs", formData);
-        console.log("Blog creado:", response.data);
+        await axios.post("/api/blogs", formData);
         resetForm();
         setUploadedImages([]); // Reiniciar las imágenes subidas
         alert("¡Blog creado exitosamente!");

@@ -39,7 +39,7 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
 
     setLoading(true);
     try {
-      const response = await axios.post(
+      await axios.post(
         "https://api-sivoy.onrender.com/travels/reviews",
         data,
         {
@@ -48,7 +48,7 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
           },
         }
       );
-      
+
       Swal.fire(
         "¡Reseña creada!",
         "Tu reseña ha sido enviada exitosamente.",

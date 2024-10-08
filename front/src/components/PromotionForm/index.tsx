@@ -50,8 +50,7 @@ const PromotionForm: React.FC = () => {
     onSubmit: async (values, { resetForm }) => {
       try {
         const formData = { ...values, images: uploadedImages }; // Añadir las imágenes subidas al formulario
-        const response = await axios.post("/api/promotions", formData);
-        console.log("Promoción creada:", response.data);
+        await axios.post("/api/promotions", formData);
         resetForm();
         setUploadedImages([]); // Reiniciar las imágenes subidas
         alert("¡Promoción creada exitosamente!");
