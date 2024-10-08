@@ -173,7 +173,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       
       setUser(newUser);     
       localStorage.setItem("user", JSON.stringify(newUser));
-      console.log("Usuario actualizado y guardado en localStorage:", newUser);
   }
 }
   const logOut = () => {
