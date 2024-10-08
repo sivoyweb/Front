@@ -21,8 +21,7 @@ const ProjectForm: React.FC = () => {
     }),
     onSubmit: async (values, { resetForm }) => {
       try {
-        const response = await axios.post("/api/projects", values);
-        console.log("Proyecto creado:", response.data);
+        await axios.post("/api/projects", values);
         resetForm();
         alert("¡Proyecto creado exitosamente!");
       } catch (error) {

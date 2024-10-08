@@ -1,4 +1,5 @@
 "use client"
+
 import { ITravelCardProps } from "@/interfaces/interfaces";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -13,26 +14,27 @@ function HomeDestinationCard({ travels, index }: ITravelCardProps) {
     const imageIndex = travels.images.length > 0 ? (index ?? 0) % travels.images.length : 0;
     const imagen = travels.images[imageIndex];
 
+
     return (
-<div className='flex justify-center'>
-    <div className="w-64 md:w-96 lg:w-[28rem] bg-white rounded-lg shadow transition-transform duration-300 hover:scale-105">
-        <div onClick={handleClick} className="cursor-pointer">
-            <div className="relative w-full h-36 md:h-40 lg:h-44"> 
-                <Image
-                    className="rounded-t-lg object-cover" 
-                    src={imagen?.url || ''} 
-                    alt={travels.name} 
-                    layout="fill" 
-                />
-            </div>
-        </div>
-        <div className="p-4">
-            <div onClick={handleClick} className="cursor-pointer">
-                <div className="mb-1 gap-1 flex justify-between">
-                    <h5 className="mb-1 text-sm md:text-base lg:text-lg text-sivoy-blue font-arialroundedmtbold">
+        <div className='flex justify-center'>
+            <div className="w-64 md:w-96 lg:w-[28rem] bg-white rounded-lg shadow transition-transform duration-300 hover:scale-105">
+                <div onClick={handleClick} className="cursor-pointer">
+                    <div className="relative w-full h-36 md:h-40 lg:h-44"> 
+                        <Image
+                            className="rounded-t-lg object-cover" 
+                            src={imagen?.url || ''} 
+                            alt={travels.name} 
+                            layout="fill" 
+                        />
+                    </div>
+                </div>
+                <div className="p-4">
+                    <div onClick={handleClick} className="cursor-pointer">
+                        <div className="mb-1 gap-1 flex justify-between">
+                        <h5 className="mb-1 text-sm md-lg:text-sm lg:text-sm xl:text-base text-sivoy-blue font-arialroundedmtbold line-clamp">
                         {travels.name}
-                    </h5>
-                    <div className="mb-1 gap-1 flex items-top mt-1">
+                        </h5>
+                        <div className="mb-1 gap-1 flex items-top mt-1">
                         <svg 
                             xmlns="http://www.w3.org/2000/svg"         
                             className="icon icon-tabler icon-tabler-star" 
@@ -60,13 +62,12 @@ function HomeDestinationCard({ travels, index }: ITravelCardProps) {
                         <path d="M7.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
                         <path d="M3 6v5.172a2 2 0 0 0 .586 1.414l7.71 7.71a2.41 2.41 0 0 0 3.408 0l5.592 -5.592a2.41 2.41 0 0 0 0 -3.408l-7.71 -7.71a2 2 0 0 0 -1.414 -.586h-5.172a3 3 0 0 0 -3 3z" />
                     </svg>
-                    <h5 className="text-xs tracking-tight text-sivoy-blue">{travels.serviceType}</h5>
+                    <h5 className="text-sm tracking-tight text-sivoy-blue">{travels.serviceType}</h5>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
     );
 }

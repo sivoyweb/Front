@@ -37,10 +37,9 @@ const TeamForm: React.FC = () => {
           formData.append("image", values.image);
         }
 
-        const response = await axios.post("/api/team", formData, {
+        await axios.post("/api/team", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
-        console.log("Persona agregada al equipo:", response.data);
         resetForm();
         alert("¡Persona agregada exitosamente al equipo!");
       } catch (error) {

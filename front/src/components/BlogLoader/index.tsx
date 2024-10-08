@@ -1,5 +1,3 @@
-// components/BlogLoader.tsx
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -23,9 +21,9 @@ const BlogLoader = () => {
         };
 
         loadBlogArticles();
-    }, []); // Dependencias vacías para que solo se ejecute una vez
+    }, []);
 
-    if (error) return <div>{error}</div>; // Manejo de error simple
+    if (error) return <div>{error}</div>;
 
     return <BlogGrid blogArticles={blogArticles} />;
 };

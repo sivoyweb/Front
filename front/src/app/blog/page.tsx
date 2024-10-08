@@ -10,8 +10,8 @@ const BlogPage = () => {
                     alt="Blog header"
                     layout="fill"
                     objectFit="cover"
-                    objectPosition="50% 30%" // Ajusta estos valores según lo necesites
-                    className="rounded-xl"
+                    objectPosition="50% 30%"
+                    className="rounded-3xl"
                     
                 />
                 <div className="absolute inset-0 flex items-center justify-start">

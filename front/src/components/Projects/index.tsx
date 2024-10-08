@@ -20,7 +20,7 @@ export const ProjectsSection = () => {
   return (
     <section className="flex-1">
       <h2 className="text-2xl font-arialroundedmtbold text-sivoy-blue mb-4">Proyectos</h2>
-      <ul className="list-disc list-inside text-gray-700">
+      <ul className="list-disc list-inside text-gray-700 text-lg">
         {projects.length > 0 ? (
           projects.map((project, index) => (
             <li key={index}>

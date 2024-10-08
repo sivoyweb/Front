@@ -28,7 +28,6 @@ export default function OtherDonationsForm() {
 
     try {
       await sendHelpEmail(formData); 
-      // Alerta de éxito
       await Swal.fire({
         icon: 'success',
         title: '¡Éxito!',
@@ -98,12 +97,12 @@ export default function OtherDonationsForm() {
           className="w-full p-2 border border-gray-300 rounded"
         >
           <option value="">Selecciona una opción</option>
-          <option value="donacion-recurrente">Donación Recurrente</option>
-          <option value="en-especie">Donación en Especie</option>
-          <option value="corporativa">Donación Corporativa</option>
-          <option value="voluntario">Inscríbete como Voluntario</option>
-          <option value="trabajo">Trabaja con Nosotros</option>
-          <option value="otro">Otro</option>
+          <option value="Donación Recurrente">Donación Recurrente</option>
+          <option value="En Especie">Donación en Especie</option>
+          <option value="Corporativa">Donación Corporativa</option>
+          <option value="Voluntario">Inscríbete como Voluntario</option>
+          <option value="Trabajo">Trabaja con Nosotros</option>
+          <option value="Otro">Otro</option>
         </select>
       </div>
 

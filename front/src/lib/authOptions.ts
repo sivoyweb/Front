@@ -26,14 +26,8 @@ export const authOptions:NextAuthOptions = {
               return false;
           }
 
-          const data = await response.json();
-          console.log(data);
-          
-          
-          
-        
-          
-          
+          await response.json();
+
           return true;
       } catch (error) {
           console.error('Error en signIn callback:', error);

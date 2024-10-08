@@ -3,15 +3,15 @@ import { IBlogArticleProps } from "@/interfaces/interfaces";
 
 export const BlogArticle = ({ article }: IBlogArticleProps) => {
   return (
-    <article className="max-w-3xl mx-auto px-4 py-8">
+    <article className="max-w-4xl mx-auto px-4 py-8">
       <div className="mb-8">
         {article.images && article.images.length > 0 && (
           <Image
             src={article.images[0].url}
-            alt={article.images[0].alt || "Imagen del artículo"} // Uso del alt de la imagen
-            width={800}
+            alt={article.images[0].alt || "Imagen del artículo"}
+            width={600}
             height={400}
-            className="rounded-lg shadow-md"
+            className="rounded-3xl mx-auto block"
           />
         )}
       </div>
@@ -24,7 +24,7 @@ export const BlogArticle = ({ article }: IBlogArticleProps) => {
         {article.date}
       </h2>
 
-      <div className="prose prose-lg text-justify text-sivoy-blue">
+      <div className="text-lg text-justify text-sivoy-blue">
         <p>{article.content}</p>
       </div>
     </article>
