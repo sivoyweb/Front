@@ -13,11 +13,11 @@ function DestinationsFilter() {
   const balneariosTravels = travels.filter(travel => travel.serviceType === 'Balneario');
   const gastronomiaTravels = travels.filter(travel => travel.serviceType === 'Gastronomía');
   const alojamientosTravels = travels.filter(travel => travel.serviceType === 'Alojamiento');
-  const ocioTravels = travels.filter(travel => travel.serviceType === "Ocio y Recreación");
-  const culturaTravels = travels.filter(travel => travel.serviceType === "Actividades Culturales");
-  const transporteTravels = travels.filter(travel => travel.serviceType === "Medios de Transporte");
+  const ocioTravels = travels.filter(travel => travel.serviceType === "Ocio y recreación");
+  const culturaTravels = travels.filter(travel => travel.serviceType === "Actividades culturales");
+  const transporteTravels = travels.filter(travel => travel.serviceType === "Medios de rransporte");
   const experienciasTravels = travels.filter(travel => travel.serviceType === "Experiencias");
-  const serviciosPersonalesTravels = travels.filter(travel => travel.serviceType === "Servicios Personales");
+  const serviciosPersonalesTravels = travels.filter(travel => travel.serviceType === "Servicios personales");
   const otroTravels = travels.filter(travel => travel.serviceType === "Otro");
 
   const handleSearchToggle = (searching: boolean) => {

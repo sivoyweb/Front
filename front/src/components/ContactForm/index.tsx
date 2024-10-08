@@ -18,18 +18,16 @@ export default function ContactForm() {
     setIsSubmitting(true);
     setErrorMessage(null);
 
-    // Crear el objeto con los datos del formulario según ISendHelp
     const formData: ISendHelp = {
       name,
       email,
-      helpType: subject, // Asunto
-      message: message || "", // Mensaje opcional
+      helpType: subject, 
+      message: message || "", 
     };
 
     try {
-      await sendHelpEmail(formData); // Llamada a la función modularizada
+      await sendHelpEmail(formData);
       alert("¡Tu mensaje fue enviado con éxito!");
-      // Limpiar los campos del formulario después del envío exitoso
       setName("");
       setEmail("");
       setSubject("");
@@ -42,9 +40,9 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {/* Campo de nombre */}
+    <form onSubmit={handleSubmit} className="bg-white  mb-4 max-w-md mx-auto">
       <div className="mb-4">
+      <h2 className="text-2xl font-arialroundedmtbold text-sivoy-blue text-center mb-6">Formulario de Contacto</h2>
         <label className="block text-sivoy-blue mb-2" htmlFor="name">
           Nombre
         </label>
@@ -58,7 +56,6 @@ export default function ContactForm() {
         />
       </div>
 
-      {/* Campo de correo */}
       <div className="mb-4">
         <label className="block text-sivoy-blue mb-2" htmlFor="email">
           Correo Electrónico
@@ -73,7 +70,6 @@ export default function ContactForm() {
         />
       </div>
 
-      {/* Campo de asunto */}
       <div className="mb-4">
         <label className="block text-sivoy-blue mb-2" htmlFor="subject">
           Asunto
@@ -88,7 +84,6 @@ export default function ContactForm() {
         />
       </div>
 
-      {/* Campo de mensaje */}
       <div className="mb-4">
         <label className="block text-sivoy-blue mb-2" htmlFor="message">
           Mensaje
@@ -106,7 +101,7 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        className="w-full text-white p-2"
+        className="w-full"
         disabled={isSubmitting}
       >
         {isSubmitting ? "Procesando..." : "Enviar Mensaje"}

@@ -88,6 +88,20 @@ export interface ICredential {
   user: IUser,
 }
 
+export interface ICredentialAvatar {
+    url: string;
+    publicId: string;
+}
+
+export interface IFormData {
+  name: string;
+  phone: string;
+  disabilities: string[];
+  credential: Credential;
+  isRepresentative: boolean;
+  id: string | undefined; 
+}
+
 export interface IImage {
   id: string,
   url: string | null,
@@ -123,9 +137,6 @@ export interface IProvider {
     date: Date;
     visible: boolean;
   }
-
-
-
 
   export interface IReviewProps{
     id?: string
@@ -221,7 +232,9 @@ createdAt: string,
 credential: ICredential,
 id: string,
 name: string,
-phone: string
+phone: string,
+avatar?: string,
+email?: string
 }
 
 export interface IUserContextType {

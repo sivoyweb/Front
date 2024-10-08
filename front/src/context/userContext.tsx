@@ -43,7 +43,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       localStorage.setItem("token", data.token);
 
       Swal.fire({
-        title: "Inicio de sesión exitoso",
+        title: "Inicio de sesión Exitoso",
         text: "Bienvenido",
         icon: "success",
       });
@@ -84,7 +84,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       const data = await postRegister(user);
       if (data) {
         Swal.fire({
-          title: "Registro exitoso",
+          title: "¡Registro Exitoso! Revise su casilla de correo para verificar su cuenta",
           text: "Inicie Sesión",
           icon: "success",
         });
