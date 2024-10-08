@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import sendHelpEmail from "@/lib/server/fetchSendHelp";
-import { ISendHelp } from "@/interfaces/interfaces";
+import sendContactEmail from "@/lib/server/fetchContact";
+import { IContact } from "@/interfaces/interfaces";
 
 export default function ContactForm() {
   const [name, setName] = useState(""); 
@@ -18,15 +18,15 @@ export default function ContactForm() {
     setIsSubmitting(true);
     setErrorMessage(null);
 
-    const formData: ISendHelp = {
+    const formData: IContact = {
+      subject,
       name,
       email,
-      helpType: subject, 
       message: message || "", 
     };
 
     try {
-      await sendHelpEmail(formData);
+      await sendContactEmail(formData);
       alert("¡Tu mensaje fue enviado con éxito!");
       setName("");
       setEmail("");

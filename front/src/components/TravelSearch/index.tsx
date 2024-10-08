@@ -37,10 +37,6 @@ const TravelSearch: React.FC<ITravelSearchProps> = ({ onSearchToggle }) => {
       setFilteredTravels(resultado);
       setNoResults(resultado.length === 0);
       resetFields();
-  
-      console.log("City:", textoCiudad);
-      console.log("Servicio:", textoServicio);
-      console.log("Resultado:", resultado);
     } 
   
   
@@ -58,8 +54,7 @@ const TravelSearch: React.FC<ITravelSearchProps> = ({ onSearchToggle }) => {
   const handleServiceClick = (service: string) => {
     setSelectedService(service);
     setIsOpen(false);
-    onSearchToggle(false); 
-    console.log("Servicio Seleccionado:", service);
+    onSearchToggle(false);
   };
   return (
     <div className="absolute p-8 inset-0 flex flex-col justify-center items-center z-10">

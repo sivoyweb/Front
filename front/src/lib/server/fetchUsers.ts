@@ -52,7 +52,6 @@ export const postLoginGoogle = async (credentials: IloginGoogle ) =>{
 
 export const changeData = async (user: IUserChange )=>{
     try {
-        console.log("User ID:", user.id);
          await axios.put(`https://api-sivoy.onrender.com/users/${user.id}`,user)
         
     } catch (error) {
