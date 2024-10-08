@@ -40,7 +40,7 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white  mb-4 max-w-md mx-auto">
+    <form onSubmit={handleSubmit} className="mb-4 max-w-md mx-auto">
       <div className="mb-4">
       <h2 className="text-2xl font-arialroundedmtbold text-sivoy-blue text-center mb-6">Formulario de Contacto</h2>
         <label className="block text-sivoy-blue mb-2" htmlFor="name">
