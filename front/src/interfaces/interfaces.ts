@@ -19,9 +19,9 @@ export interface IRegisterGoogle{
 }
 
 export interface IDisability{
-  id: string,
-  name: string,
-  category: string,
+  id: string;
+  name: string;
+  active: boolean;
   user: IUser,
 }
 
@@ -234,7 +234,9 @@ id: string,
 name: string,
 phone: string,
 avatar?: string,
-email?: string
+email?: string,
+isRepresentative:boolean,
+disabilities:IDisability[]
 }
 
 export interface IUserContextType {
@@ -338,8 +340,9 @@ export interface IFAQProps {
 }
 
 export interface Disability {
-  category: string;
+  id: string;
   name: string;
+  active: boolean;
 }
 
 export interface IAlliances {

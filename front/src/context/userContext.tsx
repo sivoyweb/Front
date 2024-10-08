@@ -41,7 +41,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
       const dataUser = data.userFinal;
       setUser(dataUser);
-      
+      console.log("este es el data user:" ,dataUser)
 
       localStorage.setItem("user", JSON.stringify(data));
       localStorage.setItem("token", data.token);
@@ -71,7 +71,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const loginWithGoogle = async (credentials: IloginGoogle) => {
     try {
       const data = await postLoginGoogle(credentials);
-      console.log(data);
+     
       
       if (!data || !data.userFinal || !data.token) {
         throw new Error("Datos de inicio de sesión incorrectos");
@@ -82,12 +82,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   
       localStorage.setItem("user", JSON.stringify(dataUser));
       localStorage.setItem("token", data.token);
-  
-      Swal.fire({
-        title: "Inicio de sesión Exitoso",
-        text: `Bienvenido ${dataUser.name}`,
-        icon: "success",
-      });
+
+      router.push('/')
   
       return true;
     } catch (error: unknown) {
@@ -172,6 +168,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       };  
       
       setUser(newUser);     
+      console.log("este es el update",newUser)
       localStorage.setItem("user", JSON.stringify(newUser));
   }
 }
