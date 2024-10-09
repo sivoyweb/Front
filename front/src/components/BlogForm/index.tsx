@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import Swal from "sweetalert2"
-import Image from "next/image"; 
+import Swal from "sweetalert2";
+import Image from "next/image";
 
 interface IImage {
   url: string;
@@ -14,17 +14,16 @@ interface IImage {
 interface IBlogFormValues {
   title: string;
   content: string;
-  images: IImage[];
+  images?: IImage[];
 }
 
 const BlogForm: React.FC = () => {
-  const [uploadedImages, setUploadedImages] = useState<IImage[]>([]); 
+  const [uploadedImages, setUploadedImages] = useState<IImage[]>([]);
 
   const handleImageUpload = () => {
-
     const newImage: IImage = {
-      url: "https://ejemplo.com/imagen.jpg", 
-      alt: "Descripción de la imagen", 
+      url: "https://ejemplo.com/imagen.jpg",
+      alt: "Descripción de la imagen",
     };
     setUploadedImages([...uploadedImages, newImage]);
   };
@@ -40,18 +39,22 @@ const BlogForm: React.FC = () => {
       content: Yup.string().required("El contenido es obligatorio."),
     }),
     onSubmit: async (values, { resetForm }) => {
+      const token = localStorage.getItem("token");
       try {
-        const formData = { ...values, images: uploadedImages }; 
-        await axios.post("/api/blogs", formData);
+        const formData = { ...values, images: uploadedImages };
+        await axios.post("https://api-sivoy.onrender.com/blogs", formData, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         resetForm();
         setUploadedImages([]);
         Swal.fire({
-          icon: 'success',
-          title: 'Éxito',
+          icon: "success",
+          title: "Éxito",
           text: "¡Blog creado exitosamente!",
         });
-      } catch (error) {
-      }
+      } catch (error) {}
     },
   });
 
