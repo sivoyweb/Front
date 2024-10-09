@@ -1,9 +1,9 @@
-import ProjectForm from "@/components/ProjectForm";
+import AdminReviewsComponent from "@/components/AdminReviewsComponent";
 
 function prueba() {
   return (
     <div className="h-full">
-      <ProjectForm />
+      <AdminReviewsComponent />
     </div>
   );
 }

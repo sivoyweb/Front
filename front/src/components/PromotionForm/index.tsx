@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import Image from "next/image";
-import Swal from "sweetalert2"
+import Swal from "sweetalert2";
 
 interface IImage {
   url: string;
@@ -14,7 +14,7 @@ interface IImage {
 interface IPromotionFormValues {
   name: string;
   description: string;
-  images: IImage[]; // Arreglo de imágenes
+  images?: IImage[]; // Arreglo de imágenes
   validFrom: string;
   validUntil: string;
 }
@@ -23,10 +23,6 @@ const PromotionForm: React.FC = () => {
   const [uploadedImages, setUploadedImages] = useState<IImage[]>([]); // Guardar imágenes subidas
 
   const handleImageUpload = () => {
-    // Aquí puedes implementar la lógica para abrir el widget de Cloudinary
-    // Por ejemplo:
-    // window.cloudinary.openUploadWidget({ ... }, (error, result) => { ... });
-    // Una vez que se haya subido la imagen, almacenas la URL y otros datos:
     const newImage: IImage = {
       url: "https://ejemplo.com/imagen.jpg", // Esta es la URL obtenida tras la subida
       alt: "Descripción de la imagen", // Esto lo puedes configurar manualmente o desde el widget
@@ -49,17 +45,25 @@ const PromotionForm: React.FC = () => {
       validUntil: Yup.date().required("La fecha de fin es obligatoria."),
     }),
     onSubmit: async (values, { resetForm }) => {
+      const token = localStorage.getItem("token");
       try {
-        const formData = { ...values, images: uploadedImages }; // Añadir las imágenes subidas al formulario
-        await axios.post("/api/promotions", formData);
+        const formData = { ...values, images: uploadedImages };
+        await axios.post(
+          "https://api-sivoy.onrender.com/Promotions",
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         resetForm();
-        setUploadedImages([]); // Reiniciar las imágenes subidas
+        setUploadedImages([]);
         Swal.fire({
-          icon: 'success',
+          icon: "success",
           text: "¡Proyecto creado exitosamente!",
         });
-      } catch (error) {
-      }
+      } catch (error) {}
     },
   });
 

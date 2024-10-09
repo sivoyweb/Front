@@ -9,8 +9,7 @@ const MySwal = withReactContent(Swal);
 
 const AdminUsersComponent = () => {
   const [users, setUsers] = useState<IUser[]>([]);
-  const token =
-    typeof window !== "undefined" ? localStorage.getItem("token") : null;
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -58,7 +57,11 @@ const AdminUsersComponent = () => {
             },
           });
           setUsers(users.filter((user) => user.id !== id));
-          MySwal.fire("¡Eliminado!", "El usuario ha sido eliminado.", "success");
+          MySwal.fire(
+            "¡Eliminado!",
+            "El usuario ha sido eliminado.",
+            "success"
+          );
         } catch (error) {
           MySwal.fire({
             title: "¡Error!",
@@ -66,7 +69,6 @@ const AdminUsersComponent = () => {
             icon: "error",
           });
         }
-        
       }
     });
   };
@@ -92,14 +94,13 @@ const AdminUsersComponent = () => {
         text: "El rol del usuario ha sido actualizado a Administrador",
         icon: "success",
       });
-      } catch (error) {
-        MySwal.fire({
-          title: "¡Error!",
-          text: "No se pudo actualizar el rol del usuario",
-          icon: "error",
-        });
-      }
-      
+    } catch (error) {
+      MySwal.fire({
+        title: "¡Error!",
+        text: "No se pudo actualizar el rol del usuario",
+        icon: "error",
+      });
+    }
   };
 
   return (
