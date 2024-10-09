@@ -50,8 +50,7 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
       );
 
       Swal.fire(
-        "¡Tu reseña ha sido enviada exitosamente!",
-        "success"
+        "¡Tu reseña ha sido enviada exitosamente!"
       );
 
       setReview("");

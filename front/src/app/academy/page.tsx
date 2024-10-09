@@ -11,12 +11,10 @@ const Academia = () => {
         <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           <div className="space-y-6">
             <h2 className="text-3xl font-arialroundedmtbold text-sivoy-blue">
-              Capacitación Profesional en Turismo Accesible
+            Inauguramos la  “Academia SÍ, VOY! Tu destino sin límites”
             </h2>
             <p className="text-lg text-justify mr-16 text-sivoy-blue">
-              Ofrecemos una formación de alta calidad que te permitirá diseñar
-              experiencias turísticas inclusivas. Aprende cómodamente desde
-              cualquier lugar y únete a la revolución del turismo accesible.
+            Con la meta de convertir a todos los países en destinos accesibles, el instituto presenta este diplomado 100% vía E-learning ofreciendo alta calidad académica con el objeto de formar nuevas generaciones de profesionales conscientes de la importancia del diseño de un turismo verdaderamente accesible.
             </p>
             <Link
               href="/contact-us"
@@ -56,19 +54,18 @@ const Academia = () => {
             </div>
             <div className="p-6 bg-sivoy-green shadow-gradient rounded-lg">
               <h4 className="text-2xl font-arialroundedmtbold text-sivoy-blue mb-4">
-                Material Exclusivo
+              Capacitación profesional en turismo accesible
               </h4>
               <p className="text-lg text-sivoy-blue">
-                Material de estudio de alta calidad disponible para ti durante
-                el curso.
+              tipos de discapacidades: mental, motriz y sensorial,etc
               </p>
             </div>
             <div className="p-6 bg-sivoy-green shadow-gradient rounded-lg">
               <h4 className="text-2xl font-arialroundedmtbold text-sivoy-blue mb-4">
-                Diploma Certificado
+              Destinatarios
               </h4>
               <p className="text-lg text-sivoy-blue">
-                Al finalizar, recibirás un diploma digitalizado y certificado.
+              Gobierno federal, estados, municipio, ciudades, Secretarias, estudiantes de carreras afines al turismo, prestadores de servicios (transporte, hoteles, restaurantes, guías de turismo, agencias de viajes, organizadores de tours médicos, líneas aéreas, etc.)
               </p>
             </div>
           </div>
@@ -88,6 +85,7 @@ const Academia = () => {
                 <li>Acceso al aula 24/7</li>
                 <li>Uso irrestricto de la biblioteca virtual</li>
                 <li>Salas de foro y chats</li>
+                <li>-Guia docente con profesores y tutores</li>
                 <li>Diploma y certificado analítico digitalizado</li>
               </ul>
             </div>

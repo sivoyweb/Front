@@ -98,9 +98,11 @@ export default function Navbar() {
                   <DropdownMenuItem>
                     <Link href="/user-dashboard">Mi Perfil</Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={handleAdmin}>
+
+                  {user?.role==="admin" ? <DropdownMenuItem onClick={handleAdmin}>
                     Administrador
-                  </DropdownMenuItem>
+                  </DropdownMenuItem>: null}
+
                   <DropdownMenuItem onClick={handleLogout}>
                     Cerrar Sesión
                   </DropdownMenuItem>
@@ -189,6 +191,18 @@ export default function Navbar() {
                 >
                   Mi Perfil
                 </Link>
+                
+                {user?.role === "admin" ?<Link
+                  href="/admin-dashboard"
+                  className="block px-3 py-2 rounded-md text-base"
+                  onClick={() => {
+                    handleAdmin();
+                    toggleMenu()
+                 
+                  }}
+                > 
+                  Administracion
+                </Link> : null}
                 <button
                   className="block w-32 ml-2 text-left px-3 py-2 rounded-md text-base font-medium"
                   onClick={() => {

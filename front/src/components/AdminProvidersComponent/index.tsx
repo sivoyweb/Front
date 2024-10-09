@@ -65,8 +65,7 @@ const AdminProvidersComponent = () => {
       );
       Swal.fire(
         "Proveedor actualizado",
-        "El proveedor ha sido actualizado correctamente",
-        "success"
+        "El proveedor ha sido actualizado correctamente"
       );
       setEditingProvider(null);
       fetchProviders(); // Actualizar lista después de editar
@@ -93,7 +92,7 @@ const AdminProvidersComponent = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        Swal.fire("El proveedor ha sido eliminado.", "success");
+        Swal.fire("El proveedor ha sido eliminado.");
         setProviders(providers.filter((provider) => provider.id !== id));
       }
     } catch (error) {

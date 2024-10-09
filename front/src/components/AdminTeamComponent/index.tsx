@@ -67,8 +67,7 @@ const AdminTeamComponent = () => {
 console.log(response);
 
       Swal.fire(
-        "¡El miembro del equipo ha sido actualizado correctamente!",
-        "success"
+        "¡El miembro del equipo ha sido actualizado correctamente!"
       );
       setEditingMember(null);
       fetchTeam(); // Actualizar la lista después de la edición
@@ -101,8 +100,7 @@ console.log(response);
           },
         });
         Swal.fire(
-          "El miembro del equipo ha sido eliminado.",
-          "success"
+          "El miembro del equipo ha sido eliminado."
         );
         setTeam(team.filter((member) => member.id !== id));
       }

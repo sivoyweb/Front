@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+
 
 const fotoInfo = 'https://res.cloudinary.com/dvxh2vynm/image/upload/v1726775425/si-voy/fkergitm9nvxuanmblks.jpg';
 const fotoAccess = 'https://res.cloudinary.com/dvxh2vynm/image/upload/v1726775425/si-voy/oc8beborc0vk6stxoz6x.jpg';
@@ -18,14 +18,12 @@ const BusinessServices = () => {
                     </p>
                     <p className="text-2xl font-arialroundedmtbold text-sivoy-blue">¿Qué beneficios obtendrás?</p>
                     <ul className="list-disc pl-5 text-lg text-sivoy-blue">
-                        <li>Incrementarás tus ganancias atendiendo a un nuevo segmento.</li>
+                        <li>Atenderás un segmento que representa el 40% de la población, por lo tanto se incrementarán tus ganancias.</li>
                         <li>Eliminas la estacionalidad del sector.</li>
                     </ul>
                     <p className="text-sivoy-blue text-lg mr-14"> 
-                        <Link href="/contact-us" className="text-blue-600 underline">
-                            Consúltanos
-                        </Link>
-                        {" "}y amplía tu oferta a un segmento que conocemos a la perfección.
+                        
+                         amplía tu oferta a un segmento que conocemos a la perfección.
                     </p>
                 </div>
                 <div className="order-1 md:order-1 mb-10 mt-5 md:mt-0">
@@ -42,22 +40,16 @@ const BusinessServices = () => {
 
             <section className="grid grid-cols-1 md:grid-cols-2 gap-8 py-16 px-8 md:px-16 text-justify text-sivoy-blue shadow-gradient">
                 <div className="order-2 md:order-2 space-y-6 mt-10">
-                    <h2 className="font-arialroundedmtbold text-3xl text-sivoy-blue">Itinerarios Accesibles Personalizados</h2>
+                    <h2 className="font-arialroundedmtbold text-3xl text-sivoy-blue">Consultoría en Diseño Universal</h2>
                     <p className="text-lg">
-                        ¿Cuentas con personal a cargo y quieres brindar una atención inclusiva? Formamos a tu equipo sobre la
-                        importancia del trato adecuado a personas con discapacidad.
+                    ¿Tenés un Hotel o una Empresa del sector turístico?
+                    ¿Te gustaría contar con instalaciones accesibles y atender a múltiples clientes?
                     </p>
                     <p className="text-2xl font-arialroundedmtbold text-sivoy-blue">¿Qué obtendrás?</p>
                     <ul className="list-disc pl-5 text-lg">
-                        <li>Capacitarás a tu personal en turismo accesible.</li>
-                        <li>Mejorarás la calidad del servicio.</li>
-                    </ul>
-                    <p>
-                        Invierte en formación,{" "}
-                        <a href="#contacto" className="text-blue-600 underline">
-                            consúltanos.
-                        </a>
-                    </p>
+                        <li>Aumentarás el confort de tus instalaciones, atrayendo un mayor número de clientes, y por ende, los ingresos.</li>
+                        <li> Te diferenciaras de la competencia, mejorará tu imagen corporativa e invertirás en Responsabilidad Social.</li>
+                    </ul>                       
                 </div>
                 <div className="order-1 md:order-1 mb-10 mt-5 md:mt-0">
                     <Image
@@ -72,21 +64,18 @@ const BusinessServices = () => {
 
             <section className="grid grid-cols-1 md:grid-cols-2 gap-8 py-16 px-8 md:px-16 text-justify">
                 <div className="space-y-6">
-                    <h2 className="font-arialroundedmtbold text-3xl text-sivoy-blue">Asesoramiento en Diseño Universal</h2>
+                    <h2 className="font-arialroundedmtbold text-3xl text-sivoy-blue">Capacitaciones</h2>
                     <p className="text-lg text-sivoy-blue mr-28">
-                        ¿Tienes un Hotel o una Empresa del sector turístico? Te gustaría contar con instalaciones accesibles
-                        y atender a múltiples clientes.
+                    ¿Tu personal se siente “incómodo o no sabe dirigirse ante una persona con discapacidad?
                     </p>
                     <p className="text-2xl font-arialroundedmtbold text-sivoy-blue">¿Qué obtendrás?</p>
                     <ul className="list-disc pl-5 text-lg text-sivoy-blue">
-                        <li>Aumentarás el confort de tus instalaciones.</li>
-                        <li>Te diferenciarás de la competencia.</li>
+                        <li>Pautas para garantizar una correcta atención a “todos” los clientes.</li>
+                        <li>A interactuar adecuadamente con las personas en situación de discapacidad o necesidades especiales.</li>
                     </ul>
                     <p>
-                        Comienza la transformación,{" "}
-                        <a href="/contact-us" className="text-blue-600 underline">
-                            consúltanos.
-                        </a>
+                    Algunas de nuestras capacitaciones es el Trato adecuado hacia las personas con discapacidad y otras necesidades <strong>Modalidad In Company/Virtual.</strong>
+
                     </p>
                 </div>
                 <div>
