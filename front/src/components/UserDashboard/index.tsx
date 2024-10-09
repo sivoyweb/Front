@@ -296,8 +296,8 @@ console.log(formData);
           <label className="combobox-label flex items-center gap-2">
             <input
               type="checkbox"
-              checked={formData.disabilities.some(disability => disability.name === option.category)} // Verifica si la discapacidad está seleccionada
-              onChange={() => handleToggleDisability(option.category)} // Controlador para añadir/eliminar discapacidades
+              checked={formData.disabilities.some(disability => disability.name === option.category)} 
+              onChange={() => handleToggleDisability(option.category)} 
             />
             <span>{option.category}</span>
           </label>
@@ -409,7 +409,7 @@ console.log(formData);
           
              <Image
              alt="imagen de perfil"
-             src={user?.credential?.avatar?.url ||  ''}
+             src={user?.credential?.avatar?.url || 'https://res.cloudinary.com/dvxh2vynm/image/upload/v1728360008/si-voy/zcomkrjmtznorb7qdtl0.png'}
              width={50}  
              height={50} 
              className="rounded-full" />

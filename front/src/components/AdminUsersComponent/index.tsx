@@ -58,7 +58,7 @@ const AdminUsersComponent = () => {
             },
           });
           setUsers(users.filter((user) => user.id !== id));
-          MySwal.fire("¡Eliminado!", "El usuario ha sido eliminado.", "success");
+          MySwal.fire("¡Eliminado!", "El usuario ha sido eliminado.");
         } catch (error) {
           MySwal.fire({
             title: "¡Error!",

@@ -264,6 +264,7 @@ avatar?: string,
 email?: string,
 isRepresentative:boolean,
 disabilities:IDisability[]
+role:string
 }
 
 export interface IUserContextType {

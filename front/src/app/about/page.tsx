@@ -1,3 +1,4 @@
+
 import { ProjectsSection } from "@/components/Projects";
 import { TeamSection } from "@/components/Team"
 

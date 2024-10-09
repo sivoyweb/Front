@@ -63,8 +63,8 @@ const AdminProjectsComponent = () => {
         }
       );
       Swal.fire(
-        "¡El proyecto ha sido actualizado correctamente!",
-        "success"
+        "¡El proyecto ha sido actualizado correctamente!"
+        
       );
       setEditingProject(null);
       fetchProjects(); // Actualizar lista después de editar
@@ -92,7 +92,7 @@ const AdminProjectsComponent = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        Swal.fire("El proyecto ha sido eliminado.", "success");
+        Swal.fire("El proyecto ha sido eliminado.");
         setProjects(projects.filter((project) => project.id !== id));
       }
     } catch (error) {

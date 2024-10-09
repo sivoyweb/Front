@@ -58,8 +58,7 @@ console.log(saving);
         }
       );
       Swal.fire(
-        "La reseña ha sido eliminada correctamente",
-        "success"
+        "La reseña ha sido eliminada correctamente"
       );
       fetchReviews();
     } catch (error) {
@@ -87,8 +86,7 @@ console.log(saving);
         }
       );
       Swal.fire(
-        "La reseña ha sido actualizada correctamente",
-        "success"
+        "La reseña ha sido actualizada correctamente"
       );
       setEditingReview(null);
       fetchReviews();
