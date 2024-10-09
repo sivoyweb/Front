@@ -19,7 +19,7 @@ export default function RegisterPage() {
               src="https://res.cloudinary.com/ddzcann0m/image/upload/v1726790351/wolbf7thf78to3chhlk8.png"
               width={200} // Ajusta el tamaño según sea necesario
               height={150} // Ajusta el tamaño según sea necesario
-              alt="Sivoy"
+              alt="Logo de Sí, Voy"
               className="object-contain max-w-full h-auto"
             />
           </div>

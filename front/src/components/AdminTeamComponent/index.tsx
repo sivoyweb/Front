@@ -4,7 +4,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { ITeam } from "@/interfaces/interfaces";
-import Image from "next/image";
+import Image from "next/image"
+import Loader from "@/components/Loader"
 
 // SweetAlert2 con React
 const MySwal = withReactContent(Swal);
@@ -35,7 +36,6 @@ const AdminTeamComponent = () => {
 
       setTeam(response.data);
     } catch (err) {
-      console.error("Error al obtener el equipo", err);
       setError("Hubo un problema al obtener el equipo.");
     } finally {
       setLoading(false);
@@ -52,9 +52,6 @@ const AdminTeamComponent = () => {
 
     const token = localStorage.getItem("token");
 
-    // Verificar los datos que se van a enviar
-    console.log("Datos que se envían para actualizar:", editingMember);
-
     try {
       const { name, description, linkedin, image } = editingMember;
 
@@ -68,18 +65,13 @@ const AdminTeamComponent = () => {
         }
       );
 
-      // Verificar la respuesta del servidor
-      console.log("Respuesta del servidor:", response);
-
       Swal.fire(
-        "Miembro actualizado",
-        "El miembro del equipo ha sido actualizado correctamente",
+        "¡El miembro del equipo ha sido actualizado correctamente!",
         "success"
       );
       setEditingMember(null);
       fetchTeam(); // Actualizar la lista después de la edición
     } catch (error) {
-      console.error("Error en la actualización:", error);
       Swal.fire(
         "Error",
         "No se pudo actualizar el miembro del equipo.",
@@ -108,7 +100,6 @@ const AdminTeamComponent = () => {
           },
         });
         Swal.fire(
-          "¡Eliminado!",
           "El miembro del equipo ha sido eliminado.",
           "success"
         );
@@ -131,7 +122,7 @@ const AdminTeamComponent = () => {
   };
 
   if (loading) {
-    return <div className="text-center">Cargando...</div>;
+    return <Loader />
   }
 
   if (error) {
@@ -209,7 +200,7 @@ const AdminTeamComponent = () => {
                     {editingMember.image && (
                       <Image
                         src={editingMember.image.url ?? "/default-image.jpg"}
-                        alt="Team member"
+                        alt={`Imagen de ${editingMember.name}`}
                         width={128}
                         height={128}
                         className="mt-4 object-cover"
@@ -239,7 +230,7 @@ const AdminTeamComponent = () => {
                     {member.image && (
                       <Image
                         src={member.image.url ?? "/default-image.jpg"}
-                        alt="Team member"
+                        alt={`Imagen de ${member.name}`} 
                         width={128}
                         height={128}
                         className="mt-4 object-cover"

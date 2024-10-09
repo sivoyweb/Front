@@ -35,7 +35,7 @@ export const HomeButton = () => {
     return (
       <button 
         onClick={handleClick}
-        className='4k:text-2xl'
+        className='text-xs md:text-base'
       >
         Explorar Destinos
       </button>
@@ -69,7 +69,7 @@ export const DonationButton = () => {
   return (
     <button
       onClick={handleClick}
-      className='bg-sivoy-gradient 4k:text-2xl ml-6'
+      className='bg-sivoy-gradient ml-6 text-xs md:text-base'
     >
       Ayúdanos a Crecer
     </button>

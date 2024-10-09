@@ -3,6 +3,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import Swal from "sweetalert2"
 
 interface IProjectFormValues {
   name: string;
@@ -20,10 +21,23 @@ const ProjectForm: React.FC = () => {
       description: Yup.string().required("La descripción es obligatoria."),
     }),
     onSubmit: async (values, { resetForm }) => {
+      const token = localStorage.getItem("token");
+      console.log(values);
       try {
-        await axios.post("/api/projects", values);
+        await axios.post(
+          "https://api-sivoy.onrender.com/projects",
+          { values },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         resetForm();
-        alert("¡Proyecto creado exitosamente!");
+        Swal.fire({
+          icon: 'success',
+          text: "¡Proyecto creado exitosamente!",
+        });
       } catch (error) {
       }
     },

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { IDonationAdmin } from "@/interfaces/interfaces";
+import Loader from "@/components/Loader"
 
 const AdminDonationsComponent = () => {
   const [donations, setDonations] = useState<IDonationAdmin[]>([]);
@@ -30,7 +31,6 @@ const AdminDonationsComponent = () => {
       );
       setDonations(response.data);
     } catch (err) {
-      console.error("Error al obtener las donaciones", err);
       setError("Hubo un problema al obtener las donaciones.");
     } finally {
       setLoading(false);
@@ -50,7 +50,7 @@ const AdminDonationsComponent = () => {
   };
 
   if (loading) {
-    return <div className="text-center">Cargando...</div>;
+    return <Loader />
   }
 
   if (error) {

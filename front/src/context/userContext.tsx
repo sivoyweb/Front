@@ -41,14 +41,13 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
       const dataUser = data.userFinal;
       setUser(dataUser);
-      console.log("este es el data user:" ,dataUser)
 
       localStorage.setItem("user", JSON.stringify(data));
       localStorage.setItem("token", data.token);
 
       Swal.fire({
-        title: "Inicio de sesión Exitoso",
-        text: `Bienvenido ${dataUser.name}`,
+        title: "Inicio de sesión exitoso",
+        text: `¡Bienvenido/a ${dataUser.name}!`,
         icon: "success",
       });
 
@@ -117,8 +116,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       const data = await postRegister(user);
       if (data) {
         Swal.fire({
-          title: "¡Registro Exitoso! Revise su casilla de correo para verificar su cuenta",
-          text: "Inicie Sesión",
+          text: "¡Registro Exitoso! Revise su casilla de correo para verificar su cuenta",
           icon: "success",
         });
 
@@ -168,7 +166,6 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       };  
       
       setUser(newUser);     
-      console.log("este es el update",newUser)
       localStorage.setItem("user", JSON.stringify(newUser));
   }
 }

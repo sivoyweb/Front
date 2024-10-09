@@ -20,7 +20,7 @@ async function TravelDetail({ params }: { params: { travelId: string } }) {
           priority={true}
           className="object-cover rounded-3xl"
         />
-<div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-sivoy-blue bg-white/80 p-8 w-3/4 rounded-3xl shadow-lg">
+<div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center text-sivoy-blue bg-white/80 p-8 w-3/4 rounded-3xl">
   <h2 className="text-xl lg:text-3xl py-4 text-sivoy-blue">{travels.serviceType}</h2>
   <h1 className="py-4 text-4xl lg:text-6xl font-arialroundedmtbold text-sivoy-blue">
     {travels.name}

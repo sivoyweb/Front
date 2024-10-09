@@ -13,7 +13,7 @@ import Swal from "sweetalert2";
           if (uploadedImage) {
         
             Swal.fire({
-              title: "Imagen subida con éxito",
+              title: "¡Imagen subida con éxito!",
               text: `URL: ${uploadedImage.secure_url}`, 
               icon: "success",
             });

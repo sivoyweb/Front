@@ -3,6 +3,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import Swal from "sweetalert2"
 
 interface ITeamFormValues {
   name: string;
@@ -37,11 +38,14 @@ const TeamForm: React.FC = () => {
           formData.append("image", values.image);
         }
 
-        await axios.post("/api/team", formData, {
+        await axios.post("https://api-sivoy.onrender.com/team", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
         resetForm();
-        alert("¡Persona agregada exitosamente al equipo!");
+        Swal.fire({
+          icon: 'success',
+          text: "¡Persona agregada exitosamente al equipo!",
+        });
       } catch (error) {
       }
     },

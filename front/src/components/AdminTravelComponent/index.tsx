@@ -5,6 +5,7 @@ import withReactContent from "sweetalert2-react-content";
 import axios from "axios";
 import { IUpdateTravel } from "@/interfaces/interfaces";
 import Image from "next/image";
+import Loader from "@/components/Loader"
 
 // SweetAlert2 con React
 const MySwal = withReactContent(Swal);
@@ -32,7 +33,6 @@ const AdminTravelComponent = () => {
         setTravels(response.data);
         setLoading(false);
       } catch (error) {
-        console.error("Error al obtener los viajes", error);
         setLoading(false);
       }
     };
@@ -57,11 +57,10 @@ const AdminTravelComponent = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        MySwal.fire("¡Eliminado!", "El destino ha sido eliminado.", "success");
+        MySwal.fire("El destino ha sido eliminado.", "success");
         setTravels(travels.filter((travel) => travel.id !== id));
       }
     } catch (error) {
-      console.error("Error al eliminar el viaje", error);
       MySwal.fire("Error", "Hubo un problema al eliminar el destino.", "error");
     }
   };
@@ -70,7 +69,6 @@ const AdminTravelComponent = () => {
     if (!editingTravel) return;
     const token = localStorage.getItem("token");
     setSaving(true);
-    console.log(editingTravel); // Verificar los datos
     try {
       await axios.put(
         `https://api-sivoy.onrender.com/travels/${editingTravel.id}`,
@@ -87,9 +85,8 @@ const AdminTravelComponent = () => {
         )
       );
       setEditingTravel(null);
-      MySwal.fire("¡Guardado!", "El destino ha sido actualizado.", "success");
+      MySwal.fire("¡El destino ha sido actualizado!", "success");
     } catch (error) {
-      console.error("Error al guardar el viaje", error);
       MySwal.fire(
         "Error",
         "Hubo un problema al actualizar el destino.",
@@ -101,7 +98,7 @@ const AdminTravelComponent = () => {
   };
 
   if (loading) {
-    return <div className="text-center">Cargando...</div>;
+    return <Loader />;
   }
 
   return (
@@ -276,7 +273,7 @@ const AdminTravelComponent = () => {
                       <Image
                         key={index}
                         src={image.url || `imagen`} // Asegúrate de que `image` sea la URL completa
-                        alt={`Image ${index + 1}`}
+                        alt={`Imagen ${index + 1}`}
                         width={100}
                         height={100}
                         className="rounded-md object-cover"

@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import Image from "next/image"; // Importar Image de Next.js
+import Swal from "sweetalert2"
+import Image from "next/image"; 
 
 interface IImage {
   url: string;
@@ -13,18 +14,17 @@ interface IImage {
 interface IBlogFormValues {
   title: string;
   content: string;
-  images: IImage[]; // Arreglo de imágenes
+  images: IImage[];
 }
 
 const BlogForm: React.FC = () => {
-  const [uploadedImages, setUploadedImages] = useState<IImage[]>([]); // Guardar imágenes subidas
+  const [uploadedImages, setUploadedImages] = useState<IImage[]>([]); 
 
   const handleImageUpload = () => {
-    // Aquí puedes implementar la lógica para abrir el widget de Cloudinary
-    // Ejemplo de manejo de subida de imagen:
+
     const newImage: IImage = {
-      url: "https://ejemplo.com/imagen.jpg", // La URL obtenida tras la subida
-      alt: "Descripción de la imagen", // Configurable manualmente o desde el widget
+      url: "https://ejemplo.com/imagen.jpg", 
+      alt: "Descripción de la imagen", 
     };
     setUploadedImages([...uploadedImages, newImage]);
   };
@@ -41,11 +41,15 @@ const BlogForm: React.FC = () => {
     }),
     onSubmit: async (values, { resetForm }) => {
       try {
-        const formData = { ...values, images: uploadedImages }; // Añadir las imágenes subidas al formulario
+        const formData = { ...values, images: uploadedImages }; 
         await axios.post("/api/blogs", formData);
         resetForm();
-        setUploadedImages([]); // Reiniciar las imágenes subidas
-        alert("¡Blog creado exitosamente!");
+        setUploadedImages([]);
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: "¡Blog creado exitosamente!",
+        });
       } catch (error) {
       }
     },
