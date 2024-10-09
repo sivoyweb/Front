@@ -6,6 +6,7 @@ import withReactContent from "sweetalert2-react-content";
 import { format } from "date-fns";
 import Image from "next/image";
 import { IPromotionAdmin } from "@/interfaces/interfaces";
+import Loader from "@/components/Loader"
 
 // SweetAlert2 con React
 const MySwal = withReactContent(Swal);
@@ -39,7 +40,6 @@ const AdminPromotionComponent = () => {
 
       setPromotions(response.data);
     } catch (err) {
-      console.error("Error al obtener las promociones", err);
       setError("Hubo un problema al obtener las promociones.");
     } finally {
       setLoading(false);
@@ -96,7 +96,7 @@ const AdminPromotionComponent = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        Swal.fire("¡Eliminado!", "La promoción ha sido eliminada.", "success");
+        Swal.fire("La promoción ha sido eliminada.", "success");
         setPromotions(promotions.filter((promotion) => promotion.name !== id));
       }
     } catch (error) {
@@ -106,11 +106,10 @@ const AdminPromotionComponent = () => {
 
   const handleImageUpdate = () => {
     // Aquí puedes agregar la lógica del widget de Cloudinary
-    console.log("Abrir widget de Cloudinary");
   };
 
   if (loading) {
-    return <div className="text-center">Cargando...</div>;
+    return <Loader />;
   }
 
   if (error) {
@@ -207,7 +206,7 @@ const AdminPromotionComponent = () => {
                         <Image
                           key={img.id}
                           src={img.url ?? `imagenes`}
-                          alt={`Image for ${promotion.name}`}
+                          alt={`Imagen de ${promotion.name}`}
                           width={128}
                           height={128}
                           className="object-cover inline-block mr-2 w-32 h-32"
@@ -256,7 +255,7 @@ const AdminPromotionComponent = () => {
                         <Image
                           key={img.id}
                           src={img.url ?? `imagenes`}
-                          alt={`Image for ${promotion.name}`}
+                          alt={`Imagen de ${promotion.name}`}
                           width={128}
                           height={128}
                           className="object-cover inline-block mr-2 w-32 h-32"

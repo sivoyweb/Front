@@ -3,6 +3,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import Swal from "sweetalert2"
 
 interface IProviderFormValues {
   name: string;
@@ -23,7 +24,10 @@ const ProvidersForm: React.FC = () => {
       try {
         await axios.post("/api/providers", values);
         resetForm();
-        alert("¡Proveedor creado exitosamente!");
+        Swal.fire({
+          icon: 'success',
+          text: "¡Proveedor creado exitosamente!",
+        });
       } catch (error) {
       }
     },

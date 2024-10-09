@@ -32,7 +32,6 @@ export default function OtherDonationsForm() {
         icon: 'success',
         title: '¡Éxito!',
         text: '¡Tu ayuda fue enviada con éxito!',
-        confirmButtonText: 'Aceptar',
       });
 
       setName("");
@@ -40,13 +39,10 @@ export default function OtherDonationsForm() {
       setHelpType("");
       setMessage("");
     } catch (error) {
-      // Alerta de error
-      setErrorMessage((error as Error).message || "Error al enviar el correo");
       await Swal.fire({
         icon: 'error',
         title: 'Error',
         text: errorMessage || 'Ocurrió un error al enviar el correo.',
-        confirmButtonText: 'Aceptar',
       });
     } finally {
       setIsSubmitting(false);

@@ -4,6 +4,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { IProjects } from "@/interfaces/interfaces";
+import Loader from "@/components/Loader"
 
 const MySwal = withReactContent(Swal);
 
@@ -36,7 +37,6 @@ const AdminProjectsComponent = () => {
 
       setProjects(response.data);
     } catch (err) {
-      console.error("Error al obtener los proyectos", err);
       setError("Hubo un problema al obtener los proyectos.");
     } finally {
       setLoading(false);
@@ -63,8 +63,7 @@ const AdminProjectsComponent = () => {
         }
       );
       Swal.fire(
-        "Proyecto actualizado",
-        "El proyecto ha sido actualizado correctamente",
+        "¡El proyecto ha sido actualizado correctamente!",
         "success"
       );
       setEditingProject(null);
@@ -93,7 +92,7 @@ const AdminProjectsComponent = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        Swal.fire("¡Eliminado!", "El proyecto ha sido eliminado.", "success");
+        Swal.fire("El proyecto ha sido eliminado.", "success");
         setProjects(projects.filter((project) => project.id !== id));
       }
     } catch (error) {
@@ -109,7 +108,7 @@ const AdminProjectsComponent = () => {
   };
 
   if (loading) {
-    return <div className="text-center">Cargando...</div>;
+    return <Loader />;
   }
 
   if (error) {

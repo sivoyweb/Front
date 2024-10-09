@@ -3,6 +3,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import Swal from "sweetalert2"
 
 interface IProjectFormValues {
   name: string;
@@ -33,8 +34,12 @@ const ProjectForm: React.FC = () => {
           }
         );
         resetForm();
-        alert("¡Proyecto creado exitosamente!");
-      } catch (error) {}
+        Swal.fire({
+          icon: 'success',
+          text: "¡Proyecto creado exitosamente!",
+        });
+      } catch (error) {
+      }
     },
   });
 

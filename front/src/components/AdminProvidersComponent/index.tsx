@@ -4,6 +4,7 @@ import axios from "axios";
 import { IProvider } from "@/interfaces/interfaces";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import Loader from "@/components/Loader"
 
 const MySwal = withReactContent(Swal);
 
@@ -37,7 +38,6 @@ const AdminProvidersComponent = () => {
 
       setProviders(response.data);
     } catch (err) {
-      console.error("Error al obtener los proveedores", err);
       setError("Hubo un problema al obtener los proveedores.");
     } finally {
       setLoading(false);
@@ -93,7 +93,7 @@ const AdminProvidersComponent = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        Swal.fire("¡Eliminado!", "El proveedor ha sido eliminado.", "success");
+        Swal.fire("El proveedor ha sido eliminado.", "success");
         setProviders(providers.filter((provider) => provider.id !== id));
       }
     } catch (error) {
@@ -102,7 +102,7 @@ const AdminProvidersComponent = () => {
   };
 
   if (loading) {
-    return <div className="text-center">Cargando...</div>;
+    return <Loader />;
   }
 
   if (error) {

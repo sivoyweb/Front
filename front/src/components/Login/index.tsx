@@ -62,8 +62,8 @@ const Login: React.FC = () => {
         token: '' 
       };
       Swal.fire({
-        title:"inicio de Sesion exitoso",
-        text:`bienvenido ${session.user?.name}`,
+        title:"Inicio de sesión exitoso",
+        text:`¡Bienvenido/a ${session.user?.name}!`,
         icon:'success'
       })
 
@@ -136,7 +136,7 @@ const Login: React.FC = () => {
                   {isSubmitting ? "Iniciando..." : "Iniciar sesión"}
                 </button>
                 <button
-                  className="rounded-2xl flex items-center justify-center text-lg font-semibold text-gray-700 bg-white border border-gray-300 shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 transition-all py-2 px-6"
+                  className="rounded-2xl flex items-center justify-center text-lg font-semibold text-gray-700 bg-white border border-gray-300 shadow-md hover:bg-gray-100 focus:outline-none focus:bg-gray-300 transition-all py-2 px-6"
                   onClick={callLoginGoogle}
                 >
                   <FontAwesomeIcon

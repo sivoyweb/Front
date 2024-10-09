@@ -46,10 +46,10 @@ export const TeamSection = () => {
 
             {/* Contenedor con flex-grow para ocupar el espacio disponible */}
             <div className="flex-grow flex flex-col justify-center">
-              <p className="font-arialroundedmtbold text-sivoy-blue text-center mt-2 4k:text-3xl">
+              <p className="font-arialroundedmtbold text-sivoy-blue text-center mt-2">
                 {member.name}
               </p>
-              <p className="text-sivoy-blue text-center text-sm 4k:text-2xl">
+              <p className="text-sivoy-blue text-center text-sm">
                 {member.description}
               </p>
             </div>

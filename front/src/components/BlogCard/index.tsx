@@ -16,18 +16,18 @@ export const BlogCard = ({ article }: IBlogArticleProps) => {
     const imageAlt = article.images[0]?.alt || "Imagen del blog"; // Tomar alt desde IImageBlog
 
     return (
-        <div className="bg-white rounded-lg shadow-md overflow-hidden hover:scale-105 transition-transform">
+        <div className="bg-white rounded-xl shadow-md overflow-hidden hover:scale-105 transition-transform">
             <div className="relative w-full h-[200px]">
                 <Image
                     src={imageUrl}
-                    alt={imageAlt} // Usar el alt de la primera imagen o un texto por defecto
+                    alt={imageAlt}
                     fill
                     className="object-cover"
                 />
             </div>
             <div className="p-4">
                 <p className="text-sm text-gray-500 mb-2">{article.date}</p>
-                <h2 className="text-xl font-arialroundedmtbold mb-4 text-sivoy-blue">{article.title}</h2>
+                <h2 className="text-xl font-arialroundedmtbold mb-4 text-sivoy-blue line-clamp-1">{article.title}</h2>
                 <button onClick={handleClick}>
                     Leer Más
                 </button>

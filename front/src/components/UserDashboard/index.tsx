@@ -122,7 +122,7 @@ const UserDashboard = () => {
         } catch (error) {
           Swal.fire({
             title: "Error",
-            text: "No se pudieron guardar los cambios.",
+            text: "No se pudieron guardar los cambios",
             icon: 'error',
           });
         } finally{
@@ -130,7 +130,7 @@ const UserDashboard = () => {
       }
     }else if(result.dismiss === Swal.DismissReason.cancel){
       Swal.fire({
-        title:"Cambios cancelados",
+        title:"Cambios Cancelados",
         icon:'info',
       });
     }
@@ -186,8 +186,6 @@ const UserDashboard = () => {
 
   const toggleDisabilityList = () => setIsDisabilityListOpen(!isDisabilityListOpen);
 
-
-console.log("este es el formdata:",formData);
 
 
   const renderSection = () => {
@@ -336,7 +334,7 @@ console.log("este es el formdata:",formData);
                                       },
                                     }));
                                     Swal.fire({
-                                      title:"Imagen subida con exito",
+                                      title:"¡Imagen subida con éxito!",
                                       icon:"success"
                                     })
                                   }else{

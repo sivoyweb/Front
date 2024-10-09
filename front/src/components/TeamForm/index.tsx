@@ -3,6 +3,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import Swal from "sweetalert2"
 
 interface ITeamFormValues {
   name: string;
@@ -41,8 +42,12 @@ const TeamForm: React.FC = () => {
           headers: { "Content-Type": "multipart/form-data" },
         });
         resetForm();
-        alert("¡Persona agregada exitosamente al equipo!");
-      } catch (error) {}
+        Swal.fire({
+          icon: 'success',
+          text: "¡Persona agregada exitosamente al equipo!",
+        });
+      } catch (error) {
+      }
     },
   });
 

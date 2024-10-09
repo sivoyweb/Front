@@ -25,12 +25,10 @@ const AdminUsersComponent = () => {
         );
         setUsers(response.data);
       } catch (error) {
-        console.error("Error al obtener usuarios:", error);
         MySwal.fire({
           title: "Error",
-          text: "No se pudo cargar la lista de usuarios.",
+          text: "No se han podido cargar los usuarios",
           icon: "error",
-          confirmButtonText: "Aceptar",
         });
       }
     };
@@ -44,14 +42,13 @@ const AdminUsersComponent = () => {
     if (!id) return;
 
     MySwal.fire({
-      title: "¿Estás seguro?",
-      text: "¡No podrás revertir esto!",
+      title: "¿Estás seguro/a?",
+      text: "Esta acción no se puede revertir",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d33",
       cancelButtonColor: "#3085d6",
       confirmButtonText: "Sí, eliminar",
-      cancelButtonText: "Cancelar",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -61,16 +58,15 @@ const AdminUsersComponent = () => {
             },
           });
           setUsers(users.filter((user) => user.id !== id));
-          MySwal.fire("Eliminado", "El usuario ha sido eliminado.", "success");
+          MySwal.fire("¡Eliminado!", "El usuario ha sido eliminado.", "success");
         } catch (error) {
-          console.error("Error al eliminar usuario:", error);
           MySwal.fire({
-            title: "Error",
-            text: "No se pudo eliminar el usuario.",
+            title: "¡Error!",
+            text: "No se pudo eliminar al usuario",
             icon: "error",
-            confirmButtonText: "Aceptar",
           });
         }
+        
       }
     });
   };
@@ -92,20 +88,18 @@ const AdminUsersComponent = () => {
         )
       );
       MySwal.fire({
-        title: "Éxito",
-        text: "El usuario ha sido actualizado a administrador.",
+        title: "¡Éxito!",
+        text: "El rol del usuario ha sido actualizado a Administrador",
         icon: "success",
-        confirmButtonText: "Aceptar",
       });
-    } catch (error) {
-      console.error("Error al actualizar rol:", error);
-      MySwal.fire({
-        title: "Error",
-        text: "No se pudo actualizar el rol del usuario.",
-        icon: "error",
-        confirmButtonText: "Aceptar",
-      });
-    }
+      } catch (error) {
+        MySwal.fire({
+          title: "¡Error!",
+          text: "No se pudo actualizar el rol del usuario",
+          icon: "error",
+        });
+      }
+      
   };
 
   return (

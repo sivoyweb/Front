@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import Image from "next/image";
+import Swal from "sweetalert2"
 
 interface IImage {
   id: string;
@@ -105,12 +106,14 @@ const TravelForm: React.FC = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        alert("¡Servicio creado exitosamente!");
+        Swal.fire({
+          icon: 'success',
+          text: "Servicio creado exitosamente!",
+        });
         resetForm();
         setUploadedImages([]);
         setUploadedSeals([]);
       } catch (error) {
-        console.error("Error al crear el servicio:", error);
       }
     },
   });
