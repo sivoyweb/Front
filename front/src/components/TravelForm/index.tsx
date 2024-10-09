@@ -7,8 +7,11 @@ import Image from "next/image";
 import Swal from "sweetalert2"
 
 interface IImage {
-  url: string;
+  id: string;
+  url?: string | null;
+  publicId: string;
   alt: string;
+  active: boolean;
 }
 
 interface IServiceFormValues {
@@ -18,9 +21,8 @@ interface IServiceFormValues {
   date?: string;
   description: string;
   serviceType: string;
-  accesibilitySeal: string;
+  accesibilitySeal: IImage[];
   images: IImage[];
-  insignias: IImage[];
   website: string;
   phone: string;
   email: string;
@@ -30,24 +32,31 @@ interface IServiceFormValues {
 
 const TravelForm: React.FC = () => {
   const [uploadedImages, setUploadedImages] = useState<IImage[]>([]);
-  const [uploadedInsignias, setUploadedInsignias] = useState<IImage[]>([]);
+  const [uploadedSeals, setUploadedSeals] = useState<IImage[]>([]);
+
   const token =
     typeof window !== "undefined" ? localStorage.getItem("token") : "";
 
   const handleImageUpload = () => {
     const newImage: IImage = {
+      id: "img-001",
       url: "https://ejemplo.com/imagen.jpg", // URL de ejemplo
+      publicId: "public-img-001",
       alt: "Descripción de la imagen",
+      active: true,
     };
     setUploadedImages([...uploadedImages, newImage]);
   };
 
-  const handleInsigniaUpload = () => {
-    const newInsignia: IImage = {
-      url: "https://ejemplo.com/insignia.jpg", // URL de ejemplo
-      alt: "Descripción de la insignia",
+  const handleSealUpload = () => {
+    const newSeal: IImage = {
+      id: "seal-001",
+      url: "https://ejemplo.com/seal.jpg", // URL de ejemplo
+      publicId: "public-seal-001",
+      alt: "Descripción del sello de accesibilidad",
+      active: true,
     };
-    setUploadedInsignias([...uploadedInsignias, newInsignia]);
+    setUploadedSeals([...uploadedSeals, newSeal]);
   };
 
   const formik = useFormik<IServiceFormValues>({
@@ -58,9 +67,8 @@ const TravelForm: React.FC = () => {
       date: "",
       description: "",
       serviceType: "",
-      accesibilitySeal: "",
+      accesibilitySeal: [],
       images: [],
-      insignias: [],
       website: "",
       phone: "",
       email: "",
@@ -73,9 +81,6 @@ const TravelForm: React.FC = () => {
       city: Yup.string().required("La ciudad es obligatoria."),
       description: Yup.string().required("La descripción es obligatoria."),
       serviceType: Yup.string().required("El tipo de servicio es obligatorio."),
-      accesibilitySeal: Yup.string().required(
-        "El sello de accesibilidad es obligatorio."
-      ),
       website: Yup.string()
         .url("Ingrese una URL válida")
         .required("El sitio web es obligatorio."),
@@ -93,9 +98,10 @@ const TravelForm: React.FC = () => {
         const formData = {
           ...values,
           images: uploadedImages,
-          insignias: uploadedInsignias,
+          accesibilitySeal: uploadedSeals,
         };
-        await axios.post("/api/services", formData, {
+        console.log(formData);
+        await axios.post("https://api-sivoy.onrender.com/travels", formData, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -106,7 +112,7 @@ const TravelForm: React.FC = () => {
         });
         resetForm();
         setUploadedImages([]);
-        setUploadedInsignias([]);
+        setUploadedSeals([]);
       } catch (error) {
       }
     },
@@ -268,14 +274,9 @@ const TravelForm: React.FC = () => {
             <option value="Balneario" label="Balneario" />
             <option value="Gastronomía" label="Gastronomía" />
             <option value="Alojamiento" label="Alojamiento" />
-            <option value="Ocio y recreación" label="Ocio y recreación" />
-            <option
-              value="Actividades culturales"
-              label="Actividades culturales"
-            />
-            <option value="Medios de transporte" label="Medios de transporte" />
-            <option value="Experiencias" label="Experiencias" />
-            <option value="Servicios personales" label="Servicios personales" />
+            <option value="Ocio y Recreación" label="Ocio y Recreación" />
+            <option value="Culturales" label="Actividades Culturales" />
+            <option value="Transporte" label="Transporte" />
             <option value="Otro" label="Otro" />
           </select>
           {formik.touched.serviceType && formik.errors.serviceType && (
@@ -285,33 +286,29 @@ const TravelForm: React.FC = () => {
           )}
         </div>
 
-        {/* Accesibility Seal */}
+        {/* Subida de sellos de accesibilidad */}
         <div className="mb-4">
-          <label
-            htmlFor="accesibilitySeal"
-            className="block text-xl font-medium text-gray-700"
-          >
-            Sello de Accesibilidad
+          <label className="block text-xl font-medium text-gray-700">
+            Sellos de Accesibilidad
           </label>
-          <input
-            id="accesibilitySeal"
-            name="accesibilitySeal"
-            type="text"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.accesibilitySeal}
-            className={`mt-1 p-2 block w-full shadow-sm border ${
-              formik.touched.accesibilitySeal && formik.errors.accesibilitySeal
-                ? "border-red-500"
-                : "border-gray-300"
-            } rounded-md`}
-          />
-          {formik.touched.accesibilitySeal &&
-            formik.errors.accesibilitySeal && (
-              <p className="text-red-500 text-sm mt-1">
-                {formik.errors.accesibilitySeal}
-              </p>
-            )}
+          <button
+            type="button"
+            onClick={handleSealUpload}
+            className="mt-2 mb-2 p-2 w-full"
+          >
+            Subir Sello
+          </button>
+          <div className="flex flex-wrap gap-2">
+            {uploadedSeals.map((seal) => (
+              <Image
+                key={seal.id}
+                src={seal.url ?? ""}
+                alt={seal.alt}
+                width={100}
+                height={100}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Website */}
@@ -446,7 +443,7 @@ const TravelForm: React.FC = () => {
           )}
         </div>
 
-        {/* Image Upload */}
+        {/* Subida de imágenes */}
         <div className="mb-4">
           <label className="block text-xl font-medium text-gray-700">
             Imágenes
@@ -459,10 +456,10 @@ const TravelForm: React.FC = () => {
             Subir Imagen
           </button>
           <div className="flex flex-wrap gap-2">
-            {uploadedImages.map((image, index) => (
+            {uploadedImages.map((image) => (
               <Image
-                key={index}
-                src={image.url}
+                key={image.id}
+                src={image.url ?? ""}
                 alt={image.alt}
                 width={100}
                 height={100}
@@ -471,32 +468,7 @@ const TravelForm: React.FC = () => {
           </div>
         </div>
 
-        {/* Insignia Upload */}
-        <div className="mb-4">
-          <label className="block text-xl font-medium text-gray-700">
-            Insignias
-          </label>
-          <button
-            type="button"
-            onClick={handleInsigniaUpload}
-            className="mt-2 mb-2 p-2 w-full"
-          >
-            Subir Insignia
-          </button>
-          <div className="flex flex-wrap gap-2">
-            {uploadedInsignias.map((insignia, index) => (
-              <Image
-                key={index}
-                src={insignia.url}
-                alt={insignia.alt}
-                width={100}
-                height={100}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Submit Button */}
+        {/* Botón de envío */}
         <div className="flex justify-center">
           <button type="submit" className="w-full">
             Crear Servicio
