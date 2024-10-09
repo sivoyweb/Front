@@ -19,6 +19,7 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
   const [saving, setSaving] = useState(false);
   const [showMyReview, setShowMyReview] = useState(false);
   const { user } = useContext(UserContext);
+  console.log(saving);
 
   const fetchReviews = useCallback(async () => {
     setLoading(true);
@@ -56,10 +57,7 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
           },
         }
       );
-      Swal.fire(
-        "La reseña ha sido eliminada correctamente",
-        "success"
-      );
+      Swal.fire("La reseña ha sido eliminada correctamente");
       fetchReviews();
     } catch (error) {
       Swal.fire(
@@ -85,10 +83,7 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
           },
         }
       );
-      Swal.fire(
-        "La reseña ha sido actualizada correctamente",
-        "success"
-      );
+      Swal.fire("La reseña ha sido actualizada correctamente");
       setEditingReview(null);
       fetchReviews();
     } catch (error) {
@@ -101,6 +96,7 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
       setSaving(false);
     }
   };
+  console.log(handleEdit);
 
   const reviews = travelReview?.reviews || [];
   const myReview = reviews.find((review) => review.user.id === user?.id);
@@ -112,10 +108,7 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
           {"Actualizar Reseñas"}
         </button>
         {myReview && (
-          <button
-            onClick={() => setShowMyReview((prev) => !prev)}
-            className=""
-          >
+          <button onClick={() => setShowMyReview((prev) => !prev)} className="">
             {showMyReview ? "Ver Todas" : "Mi Reseña"}
           </button>
         )}
@@ -124,62 +117,72 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
       {error && <p className="text-red-500">{error}</p>}
 
       {reviews.length > 0 ? (
-  (showMyReview && myReview ? [myReview] : reviews).map((review) => (
-    <div key={review.id}>
-      <button
-        type="button"
-        className="flex items-center justify-between w-full p-4 mb-2 bg-white font-medium text-black text-xl border border-sivoy-blue rounded-t-xl focus:ring-4 focus:ring-gray-200 hover:bg-sivoy-orange focus:bg-sivoy-orange gap-3"
-        onClick={() => toggleReview(review.id)}
-      >
-        <span>{review.user.name}</span>
-        <svg
-          className={`w-3 h-3 transform ${openReview === review.id ? "rotate-180" : ""}`}
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 10 6"
-        >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M9 5 5 1 1 5"
-          />
-        </svg>
-      </button>
-      {openReview === review.id && (
-        <div className="p-4 mb-4 border border-gray-400">
-          <p>{review.review}</p>
-          <Rating
-            readonly
-            initialRating={review.stars}
-            emptySymbol={
-              <i
-                className="fa-regular fa-star"
-                style={{ color: "#000000" }}
-              />
-            }
-            fullSymbol={
-              <i
-                className="fa-solid fa-star"
-                style={{ color: "#ffd700" }}
-              />
-            }
-          />
-          {review.user.id === user?.id && (
-            <div className="flex justify-end mt-2">
-              <button onClick={() => setEditingReview(review)} className="mr-2">Editar</button>
-              <button onClick={() => handleDelete(review.id)}>Eliminar</button>
-            </div>
-          )}
-        </div>
+        (showMyReview && myReview ? [myReview] : reviews).map((review) => (
+          <div key={review.id}>
+            <button
+              type="button"
+              className="flex items-center justify-between w-full p-4 mb-2 bg-white font-medium text-black text-xl border border-sivoy-blue rounded-t-xl focus:ring-4 focus:ring-gray-200 hover:bg-sivoy-orange focus:bg-sivoy-orange gap-3"
+              onClick={() => toggleReview(review.id)}
+            >
+              <span>{review.user.name}</span>
+              <svg
+                className={`w-3 h-3 transform ${
+                  openReview === review.id ? "rotate-180" : ""
+                }`}
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 10 6"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 5 5 1 1 5"
+                />
+              </svg>
+            </button>
+            {openReview === review.id && (
+              <div className="p-4 mb-4 border border-gray-400">
+                <p>{review.review}</p>
+                <Rating
+                  readonly
+                  initialRating={review.stars}
+                  emptySymbol={
+                    <i
+                      className="fa-regular fa-star"
+                      style={{ color: "#000000" }}
+                    />
+                  }
+                  fullSymbol={
+                    <i
+                      className="fa-solid fa-star"
+                      style={{ color: "#ffd700" }}
+                    />
+                  }
+                />
+                {review.user.id === user?.id && (
+                  <div className="flex justify-end mt-2">
+                    <button
+                      onClick={() => setEditingReview(review)}
+                      className="mr-2"
+                    >
+                      Editar
+                    </button>
+                    <button onClick={() => handleDelete(review.id)}>
+                      Eliminar
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        ))
+      ) : (
+        <p className="text-sivoy-blue text-lg ml-2 text-center font-arialroundedmtbold">
+          No hay reseñas disponibles.
+        </p>
       )}
-    </div>
-  ))
-) : (
-  <p className="text-sivoy-blue text-lg ml-2 text-center font-arialroundedmtbold">No hay reseñas disponibles.</p>
-)}
-
     </div>
   );
 };

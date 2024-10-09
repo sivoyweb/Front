@@ -68,8 +68,7 @@ const AdminPromotionComponent = () => {
       );
       Swal.fire(
         "Promoción actualizada",
-        "La promoción ha sido actualizada correctamente",
-        "success"
+        "La promoción ha sido actualizada correctamente"
       );
       setEditingPromotion(null);
       fetchPromotions();
@@ -96,7 +95,7 @@ const AdminPromotionComponent = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        Swal.fire("La promoción ha sido eliminada.", "success");
+        Swal.fire("La promoción ha sido eliminada.");
         setPromotions(promotions.filter((promotion) => promotion.name !== id));
       }
     } catch (error) {

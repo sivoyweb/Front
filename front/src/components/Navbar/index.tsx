@@ -27,6 +27,9 @@ export default function Navbar() {
     logOut();
     signOut();
   };
+  const handleAdmin = () => {
+    router.push('/admin-dashboard')
+  }
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -83,7 +86,7 @@ export default function Navbar() {
                 <DropdownMenuTrigger asChild>
                   <Button className="relative h-8 w-8 rounded-full custom-button hover:bg-sivoy-blue">
                     <Image
-                      src={user?.credential?.avatar?.url|| session?.user?.image || "https://res.cloudinary.com/dvxh2vynm/image/upload/v1728360008/si-voy/zcomkrjmtznorb7qdtl0.png" || ''} 
+                      src={user?.credential?.avatar?.url|| session?.user?.image || ''} 
                       alt="Avatar del usuario"
                       className="rounded-full mt-2"
                       width={46}
@@ -95,6 +98,11 @@ export default function Navbar() {
                   <DropdownMenuItem>
                     <Link href="/user-dashboard">Mi Perfil</Link>
                   </DropdownMenuItem>
+
+                  {user?.role==="admin" ? <DropdownMenuItem onClick={handleAdmin}>
+                    Administrador
+                  </DropdownMenuItem>: null}
+
                   <DropdownMenuItem onClick={handleLogout}>
                     Cerrar Sesión
                   </DropdownMenuItem>
@@ -146,7 +154,7 @@ export default function Navbar() {
               <div className="flex items-center px-5">
                 <div className="flex-shrink-0">
                   <Image
-                    src={user?.credential?.avatar.url || session?.user?.image || "https://res.cloudinary.com/dvxh2vynm/image/upload/v1728360008/si-voy/zcomkrjmtznorb7qdtl0.png"} 
+                    src={user?.credential?.avatar.url || session?.user?.image || ""} 
                     alt="Avatar del Usuario"
                     className="rounded-full"
                     width={40}
@@ -183,6 +191,18 @@ export default function Navbar() {
                 >
                   Mi Perfil
                 </Link>
+                
+                {user?.role === "admin" ?<Link
+                  href="/admin-dashboard"
+                  className="block px-3 py-2 rounded-md text-base"
+                  onClick={() => {
+                    handleAdmin();
+                    toggleMenu()
+                 
+                  }}
+                > 
+                  Administracion
+                </Link> : null}
                 <button
                   className="block w-32 ml-2 text-left px-3 py-2 rounded-md text-base font-medium"
                   onClick={() => {

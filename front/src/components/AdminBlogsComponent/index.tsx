@@ -66,8 +66,7 @@ const AdminBlogsComponent = () => {
         }
       );
       Swal.fire(
-        "¡El blog ha sido actualizado exitosamente!",
-        "success"
+        "¡El blog ha sido actualizado exitosamente!"
       );
       setEditingBlog(null);
       fetchBlogs(); 
@@ -94,7 +93,7 @@ const AdminBlogsComponent = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        Swal.fire("El blog ha sido eliminado.", "success");
+        Swal.fire("El blog ha sido eliminado.");
         setBlogs(blogs.filter((blog) => blog.id !== id));
       }
     } catch (error) {

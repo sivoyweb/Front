@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AdminDonationsComponent from "../AdminDonationsComponent";
 import AdminProjectsComponent from "../AdminProjectsComponent";
 import AdminTeamComponent from "../AdminTeamComponent";
@@ -9,11 +9,22 @@ import AdminBlogsComponent from "../AdminBlogsComponent";
 import AdminProvidersComponent from "../AdminProvidersComponent";
 import AdminUsersComponent from "../AdminUsersComponent";
 import AdminTravelComponent from "../AdminTravelComponent";
+import { UserContext } from "@/context/userContext";
+import { useRouter } from "next/navigation";
 
 
 const AdminDashboard = () => {
+  const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeSection, setActiveSection] = useState("donaciones"); 
+  const { user } = useContext(UserContext)
+
+  useEffect(() => {
+  if(user?.role !== "admin"){
+    router.push('/')
+  }
+  }, [user,router])
+  
 
   const renderActiveSection = () => {
     switch (activeSection) {

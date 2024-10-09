@@ -264,6 +264,7 @@ export interface IUserProps {
   email?: string;
   isRepresentative: boolean;
   disabilities: IDisability[];
+  role: string;
 }
 
 export interface IUserContextType {

@@ -57,7 +57,7 @@ const AdminTravelComponent = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        MySwal.fire("El destino ha sido eliminado.", "success");
+        MySwal.fire("El destino ha sido eliminado.");
         setTravels(travels.filter((travel) => travel.id !== id));
       }
     } catch (error) {
@@ -85,7 +85,7 @@ const AdminTravelComponent = () => {
         )
       );
       setEditingTravel(null);
-      MySwal.fire("¡El destino ha sido actualizado!", "success");
+      MySwal.fire("¡El destino ha sido actualizado!");
     } catch (error) {
       MySwal.fire(
         "Error",
