@@ -196,9 +196,9 @@ console.log(formData);
       
       case 'account':
         return (
-          <div className="bg-white rounded-lg shadow-lg p-6 mb-20 font-arialroundedmtbold">
+          <div className="bg-white rounded-lg shadow-lg p-6 mb-20 ">
             <div className="flex justify-between items-center">
-              <h2 className="text-xl font-semibold mb-4">Cuenta</h2>
+              <h2 className="text-xl mb-4 font-arialroundedmtbold">Cuenta</h2>
               <button
                 onClick={() => setIsEditing(!isEditing)}
                 className="focus:text-white hover:text-gray-700"
@@ -219,7 +219,7 @@ console.log(formData);
                 
               </>
             ) : (
-              <form className="space-y-4 font-arialroundedmtbold"
+              <form className="space-y-4"
                     onSubmit={handleSubmit}>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Nombre</label>
@@ -373,7 +373,7 @@ console.log(formData);
   
 
   return (
-    <div className="flex h-screen bg-gray-100 font-arialroundedmtbold text-sivoy-blue">
+    <div className="flex h-screen bg-gray-100 text-sivoy-blue">
       <div
         className={`bg-sivoy-gradient text-white ${
           sidebarOpen ? "w-64" : "w-20"
