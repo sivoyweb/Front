@@ -20,12 +20,21 @@ const ProjectForm: React.FC = () => {
       description: Yup.string().required("La descripción es obligatoria."),
     }),
     onSubmit: async (values, { resetForm }) => {
+      const token = localStorage.getItem("token");
+      console.log(values);
       try {
-        await axios.post("/api/projects", values);
+        await axios.post(
+          "https://api-sivoy.onrender.com/projects",
+          { values },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         resetForm();
         alert("¡Proyecto creado exitosamente!");
-      } catch (error) {
-      }
+      } catch (error) {}
     },
   });
 
