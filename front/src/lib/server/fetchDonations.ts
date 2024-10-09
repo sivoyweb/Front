@@ -27,7 +27,6 @@ export const postDonation = async (preference: IDonation) => {
 
         return preference_id;
     } catch (error) {
-        console.error("Error al crear la donación:", error);
         throw error;
     }
 };

@@ -55,7 +55,6 @@ const PromotionForm: React.FC = () => {
         setUploadedImages([]); // Reiniciar las imágenes subidas
         alert("¡Promoción creada exitosamente!");
       } catch (error) {
-        console.error("Error al crear la promoción:", error);
       }
     },
   });

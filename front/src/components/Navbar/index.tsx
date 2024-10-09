@@ -102,10 +102,10 @@ export default function Navbar() {
               </DropdownMenu>
             ) : (
               <div className="flex space-x-2">
-                <Button className="border border-white px-4 py-2 text-white rounded-md bg-sivoy-blue hover:bg-white hover:text-sivoy-blue transition-all duration-200" onClick={() => router.push('/login')}>
+                <Button className="border border-white px-4 py-2 text-white rounded-md bg-sivoy-blue hover:bg-white hover:text-sivoy-blue transition-all duration-200 font-arialroundedmtbold" onClick={() => router.push('/login')}>
                   Ingresar
                 </Button>
-                <Button className="border bg-sivoy-blue border-white px-4 py-2 text-white rounded-md hover:bg-white hover:text-sivoy-blue transition-all duration-200" onClick={() => router.push('/register')}>
+                <Button className="border bg-sivoy-blue border-white px-4 py-2 text-white rounded-md hover:bg-white hover:text-sivoy-blue transition-all duration-200 font-arialroundedmtbold" onClick={() => router.push('/register')}>
                   Registro
                 </Button>
               </div>

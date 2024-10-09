@@ -22,7 +22,6 @@ export const authOptions:NextAuthOptions = {
                     }),
             }); 
             if (!response.ok) {
-              console.error('Error al enviar datos al backend:', response.statusText);
               return false;
           }
 
@@ -30,7 +29,6 @@ export const authOptions:NextAuthOptions = {
 
           return true;
       } catch (error) {
-          console.error('Error en signIn callback:', error);
           return false;
       }
   }

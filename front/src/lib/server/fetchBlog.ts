@@ -11,7 +11,6 @@ export async function fetchBlog(): Promise<IBlogArticle[]> {
         const blogArticles = await response.json();
         return blogArticles;
     } catch (error) {
-        console.error("Error en fetchBlog:", error);
         throw error;
     }
 };

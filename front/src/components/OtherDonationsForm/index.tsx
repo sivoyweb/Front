@@ -57,8 +57,8 @@ export default function OtherDonationsForm() {
     <form onSubmit={handleSubmit}>
       {/* Campo de nombre */}
       <div className="mb-4">
-        <label className="block text-sivoy-blue mb-2" htmlFor="name">
-          Nombre
+        <label className="block text-sivoy-blue mb-2 text-lg" htmlFor="name">
+          Nombre y Apellido
         </label>
         <input
           type="text"
@@ -72,7 +72,7 @@ export default function OtherDonationsForm() {
 
       {/* Campo de correo */}
       <div className="mb-4">
-        <label className="block text-sivoy-blue mb-2" htmlFor="email">
+        <label className="block text-sivoy-blue mb-2 text-lg" htmlFor="email">
           Correo Electrónico
         </label>
         <input
@@ -86,7 +86,7 @@ export default function OtherDonationsForm() {
       </div>
 
       <div className="mb-4">
-        <label className="block text-sivoy-blue mb-2" htmlFor="helpType">
+        <label className="block text-sivoy-blue mb-2 text-lg" htmlFor="helpType">
           Tipo de ayuda
         </label>
         <select
@@ -108,7 +108,7 @@ export default function OtherDonationsForm() {
 
       {/* Campo de mensaje */}
       <div className="mb-4">
-        <label className="block text-sivoy-blue mb-2" htmlFor="message">
+        <label className="block text-sivoy-blue mb-2 text-lg" htmlFor="message">
           Mensaje (Obligatorio)
         </label>
         <textarea
@@ -124,7 +124,7 @@ export default function OtherDonationsForm() {
 
       <button
         type="submit"
-        className="w-full text-white p-2"
+        className="w-full text-white p-2 text-lg"
         disabled={isSubmitting}
       >
         {isSubmitting ? "Procesando..." : "Contáctate con Nosotros"}

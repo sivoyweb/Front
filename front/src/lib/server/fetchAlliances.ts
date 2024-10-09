@@ -11,7 +11,6 @@ export async function fetchAlliances(): Promise<IAlliances[]> {
         const alliances = await response.json();
         return alliances;
     } catch (error) {
-        console.error("Error en fetchAlliances:", error);
         throw error;
     }
 };

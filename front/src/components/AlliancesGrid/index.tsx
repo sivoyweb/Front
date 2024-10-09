@@ -15,9 +15,9 @@ export const AlliancesGrid = () => {
         const data = await fetchAlliances();
         setAlliances(data);
       } catch (error) {
-        console.error("Error al obtener las alianzas:", error);
-      }
+        error;
     };
+  }
 
     getAlliances();
   }, []);

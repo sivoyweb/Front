@@ -77,7 +77,7 @@ const UserDashboard = () => {
   useEffect(() => {
     if(!user && !session){
       Swal.fire({
-        titleText:"Necesitas estar logueado",
+        titleText:"Ingresa a tu cuenta o regístrate para entrar al Panel de Usuario",
         icon:"warning"
       });
       setTimeout(() => {
@@ -120,7 +120,6 @@ const UserDashboard = () => {
             icon: 'success',
           });
         } catch (error) {
-          console.error(error)
           Swal.fire({
             title: "Error",
             text: "No se pudieron guardar los cambios.",

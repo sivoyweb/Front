@@ -11,7 +11,6 @@ export async function fetchFAQ(): Promise<IFAQ[]> {
         const faqQuestions = await response.json();
         return faqQuestions;
     } catch (error) {
-        console.error("Error en fetchFAQ:", error);
         throw error;
     }
 };

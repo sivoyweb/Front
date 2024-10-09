@@ -61,7 +61,7 @@ export default function DonationsForm() {
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-4">
-        <label className="block text-sivoy-blue mb-2" htmlFor="name">
+        <label className="block text-sivoy-blue text-lg mb-2" htmlFor="name">
           Nombre y Apellido
         </label>
         <input
@@ -75,7 +75,7 @@ export default function DonationsForm() {
       </div>
 
       <div className="mb-4">
-        <label className="block text-sivoy-blue mb-2" htmlFor="email">
+        <label className="block text-sivoy-blue mb-2 text-lg" htmlFor="email">
           Correo electrónico
         </label>
         <input
@@ -89,7 +89,7 @@ export default function DonationsForm() {
       </div>
 
       <div className="mb-4">
-        <label className="block text-sivoy-blue mb-2" htmlFor="amount">
+        <label className="block text-sivoy-blue mb-2 text-lg" htmlFor="amount">
           Monto de la Donación
         </label>
         <input
@@ -103,7 +103,7 @@ export default function DonationsForm() {
       </div>
 
       <div className="mb-4">
-        <label className="block text-sivoy-blue mb-2" htmlFor="message">
+        <label className="block text-sivoy-blue mb-2 text-lg" htmlFor="message">
           Mensaje (Opcional)
         </label>
         <textarea
@@ -119,7 +119,7 @@ export default function DonationsForm() {
 
       <button
         type="submit"
-        className="w-full"
+        className="w-full text-lg"
         disabled={isSubmitting}
       >
         {isSubmitting ? "Procesando..." : "Donar"}

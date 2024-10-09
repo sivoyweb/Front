@@ -16,7 +16,6 @@ const BlogLoader = () => {
                 setBlogArticles(articles);
             } catch (error) {
                 setError("No se pudieron cargar los artículos del blog.");
-                console.error(error);
             }
         };
 

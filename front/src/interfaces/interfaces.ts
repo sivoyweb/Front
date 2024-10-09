@@ -286,8 +286,8 @@ export interface IReviewT {
   id:string,
   review:string,
   stars: number,
+  state: string,
   date: string,
-  visible?: boolean;
   user:IUserReviews;
 }
 
