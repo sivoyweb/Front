@@ -64,6 +64,7 @@ const AdminTeamComponent = () => {
           },
         }
       );
+console.log(response);
 
       Swal.fire(
         "¡El miembro del equipo ha sido actualizado correctamente!",

@@ -27,6 +27,9 @@ export default function Navbar() {
     logOut();
     signOut();
   };
+  const handleAdmin = () => {
+    router.push('/admin-dashboard')
+  }
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -94,6 +97,9 @@ export default function Navbar() {
                 <DropdownMenuContent align="end" className='bg-white mr-2'>
                   <DropdownMenuItem>
                     <Link href="/user-dashboard">Mi Perfil</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleAdmin}>
+                    Administrador
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={handleLogout}>
                     Cerrar Sesión
