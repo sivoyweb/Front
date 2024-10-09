@@ -25,11 +25,16 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@react-oauth/google": "^0.12.1",
     "@svgr/webpack": "^8.1.0",
+    "@types/date-fns": "^2.6.0",
     "algoliasearch": "^5.6.1",
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
     "cloudinary": "^2.5.0",
+<<<<<<< HEAD
+    "date-fns": "^4.1.0",
+=======
     "clsx": "^2.1.1",
+>>>>>>> fd1d099ce253f7c48f55b32afe8a513887d28628
     "formik": "^2.4.6",
     "jwt-decode": "^4.0.0",
     "leaflet": "^1.9.4",
@@ -50,6 +55,7 @@
     "sharp": "^0.33.5",
     "slick-carousel": "^1.8.1",
     "sweetalert2": "^11.14.1",
+    "sweetalert2-react-content": "^5.0.7",
     "swiper": "^11.1.14",
     "tailwind-merge": "^2.5.3",
     "tailwindcss-animate": "^1.0.7",
