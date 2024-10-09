@@ -83,8 +83,8 @@ export default function Navbar() {
                 <DropdownMenuTrigger asChild>
                   <Button className="relative h-8 w-8 rounded-full custom-button hover:bg-sivoy-blue">
                     <Image
-                      src={user?.credential?.avatar.url|| session?.user?.image || "https://res.cloudinary.com/dvxh2vynm/image/upload/v1728360008/si-voy/zcomkrjmtznorb7qdtl0.png"} 
-                      alt="Avatar del Usuario"
+                      src={user?.credential?.avatar?.url|| session?.user?.image || "https://res.cloudinary.com/dvxh2vynm/image/upload/v1728360008/si-voy/zcomkrjmtznorb7qdtl0.png" || ''} 
+                      alt="Avatar del usuario"
                       className="rounded-full mt-2"
                       width={46}
                       height={46}

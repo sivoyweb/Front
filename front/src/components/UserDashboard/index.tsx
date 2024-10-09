@@ -21,7 +21,7 @@ interface FormData {
   phone: string;
   disabilities: IDisability[];
   credential: Credential;
-  isRepresentative: boolean | null;
+  isRepresentative: boolean  ;
   id: string | undefined; 
 }
 
@@ -55,12 +55,12 @@ const UserDashboard = () => {
     disabilities:user?.disabilities || [],
     credential: {
       avatar: {
-        url: user?.credential?.avatar.url || '',
-        publicId: user?.credential?.avatar.publicId || '',
+        url: user?.credential?.avatar?.url || '',
+        publicId: user?.credential?.avatar?.publicId || '',
       },
     },
     id:user?.id,
-    isRepresentative:user?.isRepresentative || null 
+    isRepresentative:user?.isRepresentative || false 
    });
 
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -179,12 +179,13 @@ const UserDashboard = () => {
     const { checked } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      isRepresentative: checked, // Actualiza el estado según el valor del checkbox
+      isRepresentative: checked, 
     }));
   };
   
 
   const toggleDisabilityList = () => setIsDisabilityListOpen(!isDisabilityListOpen);
+console.log(formData);
 
 
 
@@ -195,7 +196,7 @@ const UserDashboard = () => {
       
       case 'account':
         return (
-          <div className="bg-white rounded-lg shadow-lg p-6 mb-20">
+          <div className="bg-white rounded-lg shadow-lg p-6 mb-20 font-arialroundedmtbold">
             <div className="flex justify-between items-center">
               <h2 className="text-xl font-semibold mb-4">Cuenta</h2>
               <button
@@ -210,14 +211,15 @@ const UserDashboard = () => {
                 <p className="text-gray-600">Nombre: {user?.name }</p>
                 <p className="text-gray-600">Email: {user?.credential?.email }</p>
                <p className="text-gray-600">Teléfono:{user?.phone} </p> 
-               <p className="text-gray-600">Representante: {user?.phone}</p>
+               <p className="text-gray-600"> Representante: {user?.isRepresentative ? "Sí" : "No"}
+</p>
                <p className="text-gray-600">discapcidad/es: {
           (user?.disabilities ?? []).map(disability => disability.name).join(', ') || 'Ninguna'
         }</p>
                 
               </>
             ) : (
-              <form className="space-y-4"
+              <form className="space-y-4 font-arialroundedmtbold"
                     onSubmit={handleSubmit}>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Nombre</label>
@@ -407,7 +409,7 @@ const UserDashboard = () => {
           
              <Image
              alt="imagen de perfil"
-             src={user?.credential?.avatar.url ||  ''}
+             src={user?.credential?.avatar?.url ||  ''}
              width={50}  
              height={50} 
              className="rounded-full" />

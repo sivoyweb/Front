@@ -1,85 +1,78 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import AdminDonationsComponent from "../AdminDonationsComponent";
+import AdminProjectsComponent from "../AdminProjectsComponent";
+import AdminTeamComponent from "../AdminTeamComponent";
+import AdminPromotionComponent from "../AdminPromotionComponent";
+import AdminBlogsComponent from "../AdminBlogsComponent";
+import AdminProvidersComponent from "../AdminProvidersComponent";
+import AdminUsersComponent from "../AdminUsersComponent";
+import AdminTravelComponent from "../AdminTravelComponent";
+
 
 const AdminDashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [activeSection, setActiveSection] = useState("perfil"); 
+  const [activeSection, setActiveSection] = useState("donaciones"); 
 
   const renderActiveSection = () => {
     switch (activeSection) {
       case "donaciones":
         return (
           <div className="block space-y-6">
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <h2 className="text-xl font-semibold mb-4">Donaciones</h2>
-              <ul>
-                <li className="text-gray-600">donacion 1 - 10/12/2024</li>
-                <li className="text-gray-600">donacion 2 - 11/12/2024</li>
-                <li className="text-gray-600">donacion 3 - 15/12/2024</li>
-              </ul>
-            </div>
+           <AdminDonationsComponent />
             </div>
         );
 
       case "proyectos":
         return (
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-semibold mb-4">Proyectos</h2>
-            <p>Aquí puedes gestionar los proyectos.</p>
+           <AdminProjectsComponent />
           </div>
         );
       case "equipo":
         return (
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-semibold mb-4">Equipo</h2>
-            <p>Aquí puedes gestionar el equipo.</p>
+           <AdminTeamComponent />
           </div>
         );
       case "promociones":
         return (
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-semibold mb-4">Promociones</h2>
-            <p>Aquí puedes gestionar las promociones.</p>
+           <AdminPromotionComponent />
           </div>
         );
 
       case "blogs":
         return (
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-semibold mb-4">Blogs</h2>
-            <p>Aquí puedes ver y gestionar los blogs.</p>
+           <AdminBlogsComponent />
           </div>
         );
 
       case "prestadores":
         return (
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-semibold mb-4">Prestadores</h2>
-            <p>Aquí puedes gestionar los prestadores.</p>
+            <AdminProvidersComponent />
           </div>
         );
       case "gestion de usuarios":
         return (
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-semibold mb-4">Usuarios</h2>
-            <p>Aquí puedes gestionar los usuarios.</p>
+           <AdminUsersComponent />
           </div>
         );
       case "destinos":
         return (
           <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-xl font-semibold mb-4">Destinos</h2>
-            <p>Aquí puedes gestionar los destinos.</p>
+            <AdminTravelComponent />
           </div>
         );
 
       default:
         return (
           <div className="block space-y-6">
-            <div className="bg-white rounded-lg shadow-lg p-6">
-             <h1>nop</h1>
-            </div>            
+           <p>Este es el default</p>           
           </div>
         );
     }
@@ -184,7 +177,7 @@ const AdminDashboard = () => {
           </div>
         </header>
 
-        <main className="mt-8">
+        <main className="mt-8 ">
           {renderActiveSection()} 
         </main>
       </div>
