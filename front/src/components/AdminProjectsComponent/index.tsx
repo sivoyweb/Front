@@ -49,25 +49,44 @@ const AdminProjectsComponent = () => {
 
   const handleEdit = async (id: string) => {
     if (!editingProject) return;
-
+  
     const token = localStorage.getItem("token");
+  
     try {
-      const { name, description } = editingProject;
-      await axios.put(
-        `https://api-sivoy.onrender.com/projects/${id}`,
-        { name, description },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      Swal.fire(
-        "¡El proyecto ha sido actualizado correctamente!"
+      // Mostrar SweetAlert para confirmar la edición
+      const result = await Swal.fire({
+        title: "¿Estás seguro de que deseas actualizar este proyecto?",
+        text: "Se aplicarán los cambios al proyecto.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sí, actualizar",
+        cancelButtonText: "Cancelar",
+      });
+  
+      // Solo proceder si el usuario confirma
+      if (result.isConfirmed) {
+        const { name, description } = editingProject;
+  
+        // Realizar la solicitud de actualización del proyecto
+        await axios.put(
+          `https://api-sivoy.onrender.com/projects/${id}`,
+          { name, description },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+  
         
-      );
-      setEditingProject(null);
-      fetchProjects(); // Actualizar lista después de editar
+        Swal.fire(
+          "¡El proyecto ha sido actualizado correctamente!"
+        );
+  
+        // Restablecer el proyecto en edición y actualizar la lista
+        setEditingProject(null);
+        fetchProjects(); // Actualizar lista después de editar
+      }
     } catch (error) {
       Swal.fire("Error", "No se pudo actualizar el proyecto.", "error");
     }
