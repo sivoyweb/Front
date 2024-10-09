@@ -55,7 +55,6 @@ export const changeData = async (user: IUserChange )=>{
          await axios.put(`https://api-sivoy.onrender.com/users/${user.id}`,user)
         
     } catch (error) {
-        
         throw error; 
     }
 };

@@ -28,7 +28,6 @@ export const BlogArticleContainer = () => {
           setArticle(blogArticle);
         } catch (error) {
           setError("No se pudo cargar el artículo del blog.");
-          console.error(error);
         } finally {
           setLoading(false);
         }

@@ -14,7 +14,6 @@ export const TeamSection = () => {
         const data = await fetchTeam();
         setTeamMembers(data);
       } catch (error) {
-        console.error("Error al obtener los miembros del equipo:", error);
       }
     };
 

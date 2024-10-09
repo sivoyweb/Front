@@ -25,7 +25,6 @@ const ProjectForm: React.FC = () => {
         resetForm();
         alert("¡Proyecto creado exitosamente!");
       } catch (error) {
-        console.error("Error al crear el proyecto:", error);
       }
     },
   });

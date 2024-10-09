@@ -27,12 +27,13 @@ const CarouselTravels: React.FC<ICarouselProps> = ({ items }) => {
   }, [goToNextSlide]);
 
   return (
-    <div className="relative w-full h-64 md:h-[30rem] overflow-hidden rounded-lg">
-      <div className="relative h-full">
+    <div className="relative w-full h-64 md:h-[30rem] overflow-hidden rounded-lg"> {/* Añadido rounded-lg aquí */}
+      <p className="text-2xl mb-4 font-arialroundedmtbold">Imágenes:</p> 
+      <div className="relative h-full rounded-lg"> {/* Puedes dejarlo o añadir rounded-lg */}
         {items.map((item, index) => (
           <div
             key={item.id}
-            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+            className={`absolute inset-0 transition-opacity duration-700 ease-in-out rounded-lg ${ // Añadido rounded-lg aquí
               currentIndex === index ? "opacity-100" : "opacity-0"
             }`}
           >
@@ -41,7 +42,7 @@ const CarouselTravels: React.FC<ICarouselProps> = ({ items }) => {
               alt={item.publicId}
               layout="fill"
               objectFit="cover"
-              className="block w-full h-full"
+              className="block w-full h-full rounded-lg" // Añadido rounded-lg aquí
             />
           </div>
         ))}
@@ -91,16 +92,15 @@ const CarouselTravels: React.FC<ICarouselProps> = ({ items }) => {
 
       <div className="absolute z-10 flex justify-center w-full space-x-2 bottom-5">
         {items.map((_, index) => (
-          <button
+          <div
             key={index}
-            type="button"
-            className={`w-3 h-3 rounded-full ${
-              currentIndex === index ? "bg-white" : "bg-gray-400"
+            className={`w-6 h-6 rounded-full cursor-pointer transition duration-300 ${
+              currentIndex === index ? "bg-sivoy-orange" : "bg-gray-400"
             }`}
             aria-current={currentIndex === index}
             aria-label={`Slide ${index + 1}`}
             onClick={() => goToSlide(index)}
-          ></button>
+          ></div>
         ))}
       </div>
     </div>

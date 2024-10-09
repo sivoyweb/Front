@@ -16,7 +16,6 @@ const sendContactEmail = async (contactData: IContact) => {
   
       return await response.json();
     } catch (error) {
-      console.error("Error en la solicitud de correo:", error);
       throw error;
     }
   };

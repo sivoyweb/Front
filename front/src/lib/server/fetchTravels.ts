@@ -11,7 +11,6 @@ export async function fetchTravels(): Promise<ITravel[]> {
         const travels = await response.json();
         return travels;
     } catch (error) {
-        console.error("Error en fetchTravels:", error);
         throw error;
     }
 }

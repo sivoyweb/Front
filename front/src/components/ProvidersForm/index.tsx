@@ -25,7 +25,6 @@ const ProvidersForm: React.FC = () => {
         resetForm();
         alert("¡Proveedor creado exitosamente!");
       } catch (error) {
-        console.error("Error al crear el proveedor:", error);
       }
     },
   });

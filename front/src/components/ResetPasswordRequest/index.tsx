@@ -36,10 +36,10 @@ export default function ResetPasswordRequest() {
   };
 
   return (
-    <div className="flex flex-col items-center p-6 border rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold mb-6">Paso 1: Ingrese su correo electrónico</h1>
+    <div className="flex flex-col items-left p-6">
+      <h1 className="text-2xl font-arialroundedmtbold mb-4">Paso 1: Ingrese su correo</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
-        <h2 className='text-xl text-center'>Ingresa el email con el que te registraste:</h2>
+        <h2 className='text-lg text-left text-sivoy-blue'>Ingrese el email registrado:</h2>
         <input
           type="email"
           placeholder="Ingrese su correo electrónico"

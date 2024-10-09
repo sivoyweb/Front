@@ -43,7 +43,6 @@ const TeamForm: React.FC = () => {
         resetForm();
         alert("¡Persona agregada exitosamente al equipo!");
       } catch (error) {
-        console.error("Error al agregar a la persona:", error);
       }
     },
   });

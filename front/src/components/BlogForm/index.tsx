@@ -47,7 +47,6 @@ const BlogForm: React.FC = () => {
         setUploadedImages([]); // Reiniciar las imágenes subidas
         alert("¡Blog creado exitosamente!");
       } catch (error) {
-        console.error("Error al crear el blog:", error);
       }
     },
   });

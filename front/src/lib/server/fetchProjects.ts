@@ -12,7 +12,6 @@ export async function fetchProjects(): Promise<IProjects[]> {
         return projects;
         
     } catch (error) {
-        console.error("Error en fetchProjects:", error);
         throw error;
     }
 };

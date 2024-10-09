@@ -174,15 +174,17 @@ const Register: React.FC = () => {
               component="div"
               className="text-red-500 text-base mt-1"
             />
-            <div className="flex space-x-4">
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="-ml-1 mt-4"
-              >
-                {isSubmitting ? "Registrando..." : "Registro"}
-              </button>
-            </div>
+            <div className="flex justify-center space-x-4 mt-4">
+  <button
+    type="submit"
+    disabled={isSubmitting}
+    className="-ml-1 px-10 py-2 mt-4"
+  >
+    {isSubmitting ? "Registrando..." : "Registro"}
+  </button>
+</div>
+
+
           </Form>
         )}
       </Formik>
