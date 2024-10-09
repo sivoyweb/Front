@@ -79,7 +79,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="flex h-screen bg-gray-100 font-arialroundedmtbold text-sivoy-blue">
+    <div className="flex bg-gray-100 font-arialroundedmtbold text-sivoy-blue">
       <div
         className={`bg-sivoy-gradient text-white ${
           sidebarOpen ? "w-64" : "w-20"
