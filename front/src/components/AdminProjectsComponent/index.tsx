@@ -36,7 +36,6 @@ const AdminProjectsComponent = () => {
 
       setProjects(response.data);
     } catch (err) {
-      console.error("Error al obtener los proyectos", err);
       setError("Hubo un problema al obtener los proyectos.");
     } finally {
       setLoading(false);
@@ -63,8 +62,7 @@ const AdminProjectsComponent = () => {
         }
       );
       Swal.fire(
-        "Proyecto actualizado",
-        "El proyecto ha sido actualizado correctamente",
+        "¡El proyecto ha sido actualizado correctamente!",
         "success"
       );
       setEditingProject(null);
@@ -93,7 +91,7 @@ const AdminProjectsComponent = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        Swal.fire("¡Eliminado!", "El proyecto ha sido eliminado.", "success");
+        Swal.fire("El proyecto ha sido eliminado.", "success");
         setProjects(projects.filter((project) => project.id !== id));
       }
     } catch (error) {

@@ -39,7 +39,6 @@ const AdminPromotionComponent = () => {
 
       setPromotions(response.data);
     } catch (err) {
-      console.error("Error al obtener las promociones", err);
       setError("Hubo un problema al obtener las promociones.");
     } finally {
       setLoading(false);
@@ -96,7 +95,7 @@ const AdminPromotionComponent = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        Swal.fire("¡Eliminado!", "La promoción ha sido eliminada.", "success");
+        Swal.fire("La promoción ha sido eliminada.", "success");
         setPromotions(promotions.filter((promotion) => promotion.name !== id));
       }
     } catch (error) {
@@ -106,7 +105,6 @@ const AdminPromotionComponent = () => {
 
   const handleImageUpdate = () => {
     // Aquí puedes agregar la lógica del widget de Cloudinary
-    console.log("Abrir widget de Cloudinary");
   };
 
   if (loading) {

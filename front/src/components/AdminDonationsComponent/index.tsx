@@ -30,7 +30,6 @@ const AdminDonationsComponent = () => {
       );
       setDonations(response.data);
     } catch (err) {
-      console.error("Error al obtener las donaciones", err);
       setError("Hubo un problema al obtener las donaciones.");
     } finally {
       setLoading(false);

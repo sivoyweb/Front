@@ -42,7 +42,6 @@ const MapsComponent: React.FC<MapProps> = ({ address }) => {
         setCoordinates([lat, lng]);
       } 
     } catch (error) {
-      console.error("Error fetching coordinates:", error);
     }
   };
 

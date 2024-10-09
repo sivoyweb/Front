@@ -35,7 +35,6 @@ const AdminTeamComponent = () => {
 
       setTeam(response.data);
     } catch (err) {
-      console.error("Error al obtener el equipo", err);
       setError("Hubo un problema al obtener el equipo.");
     } finally {
       setLoading(false);
@@ -52,9 +51,6 @@ const AdminTeamComponent = () => {
 
     const token = localStorage.getItem("token");
 
-    // Verificar los datos que se van a enviar
-    console.log("Datos que se envían para actualizar:", editingMember);
-
     try {
       const { name, description, linkedin, image } = editingMember;
 
@@ -68,18 +64,13 @@ const AdminTeamComponent = () => {
         }
       );
 
-      // Verificar la respuesta del servidor
-      console.log("Respuesta del servidor:", response);
-
       Swal.fire(
-        "Miembro actualizado",
-        "El miembro del equipo ha sido actualizado correctamente",
+        "¡El miembro del equipo ha sido actualizado correctamente!",
         "success"
       );
       setEditingMember(null);
       fetchTeam(); // Actualizar la lista después de la edición
     } catch (error) {
-      console.error("Error en la actualización:", error);
       Swal.fire(
         "Error",
         "No se pudo actualizar el miembro del equipo.",
@@ -108,7 +99,6 @@ const AdminTeamComponent = () => {
           },
         });
         Swal.fire(
-          "¡Eliminado!",
           "El miembro del equipo ha sido eliminado.",
           "success"
         );

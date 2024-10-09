@@ -5,9 +5,9 @@ import { IBlogArticle } from "@/interfaces/interfaces";
 import { format } from "date-fns";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import Image from "next/image"; // Importamos el componente Image de Next.js
+import Image from "next/image"; 
 
-// SweetAlert2 con React
+
 const MySwal = withReactContent(Swal);
 
 const AdminBlogsComponent = () => {
@@ -35,7 +35,6 @@ const AdminBlogsComponent = () => {
 
       setBlogs(response.data);
     } catch (err) {
-      console.error("Error al obtener los blogs", err);
       setError("Hubo un problema al obtener los blogs.");
     } finally {
       setLoading(false);
@@ -46,12 +45,10 @@ const AdminBlogsComponent = () => {
     fetchBlogs();
   }, []);
 
-  // Función para manejar la carga de imágenes con Cloudinary
+
   const handleUploadImages = async () => {
-    // Implementar lógica de carga de imágenes
   };
 
-  // Función para manejar la edición de un blog
   const handleEdit = async (id: string) => {
     if (!editingBlog) return;
 
@@ -68,18 +65,16 @@ const AdminBlogsComponent = () => {
         }
       );
       Swal.fire(
-        "Blog actualizado",
-        "El blog ha sido actualizado correctamente",
+        "¡El blog ha sido actualizado exitosamente!",
         "success"
       );
       setEditingBlog(null);
-      fetchBlogs(); // Actualizar lista después de editar
+      fetchBlogs(); 
     } catch (error) {
       Swal.fire("Error", "No se pudo actualizar el blog.", "error");
     }
   };
 
-  // Función para manejar la eliminación de un blog
   const handleDelete = async (id: string) => {
     const token = localStorage.getItem("token");
     try {
@@ -98,7 +93,7 @@ const AdminBlogsComponent = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        Swal.fire("¡Eliminado!", "El blog ha sido eliminado.", "success");
+        Swal.fire("El blog ha sido eliminado.", "success");
         setBlogs(blogs.filter((blog) => blog.id !== id));
       }
     } catch (error) {
@@ -118,7 +113,6 @@ const AdminBlogsComponent = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-xl font-bold mb-4">Lista de Blogs</h1>
 
-      {/* Botón para actualizar la lista de blogs */}
       <div className="text-right mb-4">
         <button
           onClick={fetchBlogs}

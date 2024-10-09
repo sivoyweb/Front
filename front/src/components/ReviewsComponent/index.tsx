@@ -27,7 +27,6 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
       const response = await axios.get<ITravelReview>(
         `https://api-sivoy.onrender.com/travels/${travelId}`
       );
-      console.log(response.data)
       setTravelReview(response.data);
     } catch (error) {
       setError(
@@ -58,7 +57,6 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
         }
       );
       Swal.fire(
-        "Reseña eliminada",
         "La reseña ha sido eliminada correctamente",
         "success"
       );
@@ -88,7 +86,6 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
         }
       );
       Swal.fire(
-        "Reseña actualizada",
         "La reseña ha sido actualizada correctamente",
         "success"
       );

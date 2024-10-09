@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import Image from "next/image";
+import Swal from "sweetalert2"
 
 interface IImage {
   url: string;
@@ -53,7 +54,10 @@ const PromotionForm: React.FC = () => {
         await axios.post("/api/promotions", formData);
         resetForm();
         setUploadedImages([]); // Reiniciar las imágenes subidas
-        alert("¡Promoción creada exitosamente!");
+        Swal.fire({
+          icon: 'success',
+          text: "¡Proyecto creado exitosamente!",
+        });
       } catch (error) {
       }
     },

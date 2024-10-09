@@ -37,7 +37,6 @@ const AdminProvidersComponent = () => {
 
       setProviders(response.data);
     } catch (err) {
-      console.error("Error al obtener los proveedores", err);
       setError("Hubo un problema al obtener los proveedores.");
     } finally {
       setLoading(false);
@@ -93,7 +92,7 @@ const AdminProvidersComponent = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        Swal.fire("¡Eliminado!", "El proveedor ha sido eliminado.", "success");
+        Swal.fire("El proveedor ha sido eliminado.", "success");
         setProviders(providers.filter((provider) => provider.id !== id));
       }
     } catch (error) {

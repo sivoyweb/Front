@@ -69,6 +69,15 @@ const Home: React.FC = () => {
   <p className="text-sivoy-blue mt-2 text-base md:text-lg 4k:text-2xl">
     <span className="font-arialroundedmtbold">Sí, voy</span> tiene como misión generar experiencias positivas en las personas con movilidad reducida, por medio de la gestión y promoción del turismo accesible y la transformación de entornos inclusivos, para garantizar el disfrute del ocio con autonomía. Nuestra visión es convertirnos en la plataforma líder en turismo accesible en América Latina, promoviendo una cultura inclusiva y garantizando que todos tengan acceso a experiencias turísticas enriquecedoras.
     </p>
+
+    <a className="flex justify-end items-center font-arialroundedmtbold text-sivoy-green" href="/about">
+    Ver Más
+    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevrons-right" width="20" height="44" viewBox="0 0 24 24" strokeWidth="3" stroke="#1a7970" fill="none" strokeLinecap="round" strokeLinejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M7 7l5 5l-5 5" />
+        <path d="M13 7l5 5l-5 5" />
+    </svg>
+</a>
 </div>
 
       </section>

@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import sendContactEmail from "@/lib/server/fetchContact";
 import { IContact } from "@/interfaces/interfaces";
+import Swal from "sweetalert2"
 
 export default function ContactForm() {
   const [name, setName] = useState(""); 
@@ -27,7 +28,11 @@ export default function ContactForm() {
 
     try {
       await sendContactEmail(formData);
-      alert("¡Tu mensaje fue enviado con éxito!");
+      await Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: "¡Tu mensaje fue enviado con éxito!",
+      });
       setName("");
       setEmail("");
       setSubject("");

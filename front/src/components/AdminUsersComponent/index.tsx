@@ -25,12 +25,10 @@ const AdminUsersComponent = () => {
         );
         setUsers(response.data);
       } catch (error) {
-        console.error("Error fetching users:", error);
         MySwal.fire({
-          title: "Error!",
-          text: "Failed to load users",
+          title: "Error",
+          text: "No se han podido cargar los usuarios",
           icon: "error",
-          confirmButtonText: "Ok",
         });
       }
     };
@@ -44,13 +42,13 @@ const AdminUsersComponent = () => {
     if (!id) return;
 
     MySwal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      title: "¿Estás seguro/a?",
+      text: "Esta acción no se puede revertir",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d33",
       cancelButtonColor: "#3085d6",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: "Sí, eliminar",
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
@@ -60,16 +58,15 @@ const AdminUsersComponent = () => {
             },
           });
           setUsers(users.filter((user) => user.id !== id));
-          MySwal.fire("Deleted!", "User has been deleted.", "success");
+          MySwal.fire("¡Eliminado!", "El usuario ha sido eliminado.", "success");
         } catch (error) {
-          console.error("Error deleting user:", error);
           MySwal.fire({
-            title: "Error!",
-            text: "Failed to delete user",
+            title: "¡Error!",
+            text: "No se pudo eliminar al usuario",
             icon: "error",
-            confirmButtonText: "Ok",
           });
         }
+        
       }
     });
   };
@@ -93,20 +90,18 @@ const AdminUsersComponent = () => {
         )
       );
       MySwal.fire({
-        title: "Success!",
-        text: "User role updated to Admin",
+        title: "¡Éxito!",
+        text: "El rol del usuario se actualizó a Administrador",
         icon: "success",
-        confirmButtonText: "Ok",
       });
-    } catch (error) {
-      console.error("Error updating user role:", error);
-      MySwal.fire({
-        title: "Error!",
-        text: "Failed to update role",
-        icon: "error",
-        confirmButtonText: "Ok",
-      });
-    }
+      } catch (error) {
+        MySwal.fire({
+          title: "¡Error!",
+          text: "No se pudo actualizar el rol",
+          icon: "error",
+        });
+      }
+      
   };
 
   return (
