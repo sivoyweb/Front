@@ -55,8 +55,8 @@ const UserDashboard = () => {
     disabilities:user?.disabilities || [],
     credential: {
       avatar: {
-        url: user?.credential?.avatar.url || '',
-        publicId: user?.credential?.avatar.publicId || '',
+        url: user?.credential?.avatar?.url || '',
+        publicId: user?.credential?.avatar?.publicId || '',
       },
     },
     id:user?.id,
@@ -197,7 +197,7 @@ console.log("este es el formdata:",formData);
       
       case 'account':
         return (
-          <div className="bg-white rounded-lg shadow-lg p-6 mb-20">
+          <div className="bg-white rounded-lg shadow-lg p-6 mb-20 font-arialroundedmtbold">
             <div className="flex justify-between items-center">
               <h2 className="text-xl font-semibold mb-4">Cuenta</h2>
               <button
@@ -219,7 +219,7 @@ console.log("este es el formdata:",formData);
                 
               </>
             ) : (
-              <form className="space-y-4"
+              <form className="space-y-4 font-arialroundedmtbold"
                     onSubmit={handleSubmit}>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Nombre</label>
@@ -409,7 +409,7 @@ console.log("este es el formdata:",formData);
           
              <Image
              alt="imagen de perfil"
-             src={user?.credential?.avatar.url ||  ''}
+             src={user?.credential?.avatar?.url ||  ''}
              width={50}  
              height={50} 
              className="rounded-full" />
