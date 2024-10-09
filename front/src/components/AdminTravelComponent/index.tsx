@@ -6,6 +6,7 @@ import axios from "axios";
 import { IUpdateTravel } from "@/interfaces/interfaces";
 import Image from "next/image";
 import Loader from "@/components/Loader"
+import CloudinaryButton from "../CloudinaryButton";
 
 // SweetAlert2 con React
 const MySwal = withReactContent(Swal);
@@ -21,6 +22,7 @@ const AdminTravelComponent = () => {
   useEffect(() => {
     const fetchTravels = async () => {
       try {
+        
         const token = localStorage.getItem("token");
         const response = await axios.get(
           "https://api-sivoy.onrender.com/travels",
@@ -68,8 +70,25 @@ const AdminTravelComponent = () => {
   const handleSave = async () => {
     if (!editingTravel) return;
     const token = localStorage.getItem("token");
+  
+
+    const result = await MySwal.fire({
+      title: "¿Estás seguro de que deseas actualizar este destino?",
+      text: "Se aplicarán los cambios realizados.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, guardar",
+      cancelButtonText: "Cancelar",
+    });
+  
+   
+    if (!result.isConfirmed) {
+      return;
+    }
+  
     setSaving(true);
     try {
+      
       await axios.put(
         `https://api-sivoy.onrender.com/travels/${editingTravel.id}`,
         editingTravel,
@@ -79,11 +98,14 @@ const AdminTravelComponent = () => {
           },
         }
       );
+  
+      
       setTravels(
         travels.map((travel) =>
           travel.id === editingTravel.id ? editingTravel : travel
         )
       );
+      
       setEditingTravel(null);
       MySwal.fire("¡El destino ha sido actualizado!");
     } catch (error) {
@@ -108,7 +130,7 @@ const AdminTravelComponent = () => {
       ) : (
         <div className="space-y-4">
           {travels.map((travel) => (
-            <div key={travel.id} className="border rounded-lg p-4 shadow-md">
+            <div key={travel.id} className="blogToggleBtn">
               {editingTravel?.id === travel.id ? (
                 <div>
                   {/* Inputs de edición */}
@@ -221,19 +243,27 @@ const AdminTravelComponent = () => {
                     }
                     className="w-full p-2 mb-2 border border-gray-300 rounded"
                   />
+                    {/* Botón para imágenes */}
+                    <div className="flex justify-start items-center space-x-2 mt-2">
+                   <CloudinaryButton/>
+                    <button className="text-white px-4 py-2 rounded-md">
+                      Subir Sello de Accesibilidad
+                    </button>
+                  </div>
                   <button
-                    className="bg-blue-500 text-white px-4 py-2 rounded-md"
+                    className="guardarInfo m-3"
                     disabled={saving}
                     onClick={handleSave}
                   >
                     {saving ? "Guardando..." : "Guardar"}
                   </button>
                   <button
-                    className="bg-gray-500 text-white px-4 py-2 rounded-md ml-2"
+                    className="cancelarBtn"
                     onClick={() => setEditingTravel(null)}
                   >
                     Cancelar
                   </button>
+                  
                 </div>
               ) : (
                 <div>
@@ -281,20 +311,10 @@ const AdminTravelComponent = () => {
                     ))}
                   </div>
 
-                  {/* Botón para imágenes */}
-                  <div className="flex justify-start items-center space-x-2 mt-2">
-                    <button className="bg-green-500 text-white px-4 py-2 rounded-md">
-                      Subir Imágenes
-                    </button>
-                    <button className="bg-yellow-500 text-white px-4 py-2 rounded-md">
-                      Subir Sello de Accesibilidad
-                    </button>
-                  </div>
-
                   {/* Botones de acción */}
                   <div className="flex justify-between mt-4">
                     <button
-                      className="bg-blue-500 text-white px-4 py-2 rounded-md"
+                      className="editarBtn"
                       onClick={() => setEditingTravel(travel)}
                     >
                       Editar
