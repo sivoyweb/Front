@@ -109,7 +109,7 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
     <div className="p-5 border border-gray-200 rounded-lg">
       <div className="mb-4">
         <button onClick={fetchReviews} disabled={loading} className="mr-4">
-          {loading ? "Cargando..." : "Actualizar Reseñas"}
+          {"Actualizar Reseñas"}
         </button>
         {myReview && (
           <button

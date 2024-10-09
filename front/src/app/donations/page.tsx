@@ -25,7 +25,7 @@ export default function Donations() {
 
       <section className="flex flex-col md:flex-row md:justify-between mb-16 w-full max-w-6exl">
         {/* Sección de Hacer una Donación */}
-        <section className="w-full max-w-lg bg-white mt-4 p-8 border border-gray-300 rounded-lg shadow-lg mx-auto">
+        <section className="w-full max-w-lg bg-white mt-4 p-8 border border-gray-300 rounded-3xl shadow-lg mx-auto">
           <h2 className="text-2xl font-arialroundedmtbold text-center mb-6 text-sivoy-blue">
             Hacer una Donación
           </h2>
@@ -37,7 +37,7 @@ export default function Donations() {
         </section>
 
         {/* Sección de Otras Colaboraciones */}
-        <section className="w-full max-w-lg bg-white mt-4 p-8 border border-gray-300 rounded-lg shadow-lg mx-auto">
+        <section className="w-full max-w-lg bg-white mt-4 p-8 border border-gray-300 rounded-3xl shadow-lg mx-auto">
           <h2 className="text-2xl font-arialroundedmtbold text-center mb-6 text-sivoy-blue">
             Otras Colaboraciones
           </h2>

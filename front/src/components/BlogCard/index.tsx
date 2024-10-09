@@ -20,7 +20,7 @@ export const BlogCard = ({ article }: IBlogArticleProps) => {
             <div className="relative w-full h-[200px]">
                 <Image
                     src={imageUrl}
-                    alt={imageAlt} // Usar el alt de la primera imagen o un texto por defecto
+                    alt={imageAlt}
                     fill
                     className="object-cover"
                 />

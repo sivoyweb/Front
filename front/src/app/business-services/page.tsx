@@ -11,7 +11,7 @@ const BusinessServices = () => {
         <main className="bg-white">
             <section className="grid grid-cols-1 md:grid-cols-2 gap-8 py-16 px-8 md:px-16 text-justify">
                 <div className="order-2 md:order-2 space-y-6 mt-16">
-                    <h2 className="font-arialroundedmtbold text-3xl text-sivoy-blue">Asesoramiento en Turismo Accesible</h2>
+                    <h2 className="font-arialroundedmtbold text-3xl text-sivoy-blue">Consultoría en Turismo Accesible</h2>
                     <p className="text-lg text-sivoy-blue mr-11">
                         ¿Tienes una Agencia de viajes o eres Operador Turístico? Te ayudamos a elaborar
                         itinerarios o rutas de viajes adaptadas a necesidades específicas individuales o grupales.
@@ -39,39 +39,10 @@ const BusinessServices = () => {
                 </div>
             </section>
 
-            <section className="grid grid-cols-1 md:grid-cols-2 gap-8 py-16 px-8 md:px-16 bg-sivoy-oranje shadow-gradient text-justify">
-                <div className="space-y-6">
-                    <h2 className="font-arialroundedmtbold text-3xl text-sivoy-blue">Consultoría en Diseño Universal</h2>
-                    <p className="text-lg text-sivoy-blue mr-28">
-                        ¿Tienes un Hotel o una Empresa del sector turístico? Te gustaría contar con instalaciones accesibles
-                        y atender a múltiples clientes.
-                    </p>
-                    <p className="text-2xl font-arialroundedmtbold text-sivoy-blue">¿Qué obtendrás?</p>
-                    <ul className="list-disc pl-5 text-lg text-sivoy-blue">
-                        <li>Aumentarás el confort de tus instalaciones.</li>
-                        <li>Te diferenciarás de la competencia.</li>
-                    </ul>
-                    <p>
-                        Comienza la transformación,{" "}
-                        <a href="/contact-us" className="text-blue-600 underline">
-                            consúltanos.
-                        </a>
-                    </p>
-                </div>
-                <div>
-                    <Image
-                        src={fotoAccess}
-                        alt="Servicio 2"
-                        width={600}
-                        height={400}
-                        className="rounded-lg w-full"
-                    />
-                </div>
-            </section>
 
-            <section className="grid grid-cols-1 md:grid-cols-2 gap-8 py-16 px-8 md:px-16 text-justify text-sivoy-blue">
+            <section className="grid grid-cols-1 md:grid-cols-2 gap-8 py-16 px-8 md:px-16 text-justify text-sivoy-blue shadow-gradient">
                 <div className="order-2 md:order-2 space-y-6 mt-10">
-                    <h2 className="font-arialroundedmtbold text-3xl text-sivoy-blue">Capacitación en Turismo Accesible</h2>
+                    <h2 className="font-arialroundedmtbold text-3xl text-sivoy-blue">Itinerarios Accesibles Personalizados</h2>
                     <p className="text-lg">
                         ¿Cuentas con personal a cargo y quieres brindar una atención inclusiva? Formamos a tu equipo sobre la
                         importancia del trato adecuado a personas con discapacidad.
@@ -92,6 +63,36 @@ const BusinessServices = () => {
                     <Image
                         src={fotoTurism}
                         alt="Servicio 3"
+                        width={600}
+                        height={400}
+                        className="rounded-lg w-full"
+                    />
+                </div>
+            </section>
+
+            <section className="grid grid-cols-1 md:grid-cols-2 gap-8 py-16 px-8 md:px-16 text-justify">
+                <div className="space-y-6">
+                    <h2 className="font-arialroundedmtbold text-3xl text-sivoy-blue">Asesoramiento en Diseño Universal</h2>
+                    <p className="text-lg text-sivoy-blue mr-28">
+                        ¿Tienes un Hotel o una Empresa del sector turístico? Te gustaría contar con instalaciones accesibles
+                        y atender a múltiples clientes.
+                    </p>
+                    <p className="text-2xl font-arialroundedmtbold text-sivoy-blue">¿Qué obtendrás?</p>
+                    <ul className="list-disc pl-5 text-lg text-sivoy-blue">
+                        <li>Aumentarás el confort de tus instalaciones.</li>
+                        <li>Te diferenciarás de la competencia.</li>
+                    </ul>
+                    <p>
+                        Comienza la transformación,{" "}
+                        <a href="/contact-us" className="text-blue-600 underline">
+                            consúltanos.
+                        </a>
+                    </p>
+                </div>
+                <div>
+                    <Image
+                        src={fotoAccess}
+                        alt="Servicio 2"
                         width={600}
                         height={400}
                         className="rounded-lg w-full"

@@ -5,6 +5,7 @@ import L, { LatLngExpression } from "leaflet";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "leaflet/dist/leaflet.css";
+import Loader from "@/components/Loader"
 
 interface MapProps {
   address: string;
@@ -52,7 +53,7 @@ const MapsComponent: React.FC<MapProps> = ({ address }) => {
   }, [address]);
 
   if (!coordinates) {
-    return <p>Cargando mapa...</p>;
+    return <Loader />;
   }
 
   return (

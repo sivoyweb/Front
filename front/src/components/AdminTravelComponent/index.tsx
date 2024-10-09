@@ -5,6 +5,7 @@ import withReactContent from "sweetalert2-react-content";
 import axios from "axios";
 import { IUpdateTravel } from "@/interfaces/interfaces";
 import Image from "next/image";
+import Loader from "@/components/Loader"
 
 // SweetAlert2 con React
 const MySwal = withReactContent(Swal);
@@ -97,7 +98,7 @@ const AdminTravelComponent = () => {
   };
 
   if (loading) {
-    return <div className="text-center">Cargando...</div>;
+    return <Loader />;
   }
 
   return (
@@ -272,7 +273,7 @@ const AdminTravelComponent = () => {
                       <Image
                         key={index}
                         src={image.url || `imagen`} // Asegúrate de que `image` sea la URL completa
-                        alt={`Image ${index + 1}`}
+                        alt={`Imagen ${index + 1}`}
                         width={100}
                         height={100}
                         className="rounded-md object-cover"

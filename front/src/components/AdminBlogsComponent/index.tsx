@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Image from "next/image"; 
+import Loader from "@/components/Loader"
 
 
 const MySwal = withReactContent(Swal);
@@ -102,7 +103,7 @@ const AdminBlogsComponent = () => {
   };
 
   if (loading) {
-    return <div className="text-center">Cargando...</div>;
+    return <Loader />;
   }
 
   if (error) {
@@ -168,7 +169,7 @@ const AdminBlogsComponent = () => {
                         <Image
                           key={img.alt}
                           src={img.url}
-                          alt={`Image for ${blog.title}`}
+                          alt={`Imagen de ${blog.title}`}
                           width={128}
                           height={128}
                           className="object-cover inline-block mr-2"
@@ -208,7 +209,7 @@ const AdminBlogsComponent = () => {
                         <Image
                           key={img.alt}
                           src={img.url}
-                          alt={`Image for ${blog.title}`}
+                          alt={`Imagen de ${blog.title}`}
                           width={128}
                           height={128}
                           className="object-cover inline-block mr-2"

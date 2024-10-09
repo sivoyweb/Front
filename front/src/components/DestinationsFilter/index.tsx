@@ -26,17 +26,17 @@ function DestinationsFilter() {
   };
 
   return (
-    <div className="w-full overflow-x-hidden">
-      <div className="relative h-[300px] md:h-[500px]">
+    <div className="p-4 w-full overflow-x-hidden">
+      <header className="relative h-96 mx-1 mt-4 mb-10">
         <Image
-          src="http://www.sivoy.com.ar/assets/upload/slider-2.jpg"
-          alt="Login"
+          src="https://res.cloudinary.com/dvxh2vynm/image/upload/v1728465338/si-voy/guz3948byfaqls1o4y2i.jpg"
+          alt="Playa accesible"
           fill
           priority={true}
-          className="object-cover"
+          className="object-cover rounded-3xl"
         />
         <TravelSearch onSearchToggle={handleSearchToggle} />
-      </div>
+      </header>
       <div className="text-center px-4 md:px-8 lg:px-12">
         {isSearching ? (
           filteredTravels.length === 0 ? (

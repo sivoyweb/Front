@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import {fetchProjects} from "@/lib/server/fetchProjects"
 import { IProjects } from '@/interfaces/interfaces';
+import Loader from "@/components/Loader"
 
 export const ProjectsSection = () => {
     const [projects, setProjects] = useState<IProjects[]>([]);
@@ -28,7 +29,7 @@ export const ProjectsSection = () => {
             </li>
           ))
         ) : (
-          <li>Cargando proyectos...</li>
+          <Loader />
         )}
       </ul>
     </section>

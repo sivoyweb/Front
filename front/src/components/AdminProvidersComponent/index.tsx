@@ -4,6 +4,7 @@ import axios from "axios";
 import { IProvider } from "@/interfaces/interfaces";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import Loader from "@/components/Loader"
 
 const MySwal = withReactContent(Swal);
 
@@ -101,7 +102,7 @@ const AdminProvidersComponent = () => {
   };
 
   if (loading) {
-    return <div className="text-center">Cargando...</div>;
+    return <Loader />;
   }
 
   if (error) {

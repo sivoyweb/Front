@@ -18,7 +18,7 @@ export default function LoginPage() {
               src="https://res.cloudinary.com/ddzcann0m/image/upload/v1726790351/wolbf7thf78to3chhlk8.png"
               width={200} 
               height={150} 
-              alt="Sivoy"
+              alt="Logo de Sí, Voy"
               className="object-contain max-w-full h-auto"
             />
           </div>

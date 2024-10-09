@@ -42,7 +42,7 @@ const CarouselTravels: React.FC<ICarouselProps> = ({ items }) => {
               alt={item.publicId}
               layout="fill"
               objectFit="cover"
-              className="block w-full h-full rounded-lg" // Añadido rounded-lg aquí
+              className="block w-full h-full rounded-lg"
             />
           </div>
         ))}

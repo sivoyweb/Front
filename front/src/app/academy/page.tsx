@@ -28,7 +28,7 @@ const Academia = () => {
           <div className="w-full lg:w-auto">
             <Image
               src={fotoAccesibilidad}
-              alt="Turismo accesible"
+              alt="Verónica con una maleta"
               className="rounded-lg shadow-lg"
               width={400}
               height={600}
