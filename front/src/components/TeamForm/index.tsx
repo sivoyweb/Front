@@ -37,13 +37,12 @@ const TeamForm: React.FC = () => {
           formData.append("image", values.image);
         }
 
-        await axios.post("/api/team", formData, {
+        await axios.post("https://api-sivoy.onrender.com/team", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
         resetForm();
         alert("¡Persona agregada exitosamente al equipo!");
-      } catch (error) {
-      }
+      } catch (error) {}
     },
   });
 
