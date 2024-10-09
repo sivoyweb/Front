@@ -19,6 +19,7 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
   const [saving, setSaving] = useState(false);
   const [showMyReview, setShowMyReview] = useState(false);
   const { user } = useContext(UserContext);
+console.log(saving);
 
   const fetchReviews = useCallback(async () => {
     setLoading(true);
@@ -101,6 +102,8 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
       setSaving(false);
     }
   };
+  console.log(handleEdit);
+  
 
   const reviews = travelReview?.reviews || [];
   const myReview = reviews.find((review) => review.user.id === user?.id);
