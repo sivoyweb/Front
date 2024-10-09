@@ -5,6 +5,7 @@ import { DonationButton, HomeButton } from "@/components/Buttons";
 import { HomeServicesGrid } from "@/components/HomeServicesGrid";
 import { AlliancesGrid } from "@/components/AlliancesGrid"
 
+
 const Home: React.FC = () => {
   return (
     <div className="">
@@ -17,6 +18,7 @@ const Home: React.FC = () => {
             <h1 className="relative flex justify-center h-auto top-[-90px] font-arialroundedmtbold text-sivoy-blue max-sm:text-sm 4k:top-[-100px] 4k:text-4xl my-4">
               Información sobre turismo accesible
             </h1>
+            
 
             <div className="flex align-middle justify-center mt-10 4k:mt-48">
               <HomeButton />

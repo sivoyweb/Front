@@ -6,6 +6,7 @@ import TravelSearch from "@/components/TravelSearch";
 import Image from "next/image";
 import TravelGridComponent from "@/components/TravelGrid";
 
+
 function DestinationsFilter() {
   const { travels, filteredTravels } = useContext(TravelContext);
   const [isSearching, setIsSearching] = useState(false);
@@ -49,6 +50,7 @@ function DestinationsFilter() {
           )
         ) : (
           <div>
+            
             <h1 className="text-xl md:text-2xl font-bold text-left py-6 font-arialroundedmtbold text-sivoy-blue mb-2 lg:-ml-12 lg:flex lg:justify-start md:flex md:justify-center">
               Balnearios
             </h1>

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { initMercadoPago } from "@mercadopago/sdk-react";
 import { postDonation } from "@/lib/server/fetchDonations";
 
+
 export default function DonationsForm() {
   const [name, setName] = useState(""); 
   const [email, setEmail] = useState(""); 
@@ -73,6 +74,7 @@ export default function DonationsForm() {
           className="w-full p-2 border border-gray-300 rounded"
         />
       </div>
+      
 
       <div className="mb-4">
         <label className="block text-sivoy-blue mb-2" htmlFor="email">
