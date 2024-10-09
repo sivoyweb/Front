@@ -3,10 +3,11 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context/userContext";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { CldUploadWidget, CloudinaryUploadWidgetInfo } from 'next-cloudinary';
 import axios from "axios";
+import { IDisability } from "@/interfaces/interfaces";
+
 
 
 interface Credential {
@@ -18,9 +19,9 @@ interface Credential {
 interface FormData {
   name: string;
   phone: string;
-  disabilities: string[];
+  disabilities: IDisability[];
   credential: Credential;
-  isRepresentative: boolean;
+  isRepresentative: boolean | null;
   id: string | undefined; 
 }
 
@@ -29,8 +30,8 @@ const UserDashboard = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [token, setToken] = useState<string | null>(null);
   const { user ,updateUser} = useContext(UserContext);
+  
   const router = useRouter()
-
 
   const disabilitiesOption=[
     { category: 'Visual', selected: false },
@@ -46,36 +47,35 @@ const UserDashboard = () => {
     const storedToken = localStorage.getItem('token');
     setToken(storedToken);
   }, []);
- 
-  
+
   
   const [formData, setFormData] = useState<FormData>({
     name:user?.name || '',
     phone:user?.phone || '',
-    disabilities:[],
+    disabilities:user?.disabilities || [],
     credential: {
       avatar: {
-        url: '',
-        publicId: '',
+        url: user?.credential?.avatar.url || '',
+        publicId: user?.credential?.avatar.publicId || '',
       },
     },
     id:user?.id,
-    isRepresentative:false
-    
+    isRepresentative:user?.isRepresentative || null 
    });
+
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeSection, setActiveSection] = useState('account');
   const [isEditing, setIsEditing] = useState(false); 
   const [selectedDisabilities, setSelectedDisabilities] = useState<string[]>([]);
   const [isDisabilityListOpen, setIsDisabilityListOpen] = useState(false);
   
-  const {data:session} = useSession();
+
   
   
 
  
   useEffect(() => {
-    if(!user && !session){
+    if(!user){
       Swal.fire({
         titleText:"Ingresa a tu cuenta o regístrate para entrar al Panel de Usuario",
         icon:"warning"
@@ -84,7 +84,7 @@ const UserDashboard = () => {
         router.push('/login')
       }, 2000);
     }
-  },[user,session,router])
+  },[user,router])
   
   const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); 
@@ -150,36 +150,36 @@ const UserDashboard = () => {
 
   
 
-  const handleToggleDisability = (disability: string) => {
-    setSelectedDisabilities((prev)=>{
-      if(prev.includes(disability)){
-        return prev.filter((item) => item !== disability);
-      } else {
-        return [...prev, disability];
-      }
-    });
+  const handleToggleDisability = (disabilityCategory: string) => {
     setFormData((prev: FormData) => {
-      const { disabilities } = prev;
+      const isAlreadySelected = prev.disabilities.some(disability => disability.name === disabilityCategory);
   
-      
-      const newDisabilities = disabilities.includes(disability)
-        ? disabilities.filter(d => d !== disability) 
-        : [...disabilities, disability]; 
-       
+      // Actualiza el array de discapacidades en el formData
+      const updatedDisabilities = isAlreadySelected
+        ? prev.disabilities.filter(disability => disability.name !== disabilityCategory) // Si está seleccionada, la eliminamos
+        : [...prev.disabilities, { name: disabilityCategory } as IDisability]; // Si no está, la añadimos
   
       return {
         ...prev,
-        disabilities: newDisabilities,
+        disabilities: updatedDisabilities,
       };
     });
-    
+  
+    // Actualiza el array de discapacidades seleccionadas para el span
+    setSelectedDisabilities((prevSelected) => {
+      if (prevSelected.includes(disabilityCategory)) {
+        return prevSelected.filter((item) => item !== disabilityCategory);
+      } else {
+        return [...prevSelected, disabilityCategory];
+      }
+    });
   };
 
   const handleRepresentativeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { checked } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      isRepresentative: checked, 
+      isRepresentative: checked, // Actualiza el estado según el valor del checkbox
     }));
   };
   
@@ -187,6 +187,7 @@ const UserDashboard = () => {
   const toggleDisabilityList = () => setIsDisabilityListOpen(!isDisabilityListOpen);
 
 
+console.log("este es el formdata:",formData);
 
 
   const renderSection = () => {
@@ -208,10 +209,13 @@ const UserDashboard = () => {
             </div>
             {!isEditing ? (
               <>
-                <p className="text-gray-600">Nombre: {user?.name || session?.user?.name}</p>
-                <p className="text-gray-600">Email: {user?.credential?.email || session?.user?.email}</p>
-               {!session?.user ? <p className="text-gray-600">Teléfono:{user?.phone} </p> : null}
-               <p className="text-gray-600">Representante: {formData.isRepresentative ? "Sí" : "No"}</p>
+                <p className="text-gray-600">Nombre: {user?.name }</p>
+                <p className="text-gray-600">Email: {user?.credential?.email }</p>
+               <p className="text-gray-600">Teléfono:{user?.phone} </p> 
+               <p className="text-gray-600">Representante: {user?.phone}</p>
+               <p className="text-gray-600">discapcidad/es: {
+          (user?.disabilities ?? []).map(disability => disability.name).join(', ') || 'Ninguna'
+        }</p>
                 
               </>
             ) : (
@@ -245,7 +249,7 @@ const UserDashboard = () => {
                     <input
                       type="checkbox"
                       name="isRepresentative"
-                      checked={formData.isRepresentative}
+                      checked={formData.isRepresentative || undefined}
                       onChange={handleRepresentativeChange} 
                       className="mr-2"
                     />
@@ -265,9 +269,15 @@ const UserDashboard = () => {
       aria-haspopup="listbox"
       aria-controls="namesList"
     >
-      <span className="text-sm w-full font-normal text-start overflow-hidden text-ellipsis whitespace-nowrap">
-        {selectedDisabilities.length > 0 ? selectedDisabilities.join(', ') : "Seleccione una opción"}
-      </span>
+  <span className="text-sm w-full font-normal text-start overflow-hidden text-ellipsis whitespace-nowrap">
+  {selectedDisabilities.length > 0
+    ? Array.from(new Set([
+        ...selectedDisabilities, 
+        ...(user?.disabilities ?? []).map(disability => disability.name)
+      ])).join(', ') // Combina las discapacidades seleccionadas con las que ya tiene el usuario
+    : (user?.disabilities ?? []).map(disability => disability.name).join(', ') // Si no hay nuevas seleccionadas, muestra las anteriores
+  }
+</span>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5">
         <path fillRule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
       </svg>
@@ -281,13 +291,13 @@ const UserDashboard = () => {
       role="listbox"
       
     >
-      {disabilitiesOption.map(option => (
+        {disabilitiesOption.map(option => (
         <li key={option.category} role="option">
           <label className="combobox-label flex items-center gap-2">
             <input
               type="checkbox"
-              checked={formData.disabilities.includes(option.category)}
-              onChange={() => handleToggleDisability(option.category)}
+              checked={formData.disabilities.some(disability => disability.name === option.category)} // Verifica si la discapacidad está seleccionada
+              onChange={() => handleToggleDisability(option.category)} // Controlador para añadir/eliminar discapacidades
             />
             <span>{option.category}</span>
           </label>
@@ -304,8 +314,8 @@ const UserDashboard = () => {
 
 
 
-                {!session && <div>
-                  <label className="block text-sm font-medium text-gray-700 mt-12 ">Avatar</label>
+                 <div>
+                  <label className="block text-sm font-medium text-gray-700 mt-6 ">Avatar</label>
                   <CldUploadWidget uploadPreset="siVoyPreset"
                                    onSuccess={(result)=>{
 
@@ -342,7 +352,7 @@ const UserDashboard = () => {
                                     onClick={()=>open()}>Subir imagen</button>
                   }}
                   </CldUploadWidget>
-                </div>}
+                </div>
                <button
                   
                   type="submit"
@@ -399,7 +409,7 @@ const UserDashboard = () => {
           
              <Image
              alt="imagen de perfil"
-             src={user?.credential?.avatar.url || session?.user?.image || ''}
+             src={user?.credential?.avatar.url ||  ''}
              width={50}  
              height={50} 
              className="rounded-full" />

@@ -7,8 +7,9 @@ import {
   IRegister,
   IUserProps,
   IUserChange,
+  IloginGoogle,
 } from "../interfaces/interfaces";
-import { postLogin, postRegister } from "@/lib/server/fetchUsers";
+import { postLogin, postLoginGoogle, postRegister } from "@/lib/server/fetchUsers";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
@@ -21,7 +22,8 @@ export const UserContext = createContext<IUserContextType>({
   login: async () => false,
   register: async () => false,
   logOut: () => {},
-  updateUser:()=> {}
+  updateUser:()=> {},
+  loginWithGoogle:async()=>false
 });
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
@@ -39,7 +41,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
       const dataUser = data.userFinal;
       setUser(dataUser);
-      
+      console.log("este es el data user:" ,dataUser)
 
       localStorage.setItem("user", JSON.stringify(data));
       localStorage.setItem("token", data.token);
@@ -57,6 +59,39 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         errorMessage = error.message;
       }
 
+      Swal.fire({
+        title: "No se pudo iniciar sesión",
+        text: errorMessage,
+        icon: "error",
+      });
+      return false;
+    }
+  };
+
+  const loginWithGoogle = async (credentials: IloginGoogle) => {
+    try {
+      const data = await postLoginGoogle(credentials);
+     
+      
+      if (!data || !data.userFinal || !data.token) {
+        throw new Error("Datos de inicio de sesión incorrectos");
+      }
+  
+      const dataUser = data.userFinal;
+      setUser(dataUser);
+  
+      localStorage.setItem("user", JSON.stringify(dataUser));
+      localStorage.setItem("token", data.token);
+
+      router.push('/')
+  
+      return true;
+    } catch (error: unknown) {
+      let errorMessage = "Algo salió mal";
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+  
       Swal.fire({
         title: "No se pudo iniciar sesión",
         text: errorMessage,
@@ -133,6 +168,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       };  
       
       setUser(newUser);     
+      console.log("este es el update",newUser)
       localStorage.setItem("user", JSON.stringify(newUser));
   }
 }
@@ -165,7 +201,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, isLogged, setIsLogged, login, register, logOut,updateUser }}
+      value={{ user, setUser, isLogged, setIsLogged, login, register, logOut,updateUser,loginWithGoogle }}
     >
       {children}
     </UserContext.Provider>
