@@ -9,7 +9,7 @@ export default function Footer() {
   const notify = () => toast('Enlace copiado al portapapeles');
 
   return (
-    <footer className="bg-sivoy-blue text-white py-8 px-4 md:px-6 lg:px-16">
+    <footer className="bg-sivoy-blue text-white py-8 px-4 md:px-6 lg:px-16 mt-auto ">
       <div className="max-w-8xl mx-auto flex flex-col md:grid md:grid-cols-3 gap-8">
         {/* Contact Information and Social Media Links */}
         <div className="space-y-5 text-center md:text-left">

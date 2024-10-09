@@ -21,7 +21,7 @@ interface FormData {
   phone: string;
   disabilities: IDisability[];
   credential: Credential;
-  isRepresentative: boolean | null;
+  isRepresentative: boolean  ;
   id: string | undefined; 
 }
 
@@ -60,7 +60,7 @@ const UserDashboard = () => {
       },
     },
     id:user?.id,
-    isRepresentative:user?.isRepresentative || null 
+    isRepresentative:user?.isRepresentative || false 
    });
 
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -179,12 +179,13 @@ const UserDashboard = () => {
     const { checked } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      isRepresentative: checked, // Actualiza el estado según el valor del checkbox
+      isRepresentative: checked, 
     }));
   };
   
 
   const toggleDisabilityList = () => setIsDisabilityListOpen(!isDisabilityListOpen);
+console.log(formData);
 
 
 
@@ -210,7 +211,8 @@ const UserDashboard = () => {
                 <p className="text-gray-600">Nombre: {user?.name }</p>
                 <p className="text-gray-600">Email: {user?.credential?.email }</p>
                <p className="text-gray-600">Teléfono:{user?.phone} </p> 
-               <p className="text-gray-600">Representante: {user?.phone}</p>
+               <p className="text-gray-600"> Representante: {user?.isRepresentative ? "Sí" : "No"}
+</p>
                <p className="text-gray-600">discapcidad/es: {
           (user?.disabilities ?? []).map(disability => disability.name).join(', ') || 'Ninguna'
         }</p>
