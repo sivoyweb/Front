@@ -10,7 +10,6 @@ export async function fetchTeam(): Promise<ITeam[]> {
         const teamMembers = await response.json();
         return teamMembers;
     } catch (error) {
-        console.error("Error en fetchTeam:", error);
         throw error;
     }
 };

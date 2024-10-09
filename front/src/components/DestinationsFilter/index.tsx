@@ -6,6 +6,7 @@ import TravelSearch from "@/components/TravelSearch";
 import Image from "next/image";
 import TravelGridComponent from "@/components/TravelGrid";
 
+
 function DestinationsFilter() {
   const { travels, filteredTravels } = useContext(TravelContext);
   const [isSearching, setIsSearching] = useState(false);
@@ -13,11 +14,11 @@ function DestinationsFilter() {
   const balneariosTravels = travels.filter(travel => travel.serviceType === 'Balneario');
   const gastronomiaTravels = travels.filter(travel => travel.serviceType === 'Gastronomía');
   const alojamientosTravels = travels.filter(travel => travel.serviceType === 'Alojamiento');
-  const ocioTravels = travels.filter(travel => travel.serviceType === "Ocio y Recreación");
-  const culturaTravels = travels.filter(travel => travel.serviceType === "Actividades Culturales");
-  const transporteTravels = travels.filter(travel => travel.serviceType === "Medios de Transporte");
+  const ocioTravels = travels.filter(travel => travel.serviceType === "Ocio y recreación");
+  const culturaTravels = travels.filter(travel => travel.serviceType === "Actividades culturales");
+  const transporteTravels = travels.filter(travel => travel.serviceType === "Medios de transporte");
   const experienciasTravels = travels.filter(travel => travel.serviceType === "Experiencias");
-  const serviciosPersonalesTravels = travels.filter(travel => travel.serviceType === "Servicios Personales");
+  const serviciosPersonalesTravels = travels.filter(travel => travel.serviceType === "Servicios personales");
   const otroTravels = travels.filter(travel => travel.serviceType === "Otro");
 
   const handleSearchToggle = (searching: boolean) => {
@@ -43,12 +44,13 @@ function DestinationsFilter() {
               No encontramos el lugar que usted busca.
             </p>
           ) : (
-            <div className="flex flex-wrap justify-center">
+            <div className="flex flex-wrap justify-center mt-12">
               <TravelGridComponent travels={filteredTravels} />
             </div>
           )
         ) : (
           <div>
+            
             <h1 className="text-xl md:text-2xl font-bold text-left py-6 font-arialroundedmtbold text-sivoy-blue mb-2 lg:-ml-12 lg:flex lg:justify-start md:flex md:justify-center">
               Balnearios
             </h1>

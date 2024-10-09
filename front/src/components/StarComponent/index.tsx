@@ -1,8 +1,10 @@
 "use client";
+
 import React, { useState, useContext } from "react";
 import Rating from "react-rating";
 import axios from "axios";
 import Swal from "sweetalert2";
+import Link from "next/link"; // Cambiado aquí
 import { IReviewProps } from "@/interfaces/interfaces";
 import { TravelContext } from "@/context/travelContext";
 import { UserContext } from "@/context/userContext";
@@ -21,7 +23,6 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
 
   const handleSubmit = async () => {
     if (!review || rating === 0) {
-      console.error("Faltan valores de reseña o calificación.");
       return;
     }
 
@@ -33,13 +34,12 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
 
     const token = localStorage.getItem("token");
     if (!token) {
-      console.error("No se encontró el token de autenticación.");
       return;
     }
 
     setLoading(true);
     try {
-      const response = await axios.post(
+      await axios.post(
         "https://api-sivoy.onrender.com/travels/reviews",
         data,
         {
@@ -48,7 +48,6 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
           },
         }
       );
-      console.log("Reseña enviada exitosamente:", response.data);
 
       Swal.fire(
         "¡Reseña creada!",
@@ -70,19 +69,18 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
         } else {
           Swal.fire("Error", "Ocurrió un error al enviar la reseña.", "error");
         }
-        console.error("Error al enviar la reseña:", error.message);
       } else {
-        console.error("Error inesperado:", error);
       }
     } finally {
       setLoading(false);
     }
   };
+  
   if (!isLogged) {
     return (
-      <p className="text-center text-2xl">
-        Debes iniciar sesión para dejar una reseña.
-      </p>
+      <Link href="/login">
+        <p className="text-lg text-sivoy-orange text-center font-arialroundedmtbold underline">Debes iniciar sesión o registrarte para dejar una calificación y/o una reseña.</p>
+      </Link>
     );
   }
 
@@ -91,7 +89,7 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
 
   return (
     <div className="flex flex-col items-center">
-      <h2 className="text-xl font-bold mb-2">Contanos tu experiencia:</h2>
+      <h2 className="text-xl font-bold mb-2">Cuéntanos tu experiencia:</h2>
 
       <textarea
         value={review}

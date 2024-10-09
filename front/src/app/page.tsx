@@ -1,24 +1,35 @@
 import Image from "next/image";
 import tudestino from "../../public/assets/tudestino.png"
+import chalten from "../../public/assets/chalten.jpg"
 import HomeGridComponent from "@/components/HomeDestinationGrid";
 import { DonationButton, HomeButton } from "@/components/Buttons";
 import { HomeServicesGrid } from "@/components/HomeServicesGrid";
-import { AlliancesGrid } from "@/components/AlliancesGrid";
+import { AlliancesGrid } from "@/components/AlliancesGrid"
+
 
 const Home: React.FC = () => {
   return (
     <div className="">
-      <header className="mt-4 ml-5 mr-5 relative before:content-none min-h-[400px] w-[calc(100% - 2rem)] bg-[url(https://res.cloudinary.com/dvxh2vynm/image/upload/v1727356843/si-voy/syuqltykbpevhst6c1uo.jpg)] bg-center bg-cover bg-opacity-50 rounded-3xl z-10 p-8 md:p-16 4k:min-h-[800px] 4k:p-24">
-        <div className="grid bg-white bg-opacity-50 p-6 rounded-3xl mt-4">
-          <div className="pt-16 pr-4 ">
+      <header className="mt-4 ml-5 mr-5 relative min-h-[400px] w-[calc(100% - 2rem)] 
+      bg-center bg-cover bg-opacity-50 rounded-3xl p-8 md:p-16 4k:min-h-[800px] 4k:p-24">
+        <div className="grid ">
+        <Image 
+          src={chalten} 
+          alt="Chalten" 
+          layout="fill" 
+          objectFit="cover"
+          className="rounded-3xl"
+        />
+          <div className="pt-28 pr-4 bg-white bg-opacity-50 p-8 rounded-3xl mt-4 z-50">
             <div className="relative flex justify-center">
               <Image src={tudestino} alt="tu destino sin límites" className="absolute top-[-60px] 2xl:top-[-90px] w-3/4 h-auto max-sm:top-[-20px] 4k:top-[-70px] 4k:w-1/2 mt-2"/>
             </div>
             <h1 className="relative flex justify-center h-auto top-[-90px] font-arialroundedmtbold text-sivoy-blue max-sm:text-sm 4k:top-[-100px] 4k:text-4xl my-4">
               Información sobre turismo accesible
             </h1>
+            
 
-            <div className="flex align-middle justify-center mt-10 4k:mt-48">
+            <div className="flex align-middle justify-center mt-10 4k:mt-48 z-500">
               <HomeButton />
               <DonationButton />
             </div>
@@ -36,7 +47,7 @@ const Home: React.FC = () => {
 
       <section className="flex flex-col md:flex-row text-justify mr-9 md:mr-8 lg:mt-4 4k:ml-20 4k:mr-20 4k:mt-4 mt-8">
         <div className="flex flex-col items-center ml-6">
-          <a href="https://www.linkedin.com/in/ver%C3%B3nica-lorena-martinez-78a303a6/" className="flex flex-col items-center border shadow-md rounded-3xl hover:scale-105 duration-300 transition-transform w-72 4k:w-[400px]">
+          <a href="https://www.linkedin.com/in/ver%C3%B3nica-lorena-martinez-78a303a6/" className="flex flex-col items-center border shadow-md rounded-3xl hover:scale-105 duration-300 transition-transform w-72 4k:w-[400px] lg:h-80 pt-4">
             <Image src="https://res.cloudinary.com/dvxh2vynm/image/upload/v1727356842/si-voy/grgrankhq13zbd3l1msc.png" alt="Foto de perfil de Verónica Martínez" className="" 
             width={180}
             height={180}/>
@@ -72,7 +83,7 @@ const Home: React.FC = () => {
   <path d="M12 9h.01" />
   <path d="M11 12h1v4h1" />
 </svg>
-              <h4 className="text-center">Información sobre destinos accesibles</h4>
+              <h1 className="text-center">Información sobre destinos accesibles</h1>
             </div>
 
             <div className="flex flex-col items-center justify-center w-full h-full p-4 sm:p-6 lg:p-8 rounded-2xl 4k:p-12">
@@ -84,7 +95,7 @@ const Home: React.FC = () => {
             <path d="M3 10h14v5a6 6 0 0 1 -6 6h-2a6 6 0 0 1 -6 -6v-5z" />
             <path d="M16.746 16.726a3 3 0 1 0 .252 -5.555" />
             </svg>
-              <h4 className="text-center">Tips / Consejos y artículos de interés</h4>
+              <h1 className="text-center">Tips / Consejos y artículos de interés</h1>
             </div>
 
             <div className="flex flex-col items-center justify-center w-full h-full p-4 sm:p-6 lg:p-8 rounded-2xl 4k:p-12">
@@ -95,7 +106,7 @@ const Home: React.FC = () => {
   <path d="M12.5 15.5l2 2" />
   <path d="M15 13l2 2" />
 </svg>
-              <h4 className="text-center">Colaboración interactiva de viajeros</h4>
+              <h1 className="text-center">Colaboración interactiva de viajeros</h1>
             </div>
 
             <div className="flex flex-col items-center justify-center w-full h-full p-4 sm:p-6 lg:p-8 rounded-2xl 4k:p-12">
@@ -107,7 +118,7 @@ const Home: React.FC = () => {
   <path d="M21.121 20.121a3 3 0 1 0 -4.242 0c.418 .419 1.125 1.045 2.121 1.879c1.051 -.89 1.759 -1.516 2.121 -1.879z" />
   <path d="M19 18v.01" />
 </svg>
-              <h4 className="text-center">Georeferenciación y localización de destinos y productos turísticos</h4>
+              <h1 className="text-center">Georeferenciación y localización de destinos y productos turísticos</h1>
             </div>
           </div>
         </div>
@@ -119,7 +130,9 @@ const Home: React.FC = () => {
 
       <section>
         <h2 className="font-arialroundedmtbold text-2xl text-sivoy-blue ml-4 mb-4 4k:text-5xl 4k:ml-8 xl:ml-5">Nuestras alianzas</h2>
-        <AlliancesGrid />
+      <div className="mb-16">
+<AlliancesGrid />
+      </div>
       </section>
     </div>
   );

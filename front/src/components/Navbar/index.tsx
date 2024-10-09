@@ -1,160 +1,202 @@
-"use client";
+"use client"
 
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-} from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useState, useEffect, useRef } from 'react';
 import React, { useContext } from "react";
-import Link from "next/link";
 import { UserContext } from "@/context/userContext";
 import { signOut, useSession } from "next-auth/react";
+import Link from 'next/link';
+import Image from 'next/image';
+import { Menu, X } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useRouter } from 'next/navigation';
 
-const navigation = [
-  { name: "Ayúdanos a Crecer", href: "/donations"},
-  { name: "Destinos", href: "/destinations" },
-  { name: "Blog", href: "/blog" },
-  { name: "Servicios a Empresas", href: "/business-services" },
-  { name: "Academia", href: "/academy" },
-];
-
-const paths = {
-  login: "/login",
-  register: "/register",
-  home: "/",
-};
-
-const AuthButtons: React.FC<{ router: ReturnType<typeof useRouter> }> = ({ router }) => (
-  <div className="flex sm:flex-row flex-col space-y-2 sm:space-y-0 sm:space-x-4">
-    <button
-      className="hover:bg-sivoy-orange text-white font-small text-sm py-2 px-4 w-full sm:w-auto rounded-md bg-transparent border border-white hover:border-transparent focus:border-transparent"
-      onClick={() => router.push(paths.login)}
-    >
-      Ingresar
-    </button>
-    <button
-      className="hover:bg-sivoy-orange text-white font-small text-sm py-2 px-4 w-full sm:w-auto rounded-md bg-transparent border border-white hover:border-transparent focus:border-transparent"
-      onClick={() => router.push(paths.register)}
-    >
-      Registro
-    </button>
-  </div>
-);
-
-
-
-const Navbar: React.FC = () => {
-  const { data: session } = useSession();
+export default function Navbar() {
   const router = useRouter();
-  const { isLogged, logOut } = useContext(UserContext);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement | null>(null); 
+  const { isLogged, user, logOut } = useContext(UserContext);
+  const { data:session } = useSession() 
 
   const handleLogout = () => {
     logOut();
     signOut();
   };
 
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  const navItems = [
+    { name: 'Ayúdanos a Crecer', href: '/donations' },
+    { name: 'Destinos', href: '/destinations' },
+    { name: 'Blog', href: '/blog' },
+    { name: 'Servicios a Empresas', href: '/business-services' },
+    { name: 'Academia', href: '/academy' },
+  ];
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {  
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
-    <Disclosure as="nav" className="bg-sivoy-blue text-white font-arialroundedmtbold w-screen">
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div className="relative flex h-16 items-center justify-between">
-          {/* Botón del menú móvil */}
-          <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            <DisclosureButton className="inline-flex items-center justify-center rounded-md p-2 text-white hover:text-sivoy-green focus:outline-none focus:ring-2 focus:ring-inset focus:ring-sivoy-green">
-              <span className="sr-only">Open main menu</span>
-              <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-              <XMarkIcon className="hidden h-6 w-6" aria-hidden="true" />
-            </DisclosureButton>
+    <nav className="bg-sivoy-blue text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex items-center">
+            <Link href="/" className="flex-shrink-0">
+              <Image 
+                src="https://res.cloudinary.com/dvxh2vynm/image/upload/v1728307822/si-voy/uy3ojsyrrlildxkxhwc9.png" 
+                alt="Logo de Sí, Voy" 
+                width={110} 
+                height={62} />
+            </Link>
           </div>
-
-          {/* Logo y navegación */}
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex items-center">
-              <Image
-                alt="Sí, voy"
-                src="https://res.cloudinary.com/dvxh2vynm/image/upload/v1728307822/si-voy/uy3ojsyrrlildxkxhwc9.png"
-                className="w-100 cursor-pointer"
-                onClick={() => router.push(paths.home)}
-                width={150}
-                height={150}
-              />
+          <div className="hidden md-lg:block">
+            <div className="ml-10 flex items-baseline space-x-4">
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="px-3 py-2 text-md hover:text-gray-200 transition"
+                >
+                  {item.name}
+                </Link>
+              ))}
             </div>
           </div>
+          <div className="hidden md-lg:block">
+            {isLogged || session ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button className="relative h-8 w-8 rounded-full custom-button hover:bg-sivoy-blue">
+                    <Image
+                      src={user?.credential?.avatar.url|| session?.user?.image || "https://res.cloudinary.com/dvxh2vynm/image/upload/v1728360008/si-voy/zcomkrjmtznorb7qdtl0.png"} 
+                      alt="User avatar"
+                      className="rounded-full mt-2"
+                      width={46}
+                      height={46}
+                    />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className='bg-white mr-2'>
+                  <DropdownMenuItem>
+                    <Link href="/user-dashboard">Mi Perfil</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleLogout}>
+                    Cerrar Sesión
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <div className="flex space-x-2">
+                <Button className="border border-white px-4 py-2 text-white rounded-md bg-sivoy-blue hover:bg-white hover:text-sivoy-blue transition-all duration-200 font-arialroundedmtbold" onClick={() => router.push('/login')}>
+                  Ingresar
+                </Button>
+                <Button className="border bg-sivoy-blue border-white px-4 py-2 text-white rounded-md hover:bg-white hover:text-sivoy-blue transition-all duration-200 font-arialroundedmtbold" onClick={() => router.push('/register')}>
+                  Registro
+                </Button>
+              </div>
+            )}
+          </div>
+          <div className="md-lg:hidden">
+            <button
+              onClick={toggleMenu}
+              className="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white hover:bg-[#172a46] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            >
+              <span className="sr-only">Open main menu</span>
+              {isMenuOpen ? (
+                <X className="block h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Menu className="block h-6 w-6" aria-hidden="true" />
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
 
-          {/* Navegación para pantallas grandes */}
-          <div className="hidden sm:flex sm:items-center sm:space-x-4 ml-auto">
-            {navigation.map((item) => (
+      {isMenuOpen && (
+        <div ref={menuRef} className="md-lg:hidden">
+          <div className="px-2 pt-2 space-y-1 sm:px-3">
+            {navItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-white hover:text-sivoy-orange px-3 py-2 rounded-md text-sm font-medium"
+                className="block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-700"
+                onClick={toggleMenu}
               >
                 {item.name}
               </Link>
             ))}
-           {(!session?.user && !isLogged)  && <AuthButtons router={router}/>}
           </div>
-
-          {isLogged && (
-            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 z-50">
-              <Menu as="div" className="relative ml-3">
-                <MenuButton className="relative flex rounded-full bg-dark text-sm focus:outline-none focus:ring-2 focus:ring-sivoy-green focus:ring-offset-2">
-                  <span className="sr-only">Menú de Usuario</span>
-                </MenuButton>
-                <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5">
-                  <MenuItem>
-                    <Link href="/user-dashboard" className="block px-4 py-2 text-sm text-gray-700">
-                      Mi Perfil
-                    </Link>
-                  </MenuItem>
-                  <MenuItem>
-                    <Link href="#" className="block px-4 py-2 text-sm text-gray-700">
-                      Configuración
-                    </Link>
-                  </MenuItem>
-                  <MenuItem>
-                    <button
-                      onClick={handleLogout}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700"
-                    >
-                      Cerrar Sesión
-                    </button>
-                  </MenuItem>
-                </MenuItems>
-              </Menu>
-            </div>
-          )}
+          <div className="pt-4 pb-3 border-t border-[#172a46]">
+            {isLogged ? (
+              <div className="flex items-center px-5">
+                <div className="flex-shrink-0">
+                  <Image
+                    src={user?.credential?.avatar.url || session?.user?.image || "https://res.cloudinary.com/dvxh2vynm/image/upload/v1728360008/si-voy/zcomkrjmtznorb7qdtl0.png"} 
+                    alt="User avatar"
+                    className="rounded-full"
+                    width={40}
+                    height={40}
+                  />
+                </div>
+                <div className="ml-3">
+                  <div className="text-base font-medium">{user?.name || session?.user?.name || "Usuario"}</div> 
+                  <div className="text-sm font-medium text-gray-400">{user?.credential?.email || session?.user?.email || "usuario@ejemplo.com"}</div> 
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-6 mb-6">
+                <Button
+                  className="min-w-min ml-5 border border-white px-4 py-2 text-white rounded-md bg-sivoy-blue hover:bg-white hover:text-sivoy-blue transition-all duration-200"
+                  onClick={() => router.push('/login')}
+                >
+                  Ingresar
+                </Button>
+                <Button
+                  className="min-w-min ml-5 border bg-sivoy-blue border-white px-4 py-2 text-white rounded-md hover:bg-white hover:text-sivoy-blue transition-all duration-200"
+                  onClick={() => router.push('/register')}
+                >
+                  Registro
+                </Button>
+              </div>
+            )}
+            {isLogged && (
+              <div className="mt-3 px-2 space-y-1">
+                <Link
+                  href="/user-dashboard"
+                  className="block px-3 py-2 rounded-md text-base"
+                  onClick={toggleMenu}
+                >
+                  Mi Perfil
+                </Link>
+                <button
+                  className="block w-32 ml-2 text-left px-3 py-2 rounded-md text-base font-medium"
+                  onClick={() => {
+                    handleLogout();
+                    toggleMenu();
+                  }}
+                >
+                  Cerrar Sesión
+                </button>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-
-      {/* Menú móvil colapsado */}
-      <DisclosurePanel className="sm:hidden">
-        <div className="space-y-1 px-2 pb-3 pt-2">
-          {navigation.map((item) => (
-            <DisclosureButton
-              key={item.name}
-              as="a"
-              href={item.href}
-              className="block px-3 py-2 rounded-md text-base font-medium text-white hover:text-sivoy-orange hover:bg-gray-700"
-            >
-              {item.name}
-            </DisclosureButton>
-          ))}
-        </div>
-      
-        {(!session?.user && !isLogged) && <AuthButtons router={router}/>}
-     
-       
-      </DisclosurePanel>
-    </Disclosure>
+      )}
+    </nav>
   );
-};
-
-export default Navbar;
+}

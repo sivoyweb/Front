@@ -9,25 +9,23 @@ const BusinessServices = () => {
 
     return (
         <main className="bg-white">
-    
-            {/* Sección 1 */}
-            <section className="grid grid-cols-1 md:grid-cols-2 gap-8 py-16 px-8 md:px-16">
+            <section className="grid grid-cols-1 md:grid-cols-2 gap-8 py-16 px-8 md:px-16 text-justify">
                 <div className="order-2 md:order-2 space-y-6 mt-16">
-                    <h2 className="font-arialroundedmtbold text-2xl text-sivoy-blue">Asesoramiento en Turismo Accesible</h2>
-                    <p className="text-lg">
+                    <h2 className="font-arialroundedmtbold text-3xl text-sivoy-blue">Asesoramiento en Turismo Accesible</h2>
+                    <p className="text-lg text-sivoy-blue mr-11">
                         ¿Tienes una Agencia de viajes o eres Operador Turístico? Te ayudamos a elaborar
                         itinerarios o rutas de viajes adaptadas a necesidades específicas individuales o grupales.
                     </p>
-                    <p className="text-lg font-arialroundedmtbold text-sivoy-blue">¿Qué beneficios obtendrás?</p>
-                    <ul className="list-disc pl-5 text-lg">
+                    <p className="text-2xl font-arialroundedmtbold text-sivoy-blue">¿Qué beneficios obtendrás?</p>
+                    <ul className="list-disc pl-5 text-lg text-sivoy-blue">
                         <li>Incrementarás tus ganancias atendiendo a un nuevo segmento.</li>
                         <li>Eliminas la estacionalidad del sector.</li>
                     </ul>
-                    <p>
-                        Amplía tu oferta a un segmento que conocemos a la perfección,{" "}
-                        <Link href="#contacto" className="text-blue-600 underline">
-                            consúltanos.
+                    <p className="text-sivoy-blue text-lg mr-14"> 
+                        <Link href="/contact-us" className="text-blue-600 underline">
+                            Consúltanos
                         </Link>
+                        {" "}y amplía tu oferta a un segmento que conocemos a la perfección.
                     </p>
                 </div>
                 <div className="order-1 md:order-1 mb-10 mt-5 md:mt-0">
@@ -41,22 +39,21 @@ const BusinessServices = () => {
                 </div>
             </section>
 
-            {/* Sección 2 */}
-            <section className="grid grid-cols-1 md:grid-cols-2 gap-8 py-16 px-8 md:px-16 bg-sivoy-oranje shadow-gradient">
+            <section className="grid grid-cols-1 md:grid-cols-2 gap-8 py-16 px-8 md:px-16 bg-sivoy-oranje shadow-gradient text-justify">
                 <div className="space-y-6">
-                    <h2 className="font-arialroundedmtbold text-2xl text-sivoy-blue">Consultoría en Diseño Universal</h2>
-                    <p className="text-lg">
+                    <h2 className="font-arialroundedmtbold text-3xl text-sivoy-blue">Consultoría en Diseño Universal</h2>
+                    <p className="text-lg text-sivoy-blue mr-28">
                         ¿Tienes un Hotel o una Empresa del sector turístico? Te gustaría contar con instalaciones accesibles
                         y atender a múltiples clientes.
                     </p>
-                    <p className="text-lg font-arialroundedmtbold text-sivoy-blue">¿Qué obtendrás?</p>
-                    <ul className="list-disc pl-5 text-lg">
+                    <p className="text-2xl font-arialroundedmtbold text-sivoy-blue">¿Qué obtendrás?</p>
+                    <ul className="list-disc pl-5 text-lg text-sivoy-blue">
                         <li>Aumentarás el confort de tus instalaciones.</li>
                         <li>Te diferenciarás de la competencia.</li>
                     </ul>
                     <p>
                         Comienza la transformación,{" "}
-                        <a href="#contacto" className="text-blue-600 underline">
+                        <a href="/contact-us" className="text-blue-600 underline">
                             consúltanos.
                         </a>
                     </p>
@@ -72,15 +69,14 @@ const BusinessServices = () => {
                 </div>
             </section>
 
-            {/* Sección 3 */}
-            <section className="grid grid-cols-1 md:grid-cols-2 gap-8 py-16 px-8 md:px-16">
+            <section className="grid grid-cols-1 md:grid-cols-2 gap-8 py-16 px-8 md:px-16 text-justify text-sivoy-blue">
                 <div className="order-2 md:order-2 space-y-6 mt-10">
-                    <h2 className="font-arialroundedmtbold text-2xl text-sivoy-blue">Capacitación en Turismo Accesible</h2>
+                    <h2 className="font-arialroundedmtbold text-3xl text-sivoy-blue">Capacitación en Turismo Accesible</h2>
                     <p className="text-lg">
                         ¿Cuentas con personal a cargo y quieres brindar una atención inclusiva? Formamos a tu equipo sobre la
                         importancia del trato adecuado a personas con discapacidad.
                     </p>
-                    <p className="text-lg font-arialroundedmtbold text-sivoy-blue">¿Qué obtendrás?</p>
+                    <p className="text-2xl font-arialroundedmtbold text-sivoy-blue">¿Qué obtendrás?</p>
                     <ul className="list-disc pl-5 text-lg">
                         <li>Capacitarás a tu personal en turismo accesible.</li>
                         <li>Mejorarás la calidad del servicio.</li>

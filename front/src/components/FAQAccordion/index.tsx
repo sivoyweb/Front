@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { IAccordionItemProps } from '@/interfaces/interfaces';
 import { IFAQ } from '@/interfaces/interfaces';
-import { fetchFAQ } from '@/lib/server/fetchFAQ';// Asegúrate de importar la función correctamente
+import { fetchFAQ } from '@/lib/server/fetchFAQ';
 
 const AccordionItem: React.FC<IAccordionItemProps> = ({ question, answer, isOpen, onToggle }) => {
   return (
@@ -22,26 +22,24 @@ const AccordionItem: React.FC<IAccordionItemProps> = ({ question, answer, isOpen
 
 const FAQAccordion: React.FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const [faqs, setFaqs] = useState<IFAQ[]>([]); // Estado para almacenar las FAQs
+  const [faqs, setFaqs] = useState<IFAQ[]>([]);
 
-  // Función para obtener las FAQs desde el backend
   useEffect(() => {
     const getFaqs = async () => {
       try {
         const fetchedFaqs = await fetchFAQ();
-        setFaqs(fetchedFaqs); // Actualiza el estado con las FAQs traídas
+        setFaqs(fetchedFaqs); 
       } catch (error) {
-        console.error('Error fetching FAQs:', error);
       }
     };
 
-    getFaqs(); // Llama a la función al montar el componente
+    getFaqs(); 
   }, []);
 
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-6xl mx-auto">
       <h2 className="text-2xl font-arialroundedmtbold mt-8 mb-4 text-sivoy-blue">Preguntas Frecuentes</h2>
-      <div className='md:text-lg'>
+      <div className='md:text-xl'>
       {faqs.map((faq, index) => (
         <AccordionItem
           key={index}

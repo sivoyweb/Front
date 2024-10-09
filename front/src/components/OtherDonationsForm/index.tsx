@@ -1,14 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
+import sendHelpEmail from "@/lib/server/fetchSendHelp"; 
+import { ISendHelp } from "@/interfaces/interfaces";
+import Swal from "sweetalert2";
 
 export default function OtherDonationsForm() {
-  const [name, setName] = useState(""); // Campo para el nombre
-  const [email, setEmail] = useState(""); // Campo para el correo electrónico
-  const [helpType, setHelpType] = useState(""); // Campo para el tipo de ayuda
-  const [message, setMessage] = useState(""); // Campo para el mensaje
-  const [isSubmitting, setIsSubmitting] = useState(false); // Estado para el envío
-  const [errorMessage, setErrorMessage] = useState<string | null>(null); // Mensajes de error
+  const [name, setName] = useState(""); 
+  const [email, setEmail] = useState(""); 
+  const [helpType, setHelpType] = useState(""); 
+  const [message, setMessage] = useState(""); 
+  const [isSubmitting, setIsSubmitting] = useState(false); 
+  const [errorMessage, setErrorMessage] = useState<string | null>(null); 
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -16,13 +19,35 @@ export default function OtherDonationsForm() {
     setIsSubmitting(true);
     setErrorMessage(null);
 
+    const formData: ISendHelp = {
+      name,
+      email,
+      helpType,
+      message: message || "", 
+    };
+
     try {
+      await sendHelpEmail(formData); 
+      await Swal.fire({
+        icon: 'success',
+        title: '¡Éxito!',
+        text: '¡Tu ayuda fue enviada con éxito!',
+        confirmButtonText: 'Aceptar',
+      });
+
       setName("");
       setEmail("");
       setHelpType("");
       setMessage("");
-    } catch (error: unknown) {
-      setErrorMessage("Error al procesar la solicitud.");
+    } catch (error) {
+      // Alerta de error
+      setErrorMessage((error as Error).message || "Error al enviar el correo");
+      await Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: errorMessage || 'Ocurrió un error al enviar el correo.',
+        confirmButtonText: 'Aceptar',
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -30,9 +55,10 @@ export default function OtherDonationsForm() {
 
   return (
     <form onSubmit={handleSubmit}>
+      {/* Campo de nombre */}
       <div className="mb-4">
-        <label className="block text-sivoy-blue mb-2" htmlFor="name">
-          Nombre
+        <label className="block text-sivoy-blue mb-2 text-lg" htmlFor="name">
+          Nombre y Apellido
         </label>
         <input
           type="text"
@@ -44,8 +70,9 @@ export default function OtherDonationsForm() {
         />
       </div>
 
+      {/* Campo de correo */}
       <div className="mb-4">
-        <label className="block text-sivoy-blue mb-2" htmlFor="email">
+        <label className="block text-sivoy-blue mb-2 text-lg" htmlFor="email">
           Correo Electrónico
         </label>
         <input
@@ -59,8 +86,8 @@ export default function OtherDonationsForm() {
       </div>
 
       <div className="mb-4">
-        <label className="block text-sivoy-blue mb-2" htmlFor="helpType">
-          Tipo de Ayuda
+        <label className="block text-sivoy-blue mb-2 text-lg" htmlFor="helpType">
+          Tipo de ayuda
         </label>
         <select
           id="helpType"
@@ -70,18 +97,19 @@ export default function OtherDonationsForm() {
           className="w-full p-2 border border-gray-300 rounded"
         >
           <option value="">Selecciona una opción</option>
-          <option value="donacion-recurrente">Donación Recurrente</option>
-          <option value="en-especie">Donación en Especie</option>
-          <option value="corporativa">Donación Corporativa</option>
-          <option value="voluntario">Inscríbete como Voluntario</option>
-          <option value="trabajo">Trabaja con Nosotros</option>
-          <option value="otro">Otro</option>
+          <option value="Donación Recurrente">Donación Recurrente</option>
+          <option value="En Especie">Donación en Especie</option>
+          <option value="Corporativa">Donación Corporativa</option>
+          <option value="Voluntario">Inscríbete como Voluntario</option>
+          <option value="Trabajo">Trabaja con Nosotros</option>
+          <option value="Otro">Otro</option>
         </select>
       </div>
 
+      {/* Campo de mensaje */}
       <div className="mb-4">
-        <label className="block text-sivoy-blue mb-2" htmlFor="message">
-          Mensaje (Opcional)
+        <label className="block text-sivoy-blue mb-2 text-lg" htmlFor="message">
+          Mensaje (Obligatorio)
         </label>
         <textarea
           id="message"
@@ -96,11 +124,11 @@ export default function OtherDonationsForm() {
 
       <button
         type="submit"
-        className="w-full text-white p-2"
+        className="w-full text-white p-2 text-lg"
         disabled={isSubmitting}
       >
         {isSubmitting ? "Procesando..." : "Contáctate con Nosotros"}
       </button>
     </form>
   );
-}
+};

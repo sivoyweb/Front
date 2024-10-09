@@ -2,8 +2,7 @@
 
 import { useContext, useRef, useState } from "react";
 import { TravelContext } from "@/context/travelContext";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+
 import { ITravelSearchProps } from "@/interfaces/interfaces";
 
 const TravelSearch: React.FC<ITravelSearchProps> = ({ onSearchToggle }) => {
@@ -11,7 +10,7 @@ const TravelSearch: React.FC<ITravelSearchProps> = ({ onSearchToggle }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedService, setSelectedService] = useState('Seleccione un servicio');
-  const services = ["Balnearios", "Gastronomía", "Alojamientos", "Ocio y Recreación", "Actividades Culturales", "Transporte", "Experiencias", "Servicios Personales", "Otro"];
+  const services = ['Balneario', 'Gastronomía','Alojamiento', 'Ocio y recreación','Actividades culturales','Medios de transporte', 'Experiencias', 'Servicios personales', 'Otro'];
 
   const resetFields = () => {
     setSelectedService('Seleccione un servicio');
@@ -23,24 +22,23 @@ const TravelSearch: React.FC<ITravelSearchProps> = ({ onSearchToggle }) => {
   const filtrarTravels = () => {
     const textoCiudad = inputRef.current?.value.toLowerCase() || '';
     const textoServicio = selectedService !== 'Seleccione un servicio' ? selectedService : '';
-  
-    if (textoCiudad && textoServicio) {
-      const resultado = travels.filter((travel) =>
-        travel.city.toLowerCase().includes(textoCiudad) &&
-        (textoServicio === '' || travel.serviceType === textoServicio)
-      );
-  
+
+    let resultado = travels;
+
+    if (textoCiudad) {
+     resultado = resultado.filter((travel)=> travel.city.toLowerCase().includes(textoCiudad));
+
+    }
+
+    if(textoServicio){
+      resultado = resultado.filter((travel)=> travel.serviceType === textoServicio);
+    }
+    
       setFilteredTravels(resultado);
       setNoResults(resultado.length === 0);
       resetFields();
+    } 
   
-      console.log("City:", textoCiudad);
-      console.log("Servicio:", textoServicio);
-      console.log("Resultado:", resultado);
-    } else {
-      console.log("Por favor, selecciona un servicio y una ciudad");
-    }
-  };
   
   const handleSearch = () => {
     filtrarTravels(); 
@@ -56,14 +54,28 @@ const TravelSearch: React.FC<ITravelSearchProps> = ({ onSearchToggle }) => {
   const handleServiceClick = (service: string) => {
     setSelectedService(service);
     setIsOpen(false);
-    onSearchToggle(false); 
-    console.log("Servicio Seleccionado:", service);
+    onSearchToggle(false);
   };
   return (
     <div className="absolute p-8 inset-0 flex flex-col justify-center items-center z-10">
     <div className="flex flex-row space-x-4 items-center">
   
       
+  
+     
+      <div>
+        <h1 className="text-white text-2xl mb-6 font-arialroundedmtbold">
+          ¿Dónde quieres ir?
+        </h1>
+        <input
+          ref={inputRef}
+          type="text"
+          name="ciudad"
+          placeholder="Por ej: Buenos Aires"
+          className="px-4 py-2 w-64 rounded-md bg-white/80"
+          onKeyUp={handleInputChange}
+        />
+      </div>
       <div>
         <h1 className="text-white text-2xl mb-6 font-arialroundedmtbold">
           ¿Qué buscas?
@@ -77,13 +89,7 @@ const TravelSearch: React.FC<ITravelSearchProps> = ({ onSearchToggle }) => {
             className="px-4 py-2 w-64 rounded-md bg-gray-300 cursor-pointer"
             onClick={() => setIsOpen(!isOpen)}
           />
-          <button
-            type="button"
-            className="ml-2 cursor-pointer"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            <FontAwesomeIcon icon={faChevronDown} style={{ color: "#ffffffa7" }} />
-          </button>
+          
         </div>
   
        
@@ -102,22 +108,6 @@ const TravelSearch: React.FC<ITravelSearchProps> = ({ onSearchToggle }) => {
             </ul>
           </div>
         )}
-      </div>
-  
-     
-      <div>
-        <h1 className="text-white text-2xl mb-6 font-arialroundedmtbold">
-          ¿Dónde quieres ir?
-        </h1>
-        <input
-          ref={inputRef}
-          type="text"
-          name="ciudad"
-          placeholder="Por ej: Buenos Aires"
-          className="px-4 py-2 w-64 rounded-md bg-white/80"
-          onKeyUp={handleInputChange}
-          disabled={selectedService === 'Seleccione un servicio'}
-        />
       </div>
     </div>
   

@@ -4,11 +4,11 @@ import OtherDonationsForm from "@/components/OtherDonationsForm";
 export default function Donations() {
   return (
     <div className="min-h-screen text-sivoy-blue flex flex-col items-center px-4 md:px-8">
-      <div className="w-full max-w-5xl py-10">
+      <div className="w-full max-w-6xl py-10">
         <h1 className="font-arialroundedmtbold text-4xl text-center mb-8 text-sivoy-blue">
           Ayúdanos a Crecer
         </h1>
-        <p className="text-lg leading-relaxed text-justify">
+        <p className="text-xl leading-relaxed text-justify">
           En{" "}
           <span className="font-arialroundedmtbold text-sivoy-blue">
             Sí, Voy
@@ -23,13 +23,13 @@ export default function Donations() {
         </p>
       </div>
 
-      <section className="flex flex-col md:flex-row md:justify-between gap-16 mb-16 w-full max-w-5xl">
+      <section className="flex flex-col md:flex-row md:justify-between mb-16 w-full max-w-6exl">
         {/* Sección de Hacer una Donación */}
-        <section className="w-full max-w-md bg-white mt-4 p-8 border border-gray-300 rounded-lg shadow-lg mx-auto">
+        <section className="w-full max-w-lg bg-white mt-4 p-8 border border-gray-300 rounded-lg shadow-lg mx-auto">
           <h2 className="text-2xl font-arialroundedmtbold text-center mb-6 text-sivoy-blue">
             Hacer una Donación
           </h2>
-          <p className="text-base leading-6 text-sivoy-blue text-center mb-6">
+          <p className="text-lg leading-6 text-sivoy-blue text-center mb-6">
             Tu contribución nos ayuda a seguir adelante con nuestra misión.
             ¡Gracias por hacer la diferencia!
           </p>
@@ -37,11 +37,11 @@ export default function Donations() {
         </section>
 
         {/* Sección de Otras Colaboraciones */}
-        <section className="w-full max-w-md bg-white mt-4 p-8 border border-gray-300 rounded-lg shadow-lg mx-auto">
+        <section className="w-full max-w-lg bg-white mt-4 p-8 border border-gray-300 rounded-lg shadow-lg mx-auto">
           <h2 className="text-2xl font-arialroundedmtbold text-center mb-6 text-sivoy-blue">
             Otras Colaboraciones
           </h2>
-          <p className="text-base leading-6 text-sivoy-blue text-center mb-6">
+          <p className="text-lg leading-6 text-sivoy-blue text-center mb-6">
             ¿Tienes pensado otro tipo de ayuda para ofrecer a Sí, Voy?
             ¡Contáctanos a través de este formulario!
           </p>
@@ -51,4 +51,3 @@ export default function Donations() {
     </div>
   );
 }
-

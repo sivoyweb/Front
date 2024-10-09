@@ -22,7 +22,13 @@ export interface IDisability {
   id: string;
   name: string;
   category: string;
-  user: IUser;
+  user: IUser;}
+  
+export interface IDisabilityprops{
+  id: string;
+  name: string;
+  active: boolean;
+  user: IUser,
 }
 
 export interface IloginGoogle {
@@ -83,6 +89,20 @@ export interface ICredential {
   password: string;
   avatar: IImage;
   user: IUser;
+}
+
+export interface ICredentialAvatar {
+    url: string;
+    publicId: string;
+}
+
+export interface IFormData {
+  name: string;
+  phone: string;
+  disabilities: string[];
+  credential: Credential;
+  isRepresentative: boolean;
+  id: string | undefined; 
 }
 
 export interface IImage {
@@ -182,6 +202,7 @@ export interface ITravelAdmin {
   averageStars: number;
 }
 
+ 
 export interface IUserResponse {
   login: boolean;
   user: Partial<IUser> | null;
@@ -231,14 +252,18 @@ export interface ITravelSearchProps {
   onSearchToggle: (searching: boolean) => void;
 }
 
-export interface IUserProps {
-  auth: boolean;
-  block: false;
-  createdAt: string;
-  credential: ICredential;
-  id: string;
-  name: string;
-  phone: string;
+export interface IUserProps{
+auth: boolean,
+block: false,
+createdAt: string,
+credential: ICredential,
+id: string,
+name: string,
+phone: string,
+avatar?: string,
+email?: string,
+isRepresentative:boolean,
+disabilities:IDisability[]
 }
 
 export interface IUserContextType {
@@ -249,6 +274,9 @@ export interface IUserContextType {
   login: (credentials: ILogin) => Promise<boolean>;
   register: (user: IRegister) => Promise<boolean>;
   logOut: () => void;
+  updateUser: (updatedUser: IUserChange) => void;
+  loginWithGoogle: (credentials: IloginGoogle) => Promise<boolean>;
+
 }
 
 export interface ITravelCardProps {
@@ -259,6 +287,7 @@ export interface ITravelCardProps {
 export interface ICarouselProps {
   items: IImage[];
 }
+
 export interface IBlogArticle {
   id: string;
   title: string;
@@ -283,12 +312,12 @@ interface IUserReviews {
 }
 
 export interface IReviewT {
-  id: string;
-  review: string;
-  stars: number;
-  date: string;
-  visible?: boolean;
-  user: IUserReviews;
+  id:string,
+  review:string,
+  stars: number,
+  state: string,
+  date: string,
+  user:IUserReviews;
 }
 
 export interface ITravelReview {
@@ -337,15 +366,17 @@ export interface IFAQProps {
 }
 
 export interface Disability {
-  category: string;
+  id: string;
   name: string;
+  active: boolean;
 }
 
 export interface IAlliances {
-  id: string;
-  name: string;
-  visible: boolean;
-  image: IImage;
+  id: string,
+  name: string,
+  url: string, 
+  visible: boolean,
+  image: IImage
 }
 
 export interface IProjects {
@@ -402,4 +433,18 @@ export interface IUpdateTravel {
   email?: string;
   address?: string;
   openingHours?: string;
+}
+
+export interface ISendHelp {
+  helpType: string,
+  name: string,
+  message?: string,
+  email: string
+}
+
+export interface IContact {
+  subject: string,
+  name: string,
+  message: string,
+  email: string
 }

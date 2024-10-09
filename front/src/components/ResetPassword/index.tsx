@@ -66,13 +66,13 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="flex flex-col items-center p-6 border rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold mb-6 text-center">
+    <div className="flex flex-col items-start p-6">
+      <h1 className="text-2xl font-arialroundedmtbold mb-6">
         Paso 3: Ingrese el email, código y nueva contraseña
       </h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
-        <h2 className="text-xl text-center">Ingresa el email de la cuenta:</h2>
+        <h2 className="text-sivoy-blue text-left">Ingrese el email de la cuenta</h2>
         <input
           type="email"
           placeholder="Ingrese su correo electrónico"
@@ -81,8 +81,8 @@ export default function ResetPassword() {
           onChange={(e) => setEmail(e.target.value)}
           disabled={isLoading}
         />
-        <h2 className="text-xl text-center">
-          Ingresa el codigo para cambiar la contraseña:
+        <h2 className="text-left text-sivoy-blue">
+          Ingrese el código para cambiar la contraseña
         </h2>
         <input
           type="text"
@@ -92,7 +92,7 @@ export default function ResetPassword() {
           onChange={(e) => setResetCode(e.target.value)}
           disabled={isLoading}
         />
-        <h2 className="text-xl text-center">Ingresa la contraseña nueva:</h2>
+        <h2 className="text-left text-sivoy-blue">Ingrese la contraseña nueva</h2>
         <div className="relative w-full">
           <input
             type={showPassword ? "text" : "password"}
@@ -111,7 +111,7 @@ export default function ResetPassword() {
             {showPassword ? "🙈" : "👁️"}
           </button>
         </div>
-        <h2 className="text-xl text-center">Confirma la contraseña nueva:</h2>
+        <h2 className="text-left text-sivoy-blue">Confirme la contraseña nueva</h2>
         <div className="relative w-full">
           <input
             type={showPassword ? "text" : "password"}

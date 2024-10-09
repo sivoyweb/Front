@@ -22,21 +22,13 @@ export const authOptions:NextAuthOptions = {
                     }),
             }); 
             if (!response.ok) {
-              console.error('Error al enviar datos al backend:', response.statusText);
               return false;
           }
 
-          const data = await response.json();
-          console.log(data);
-          
-          
-          
-        
-          
-          
+          await response.json();
+
           return true;
       } catch (error) {
-          console.error('Error en signIn callback:', error);
           return false;
       }
   }

@@ -21,12 +21,10 @@ const ProvidersForm: React.FC = () => {
     }),
     onSubmit: async (values, { resetForm }) => {
       try {
-        const response = await axios.post("/api/providers", values);
-        console.log("Proveedor creado:", response.data);
+        await axios.post("/api/providers", values);
         resetForm();
         alert("¡Proveedor creado exitosamente!");
       } catch (error) {
-        console.error("Error al crear el proveedor:", error);
       }
     },
   });

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { ILogin } from "../../interfaces/interfaces";
@@ -15,7 +15,7 @@ import { signIn, useSession } from "next-auth/react";
 const Login: React.FC = () => {
   const { data: session } = useSession();
   const router = useRouter();
-  const { login } = useContext(UserContext);
+  const { login,loginWithGoogle } = useContext(UserContext);
   const [showPassword, setShowPassword] = useState(false);
 
   const initialValues: ILogin = {
@@ -41,6 +41,7 @@ const Login: React.FC = () => {
 
   const callLoginGoogle = async () => {
     try {
+      
       await signIn("google");
     } catch (error: unknown) {
       Swal.fire({
@@ -48,20 +49,27 @@ const Login: React.FC = () => {
         text: `Vuelva a intentarlo: ${error}`,
         icon: "error",
       });
+      
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (session) {
+      const emailGoogle = {
+        email: session.user?.email || '',
+        name: session.user?.name || '',
+        phone: '', 
+        token: '' 
+      };
       Swal.fire({
-        title: `Bienvenido ${session.user?.name}`,
-        icon: "success",
-      }).then(() => {
-        router.push("/");
-        console.log(session);
-      });
+        title:"inicio de Sesion exitoso",
+        text:`bienvenido ${session.user?.name}`,
+        icon:'success'
+      })
+
+      loginWithGoogle(emailGoogle);
     }
-  }, [session, router]);
+  }, [session,loginWithGoogle]);
 
   return (
     <div className="">

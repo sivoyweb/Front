@@ -3,10 +3,11 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context/userContext";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { CldUploadWidget, CloudinaryUploadWidgetInfo } from 'next-cloudinary';
 import axios from "axios";
+import { IDisability } from "@/interfaces/interfaces";
+
 
 
 interface Credential {
@@ -18,9 +19,9 @@ interface Credential {
 interface FormData {
   name: string;
   phone: string;
-  disabilities: string[];
+  disabilities: IDisability[];
   credential: Credential;
-  isRepresentative: boolean;
+  isRepresentative: boolean | null;
   id: string | undefined; 
 }
 
@@ -28,15 +29,15 @@ interface FormData {
 const UserDashboard = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [token, setToken] = useState<string | null>(null);
-  const { isLogged,user } = useContext(UserContext);
+  const { user ,updateUser} = useContext(UserContext);
+  
   const router = useRouter()
-
 
   const disabilitiesOption=[
     { category: 'Visual', selected: false },
     { category: 'Auditiva', selected: false },
     { category: 'Motora', selected: false },
-    { category: 'Fisica', selected: false },
+    { category: 'Física', selected: false },
     { category: 'Sensorial', selected: false },
     { category: 'Cognitiva', selected: false },
     { category: 'Psicosocial', selected: false },
@@ -46,48 +47,47 @@ const UserDashboard = () => {
     const storedToken = localStorage.getItem('token');
     setToken(storedToken);
   }, []);
+
   
   const [formData, setFormData] = useState<FormData>({
     name:user?.name || '',
     phone:user?.phone || '',
-    disabilities:[],
+    disabilities:user?.disabilities || [],
     credential: {
       avatar: {
-        url: '',
-        publicId: '',
+        url: user?.credential?.avatar.url || '',
+        publicId: user?.credential?.avatar.publicId || '',
       },
     },
     id:user?.id,
-    isRepresentative:false
-    
+    isRepresentative:user?.isRepresentative || null 
    });
+
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeSection, setActiveSection] = useState('account');
   const [isEditing, setIsEditing] = useState(false); 
   const [selectedDisabilities, setSelectedDisabilities] = useState<string[]>([]);
   const [isDisabilityListOpen, setIsDisabilityListOpen] = useState(false);
   
-  const {data:session} = useSession();
+
   
   
 
  
   useEffect(() => {
-    if(!isLogged){
+    if(!user){
       Swal.fire({
-        titleText:"Necesitas estar logueado",
+        titleText:"Ingresa a tu cuenta o regístrate para entrar al Panel de Usuario",
         icon:"warning"
       });
       setTimeout(() => {
         router.push('/login')
       }, 2000);
     }
-  },[isLogged,router])
+  },[user,router])
   
   const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); 
-
-  
     
     Swal.fire({
     title: '¿Estás seguro de los cambios?',
@@ -103,18 +103,23 @@ const UserDashboard = () => {
         try {
           if(user){
         
-            await axios.put(`https://api-sivoy.onrender.com/users/${user.id}`,formData,{
+           const response = await axios.put(`https://api-sivoy.onrender.com/users/${user.id}`,formData,{
               headers:{
                 Authorization:`Bearer ${token}`
               }
             });
+
+            if(response.data && response.data.user){
+              updateUser(response.data.user)
+            }
+           
+            
           }
           Swal.fire({
             title: "Cambios guardados con éxito",
             icon: 'success',
           });
         } catch (error) {
-          console.error(error)
           Swal.fire({
             title: "Error",
             text: "No se pudieron guardar los cambios.",
@@ -145,36 +150,36 @@ const UserDashboard = () => {
 
   
 
-  const handleToggleDisability = (disability: string) => {
-    setSelectedDisabilities((prev)=>{
-      if(prev.includes(disability)){
-        return prev.filter((item) => item !== disability);
-      } else {
-        return [...prev, disability];
-      }
-    });
+  const handleToggleDisability = (disabilityCategory: string) => {
     setFormData((prev: FormData) => {
-      const { disabilities } = prev;
+      const isAlreadySelected = prev.disabilities.some(disability => disability.name === disabilityCategory);
   
-      
-      const newDisabilities = disabilities.includes(disability)
-        ? disabilities.filter(d => d !== disability) 
-        : [...disabilities, disability]; 
-       
+      // Actualiza el array de discapacidades en el formData
+      const updatedDisabilities = isAlreadySelected
+        ? prev.disabilities.filter(disability => disability.name !== disabilityCategory) // Si está seleccionada, la eliminamos
+        : [...prev.disabilities, { name: disabilityCategory } as IDisability]; // Si no está, la añadimos
   
       return {
         ...prev,
-        disabilities: newDisabilities,
+        disabilities: updatedDisabilities,
       };
     });
-    
+  
+    // Actualiza el array de discapacidades seleccionadas para el span
+    setSelectedDisabilities((prevSelected) => {
+      if (prevSelected.includes(disabilityCategory)) {
+        return prevSelected.filter((item) => item !== disabilityCategory);
+      } else {
+        return [...prevSelected, disabilityCategory];
+      }
+    });
   };
 
   const handleRepresentativeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { checked } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      isRepresentative: checked, 
+      isRepresentative: checked, // Actualiza el estado según el valor del checkbox
     }));
   };
   
@@ -182,6 +187,7 @@ const UserDashboard = () => {
   const toggleDisabilityList = () => setIsDisabilityListOpen(!isDisabilityListOpen);
 
 
+console.log("este es el formdata:",formData);
 
 
   const renderSection = () => {
@@ -203,10 +209,13 @@ const UserDashboard = () => {
             </div>
             {!isEditing ? (
               <>
-                <p className="text-gray-600">Nombre: {user?.name || session?.user?.name}</p>
-                <p className="text-gray-600">Email: {user?.credential?.email || session?.user?.email}</p>
-               {!session?.user ? <p className="text-gray-600">Teléfono:{user?.phone} </p> : null}
-               <p className="text-gray-600">Representante: {formData.isRepresentative ? "Sí" : "No"}</p>
+                <p className="text-gray-600">Nombre: {user?.name }</p>
+                <p className="text-gray-600">Email: {user?.credential?.email }</p>
+               <p className="text-gray-600">Teléfono:{user?.phone} </p> 
+               <p className="text-gray-600">Representante: {user?.phone}</p>
+               <p className="text-gray-600">discapcidad/es: {
+          (user?.disabilities ?? []).map(disability => disability.name).join(', ') || 'Ninguna'
+        }</p>
                 
               </>
             ) : (
@@ -236,11 +245,11 @@ const UserDashboard = () => {
                   />
                 </div>
                 <div>
-                  <label className="flex items-center">
+                  <label className="flex items-center mt-7">
                     <input
                       type="checkbox"
                       name="isRepresentative"
-                      checked={formData.isRepresentative}
+                      checked={formData.isRepresentative || undefined}
                       onChange={handleRepresentativeChange} 
                       className="mr-2"
                     />
@@ -248,47 +257,55 @@ const UserDashboard = () => {
                   </label>
                 </div>
                 <div className="flex gap-4">
-  {/*categories*/}
-  <div className="w-full max-w-xs flex flex-col gap-1">
-    <label htmlFor="disabilities" className="w-fit pl-0.5 text-sm text-neutral-600">Discapacidad</label>
-    <div className="relative">
+ {/*categories*/}
+<div className="w-full max-w-xs flex flex-col gap-1 mt-5 mb-5">
+  <label htmlFor="disabilities" className="w-fit pl-0.5 text-sm text-neutral-600">Discapacidad</label>
+  <div className="relative">
     <button
-  type="button"
-  role="combobox"
-  onClick={toggleDisabilityList}
-  className="inline-flex w-full items-center justify-between gap-2 whitespace-nowrap border-0 bg-transparent px-4 py-2 text-sm font-medium capitalize tracking-wide text-neutral-600 transition hover:bg-gray-200 focus:bg-gray-300 focus:outline-none"
-  aria-haspopup="listbox"
-  aria-controls="namesList"
->
+      type="button"
+      role="combobox"
+      onClick={toggleDisabilityList}
+      className="inline-flex w-full items-center justify-between gap-2 whitespace-nowrap border-0 bg-transparent px-4 py-2 text-sm font-medium capitalize tracking-wide text-neutral-600 transition hover:bg-gray-200 focus:bg-gray-300 focus:outline-none"
+      aria-haspopup="listbox"
+      aria-controls="namesList"
+    >
   <span className="text-sm w-full font-normal text-start overflow-hidden text-ellipsis whitespace-nowrap">
-    {selectedDisabilities.length > 0 ? selectedDisabilities.join(', ') : "Seleccione una opción"}
-  </span>
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5">
-    <path fillRule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd"/>
-  </svg>
-</button>
+  {selectedDisabilities.length > 0
+    ? Array.from(new Set([
+        ...selectedDisabilities, 
+        ...(user?.disabilities ?? []).map(disability => disability.name)
+      ])).join(', ') // Combina las discapacidades seleccionadas con las que ya tiene el usuario
+    : (user?.disabilities ?? []).map(disability => disability.name).join(', ') // Si no hay nuevas seleccionadas, muestra las anteriores
+  }
+</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5">
+        <path fillRule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clipRule="evenodd" />
+      </svg>
+    </button>
 
-      <input id="disabilities" name="disabilities" type="text"  hidden value={selectedDisabilities.join(',')} />
-      <ul id="disabilitiesList"
-      className={`absolute z-10 left-0 top-11 flex max-h-44 w-full flex-col overflow-hidden overflow-y-auto border-neutral-300 bg-neutral-50 py-1.5 border rounded-md transition-height ${
+    <input id="disabilities" name="disabilities" type="text" hidden value={selectedDisabilities.join(',')} />
+    <ul id="disabilitiesList"
+      className={`absolute z-10 left-0 top-full flex max-h-44 w-full flex-col overflow-hidden overflow-y-auto border-neutral-300 bg-neutral-50 py-1.5 rounded-md transition-height ${
         isDisabilityListOpen ? 'visible-list' : 'hidden-list'
-      }`} role="listbox">
-
+      }`}
+      role="listbox"
+      
+    >
         {disabilitiesOption.map(option => (
-              <li key={option.category} role="option">
-                <label className="combobox-label">
-                  <input
-                    type="checkbox"
-                    checked={formData.disabilities.includes(option.category)}
-                    onChange={() => handleToggleDisability(option.category)}
-                  />
-                  <span>{option.category}</span>
-                </label>
-              </li>
-            ))}
-      </ul>
-    </div>
+        <li key={option.category} role="option">
+          <label className="combobox-label flex items-center gap-2">
+            <input
+              type="checkbox"
+              checked={formData.disabilities.some(disability => disability.name === option.category)} // Verifica si la discapacidad está seleccionada
+              onChange={() => handleToggleDisability(option.category)} // Controlador para añadir/eliminar discapacidades
+            />
+            <span>{option.category}</span>
+          </label>
+        </li>
+      ))}
+    </ul>
   </div>
+</div>
 
   
  
@@ -296,8 +313,9 @@ const UserDashboard = () => {
 
 
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mt-12 ">Avatar</label>
+
+                 <div>
+                  <label className="block text-sm font-medium text-gray-700 mt-6 ">Avatar</label>
                   <CldUploadWidget uploadPreset="siVoyPreset"
                                    onSuccess={(result)=>{
 
@@ -335,7 +353,7 @@ const UserDashboard = () => {
                   }}
                   </CldUploadWidget>
                 </div>
-                <button
+               <button
                   
                   type="submit"
                   disabled={isSubmitting}
@@ -352,7 +370,7 @@ const UserDashboard = () => {
         return <p>Selecciona una opción del menú.</p>;
     }
   };
-  console.log(formData)
+  
 
   return (
     <div className="flex h-screen bg-gray-100 font-arialroundedmtbold text-sivoy-blue">
@@ -361,7 +379,7 @@ const UserDashboard = () => {
           sidebarOpen ? "w-64" : "w-20"
         } transition-all duration-300`}
       >
-        <div className="p-4">
+        <div className="p-2">
           <button
             onClick={() => setSidebarOpen(!sidebarOpen)}
             className="focus:outline-none"
@@ -391,7 +409,7 @@ const UserDashboard = () => {
           
              <Image
              alt="imagen de perfil"
-             src={user?.credential?.avatar.url || session?.user?.image || ''}
+             src={user?.credential?.avatar.url ||  ''}
              width={50}  
              height={50} 
              className="rounded-full" />
