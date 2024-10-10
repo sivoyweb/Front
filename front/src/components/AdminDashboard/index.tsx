@@ -198,7 +198,7 @@ const AdminDashboard = () => {
               !sidebarOpen ? "opacity-0 w-0" : "opacity-100 w-full"
             }`}
           >
-            Reviews
+            Reseñas
           </Link>
           <Link
             href="#"
