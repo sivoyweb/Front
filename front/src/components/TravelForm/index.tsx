@@ -43,34 +43,30 @@ const TravelForm: React.FC = () => {
   const [uploadedImages, setUploadedImages] = useState<IImage[]>([]);
   const [uploadedAccesibilitySeal, setUploadedAccesibilitySeal] = useState<IImage[]>([]);
 
-<<<<<<< HEAD
-  const token = localStorage.getItem("token");
-=======
   const token =  localStorage.getItem("token") ;
 
-  const handleImageUpload = () => {
-    const newImage: IImage = {
-      id: "img-001",
-      url: "https://ejemplo.com/imagen.jpg", // URL de ejemplo
-      publicId: "public-img-001",
-      alt: "Descripción de la imagen",
-      active: true,
-    };
-    setUploadedImages([...uploadedImages, newImage]);
-  };
+  // const handleImageUpload = () => {
+  //   const newImage: IImage = {
+  //     id: "img-001",
+  //     url: "https://ejemplo.com/imagen.jpg", // URL de ejemplo
+  //     publicId: "public-img-001",
+  //     alt: "Descripción de la imagen",
+  //     active: true,
+  //   };
+  //   setUploadedImages([...uploadedImages, newImage]);
+  // };
 
-  const handleSealUpload = () => {
-    const newSeal: IImage = {
-      id: "seal-001",
-      url: "https://ejemplo.com/seal.jpg", // URL de ejemplo
-      publicId: "public-seal-001",
-      alt: "Descripción del sello de accesibilidad",
-      active: true,
-    };
-    setUploadedSeals([...uploadedSeals, newSeal]);
-  };
+  // const handleSealUpload = () => {
+  //   const newSeal: IImage = {
+  //     id: "seal-001",
+  //     url: "https://ejemplo.com/seal.jpg", // URL de ejemplo
+  //     publicId: "public-seal-001",
+  //     alt: "Descripción del sello de accesibilidad",
+  //     active: true,
+  //   };
+  //   setUploadedSeals([...uploadedSeals, newSeal]);
+  // };
 
->>>>>>> ae59e5b72de41f9cc1896f56be828dba4193b4ad
   const formik = useFormik<IServiceFormValues>({
     initialValues: {
       name: "",

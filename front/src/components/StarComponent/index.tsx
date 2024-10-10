@@ -90,7 +90,7 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
 
   return (
     <div className="flex flex-col items-center">
-      <h2 className="text-xl font-bold mb-2">Cuéntanos tu experiencia:</h2>
+      <h2 className="md:text-lg font-arialroundedmtbold text-sivoy-blue mb-2">Cuéntanos tu experiencia:</h2>
 
       <textarea
         value={review}
@@ -108,7 +108,7 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
         fullSymbol={<i className="fa-solid fa-star fa-2x" style={starStyle} />}
       />
 
-      <p className="mt-2">Nivel de satisfacción: {rating} estrellas</p>
+      <p className="mt-2 text-sivoy-blue">Nivel de satisfacción: {rating} estrellas</p>
 
       <button onClick={handleSubmit} className="mt-4" disabled={loading}>
         {loading ? "Enviando..." : "Enviar reseña"}

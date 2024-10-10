@@ -132,7 +132,7 @@ const Login: React.FC = () => {
           />
 
           <div className="flex space-x-4 mt-8 justify-center">
-            <button type="submit" disabled={isSubmitting} className="">
+            <button type="submit" disabled={isSubmitting} className="w-64">
               {isSubmitting ? "Iniciando..." : "Iniciar sesión"}
             </button>
           </div>
@@ -157,7 +157,7 @@ const Login: React.FC = () => {
 
   <div className="flex flex-col items-end space-y-4 mt-8">
     <a href="/forgot-password" className="text-sivoy-blue hover:underline ">
-      ¿Olvidó tu Contraseña?
+      ¿Olvidó su Contraseña?
     </a>
     <div className="ml-1 text-right">
       <p className="text-sivoy-blue">

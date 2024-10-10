@@ -60,6 +60,7 @@ html, body {
   padding: 0;
   width: 100%;
   overflow-x: hidden; 
+  color: #09253E;
 }
 * {
   box-sizing: border-box; 

@@ -1,17 +1,11 @@
 "use client"
 
-import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faWheelchairMove, faMapLocationDot, faGlobe, faFileLines } from "@fortawesome/free-solid-svg-icons"
-import Link from 'next/link'
 
 export const HomeServicesGrid = () => {
 
-    const router = useRouter();
 
-    const handleClick = () => {
-        router.push(`/business-services`);
-    };
 
     return (
         <div className="ml-5 mr-5">
@@ -22,7 +16,7 @@ export const HomeServicesGrid = () => {
       
         <div className="mt-4 mb-4">
           <div className="mb-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-6">
-            <div className="relative isolate mt-1 mb-1" onClick={handleClick}>
+            <div className="relative isolate mt-1 mb-1">
               <div className="top-full left-0 w-full h-full p-8 bg-gray-100 rounded-2xl transition-transform hover:scale-105 duration-300">
                 <span className="inline-block mb-4 pt-2 pr-2">
                   <FontAwesomeIcon icon={faWheelchairMove} size="2xl" style={{ color: "#229764" }} />
@@ -34,7 +28,7 @@ export const HomeServicesGrid = () => {
               </div>
             </div>
       
-            <div className="relative isolate mt-1 mb-1" onClick={handleClick}>
+            <div className="relative isolate mt-1 mb-1">
               <div className="top-full left-0 w-full h-full p-8 bg-gray-100 rounded-2xl transition-transform hover:scale-105 duration-300">
                 <span className="inline-block mb-4 pt-2 pr-2">
                   <FontAwesomeIcon icon={faMapLocationDot} size="2xl" style={{ color: "#229764" }} />
@@ -46,7 +40,7 @@ export const HomeServicesGrid = () => {
               </div>
             </div>
       
-            <div className="relative isolate mt-1 mb-1" onClick={handleClick}>
+            <div className="relative isolate mt-1 mb-1">
               <div className="top-full left-0 w-full h-full p-8 bg-gray-100 rounded-2xl transition-transform hover:scale-110 duration-300">
                 <span className="inline-block mb-4 pt-2 pr-2">
                   <FontAwesomeIcon icon={faGlobe} size="2xl" style={{ color: "#229764" }} />
@@ -58,7 +52,7 @@ export const HomeServicesGrid = () => {
               </div>
             </div>
       
-            <Link className="relative isolate mt-1 mb-1 transition-transform hover:scale-105 duration-300" href="/academy">
+            <div className="relative isolate mt-1 mb-1 transition-transform hover:scale-105 duration-300">
               <div className="top-full left-0 w-full h-full p-8 bg-gray-100 rounded-2xl">
                 <span className="inline-block mb-4 pt-2 pr-2">
                   <FontAwesomeIcon icon={faFileLines} size="2xl" style={{ color: "#229764" }} />
@@ -68,7 +62,7 @@ export const HomeServicesGrid = () => {
                   Capacitaciones en diseño universal y en trato adecuado a personas con movilidad reducida.
                 </p>
               </div>
-            </Link>
+            </div>
           </div>
         </div>
       </div>

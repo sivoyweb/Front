@@ -9,7 +9,7 @@ export const LoginButton = () => {
         router.push("/login");
       };
 
-    return ( <div className='justify-center'>
+    return ( <div>
         <button onClick={handleClick}>Iniciar Sesión</button>
     </div> );
 };
@@ -52,7 +52,7 @@ export const NotFoundButton = () => {
   return (
     <button
       onClick={handleClick}
-      className='text-xl'
+      className='md:text-xl'
     >
       Volver al Home
     </button>

@@ -85,7 +85,7 @@ const Academia = () => {
                 <li>Acceso al aula 24/7</li>
                 <li>Uso irrestricto de la biblioteca virtual</li>
                 <li>Salas de foro y chats</li>
-                <li>-Guia docente con profesores y tutores</li>
+                <li>Guía docente con profesores y tutores</li>
                 <li>Diploma y certificado analítico digitalizado</li>
               </ul>
             </div>

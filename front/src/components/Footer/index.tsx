@@ -19,7 +19,7 @@ export default function Footer() {
         <p className="text-sm">info.sivoy.com.ar</p>
         <p className="text-sm">Argentina</p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-6 gap-2"> {/* Cambiado a 2 columnas en móviles */}
+      <div className="grid grid-cols-1 lg:grid-cols-4 2xl:grid-cols-6 gap-2"> {/* Cambiado a 2 columnas en móviles */}
         <Link href="https://web.facebook.com/sivoy.com.ar" className="flex justify-center md:justify-start space-x-1 text-xs hover:text-gray-300 transition-colors">
           <Facebook size={16} />
           <span>Facebook</span>

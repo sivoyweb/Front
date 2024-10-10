@@ -178,7 +178,7 @@ const Register: React.FC = () => {
   <button
     type="submit"
     disabled={isSubmitting}
-    className="-ml-1 px-10 py-2 mt-4"
+    className="-ml-1 px-10 py-2 mt-4 w-64"
   >
     {isSubmitting ? "Registrando..." : "Registro"}
   </button>

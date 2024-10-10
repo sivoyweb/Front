@@ -8,8 +8,8 @@ interface TravelGridProps {
 
 function TravelGridComponent({ travels }: TravelGridProps) {
   return (
-    <div className="flex justify-center px-4 md:px-8 -ml-24">
-      <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-8 w-full -mr-24">
+    <div className="flex justify-center ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-8 w-full">
         {travels.map((travels: ITravel) => (
           <TravelCard travels={travels} key={travels.id} />
         ))}
