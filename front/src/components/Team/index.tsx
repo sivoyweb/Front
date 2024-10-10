@@ -23,12 +23,13 @@ export const TeamSection = () => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 py-6">
       {teamMembers.map((member) => (
         <div key={member.id} className="flex flex-col items-center">
-          <a
-            href={member.linkedin}
-            className="flex flex-col items-center border shadow-md rounded-3xl hover:scale-105 duration-300 transition-transform p-4 h-96"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+<a
+  href={member.linkedin}
+  className="flex flex-col items-center border shadow-md rounded-3xl hover:scale-105 duration-300 transition-transform p-4 h-96 w-full min-h-[400px]" // Asegura que todas las tarjetas tengan el mismo ancho y una altura mínima
+  target="_blank"
+  rel="noopener noreferrer"
+>
+
             {member.image?.url ? (
               <Image
                 src={member.image.url as string}
