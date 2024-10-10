@@ -5,7 +5,6 @@ import withReactContent from "sweetalert2-react-content";
 import axios from "axios";
 import { IUpdateTravel } from "@/interfaces/interfaces";
 import Image from "next/image";
-import Loader from "@/components/Loader"
 import CloudinaryButton from "../CloudinaryButton";
 
 // SweetAlert2 con React
@@ -120,7 +119,7 @@ const AdminTravelComponent = () => {
   };
 
   if (loading) {
-    return <Loader />;
+    <p className=".loader"></p>
   }
 
   return (

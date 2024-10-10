@@ -6,9 +6,7 @@ import { format } from "date-fns";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Image from "next/image"; 
-import Loader from "@/components/Loader"
 import CloudinaryButton from "../CloudinaryButton";
-
 
 const MySwal = withReactContent(Swal);
 
@@ -120,7 +118,7 @@ const AdminBlogsComponent = () => {
   };
 
   if (loading) {
-    return <Loader />;
+    <p className=".loader"></p>
   }
 
   if (error) {

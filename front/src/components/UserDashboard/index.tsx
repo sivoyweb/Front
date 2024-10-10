@@ -263,7 +263,7 @@ console.log(formData);
   <div className="relative">
     <button
       type="button"
-      role="combobox"
+      role=""
       onClick={toggleDisabilityList}
       className="inline-flex w-full items-center justify-between gap-2 whitespace-nowrap border-0 bg-transparent px-4 py-2 text-sm font-medium capitalize tracking-wide text-neutral-600 transition hover:bg-gray-200 focus:bg-gray-300 focus:outline-none"
       aria-haspopup="listbox"
@@ -292,7 +292,7 @@ console.log(formData);
       
     >
         {disabilitiesOption.map(option => (
-        <li key={option.category} role="option">
+        <li key={option.category} role="">
           <label className="combobox-label flex items-center gap-2">
             <input
               type="checkbox"
@@ -409,7 +409,7 @@ console.log(formData);
           
              <Image
              alt="imagen de perfil"
-             src={user?.credential?.avatar?.url ||  'https://res.cloudinary.com/dvxh2vynm/image/upload/v1728360008/si-voy/zcomkrjmtznorb7qdtl0.png'}
+             src={user?.credential?.avatar?.url || ''}
              width={50}  
              height={50} 
              className="rounded-full" />

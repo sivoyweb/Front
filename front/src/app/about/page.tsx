@@ -49,6 +49,7 @@ const AboutUsPage = () => {
 
       <div className="flex flex-col md:flex-row justify-between gap-16 mb-8">
         <ProjectsSection />
+
         <section className="flex-1">
           <h2 className="text-2xl font-arialroundedmtbold text-sivoy-blue mb-4">
             Logros
@@ -84,4 +85,4 @@ const AboutUsPage = () => {
   );
 };
 
-export default AboutUsPage;
+export default AboutUs;
