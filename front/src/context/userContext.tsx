@@ -128,7 +128,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       } else if (data.error === "email already in use") {
         Swal.fire({
           title: "Correo ya registrado",
-          text: "El correo ya tiene una cuenta creada. Intente iniciar sesión.",
+          text: "El correo ya tiene una cuenta creada. Intente iniciar sesión",
           icon: "warning",
         });
         return false;

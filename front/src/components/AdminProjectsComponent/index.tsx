@@ -4,7 +4,6 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { IProjects } from "@/interfaces/interfaces";
-import Loader from "@/components/Loader"
 
 const MySwal = withReactContent(Swal);
 
@@ -127,7 +126,7 @@ const AdminProjectsComponent = () => {
   };
 
   if (loading) {
-    return <Loader />;
+    <p className=".loader"></p>
   }
 
   if (error) {

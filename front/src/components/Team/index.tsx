@@ -5,7 +5,7 @@ import { fetchTeam } from "@/lib/server/fetchTeam";
 import { ITeam } from "@/interfaces/interfaces";
 import { useEffect, useState } from "react";
 
-export const TeamSection = () => {
+const Team: React.FC = () => {
   const [teamMembers, setTeamMembers] = useState<ITeam[]>([]);
 
   useEffect(() => {
@@ -13,8 +13,7 @@ export const TeamSection = () => {
       try {
         const data = await fetchTeam();
         setTeamMembers(data);
-      } catch (error) {
-      }
+      } catch (error) {}
     };
 
     getTeam();
@@ -31,7 +30,7 @@ export const TeamSection = () => {
             rel="noopener noreferrer"
           >
             {member.image?.url ? (
-              <Image 
+              <Image
                 src={member.image.url as string}
                 alt={`Foto de perfil de ${member.name}`}
                 width={180}
@@ -68,3 +67,6 @@ export const TeamSection = () => {
     </div>
   );
 };
+
+export default Team;
+
