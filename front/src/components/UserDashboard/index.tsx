@@ -23,12 +23,20 @@ interface FormData {
   isRepresentative: boolean  ;
   id: string | undefined; 
 }
-
+interface Review{
+  date:string,
+  id:string,
+  review:string,
+  stars:number,
+  state:string
+}
 
 const UserDashboard = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [token, setToken] = useState<string | null>(null);
   const { user ,updateUser} = useContext(UserContext);
+  const [reviews, setReviews] = useState<Review[]>([]);
+
   
   
   const router = useRouter()
@@ -68,6 +76,7 @@ const UserDashboard = () => {
   const [isEditing, setIsEditing] = useState(false); 
   const [selectedDisabilities, setSelectedDisabilities] = useState<string[]>([]);
   const [isDisabilityListOpen, setIsDisabilityListOpen] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   
   useEffect(() => {
     if(!user){
@@ -180,7 +189,36 @@ const UserDashboard = () => {
   
 
   const toggleDisabilityList = () => setIsDisabilityListOpen(!isDisabilityListOpen);
-console.log(formData);
+
+  const fetchReviews = async () => {
+    try {
+      const response = await axios.get(`https://api-sivoy.onrender.com/users/${user?.id}/reviews`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log("Response data:", response.data.revies);
+      setReviews(response.data.reviews);
+    } catch (error) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("Ocurrió un error desconocido");
+      }
+    }
+  };
+
+
+  useEffect(() => {
+    if (user && token) {
+      fetchReviews();
+    }
+  }, [user, token]);
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
+
 
 
 
@@ -372,12 +410,35 @@ console.log(formData);
             )}
           </div>
         );
+        case 'reviews':
+          return(
+              <div>
+                <div className="bg-white rounded-lg p-6 shadow-lg">
+                  <h2 className="text-xl mb-4 font-arialroundedmtbold">Reseñas</h2>
+                  {reviews.length === 0 ? (
+                    <p>No hay reseñas disponibles.</p>
+                  ) : (
+                    <div className="space-y-4">
+                     {reviews.map((review, index) => (
+  <div key={review.id} className="border-b border-gray-200 pb-4">
+    <h3 className="text-lg font-semibold">Reseña #{index + 1}</h3>
+    <p className="text-sm text-gray-600">Comentario: {review.review}</p>
+    <p className="text-sm text-gray-600">Fecha: {review.date}</p>
+    <p className="text-sm text-gray-600">Estado: {review.state}</p>
+    <p className="mt-2 font-bold">Calificación: {review.stars}/5</p>
+  </div>
+))}
+                    </div>
+                  )}
+                </div>
+              </div>
+          )
       
       default:
         return <p>Selecciona una opción del menú.</p>;
     }
   };
-  
+  console.log(reviews)
 
   return (
     <div className="flex h-screen bg-gray-100 text-sivoy-blue">
@@ -405,6 +466,15 @@ console.log(formData);
             }`}
           >
             Cuenta
+          </a>
+          <a
+            href="#"
+            onClick={() => setActiveSection('reviews')}
+            className={`block py-2.5 px-4 rounded transition-all duration-200 hover:bg-sivoy-blue font-arialroundedmtbold ${
+              !sidebarOpen ? "opacity-0 w-0" : "opacity-100 w-full"
+            }`}
+          >
+            Reseñas
           </a>
         </nav>
       </div>
