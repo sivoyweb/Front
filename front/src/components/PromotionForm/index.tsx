@@ -5,30 +5,24 @@ import * as Yup from "yup";
 import axios from "axios";
 import Image from "next/image";
 import Swal from "sweetalert2";
+import { CldUploadWidget, CloudinaryUploadWidgetInfo } from "next-cloudinary";
 
 interface IImage {
   url: string;
+  publicId: string;
   alt: string;
 }
 
 interface IPromotionFormValues {
   name: string;
   description: string;
-  images?: IImage[]; // Arreglo de imágenes
+  images: IImage[]; // Arreglo de imágenes
   validFrom: string;
   validUntil: string;
 }
 
 const PromotionForm: React.FC = () => {
   const [uploadedImages, setUploadedImages] = useState<IImage[]>([]); // Guardar imágenes subidas
-
-  const handleImageUpload = () => {
-    const newImage: IImage = {
-      url: "https://ejemplo.com/imagen.jpg", // Esta es la URL obtenida tras la subida
-      alt: "Descripción de la imagen", // Esto lo puedes configurar manualmente o desde el widget
-    };
-    setUploadedImages([...uploadedImages, newImage]);
-  };
 
   const formik = useFormik<IPromotionFormValues>({
     initialValues: {
@@ -45,7 +39,7 @@ const PromotionForm: React.FC = () => {
       validUntil: Yup.date().required("La fecha de fin es obligatoria."),
     }),
     onSubmit: async (values, { resetForm }) => {
-      const token =  localStorage.getItem("token") ;
+      const token = localStorage.getItem("token");
       try {
         const formData = { ...values, images: uploadedImages };
         await axios.post(
@@ -184,13 +178,37 @@ const PromotionForm: React.FC = () => {
           <label className="block text-xl font-medium text-gray-700">
             Imágenes de la Promoción
           </label>
-          <button
-            type="button"
-            onClick={handleImageUpload}
-            className="mt-2 p-2 w-full "
+          <CldUploadWidget
+            uploadPreset="siVoyPreset" // Reemplaza con tu preset de Cloudinary
+            onSuccess={(result) => {
+              const uploadedImage = result?.info as CloudinaryUploadWidgetInfo;
+              if (uploadedImage) {
+                setUploadedImages((prevImages) => [
+                  ...prevImages,
+                  {
+                    url: uploadedImage.secure_url,
+                    publicId: uploadedImage.public_id,
+                    alt: uploadedImage.original_filename,
+                  },
+                ]);
+                Swal.fire({
+                  title: "¡Imagen subida con éxito!",
+                  text: `URL: ${uploadedImage.secure_url}`,
+                  icon: "success",
+                });
+              }
+            }}
           >
-            Subir Imágenes
-          </button>
+            {({ open }) => (
+              <button
+                type="button"
+                className="focus text-ls px-3 py-2 text-white bg-blue-500 rounded-md ml-2"
+                onClick={() => open()}
+              >
+                Subir imagen
+              </button>
+            )}
+          </CldUploadWidget>
           <div className="mt-2">
             {uploadedImages.map((image, index) => (
               <div key={index} className="mt-2">
@@ -199,8 +217,7 @@ const PromotionForm: React.FC = () => {
                   alt={image.alt}
                   width={300}
                   height={150}
-                  layout="responsive"
-                  objectFit="cover"
+                  className="w-full"
                 />
               </div>
             ))}
