@@ -3,13 +3,13 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import Swal from "sweetalert2"
-import Image from "next/image"; 
+import Swal from "sweetalert2";
+import Image from "next/image";
 import { CldUploadWidget, CloudinaryUploadWidgetInfo } from "next-cloudinary";
 
 interface IImage {
   url: string;
-  publicId:string,
+  publicId: string;
   alt: string;
 }
 
@@ -20,7 +20,7 @@ interface IBlogFormValues {
 }
 
 const BlogForm: React.FC = () => {
-  const [uploadedImages, setUploadedImages] = useState<IImage[]>([]); 
+  const [uploadedImages, setUploadedImages] = useState<IImage[]>([]);
 
   const formik = useFormik<IBlogFormValues>({
     initialValues: {
@@ -33,21 +33,20 @@ const BlogForm: React.FC = () => {
       content: Yup.string().required("El contenido es obligatorio."),
     }),
     onSubmit: async (values, { resetForm }) => {
-      //const token =  localStorage.getItem("token") ;
+      const token = localStorage.getItem("token");
       try {
-        const formData = { ...values, images: uploadedImages }; 
-        console.log(formData)
-        console.log(uploadedImages)
-        await axios.post("/api/blogs", formData);
+        const formData = { ...values, images: uploadedImages };
+        await axios.post("https://api-sivoy.onrender.com/blogs", formData, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         resetForm();
         setUploadedImages([]);
         Swal.fire({
-          icon: 'success',
-          title: 'Éxito',
+          icon: "success",
+          title: "Éxito",
           text: "¡Blog creado exitosamente!",
         });
-      } catch (error) {
-      }
+      } catch (error) {}
     },
   });
 
@@ -113,33 +112,36 @@ const BlogForm: React.FC = () => {
             Imágenes del Blog
           </label>
           <CldUploadWidget
-  uploadPreset="siVoyPreset"
-  onSuccess={(result) => {
-    const uploadedImage = result?.info as CloudinaryUploadWidgetInfo;
-    if (uploadedImage) {
-      setUploadedImages( (prevImages) => [...prevImages, {
-        url: uploadedImage.secure_url,
-        publicId: uploadedImage.public_id,
-        alt: uploadedImage.original_filename,
-      }]); 
-      Swal.fire({
-        title: "¡Imagen subida con éxito!",
-        text: `URL: ${uploadedImage.secure_url}`,
-        icon: "success",
-      });
-    }
-  }}
->
-  {({ open }) => (
-    <button
-      type="button"
-      className="focus text-ls px-3 py-2 text-white bg-blue-500 rounded-md ml-2"
-      onClick={() => open()}
-    >
-      Subir imagen
-    </button>
-  )}
-</CldUploadWidget>
+            uploadPreset="siVoyPreset"
+            onSuccess={(result) => {
+              const uploadedImage = result?.info as CloudinaryUploadWidgetInfo;
+              if (uploadedImage) {
+                setUploadedImages((prevImages) => [
+                  ...prevImages,
+                  {
+                    url: uploadedImage.secure_url,
+                    publicId: uploadedImage.public_id,
+                    alt: uploadedImage.original_filename,
+                  },
+                ]);
+                Swal.fire({
+                  title: "¡Imagen subida con éxito!",
+                  text: `URL: ${uploadedImage.secure_url}`,
+                  icon: "success",
+                });
+              }
+            }}
+          >
+            {({ open }) => (
+              <button
+                type="button"
+                className="focus text-ls px-3 py-2 text-white bg-blue-500 rounded-md ml-2"
+                onClick={() => open()}
+              >
+                Subir imagen
+              </button>
+            )}
+          </CldUploadWidget>
 
           {formik.touched.images && formik.errors.images && (
             <p className="text-red-500 text-sm mt-1">error</p>

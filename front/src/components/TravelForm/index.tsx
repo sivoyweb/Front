@@ -4,8 +4,7 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import Swal from   
- "sweetalert2";
+import Swal from "sweetalert2";
 import Image from "next/image";
 import { CldUploadWidget, CloudinaryUploadWidgetInfo } from "next-cloudinary";
 
@@ -41,32 +40,11 @@ interface IServiceFormValues {
 
 const TravelForm: React.FC = () => {
   const [uploadedImages, setUploadedImages] = useState<IImage[]>([]);
-  const [uploadedAccesibilitySeal, setUploadedAccesibilitySeal] = useState<IImage[]>([]);
+  const [uploadedAccesibilitySeal, setUploadedAccesibilitySeal] = useState<
+    IImage[]
+  >([]);
 
-  const token =  localStorage.getItem("token") ;
-
-  // const handleImageUpload = () => {
-  //   const newImage: IImage = {
-  //     id: "img-001",
-  //     url: "https://ejemplo.com/imagen.jpg", // URL de ejemplo
-  //     publicId: "public-img-001",
-  //     alt: "Descripción de la imagen",
-  //     active: true,
-  //   };
-  //   setUploadedImages([...uploadedImages, newImage]);
-  // };
-
-  // const handleSealUpload = () => {
-  //   const newSeal: IImage = {
-  //     id: "seal-001",
-  //     url: "https://ejemplo.com/seal.jpg", // URL de ejemplo
-  //     publicId: "public-seal-001",
-  //     alt: "Descripción del sello de accesibilidad",
-  //     active: true,
-  //   };
-  //   setUploadedSeals([...uploadedSeals, newSeal]);
-  // };
-
+  const token = localStorage.getItem("token");
   const formik = useFormik<IServiceFormValues>({
     initialValues: {
       name: "",
