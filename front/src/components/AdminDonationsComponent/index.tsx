@@ -13,7 +13,7 @@ const AdminDonationsComponent = () => {
     setLoading(true);
     setError(null);
     try {
-      const token = localStorage.getItem("token");
+      const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
       if (!token) {
         setError("No se encontró un token de autenticación.");
         setLoading(false);

@@ -1,5 +1,5 @@
 import { ProjectsSection } from "@/components/Projects";
-import { TeamSection } from "@/components/Team";
+import  TeamSection  from "@/components/Team";
 
 const AboutUsPage = () => {
   return (

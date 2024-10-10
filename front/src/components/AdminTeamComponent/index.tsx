@@ -21,7 +21,7 @@ const AdminTeamComponent = () => {
     setLoading(true);
     setError(null);
     try {
-      const token = localStorage.getItem("token");
+      const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
       if (!token) {
         setError("No se encontró un token de autenticación.");
         setLoading(false);
@@ -50,7 +50,7 @@ const AdminTeamComponent = () => {
   const handleEdit = async (id: string) => {
     if (!editingMember) return;
 
-    const token = localStorage.getItem("token");
+    const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
 
     try {
 
@@ -93,7 +93,7 @@ console.log(response);
 
   // Función para manejar la eliminación de un miembro del equipo
   const handleDelete = async (id: string) => {
-    const token = localStorage.getItem("token");
+    const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
     try {
       const result = await MySwal.fire({
         title: "¿Estás seguro?",

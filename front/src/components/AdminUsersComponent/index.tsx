@@ -9,7 +9,7 @@ const MySwal = withReactContent(Swal);
 
 const AdminUsersComponent = () => {
   const [users, setUsers] = useState<IUser[]>([]);
-  const token = localStorage.getItem("token");
+  const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
 
   useEffect(() => {
     const fetchUsers = async () => {

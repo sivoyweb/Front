@@ -18,7 +18,7 @@ const AdminProjectsComponent = () => {
     setLoading(true);
     setError(null);
     try {
-      const token = localStorage.getItem("token");
+      const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
       if (!token) {
         setError("No se encontró un token de autenticación.");
         setLoading(false);
@@ -49,7 +49,7 @@ const AdminProjectsComponent = () => {
   const handleEdit = async (id: string) => {
     if (!editingProject) return;
   
-    const token = localStorage.getItem("token");
+    const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
   
     try {
       
@@ -93,7 +93,7 @@ const AdminProjectsComponent = () => {
 
   
   const handleDelete = async (id: string) => {
-    const token = localStorage.getItem("token");
+    const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
     try {
       const result = await MySwal.fire({
         title: "¿Estás seguro?",

@@ -22,7 +22,7 @@ const AdminTravelComponent = () => {
     const fetchTravels = async () => {
       try {
         
-        const token = localStorage.getItem("token");
+        const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
         const response = await axios.get(
           "https://api-sivoy.onrender.com/travels",
           {
@@ -42,7 +42,7 @@ const AdminTravelComponent = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      const token = localStorage.getItem("token");
+      const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
       const result = await MySwal.fire({
         title: "¿Estás seguro?",
         text: "Esta acción no se puede deshacer",
@@ -68,7 +68,7 @@ const AdminTravelComponent = () => {
 
   const handleSave = async () => {
     if (!editingTravel) return;
-    const token = localStorage.getItem("token");
+    const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
   
 
     const result = await MySwal.fire({
