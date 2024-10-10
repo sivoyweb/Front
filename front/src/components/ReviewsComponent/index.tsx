@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback, useContext } from "react";
 import Rating from "react-rating";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { ITravelReview, IReviewT } from "@/interfaces/interfaces";
+import { ITravelReview } from "@/interfaces/interfaces";
 import { UserContext } from "@/context/userContext";
 
 interface ReviewsComponentProps {
@@ -14,7 +14,6 @@ interface ReviewsComponentProps {
 const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
   const [travelReview, setTravelReview] = useState<ITravelReview | null>(null);
   const [loading, setLoading] = useState(false);
-  const [editingReview, setEditingReview] = useState<IReviewT | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [showMyReview, setShowMyReview] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -37,8 +36,6 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
       setLoading(false);
     }
   }, [travelId]);
-
-  console.log(editingReview)
 
   useEffect(() => {
     fetchReviews();
@@ -104,12 +101,6 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
             />
             {review.user.id === user?.id && (
               <div className="flex justify-end mt-2">
-                <button
-                  onClick={() => setEditingReview(review)}
-                  className="editarBtn"
-                >
-                  Editar
-                </button>
                 <button onClick={() => handleDelete(review.id)} className="custom-button">
                   Eliminar
                 </button>
