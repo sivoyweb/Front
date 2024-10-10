@@ -101,7 +101,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
+    const token =  localStorage.getItem("token") ;
     const TokenGoogle = typeof window !== "undefined" ? localStorage.getItem("TokenGoogle") === 'true' : null;
 
     if (session?.user) {
@@ -180,7 +180,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   
 
   useEffect(() => {
-    const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
+    const token =  localStorage.getItem("token") ;
     if (token) {
       setIsLogged(true);
     }
