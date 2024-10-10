@@ -178,7 +178,7 @@ const Register: React.FC = () => {
   <button
     type="submit"
     disabled={isSubmitting}
-    className="-ml-1 px-10 py-2 mt-4"
+    className="-ml-1 px-10 py-2 mt-4 w-64"
   >
     {isSubmitting ? "Registrando..." : "Registro"}
   </button>
@@ -188,16 +188,16 @@ const Register: React.FC = () => {
           </Form>
         )}
       </Formik>
-      <div className="text-center mt-6">
-  <p className="text-sivoy-blue text-lg">
-    ¿Ya tienes una cuenta?
+      <div className="text-right mt-6">
+  <p className="text-sivoy-blue">
+    ¿Ya tiene una cuenta?
+  </p>
     <a
       href="/login"
       className="text-sivoy-orange font-bold hover:text-orange-600 ml-1"
     >
-      Inicia sesión aquí
+      Inicie sesión aquí
     </a>
-  </p>
 </div>
     </div>
   );

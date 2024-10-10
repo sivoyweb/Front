@@ -52,7 +52,7 @@ export const NotFoundButton = () => {
   return (
     <button
       onClick={handleClick}
-      className='text-xl'
+      className='md:text-xl'
     >
       Volver al Home
     </button>

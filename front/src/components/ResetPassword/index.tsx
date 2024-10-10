@@ -67,7 +67,7 @@ export default function ResetPassword() {
 
   return (
     <div className="flex flex-col items-start p-6">
-      <h1 className="text-2xl font-arialroundedmtbold mb-6">
+      <h1 className="text-xl md:text-2xl font-arialroundedmtbold mb-6">
         Paso 3: Ingrese el email, código y nueva contraseña
       </h1>
 
@@ -131,7 +131,7 @@ export default function ResetPassword() {
           </button>
         </div>
 
-        <button type="submit" className="" disabled={isLoading}>
+        <button type="submit" className="mt-4 md:mt-8" disabled={isLoading}>
           {isLoading ? "Restableciendo..." : "Restablecer contraseña"}
         </button>
       </form>
