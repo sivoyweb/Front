@@ -6,7 +6,7 @@ import { IReviewAdmin } from "@/interfaces/interfaces";
 const AdminReviewsComponent: React.FC = () => {
   const [reviews, setReviews] = useState<IReviewAdmin[]>([]);
   const [visibleReviews, setVisibleReviews] = useState(5);
-  const token = localStorage.getItem("token");
+  const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
 
   const fetchReviews = useCallback(async () => {
     try {

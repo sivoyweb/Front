@@ -32,7 +32,7 @@ const StarComponent: React.FC<ReviewComponentProps> = ({ travelId }) => {
       travelId,
     };
 
-    const token = localStorage.getItem("token");
+    const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
     if (!token) {
       return;
     }

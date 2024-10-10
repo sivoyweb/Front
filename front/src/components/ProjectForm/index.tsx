@@ -21,7 +21,7 @@ const ProjectForm: React.FC = () => {
       description: Yup.string().required("La descripción es obligatoria."),
     }),
     onSubmit: async (values, { resetForm }) => {
-      const token = localStorage.getItem("token");
+      const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
       console.log(values);
       try {
         await axios.post("https://api-sivoy.onrender.com/projects", values, {

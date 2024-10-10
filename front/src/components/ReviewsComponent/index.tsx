@@ -47,7 +47,7 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
   };
 
   const handleDelete = async (reviewId: string) => {
-    const token = localStorage.getItem("token");
+    const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
     try {
       await axios.delete(
         `https://api-sivoy.onrender.com/travels/reviews/${reviewId}`,
@@ -69,7 +69,7 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
   };
 
   const handleEdit = async () => {
-    const token = localStorage.getItem("token");
+    const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
     if (!editingReview) return;
     setSaving(true);
     try {

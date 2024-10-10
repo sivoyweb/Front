@@ -34,7 +34,7 @@ const TravelForm: React.FC = () => {
   const [uploadedImages, setUploadedImages] = useState<IImage[]>([]);
   const [uploadedSeals, setUploadedSeals] = useState<IImage[]>([]);
 
-  const token = localStorage.getItem("token");
+  const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
 
   const handleImageUpload = () => {
     const newImage: IImage = {
