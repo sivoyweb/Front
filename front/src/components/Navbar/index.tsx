@@ -100,7 +100,7 @@ export default function Navbar() {
                   </DropdownMenuItem>
 
                   {user?.role==="admin" ? <DropdownMenuItem onClick={handleAdmin}>
-                    Administrador
+                    Panel de Administrador
                   </DropdownMenuItem>: null}
 
                   <DropdownMenuItem onClick={handleLogout}>
@@ -201,7 +201,7 @@ export default function Navbar() {
                  
                   }}
                 > 
-                  Administracion
+                  Panel de Administrador
                 </Link> : null}
                 <button
                   className="block w-32 ml-2 text-left px-3 py-2 rounded-md text-base font-medium"

@@ -3,7 +3,7 @@ import BlogLoader from "@/components/BlogLoader";
 
 const BlogPage = () => {
     return (
-        <div className="p-4 h-screen">
+        <div className="p-4">
             <div className="relative h-96 mx-1 mt-4 mb-10">
                 <Image
                     src="https://res.cloudinary.com/dvxh2vynm/image/upload/v1728453468/si-voy/jcyrbhlj8xxnjdxis3mp.jpg"
