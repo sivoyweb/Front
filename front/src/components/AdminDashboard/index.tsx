@@ -13,6 +13,15 @@ import { UserContext } from "@/context/userContext";
 import { useRouter } from "next/navigation";
 import AdminReviewsComponent from "../AdminReviewsComponent";
 import AdminFaqComponent from "../AdminFaqComponent";
+import ProjectForm from "../ProjectForm";
+import TeamForm from "../TeamForm";
+import PromotionForm from "../PromotionForm";
+import BlogForm from "../BlogForm";
+import TravelForm from "../TravelForm";
+import ProvidersForm from "../ProvidersForm";
+import FaqForm from "../FaqForm";
+import AdminAliComponent from "../AdminAliComponent";
+import AliForm from "../AliForm";
 
 
 const AdminDashboard = () => {
@@ -34,25 +43,29 @@ const AdminDashboard = () => {
         return (
           <div className="block space-y-6">
            <AdminDonationsComponent />
+          
             </div>
         );
 
       case "proyectos":
         return (
-          <div className="bg-white rounded-lg shadow-lg p-6">
+          <div className=" flex bg-white rounded-lg shadow-lg p-3">
            <AdminProjectsComponent />
+           <ProjectForm />
           </div>
         );
       case "equipo":
         return (
-          <div className="bg-white rounded-lg shadow-lg p-6">
+          <div className=" flex bg-white rounded-lg shadow-lg p-6">
            <AdminTeamComponent />
+           <TeamForm/>
           </div>
         );
       case "promociones":
         return (
           <div className="bg-white rounded-lg shadow-lg p-6">
            <AdminPromotionComponent />
+           <PromotionForm />
           </div>
         );
 
@@ -60,6 +73,7 @@ const AdminDashboard = () => {
         return (
           <div className="bg-white rounded-lg shadow-lg p-6">
            <AdminBlogsComponent />
+           <BlogForm />
           </div>
         );
 
@@ -67,6 +81,7 @@ const AdminDashboard = () => {
         return (
           <div className="bg-white rounded-lg shadow-lg p-6">
             <AdminProvidersComponent />
+            <ProvidersForm />
           </div>
         );
       case "gestion de usuarios":
@@ -78,6 +93,7 @@ const AdminDashboard = () => {
       case "destinos":
         return (
           <div className="bg-white rounded-lg shadow-lg p-6">
+            <TravelForm />
             <AdminTravelComponent />
           </div>
         );
@@ -91,6 +107,14 @@ const AdminDashboard = () => {
         return (
           <div className="bg-white rounded-lg shadow-lg p-6">
             <AdminFaqComponent />
+            <FaqForm />
+          </div>
+        );
+      case "alianza":
+        return (
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <AdminAliComponent />
+            <AliForm />
           </div>
         );
 
@@ -208,6 +232,15 @@ const AdminDashboard = () => {
             }`}
           >
             FAQ
+          </Link>
+          <Link
+            href="#"
+            onClick={() => setActiveSection("alianza")}
+            className={`block py-2.5 px-4 rounded transition-all duration-200 hover:bg-sivoy-blue ${
+              !sidebarOpen ? "opacity-0 w-0" : "opacity-100 w-full"
+            }`}
+          >
+            Alianzas
           </Link>
         </nav>
       </div>
