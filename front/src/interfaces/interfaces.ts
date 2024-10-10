@@ -110,8 +110,8 @@ export interface IImage {
   id: string;
   url?: string | null;
   publicId: string;
-  alt: string;
-  active: boolean;
+  alt?: string;
+  active?: boolean;
 }
 
 export interface IImageBlog {
@@ -178,6 +178,7 @@ export interface ITravel {
   website: string;
   phone: string;
   averageStars: number;
+  accessibilitySealName: string;
 }
 
 export interface ITravelAdmin {
@@ -462,4 +463,17 @@ export interface IReviewAdmin {
 export interface IFAQAdmin {
   question: string;
   answer: string;
+}
+
+export interface ITeamFormValues {
+  name: string;
+  description: string;
+  linkedin: string;
+  image: IImage;
+}
+
+export interface IAliFormValues {
+  name: string;
+  url: string;
+  image: IImage;
 }

@@ -28,7 +28,7 @@ const CarouselTravels: React.FC<ICarouselProps> = ({ items }) => {
 
   return (
     <div className="relative w-full h-64 md:h-[30rem] overflow-hidden rounded-lg"> {/* Añadido rounded-lg aquí */}
-      <p className="text-2xl mb-4 font-arialroundedmtbold">Imágenes:</p> 
+      <p className="sm:text-xl lg:text-2xl mb-4 font-arialroundedmtbold text-sivoy-blue">Galería:</p> 
       <div className="relative h-full rounded-lg"> {/* Puedes dejarlo o añadir rounded-lg */}
         {items.map((item, index) => (
           <div
@@ -94,7 +94,7 @@ const CarouselTravels: React.FC<ICarouselProps> = ({ items }) => {
         {items.map((_, index) => (
           <div
             key={index}
-            className={`w-6 h-6 rounded-full cursor-pointer transition duration-300 ${
+            className={`w-5 h-5 rounded-full cursor-pointer transition duration-500 ${
               currentIndex === index ? "bg-sivoy-orange" : "bg-gray-400"
             }`}
             aria-current={currentIndex === index}

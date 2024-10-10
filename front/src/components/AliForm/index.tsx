@@ -5,56 +5,52 @@ import * as Yup from "yup";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { CldUploadWidget, CloudinaryUploadWidgetInfo } from "next-cloudinary";
-import { ITeamFormValues } from "@/interfaces/interfaces";
+import { IAliFormValues } from "@/interfaces/interfaces";
+import Image from "next/image";
 
-const TeamForm: React.FC = () => {
-  const formik = useFormik<ITeamFormValues>({
+const AliForm: React.FC = () => {
+  const formik = useFormik<IAliFormValues>({
     initialValues: {
       name: "",
-      description: "",
-      linkedin: "",
-      image: { id: "", url: null, publicId: "", alt: "", active: true }, // Adaptación del objeto IImage
+      url: "",
+      image: { id: "", url: null, publicId: "", alt: "", active: true },
     },
     validationSchema: Yup.object({
       name: Yup.string().required("El nombre es obligatorio."),
-      description: Yup.string().required("La descripción es obligatoria."),
-      linkedin: Yup.string()
+      url: Yup.string()
         .url("Debe ser un enlace válido de LinkedIn")
-        .required("El enlace de LinkedIn es obligatorio."),
+        .required("El enlace de Pagina Web es obligatorio."),
       image: Yup.object().shape({
-        url: Yup.string().required("La imagen es obligatoria."), // Validamos el campo `url`
+        url: Yup.string().required("La imagen es obligatoria."),
       }),
     }),
     onSubmit: async (values, { resetForm }) => {
-      const token =  localStorage.getItem("token") ;
+      const token = localStorage.getItem("token");
       try {
-        // Payload ajustado según el formato requerido
         const payload = {
           name: values.name,
-          description: values.description,
-          linkedin: values.linkedin,
+          url: values.url,
           image: {
             url: values.image.url,
             publicId: values.image.publicId,
+            alt: values.image.alt,
           },
         };
 
-        console.log("Payload:", payload);
-
-        await axios.post("https://api-sivoy.onrender.com/team", payload, {
+        await axios.post("https://api-sivoy.onrender.com/alliances", payload, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
         resetForm();
         Swal.fire({
           icon: "success",
-          text: "¡Persona agregada exitosamente al equipo!",
+          text: "¡Alianza agregada exitosamente al equipo!",
         });
       } catch (error) {
         console.error("Error al enviar el formulario:", error);
         Swal.fire({
           icon: "error",
-          text: "Hubo un error al agregar la persona.",
+          text: "Hubo un error al agregar la Alianza.",
         });
       }
     },
@@ -66,7 +62,7 @@ const TeamForm: React.FC = () => {
         onSubmit={formik.handleSubmit}
         className="bg-white p-6 rounded-lg shadow-2xl w-full max-w-md"
       >
-        <h2 className="text-2xl font-bold mb-4">Agregar Persona al Equipo</h2>
+        <h2 className="text-2xl font-bold mb-4">Agregar Alianza al Equipo</h2>
 
         <div className="mb-4">
           <label
@@ -95,54 +91,22 @@ const TeamForm: React.FC = () => {
 
         <div className="mb-4">
           <label
-            htmlFor="description"
+            htmlFor="url"
             className="block text-xl font-medium text-gray-700"
           >
-            Descripción
-          </label>
-          <textarea
-            id="description"
-            name="description"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.description}
-            className={`mt-1 p-2 block w-full shadow-sm border ${
-              formik.touched.description && formik.errors.description
-                ? "border-red-500"
-                : "border-gray-300"
-            } rounded-md`}
-          />
-          {formik.touched.description && formik.errors.description ? (
-            <p className="text-red-500 text-sm mt-1">
-              {formik.errors.description}
-            </p>
-          ) : null}
-        </div>
-
-        <div className="mb-4">
-          <label
-            htmlFor="linkedin"
-            className="block text-xl font-medium text-gray-700"
-          >
-            LinkedIn
+            Pagina Web
           </label>
           <input
-            id="linkedin"
-            name="linkedin"
+            id="url"
+            name="url"
             type="text"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values.linkedin}
-            className={`mt-1 p-2 block w-full shadow-sm border ${
-              formik.touched.linkedin && formik.errors.linkedin
-                ? "border-red-500"
-                : "border-gray-300"
-            } rounded-md`}
+            value={formik.values.url}
+            className={`mt-1 p-2 block w-full shadow-sm border rounded-md`}
           />
-          {formik.touched.linkedin && formik.errors.linkedin ? (
-            <p className="text-red-500 text-sm mt-1">
-              {formik.errors.linkedin}
-            </p>
+          {formik.touched.url && formik.errors.url ? (
+            <p className="text-red-500 text-sm mt-1">{formik.errors.url}</p>
           ) : null}
         </div>
 
@@ -160,7 +124,6 @@ const TeamForm: React.FC = () => {
                   url: uploadedImage.secure_url,
                   publicId: uploadedImage.public_id,
                   alt: uploadedImage.original_filename,
-                  active: true,
                 });
                 Swal.fire({
                   title: "¡Imagen subida con éxito!",
@@ -171,32 +134,30 @@ const TeamForm: React.FC = () => {
             }}
           >
             {({ open }) => (
-              <button
-                type="button"
-                className="focus text-ls px-3 py-2 text-white bg-blue-500 rounded-md ml-2"
-                onClick={() => open()}
-              >
+              <button type="button" className="m-4" onClick={() => open()}>
                 Subir imagen
               </button>
             )}
           </CldUploadWidget>
-          {formik.touched.image?.url && formik.errors.image?.url ? (
-            <p className="text-red-500 text-sm mt-1">
-              {formik.errors.image.url}
-            </p>
-          ) : null}
+          {formik.values.image.url && (
+            <div className="mt-2">
+              <Image
+                src={formik.values.image.url}
+                alt={formik.values.image.alt || ""}
+                width={300} // Ajusta el ancho según tus necesidades
+                height={200} // Ajusta el alto según tus necesidades
+                className="w-full"
+              />
+            </div>
+          )}
         </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded-md"
-          disabled={formik.isSubmitting}
-        >
-          {formik.isSubmitting ? "Enviando..." : "Agregar Persona"}
+        <button type="submit" className="w-full" disabled={formik.isSubmitting}>
+          {formik.isSubmitting ? "Enviando..." : "Agregar Alianza"}
         </button>
       </form>
     </div>
   );
 };
 
-export default TeamForm;
+export default AliForm;

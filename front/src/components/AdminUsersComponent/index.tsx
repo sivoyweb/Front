@@ -9,7 +9,7 @@ const MySwal = withReactContent(Swal);
 
 const AdminUsersComponent = () => {
   const [users, setUsers] = useState<IUser[]>([]);
-  const token =  localStorage.getItem("token") ;
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -99,9 +99,79 @@ const AdminUsersComponent = () => {
     }
   };
 
+  const handleDownload = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        MySwal.fire({
+          title: "Error",
+          text: "No se encontró un token de autenticación.",
+          icon: "error",
+        });
+        return;
+      }
+
+      // Paso 1: Llamar a la API para exportar "User"
+      const exportResponse = await axios.get(
+        "https://api-sivoy.onrender.com/data/export/User", // Cambia 'User' según tu entidad
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // Asumimos que el objeto de respuesta tiene la propiedad `fileName`
+      const fileName = exportResponse.data.fileName;
+      if (!fileName) {
+        MySwal.fire({
+          title: "Error",
+          text: "No se pudo obtener el nombre del archivo.",
+          icon: "error",
+        });
+        return;
+      }
+
+      // Paso 2: Descargar el archivo exportado
+      const downloadResponse = await axios({
+        url: `https://api-sivoy.onrender.com/data/download/${fileName}`,
+        method: "GET",
+        responseType: "blob", // Esto es importante para manejar archivos binarios
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // Crear un enlace temporal para descargar el archivo
+      const url = window.URL.createObjectURL(new Blob([downloadResponse.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", fileName); // Nombre del archivo que descargaremos
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link); // Elimina el enlace tras la descarga
+
+    } catch (err) {
+      MySwal.fire({
+        title: "¡Error!",
+        text: "Hubo un problema al descargar el archivo.",
+        icon: "error",
+      });
+    }
+  };
+
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-2xl font-bold mb-4">Lista de Usuarios</h1>
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">Lista de Usuarios</h1>
+        <button
+          onClick={handleDownload}
+          className="bg-green-500 text-white px-4 py-2 rounded-md"
+        >
+          Descargar Usuarios en Excel
+        </button>
+      </div>
+
       {users.length === 0 ? (
         <p>No se encontraron usuarios.</p>
       ) : (
