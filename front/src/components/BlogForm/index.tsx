@@ -33,15 +33,12 @@ const BlogForm: React.FC = () => {
       content: Yup.string().required("El contenido es obligatorio."),
     }),
     onSubmit: async (values, { resetForm }) => {
-<<<<<<< HEAD
-=======
-      const token =  localStorage.getItem("token") ;
->>>>>>> ae59e5b72de41f9cc1896f56be828dba4193b4ad
+      const token = localStorage.getItem("token")
       try {
         const formData = { ...values, images: uploadedImages }; 
-        console.log(formData)
-        console.log(uploadedImages)
-        await axios.post("/api/blogs", formData);
+        await axios.post("https://api-sivoy.onrender.com/blogs", formData, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         resetForm();
         setUploadedImages([]);
         Swal.fire({

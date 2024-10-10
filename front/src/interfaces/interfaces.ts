@@ -469,3 +469,9 @@ export interface ITeamFormValues {
   linkedin: string;
   image: IImage;
 }
+
+export interface IAliFormValues {
+  name: string;
+  url: string;
+  image: IImage;
+}
