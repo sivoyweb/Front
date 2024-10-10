@@ -30,7 +30,7 @@ const AdminFaqComponent: React.FC = () => {
   const handleDelete = async (id: string) => {
     const result = await MySwal.fire({
       title: "¿Estás seguro?",
-      text: "Esta acción eliminará la pregunta frecuenta",
+      text: "Esta acción eliminará la pregunta frecuente",
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Sí, eliminar",
@@ -54,13 +54,11 @@ const AdminFaqComponent: React.FC = () => {
     }
   };
 
-  // Activar modo edición para una FAQ
   const handleEdit = (index: number) => {
     setEditMode(index);
     setEditedFAQ(faqs[index]);
   };
 
-  // Guardar los cambios de la FAQ editada con confirmación
   const handleSaveEdit = async () => {
     const result = await MySwal.fire({
       title: "¿Estás seguro?",
@@ -101,18 +99,15 @@ const AdminFaqComponent: React.FC = () => {
     }
   };
 
-  // Cancelar edición
   const handleCancelEdit = () => {
     setEditMode(null);
     setEditedFAQ({});
   };
 
-  // Cargar más FAQs
   const handleShowMore = () => {
     setVisibleFAQs(faqs.length);
   };
 
-  // Actualizar FAQs
   const handleUpdateFaqs = async () => {
     try {
       const fetchedFaqs = await fetchFAQ();
@@ -123,11 +118,79 @@ const AdminFaqComponent: React.FC = () => {
     }
   };
 
+  const handleDownload = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        MySwal.fire({
+          title: "Error",
+          text: "No se encontró un token de autenticación.",
+          icon: "error",
+        });
+        return;
+      }
+
+      // Paso 1: Llamar a la API para exportar "FAQ"
+      const exportResponse = await axios.get(
+        "https://api-sivoy.onrender.com/data/export/FAQ", // Cambia 'FAQ' según tu entidad
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const fileName = exportResponse.data.fileName;
+      if (!fileName) {
+        MySwal.fire({
+          title: "Error",
+          text: "No se pudo obtener el nombre del archivo.",
+          icon: "error",
+        });
+        return;
+      }
+
+      // Paso 2: Descargar el archivo exportado
+      const downloadResponse = await axios({
+        url: `https://api-sivoy.onrender.com/data/download/${fileName}`,
+        method: "GET",
+        responseType: "blob",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const url = window.URL.createObjectURL(new Blob([downloadResponse.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", fileName); 
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link); 
+    } catch (err) {
+      MySwal.fire({
+        title: "¡Error!",
+        text: "Hubo un problema al descargar el archivo.",
+        icon: "error",
+      });
+    }
+  };
+
   return (
     <div className="max-w-6xl mx-auto h-full">
       <h2 className="text-2xl font-arialroundedmtbold mt-8 mb-4 text-sivoy-blue">
         Preguntas Frecuentes
       </h2>
+
+      <div className="text-right mb-4">
+        <button
+          onClick={handleDownload}
+          className="bg-green-500 text-white px-4 py-2 rounded-md"
+        >
+          Descargar FAQs en Excel
+        </button>
+      </div>
+
       <div className="md:text-xl">
         {faqs.slice(0, visibleFAQs).map((faq, index) => (
           <div key={faq.id} className="p-4 border rounded-lg mb-4">
