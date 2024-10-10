@@ -22,7 +22,7 @@ const AdminPromotionComponent = () => {
     setLoading(true);
     setError(null);
     try {
-      const token =  localStorage.getItem("token") ;
+      const token = localStorage.getItem("token");
       if (!token) {
         setError("No se encontró un token de autenticación.");
         setLoading(false);
@@ -52,9 +52,9 @@ const AdminPromotionComponent = () => {
 
   const handleEdit = async (id: string) => {
     if (!editingPromotion) return;
-  
-    const token =  localStorage.getItem("token") ;
-  
+
+    const token = localStorage.getItem("token");
+
     // Mostrar confirmación antes de editar la promoción
     const result = await Swal.fire({
       title: "¿Estás seguro de que deseas actualizar esta promoción?",
@@ -64,16 +64,16 @@ const AdminPromotionComponent = () => {
       confirmButtonText: "Sí, actualizar",
       cancelButtonText: "Cancelar",
     });
-  
+
     // Si el usuario cancela, salir de la función
     if (!result.isConfirmed) {
       return;
     }
-  
+
     try {
-      const { name, description, validFrom, validUntil, images } = editingPromotion;
-      
-      
+      const { name, description, validFrom, validUntil, images } =
+        editingPromotion;
+
       await axios.put(
         `https://api-sivoy.onrender.com/promotions/${id}`,
         { name, description, validFrom, validUntil, images },
@@ -83,22 +83,21 @@ const AdminPromotionComponent = () => {
           },
         }
       );
-  
-      
+
       Swal.fire(
         "Promoción actualizada",
         "La promoción ha sido actualizada correctamente"
       );
-      
+
       setEditingPromotion(null);
-      fetchPromotions(); 
+      fetchPromotions();
     } catch (error) {
       Swal.fire("Error", "No se pudo actualizar la promoción.", "error");
     }
   };
 
   const handleDelete = async (id: string) => {
-    const token =  localStorage.getItem("token") ;
+    const token = localStorage.getItem("token");
     try {
       const result = await MySwal.fire({
         title: "¿Estás seguro?",
@@ -116,15 +115,76 @@ const AdminPromotionComponent = () => {
           },
         });
         Swal.fire("La promoción ha sido eliminada.");
-        setPromotions(promotions.filter((promotion) => promotion.name !== id));
+        setPromotions(promotions.filter((promotion) => promotion.id !== id));
       }
     } catch (error) {
       Swal.fire("Error", "Hubo un problema al eliminar la promoción.", "error");
     }
   };
 
+  const handleDownload = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        MySwal.fire({
+          title: "Error",
+          text: "No se encontró un token de autenticación.",
+          icon: "error",
+        });
+        return;
+      }
+
+      // Paso 1: Llamar a la API para exportar "Promotion"
+      const exportResponse = await axios.get(
+        "https://api-sivoy.onrender.com/data/export/Promotion", // Cambia 'Promotion' según tu entidad
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // Asumimos que el objeto de respuesta tiene la propiedad `fileName`
+      const fileName = exportResponse.data.fileName;
+      if (!fileName) {
+        MySwal.fire({
+          title: "Error",
+          text: "No se pudo obtener el nombre del archivo.",
+          icon: "error",
+        });
+        return;
+      }
+
+      // Paso 2: Descargar el archivo exportado
+      const downloadResponse = await axios({
+        url: `https://api-sivoy.onrender.com/data/download/${fileName}`,
+        method: "GET",
+        responseType: "blob", // Esto es importante para manejar archivos binarios
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // Crear un enlace temporal para descargar el archivo
+      const url = window.URL.createObjectURL(new Blob([downloadResponse.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", fileName); // Nombre del archivo que descargaremos
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link); // Elimina el enlace tras la descarga
+
+    } catch (err) {
+      MySwal.fire({
+        title: "¡Error!",
+        text: "Hubo un problema al descargar el archivo.",
+        icon: "error",
+      });
+    }
+  };
+
   if (loading) {
-    <p className="loader"></p>
+    <p className="loader"></p>;
   }
 
   if (error) {
@@ -133,9 +193,16 @@ const AdminPromotionComponent = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-xl font-bold mb-4">Lista de Promociones</h1>
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-xl font-bold">Lista de Promociones</h1>
+        <button
+          onClick={handleDownload}
+          className="bg-green-500 text-white px-4 py-2 rounded-md"
+        >
+          Descargar Promociones en Excel
+        </button>
+      </div>
 
-      
       <div className="text-right mb-4">
         <button
           onClick={fetchPromotions}
@@ -228,7 +295,7 @@ const AdminPromotionComponent = () => {
                         />
                       ))}
                     </div>
-                   <CloudinaryButton />
+                    <CloudinaryButton />
                     <button
                       onClick={() => handleEdit(promotion.id)}
                       className="guardarInfo m-2"
