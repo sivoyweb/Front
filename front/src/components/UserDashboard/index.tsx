@@ -409,7 +409,7 @@ console.log(formData);
           
              <Image
              alt="imagen de perfil"
-             src={user?.credential?.avatar?.url || ''}
+             src={user?.credential?.avatar?.url || 'https://res.cloudinary.com/dvxh2vynm/image/upload/v1728364236/qclbqnbkrp0jxjmkpguj.png'}
              width={50}  
              height={50} 
              className="rounded-full" />
