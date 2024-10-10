@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { IDonationAdmin } from "@/interfaces/interfaces";
-import Loader from "@/components/Loader"
 
 const AdminDonationsComponent = () => {
   const [donations, setDonations] = useState<IDonationAdmin[]>([]);
@@ -50,7 +49,7 @@ const AdminDonationsComponent = () => {
   };
 
   if (loading) {
-    return <Loader />
+    <p className=".loader"></p>
   }
 
   if (error) {

@@ -6,7 +6,6 @@ import withReactContent from "sweetalert2-react-content";
 import { format } from "date-fns";
 import Image from "next/image";
 import { IPromotionAdmin } from "@/interfaces/interfaces";
-import Loader from "@/components/Loader"
 
 // SweetAlert2 con React
 const MySwal = withReactContent(Swal);
@@ -108,7 +107,7 @@ const AdminPromotionComponent = () => {
   };
 
   if (loading) {
-    return <Loader />;
+    <p className=".loader"></p>
   }
 
   if (error) {

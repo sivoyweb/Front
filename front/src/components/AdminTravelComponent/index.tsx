@@ -5,7 +5,6 @@ import withReactContent from "sweetalert2-react-content";
 import axios from "axios";
 import { IUpdateTravel } from "@/interfaces/interfaces";
 import Image from "next/image";
-import Loader from "@/components/Loader"
 
 // SweetAlert2 con React
 const MySwal = withReactContent(Swal);
@@ -98,7 +97,7 @@ const AdminTravelComponent = () => {
   };
 
   if (loading) {
-    return <Loader />;
+    <p className=".loader"></p>
   }
 
   return (

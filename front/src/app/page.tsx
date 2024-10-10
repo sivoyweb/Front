@@ -85,7 +85,7 @@ const Home: React.FC = () => {
         <div className="mb-4 mt-4 font-arialroundedmtbold text-sivoy-blue text-sm">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-4 lg:grid-cols-4">
             <div className="flex flex-col items-center justify-center w-full h-full p-4 sm:p-6 lg:p-8 rounded-2xl">
-            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-info-circle" width="41" height="41" viewBox="0 0 24 24" stroke-width="1.5" stroke="#df5430" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-info-circle" width="41" height="41" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#df5430" fill="none" strokeLinecap="round" strokeLinejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
   <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
   <path d="M12 9h.01" />
@@ -95,7 +95,7 @@ const Home: React.FC = () => {
             </div>
 
             <div className="flex flex-col items-center justify-center w-full h-full p-4 sm:p-6 lg:p-8 rounded-2xl">
-            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-coffee" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#df5430" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-coffee" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#df5430" fill="none" strokeLinecap="round" strokeLinejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
             <path d="M3 14c.83 .642 2.077 1.017 3.5 1c1.423 .017 2.67 -.358 3.5 -1c.83 -.642 2.077 -1.017 3.5 -1c1.423 -.017 2.67 .358 3.5 1" />
             <path d="M8 3a2.4 2.4 0 0 0 -1 2a2.4 2.4 0 0 0 1 2" />
@@ -107,7 +107,7 @@ const Home: React.FC = () => {
             </div>
 
             <div className="flex flex-col items-center justify-center w-full h-full p-4 sm:p-6 lg:p-8 rounded-2xl">
-            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-heart-handshake" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#df5430" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-heart-handshake" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#df5430" fill="none" strokeLinecap="round" strokeLinejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
   <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
   <path d="M12 6l-3.293 3.293a1 1 0 0 0 0 1.414l.543 .543c.69 .69 1.81 .69 2.5 0l1 -1a3.182 3.182 0 0 1 4.5 0l2.25 2.25" />
@@ -118,7 +118,7 @@ const Home: React.FC = () => {
             </div>
 
             <div className="flex flex-col items-center justify-center w-full h-full p-4 sm:p-6 lg:p-8 rounded-2xl">
-            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-map-pin-2" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#df5430" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-map-pin-2" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#df5430" fill="none" strokeLinecap="round" strokeLinejoin="round">
   <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
   <path d="M12 18.5l-3 -1.5l-6 3v-13l6 -3l6 3l6 -3v7" />
   <path d="M9 4v13" />

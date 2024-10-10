@@ -1,8 +1,7 @@
+import Projects from "@/components/Projects";
+import Team from "@/components/Team";
 
-import { ProjectsSection } from "@/components/Projects";
-import { TeamSection } from "@/components/Team"
-
-const AboutUsPage = () => {
+const AboutUs = () => {
   return (
     <div className="max-w-4xl mx-auto p-8 text-justify">
       <section className="mb-8">
@@ -27,7 +26,7 @@ const AboutUsPage = () => {
       </section>
 
       <div className="flex flex-col md:flex-row justify-between gap-16 mb-8">
-        < ProjectsSection />
+        <Projects />
         <section className="flex-1">
           <h2 className="text-2xl font-arialroundedmtbold text-sivoy-blue mb-4">Logros</h2>
           <ul className="list-disc list-inside text-gray-700 text-lg">
@@ -44,10 +43,10 @@ const AboutUsPage = () => {
         <p className="text-gray-700 text-lg mt-4">
           Contamos con un equipo dedicado de voluntarios que apoyan en la investigación, mapeo de destinos y organización de eventos.
         </p>
-        <TeamSection /> 
+        <Team /> 
       </section>
     </div>
   );
 };
 
-export default AboutUsPage;
+export default AboutUs;

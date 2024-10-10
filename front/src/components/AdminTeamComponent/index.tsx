@@ -5,7 +5,6 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { ITeam } from "@/interfaces/interfaces";
 import Image from "next/image"
-import Loader from "@/components/Loader"
 
 // SweetAlert2 con React
 const MySwal = withReactContent(Swal);
@@ -121,7 +120,7 @@ console.log(response);
   };
 
   if (loading) {
-    return <Loader />
+    <p className=".loader"></p>
   }
 
   if (error) {

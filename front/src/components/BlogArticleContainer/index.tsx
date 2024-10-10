@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { fetchBlogArticleById } from "@/lib/server/fetchBlog";
 import { IBlogArticle } from "@/interfaces/interfaces";
 import { BlogArticle } from "@/components/BlogArticle";
-import Loader from "@/components/Loader"
 
 export const BlogArticleContainer = () => {
   const [article, setArticle] = useState<IBlogArticle | null>(null);
@@ -37,7 +36,7 @@ export const BlogArticleContainer = () => {
     }
   }, [id]);
 
-  if (loading) return <Loader />;
+  if (loading) return <p className=".loader"></p>;
   if (error) return <div>{error}</div>;
   if (!article) return <div>No se encontró el artículo.</div>;
 

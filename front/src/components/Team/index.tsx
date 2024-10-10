@@ -5,7 +5,7 @@ import { fetchTeam } from "@/lib/server/fetchTeam";
 import { ITeam } from "@/interfaces/interfaces";
 import { useEffect, useState } from "react";
 
-export const TeamSection = () => {
+const Team: React.FC = () => {
   const [teamMembers, setTeamMembers] = useState<ITeam[]>([]);
 
   useEffect(() => {
@@ -68,3 +68,5 @@ export const TeamSection = () => {
     </div>
   );
 };
+
+export default Team;
