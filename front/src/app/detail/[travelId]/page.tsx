@@ -46,26 +46,28 @@ const TravelDetail = async({ params }: { params: { travelId: string } }) => {
     <div className="bg-white border border-gray-200 rounded-3xl shadow-xl p-6 w-full lg:w-auto m-1 mt-8">
       <div className="w-[90%] mx-auto">
         {/* Ícono de regreso sobre la descripción */}
-        <div className="mb-4">
-          <Link href="/destinations" className="inline-block">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="icon icon-tabler icon-tabler-chevrons-left"
-              width="44"
-              height="44"
-              viewBox="0 0 24 24"
-              strokeWidth="2.5"
-              stroke="#1a7970"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M11 7l-5 5l5 5" />
-              <path d="M17 7l-5 5l5 5" />
-            </svg>
-          </Link>
-        </div>
+        <div className="mb-4 gap-2">
+  <Link href="/destinations">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="icon icon-tabler icon-tabler-chevrons-left"
+      width="44"
+      height="44"
+      viewBox="0 0 24 24"
+      strokeWidth="2.5"
+      stroke="#1a7970"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M11 7l-5 5l5 5" />
+      <path d="M17 7l-5 5l5 5" />
+    </svg>
+  </Link>
+    <span>Volver a destinos</span>
+</div>
+
 
         {/* Texto de la descripción */}
         <p className="text-sivoy-blue text-xl mb-6 mt-4 text-justify">

@@ -9,7 +9,7 @@ export const LoginButton = () => {
         router.push("/login");
       };
 
-    return ( <div>
+    return ( <div className='justify-center'>
         <button onClick={handleClick}>Iniciar Sesión</button>
     </div> );
 };

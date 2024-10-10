@@ -131,7 +131,7 @@ const Login: React.FC = () => {
             className="text-red-500 text-sm mt-1"
           />
 
-          <div className="flex space-x-4 mt-8 justify-start">
+          <div className="flex space-x-4 mt-8 justify-center">
             <button type="submit" disabled={isSubmitting} className="">
               {isSubmitting ? "Iniciando..." : "Iniciar sesión"}
             </button>
@@ -142,7 +142,7 @@ const Login: React.FC = () => {
   </div>
 
   
-  <div className="mt-4 flex justify-start">
+  <div className="mt-4 flex justify-center">
     <button
       className="rounded-2xl flex items-left justify-start text-lg font-semibold text-gray-700 bg-white border border-gray-300 shadow-md hover:bg-gray-100 focus:outline-none focus:bg-gray-300 transition-all py-2 px-6"
       onClick={callLoginGoogle} 
@@ -155,20 +155,20 @@ const Login: React.FC = () => {
     </button>
   </div>
 
-  <div className="flex flex-col items-end space-y-4 mt-8 text-lg">
+  <div className="flex flex-col items-end space-y-4 mt-8">
     <a href="/forgot-password" className="text-sivoy-blue hover:underline ">
-      ¿Olvidaste tu Contraseña?
+      ¿Olvidó tu Contraseña?
     </a>
-    <div className="ml-1">
+    <div className="ml-1 text-right">
       <p className="text-sivoy-blue">
-        ¿Aún no tienes cuenta?
+        ¿Aún no tiene una cuenta?
+        </p>
         <a
           href="/register"
           className="text-sivoy-orange font-bold hover:text-orange-600 "
         >
-          Regístrate aquí
+           Regístrese aquí
         </a>
-      </p>
     </div>
   </div>
 </div>
