@@ -73,90 +73,106 @@ const Login: React.FC = () => {
 
   return (
     <div className="">
-      <div className="">
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
+  <div className="">
+    <Formik
+      initialValues={initialValues}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ isSubmitting }) => (
+        <Form className="space-y-4">
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-lg font-medium text-gray-700"
+            >
+              Email
+            </label>
+            <Field
+              type="text"
+              id="email"
+              name="email"
+              className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-sivoy-green"
+            />
+          </div>
+          <ErrorMessage
+            name="email"
+            component="div"
+            className="text-red-500 text-sm mt-1"
+          />
+
+          <div className="relative">
+            <label
+              htmlFor="password"
+              className="block text-lg font-medium text-gray-700"
+            >
+              Contraseña
+            </label>
+            <Field
+              type={showPassword ? "text" : "password"}
+              id="password"
+              name="password"
+              className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-sivoy-green"
+            />
+            <span
+              onClick={togglePasswordVisibility}
+              className="absolute z-10 inset-y-0 mt-4 right-3 top-1/2 transform -translate-y-1/2 flex items-center text-sm leading-5 cursor-pointer"
+            >
+              {showPassword ? (
+                <FontAwesomeIcon icon={faEyeSlash} />
+              ) : (
+                <FontAwesomeIcon icon={faEye} />
+              )}
+            </span>
+          </div>
+          <ErrorMessage
+            name="password"
+            component="div"
+            className="text-red-500 text-sm mt-1"
+          />
+
+          <div className="flex space-x-4 mt-8 justify-start">
+            <button type="submit" disabled={isSubmitting} className="">
+              {isSubmitting ? "Iniciando..." : "Iniciar sesión"}
+            </button>
+          </div>
+        </Form>
+      )}
+    </Formik>
+  </div>
+
+  
+  <div className="mt-4 flex justify-start">
+    <button
+      className="rounded-2xl flex items-left justify-start text-lg font-semibold text-gray-700 bg-white border border-gray-300 shadow-md hover:bg-gray-100 focus:outline-none focus:bg-gray-300 transition-all py-2 px-6"
+      onClick={callLoginGoogle} 
+    >
+      <FontAwesomeIcon
+        icon={faGoogle}
+        className="text-xl text-gray-700 mr-2"
+      />
+      <span className="text-base">Iniciar sesión con Google</span>
+    </button>
+  </div>
+
+  <div className="flex flex-col items-end space-y-4 mt-8 text-lg">
+    <a href="/forgot-password" className="text-sivoy-blue hover:underline ">
+      ¿Olvidaste tu Contraseña?
+    </a>
+    <div className="ml-1">
+      <p className="text-sivoy-blue">
+        ¿Aún no tienes cuenta?
+        <a
+          href="/register"
+          className="text-sivoy-orange font-bold hover:text-orange-600 "
         >
-          {({ isSubmitting }) => (
-            <Form className="space-y-4">
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-lg font-medium text-gray-700"
-                >
-                  Email
-                </label>
-                <Field
-                  type="text"
-                  id="email"
-                  name="email"
-                  className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-sivoy-green"
-                />
-              </div>
-              <ErrorMessage
-                name="email"
-                component="div"
-                className="text-red-500 text-sm mt-1"
-              />
-
-              <div className="relative">
-                <label
-                  htmlFor="password"
-                  className="block text-lg font-medium text-gray-700"
-                >
-                  Contraseña
-                </label>
-                <Field
-                  type={showPassword ? "text" : "password"}
-                  id="password"
-                  name="password"
-                  className="w-full p-3 border border-gray-300 rounded mt-1 focus:outline-none focus:ring-2 focus:ring-sivoy-green"
-                />
-                <span
-                  onClick={togglePasswordVisibility}
-                  className="absolute z-10 inset-y-0 mt-4 right-3 top-1/2 transform -translate-y-1/2 flex items-center text-sm leading-5 cursor-pointer"
-                >
-                  {showPassword ? (
-                    <FontAwesomeIcon icon={faEyeSlash} />
-                  ) : (
-                    <FontAwesomeIcon icon={faEye} />
-                  )}
-                </span>
-              </div>
-              <ErrorMessage
-                name="password"
-                component="div"
-                className="text-red-500 text-sm mt-1"
-              />
-
-              <div className="flex space-x-4 mt-8 justify-center">
-                <button type="submit" disabled={isSubmitting} className="">
-                  {isSubmitting ? "Iniciando..." : "Iniciar sesión"}
-                </button>
-                <button
-                  className="rounded-2xl flex items-center justify-center text-lg font-semibold text-gray-700 bg-white border border-gray-300 shadow-md hover:bg-gray-100 focus:outline-none focus:bg-gray-300 transition-all py-2 px-6"
-                  onClick={callLoginGoogle}
-                >
-                  <FontAwesomeIcon
-                    icon={faGoogle}
-                    className="text-xl text-gray-700 mr-2"
-                  />
-                  <span className="text-base">Iniciar sesión con Google</span>
-                </button>
-              </div>
-            </Form>
-          )}
-        </Formik>
-      </div>
-
-      <div className="mt-6 text-right">
-        <a href="/forgot-password" className="text-sivoy-blue hover:underline">
-          ¿Olvidaste tu Contraseña?
+          Regístrate aquí
         </a>
-      </div>
+      </p>
     </div>
+  </div>
+</div>
+
   );
 };
 
