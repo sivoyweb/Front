@@ -345,6 +345,7 @@ export interface ITravelsProps {
   reviews: IReviewT[];
   images: IImage[];
   provider: null;
+  accessibilitySealName: string;
 }
 
 export interface IAccordionItemProps {
