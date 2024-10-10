@@ -59,10 +59,10 @@ async function TravelDetail({ params }: { params: { travelId: string } }) {
           </div>
         </div>
 
-        <StarComponent travelId={travels.id} />
+          <ReviewsComponent travelId={travels.id} />
 
         <div className="w-[92%] mx-auto mt-8 px-4">
-          <ReviewsComponent travelId={travels.id} />
+        <StarComponent travelId={travels.id} />
         </div>
 
         <div className="w-[92%] mx-auto mt-8 px-4">

@@ -29,7 +29,7 @@ const TeamForm: React.FC = () => {
       image: Yup.mixed().required("La imagen es obligatoria."),
     }),
     onSubmit: async (values, { resetForm }) => {
-      const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
+      const token =  localStorage.getItem("token") ;
       try {
         const formData = new FormData();
         formData.append("name", values.name);

@@ -20,7 +20,8 @@ const AdminBlogsComponent = () => {
     setLoading(true);
     setError(null);
     try {
-      const token = localStorage.getItem("token");
+
+      const token = localStorage.getItem("token") ;
       if (!token) {
         setError("No se encontró un token de autenticación.");
         setLoading(false);
@@ -92,7 +93,7 @@ const AdminBlogsComponent = () => {
   };
 
   const handleDelete = async (id: string) => {
-    const token = localStorage.getItem("token");
+    const token =  localStorage.getItem("token");
     try {
       const result = await MySwal.fire({
         title: "¿Estás seguro/a?",
@@ -145,7 +146,7 @@ const AdminBlogsComponent = () => {
           {blogs.map((blog) => (
             <div key={blog.id} className="border rounded-lg p-4 shadow-md">
               <button
-                className="blogToggleBtn"
+                className="custom-button"
                 onClick={() =>
                   document
                     .getElementById(`blog-${blog.id}`)

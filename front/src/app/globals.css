@@ -150,6 +150,8 @@ button:disabled {
 
 button.custom-button {
   all: unset;
+  cursor: pointer;
+  margin:1rem
 }
 
 .guardarInfo {
@@ -220,6 +222,17 @@ button.custom-button {
     font-weight: 600; 
     transition: background-color 0.3s, color 0.3s; 
   }
+  .blogToggleBtn{
+    background-color: transparent; 
+    color: #333; 
+    padding: 0.5rem; 
+    border: none; 
+    text-align: left; 
+    width: 100%; 
+    cursor: pointer;
+    font-weight: 600; 
+    transition: background-color 0.3s, color 0.3s; 
+  }
   
   
   .blogToggleBtn:hover {
@@ -256,5 +269,9 @@ button.custom-button {
   100% {
     transform: rotate(360deg);
   }
+}
+Image{
+  width: auto;
+  height: auto;
 }
 

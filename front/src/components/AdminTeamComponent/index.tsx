@@ -21,7 +21,7 @@ const AdminTeamComponent = () => {
     setLoading(true);
     setError(null);
     try {
-      const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
+      const token =  localStorage.getItem("token") ;
       if (!token) {
         setError("No se encontró un token de autenticación.");
         setLoading(false);
@@ -50,7 +50,7 @@ const AdminTeamComponent = () => {
   const handleEdit = async (id: string) => {
     if (!editingMember) return;
 
-    const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
+    const token =  localStorage.getItem("token") ;
 
     try {
 
@@ -93,7 +93,7 @@ console.log(response);
 
   // Función para manejar la eliminación de un miembro del equipo
   const handleDelete = async (id: string) => {
-    const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
+    const token =  localStorage.getItem("token") ;
     try {
       const result = await MySwal.fire({
         title: "¿Estás seguro?",
@@ -162,7 +162,7 @@ console.log(response);
           {team.map((member) => (
             <div key={member.id} className="border rounded-lg p-4 shadow-md">
               <button
-                className="blogToggleBtn"
+                className="custom-button"
                 onClick={() =>
                   document
                     .getElementById(`member-${member.id}`)

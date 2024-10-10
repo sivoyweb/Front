@@ -22,7 +22,7 @@ const AdminPromotionComponent = () => {
     setLoading(true);
     setError(null);
     try {
-      const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
+      const token =  localStorage.getItem("token") ;
       if (!token) {
         setError("No se encontró un token de autenticación.");
         setLoading(false);
@@ -53,7 +53,7 @@ const AdminPromotionComponent = () => {
   const handleEdit = async (id: string) => {
     if (!editingPromotion) return;
   
-    const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
+    const token =  localStorage.getItem("token") ;
   
     // Mostrar confirmación antes de editar la promoción
     const result = await Swal.fire({
@@ -98,7 +98,7 @@ const AdminPromotionComponent = () => {
   };
 
   const handleDelete = async (id: string) => {
-    const token = typeof window !== "undefined" ? localStorage.getItem("token") === 'true' : null;
+    const token =  localStorage.getItem("token") ;
     try {
       const result = await MySwal.fire({
         title: "¿Estás seguro?",
@@ -152,7 +152,7 @@ const AdminPromotionComponent = () => {
           {promotions.map((promotion, index) => (
             <div key={index} className="border rounded-lg p-4 shadow-md">
               <button
-                className="blogToggleBtn"
+                className="custom-button"
                 onClick={() =>
                   document
                     .getElementById(`promotion-${index}`)

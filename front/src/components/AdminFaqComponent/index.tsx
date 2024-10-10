@@ -142,7 +142,7 @@ const AdminFaqComponent: React.FC = () => {
                       question: e.target.value,
                     }))
                   }
-                  className="w-full p-2 border rounded mb-2"
+                  className="custom-button"
                 />
                 <textarea
                   value={editedFAQ.answer || ""}
@@ -156,10 +156,10 @@ const AdminFaqComponent: React.FC = () => {
                   rows={4}
                 />
                 <div className="flex justify-end gap-2">
-                  <button onClick={handleSaveEdit} className="px-4 py-2 ">
+                  <button onClick={handleSaveEdit} className="guardarInfo ">
                     Guardar
                   </button>
-                  <button onClick={handleCancelEdit} className="px-4 py-2 ">
+                  <button onClick={handleCancelEdit} className="cancelarBtn ">
                     Cancelar
                   </button>
                 </div>
@@ -171,7 +171,7 @@ const AdminFaqComponent: React.FC = () => {
                 <div className="flex justify-end gap-4 mt-2">
                   <button
                     onClick={() => handleEdit(index)}
-                    className="px-4 py-2 "
+                    className="editarBtn "
                   >
                     Editar
                   </button>
