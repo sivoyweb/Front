@@ -54,7 +54,7 @@ const MapsComponent: React.FC<MapProps> = ({ address }) => {
 
   // Condición de carga
   if (!coordinates) {
-    return <p className="loader">Cargando...</p>; // Retorna un loader adecuado
+    return <p className="loader"></p>; // Retorna un loader adecuado
   }
 
   return (
