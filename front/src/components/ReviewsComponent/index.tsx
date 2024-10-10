@@ -1,4 +1,5 @@
-"use client";
+"use client"
+
 import React, { useState, useEffect, useCallback, useContext } from "react";
 import Rating from "react-rating";
 import axios from "axios";
@@ -15,10 +16,10 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
   const [loading, setLoading] = useState(false);
   const [editingReview, setEditingReview] = useState<IReviewT | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [saving, setSaving] = useState(false);
   const [showMyReview, setShowMyReview] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const reviewsPerPage = 5;
   const { user } = useContext(UserContext);
-  console.log(saving);
 
   const fetchReviews = useCallback(async () => {
     setLoading(true);
@@ -36,6 +37,8 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
       setLoading(false);
     }
   }, [travelId]);
+
+  console.log(editingReview)
 
   useEffect(() => {
     fetchReviews();
@@ -63,47 +66,20 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
     }
   };
 
-  const handleEdit = async () => {
-    const token = localStorage.getItem("token");
-    if (!editingReview) return;
-    setSaving(true);
-    try {
-      const { id, review, stars } = editingReview;
-      await axios.put(
-        `https://api-sivoy.onrender.com/travels/reviews/${id}`,
-        { review, stars },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      Swal.fire("La reseña ha sido actualizada correctamente");
-      setEditingReview(null);
-      fetchReviews();
-    } catch (error) {
-      Swal.fire(
-        "Error",
-        "No se pudo actualizar la reseña. Inténtelo de nuevo.",
-        "error"
-      );
-    } finally {
-      setSaving(false);
-    }
-  };
-
+  
   const reviews = travelReview?.reviews || [];
   const myReview = reviews.find((review) => review.user.id === user?.id);
-  console.log(handleEdit);
- 
+  const paginatedReviews = showMyReview && myReview ? [myReview] : reviews.slice((currentPage - 1) * reviewsPerPage, currentPage * reviewsPerPage);
+  const totalPages = Math.ceil(reviews.length / reviewsPerPage);
+
   return (
     <div className="p-5 border border-gray-200 rounded-lg">
-      <div className="mb-4">
-        <button onClick={fetchReviews} disabled={loading} className="mr-4">
+      <div className="mb-4 flex justify-center space-x-4">
+        <button onClick={fetchReviews} disabled={loading}>
           {"Actualizar Reseñas"}
         </button>
         {myReview && (
-          <button onClick={() => setShowMyReview((prev) => !prev)} className="">
+          <button onClick={() => setShowMyReview((prev) => !prev)}>
             {showMyReview ? "Ver Todas" : "Mi reseña"}
           </button>
         )}
@@ -112,17 +88,10 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
       {error && <p className="text-red-500">{error}</p>}
 
       {reviews.length > 0 ? (
-        (showMyReview && myReview ? [myReview] : reviews).map((review) => (
+        paginatedReviews.map((review) => (
           <div key={review.id} className="mb-4 p-4 border border-gray-300 rounded-md">
-            {/* Mostrar nombre del usuario */}
             <p className="text-lg font-bold mb-1">{review.user.name}</p>
-
-            {/* Mostrar reseña en un label */}
-            <label className="block mb-2 text-gray-700">
-              {review.review}
-            </label>
-
-            {/* Mostrar rating */}
+            <label className="block mb-2 text-gray-700">{review.review}</label>
             <Rating
               readonly
               initialRating={review.stars}
@@ -133,8 +102,6 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
                 <i className="fa-solid fa-star" style={{ color: "#ffd700" }} />
               }
             />
-
-            {/* Acciones solo para la reseña del usuario */}
             {review.user.id === user?.id && (
               <div className="flex justify-end mt-2">
                 <button
@@ -151,9 +118,29 @@ const ReviewsComponent: React.FC<ReviewsComponentProps> = ({ travelId }) => {
           </div>
         ))
       ) : (
-        <p className="text-sivoy-blue text-lg ml-2 text-center font-arialroundedmtbold">
+        <p className="text-sivoy-blue md:text-lg ml-2 text-center">
           No hay reseñas disponibles.
         </p>
+      )}
+
+      {reviews.length > reviewsPerPage && (
+        <div className="flex justify-center mt-4 space-x-2">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            Anterior
+          </button>
+          <span>
+            Página {currentPage} de {totalPages}
+          </span>
+          <button
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+          >
+            Siguiente
+          </button>
+        </div>
       )}
     </div>
   );

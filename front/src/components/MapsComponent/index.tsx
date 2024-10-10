@@ -59,7 +59,7 @@ const MapsComponent: React.FC<MapProps> = ({ address }) => {
 
   return (
     <div className="rounded-xl overflow-hidden">
-      <p className="text-2xl mb-4 font-arialroundedmtbold">Ubicación:</p> 
+      <p className="sm:text-xl lg:text-2xl mb-4 font-arialroundedmtbold text-sivoy-blue">Ubicación:</p> 
       <MapContainer
         center={coordinates} // Usar las coordenadas aquí
         zoom={16}
