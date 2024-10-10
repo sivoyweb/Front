@@ -20,6 +20,7 @@ const AdminBlogsComponent = () => {
     setLoading(true);
     setError(null);
     try {
+
       const token = localStorage.getItem("token") ;
       if (!token) {
         setError("No se encontró un token de autenticación.");
@@ -50,7 +51,7 @@ const AdminBlogsComponent = () => {
   const handleEdit = async (id: string) => {
     if (!editingBlog) return;
   
-    const token =typeof window !== "undefined" ? localStorage.getItem("token") === 'true': null;
+    const token = localStorage.getItem("token");
   
     
     const result = await Swal.fire({
@@ -95,7 +96,7 @@ const AdminBlogsComponent = () => {
     const token =  localStorage.getItem("token");
     try {
       const result = await MySwal.fire({
-        title: "¿Estás seguro?",
+        title: "¿Estás seguro/a?",
         text: "Esta acción no se puede deshacer",
         icon: "warning",
         showCancelButton: true,
