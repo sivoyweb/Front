@@ -1,17 +1,25 @@
 "use client";
-import React, { useState } from "react";
+
+import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import Swal from   
+ "sweetalert2";
 import Image from "next/image";
-import Swal from "sweetalert2";
+import { CldUploadWidget, CloudinaryUploadWidgetInfo } from "next-cloudinary";
+
+enum AccessibilitySealName {
+  BRONZE = "Bronze",
+  PLATA = "Plata",
+  ORO = "Oro",
+  PLATINO = "Platino",
+}
 
 interface IImage {
-  id?: string;
-  url?: string | null;
-  publicId?: string;
-  alt?: string;
-  active?: boolean;
+  url: string;
+  publicId: string;
+  alt: string;
 }
 
 interface IServiceFormValues {
@@ -21,8 +29,9 @@ interface IServiceFormValues {
   date?: string;
   description: string;
   serviceType: string;
-  accesibilitySeal?: IImage[];
-  images?: IImage[];
+  accessibilitySealName?: AccessibilitySealName;
+  accesibilitySeal: IImage[];
+  images: IImage[];
   website: string;
   phone: string;
   email: string;
@@ -32,8 +41,11 @@ interface IServiceFormValues {
 
 const TravelForm: React.FC = () => {
   const [uploadedImages, setUploadedImages] = useState<IImage[]>([]);
-  const [uploadedSeals, setUploadedSeals] = useState<IImage[]>([]);
+  const [uploadedAccesibilitySeal, setUploadedAccesibilitySeal] = useState<IImage[]>([]);
 
+<<<<<<< HEAD
+  const token = localStorage.getItem("token");
+=======
   const token =  localStorage.getItem("token") ;
 
   const handleImageUpload = () => {
@@ -58,6 +70,7 @@ const TravelForm: React.FC = () => {
     setUploadedSeals([...uploadedSeals, newSeal]);
   };
 
+>>>>>>> ae59e5b72de41f9cc1896f56be828dba4193b4ad
   const formik = useFormik<IServiceFormValues>({
     initialValues: {
       name: "",
@@ -66,6 +79,7 @@ const TravelForm: React.FC = () => {
       date: "",
       description: "",
       serviceType: "",
+      accessibilitySealName: undefined,
       accesibilitySeal: [],
       images: [],
       website: "",
@@ -75,29 +89,15 @@ const TravelForm: React.FC = () => {
       openingHours: "",
     },
     validationSchema: Yup.object({
-      name: Yup.string().required("El nombre es obligatorio."),
-      country: Yup.string().required("El país es obligatorio."),
-      city: Yup.string().required("La ciudad es obligatoria."),
-      description: Yup.string().required("La descripción es obligatoria."),
-      serviceType: Yup.string().required("El tipo de servicio es obligatorio."),
-      website: Yup.string()
-        .url("Ingrese una URL válida")
-        .required("El sitio web es obligatorio."),
-      phone: Yup.string().required("El teléfono es obligatorio."),
-      email: Yup.string()
-        .email("Ingrese un email válido")
-        .required("El correo electrónico es obligatorio."),
-      address: Yup.string().required("La dirección es obligatoria."),
-      openingHours: Yup.string().required(
-        "El horario de apertura es obligatorio."
-      ),
+      // ... tus validaciones ...
     }),
     onSubmit: async (values, { resetForm }) => {
+      console.log(token);
       try {
         const formData = {
           ...values,
           images: uploadedImages,
-          accesibilitySeal: uploadedSeals,
+          accesibilitySeal: uploadedAccesibilitySeal,
         };
         console.log(formData);
         await axios.post("https://api-sivoy.onrender.com/travels", formData, {
@@ -111,7 +111,7 @@ const TravelForm: React.FC = () => {
         });
         resetForm();
         setUploadedImages([]);
-        setUploadedSeals([]);
+        setUploadedAccesibilitySeal([]);
       } catch (error) {}
     },
   });
@@ -289,27 +289,87 @@ const TravelForm: React.FC = () => {
           )}
         </div>
 
-        {/* Subida de sellos de accesibilidad */}
+        {/* Insignia de Accesibilidad */}
+        <div className="mb-4">
+          <label
+            htmlFor="accessibilitySealName"
+            className="block text-xl font-medium text-gray-700"
+          >
+            Insignia de Accesibilidad
+          </label>
+          <select
+            id="accessibilitySealName"
+            name="accessibilitySealName"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.accessibilitySealName}
+            className={`mt-1 p-2 block w-full shadow-sm border ${
+              formik.touched.accessibilitySealName &&
+              formik.errors.accessibilitySealName
+                ? "border-red-500"
+                : "border-gray-300"
+            } rounded-md`}
+          >
+            <option value="" label="Seleccione una insignia" />
+            <option value={AccessibilitySealName.BRONZE} label="Bronce" />
+            <option value={AccessibilitySealName.PLATA} label="Plata" />
+            <option value={AccessibilitySealName.ORO} label="Oro" />
+            <option value={AccessibilitySealName.PLATINO} label="Platino" />
+          </select>
+          {formik.touched.accessibilitySealName &&
+            formik.errors.accessibilitySealName && (
+              <p className="text-red-500 text-sm mt-1">
+                {formik.errors.accessibilitySealName}
+              </p>
+            )}
+        </div>
+
         <div className="mb-4">
           <label className="block text-xl font-medium text-gray-700">
-            Sellos de Accesibilidad
+            Insignias
           </label>
-          <button
-            type="button"
-            onClick={handleSealUpload}
-            className="mt-2 mb-2 p-2 w-full"
+          <CldUploadWidget
+            uploadPreset="siVoyPreset"
+            onSuccess={(result) => {
+              const uploadedImage = result?.info as CloudinaryUploadWidgetInfo;
+              if (uploadedImage) {
+                setUploadedAccesibilitySeal((prevImages) => [
+                  ...prevImages,
+                  {
+                    url: uploadedImage.secure_url,
+                    publicId: uploadedImage.public_id,
+                    alt: uploadedImage.original_filename,
+                  },
+                ]);
+                Swal.fire({
+                  title: "¡Imagen subida con éxito!",
+                  text: `URL: ${uploadedImage.secure_url}`,
+                  icon: "success",
+                });
+              }
+            }}
           >
-            Subir Sello
-          </button>
-          <div className="flex flex-wrap gap-2">
-            {uploadedSeals.map((seal) => (
-              <Image
-                key={seal.id}
-                src={seal.url ?? ""}
-                alt={seal.alt ?? ""}
-                width={100}
-                height={100}
-              />
+            {({ open }) => (
+              <button
+                type="button"
+                className="focus text-ls px-3 py-2 text-white bg-blue-500 rounded-md ml-2"
+                onClick={() => open()}
+              >
+                Subir imagen
+              </button>
+            )}
+          </CldUploadWidget>
+          <div className="mt-2">
+            {uploadedAccesibilitySeal.map((image, index) => (
+              <div key={index} className="mt-2">
+                <Image
+                  src={image.url}
+                  alt={image.alt}
+                  width={300}
+                  height={150}
+                  className="w-full"
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -446,34 +506,61 @@ const TravelForm: React.FC = () => {
           )}
         </div>
 
-        {/* Subida de imágenes */}
         <div className="mb-4">
           <label className="block text-xl font-medium text-gray-700">
-            Imágenes
+            Imagen
           </label>
-          <button
-            type="button"
-            onClick={handleImageUpload}
-            className="mt-2 mb-2 p-2 w-full"
+          <CldUploadWidget
+            uploadPreset="siVoyPreset"
+            onSuccess={(result) => {
+              const uploadedImage = result?.info as CloudinaryUploadWidgetInfo;
+              if (uploadedImage) {
+                setUploadedImages((prevImages) => [
+                  ...prevImages,
+                  {
+                    url: uploadedImage.secure_url,
+                    publicId: uploadedImage.public_id,
+                    alt: uploadedImage.original_filename,
+                  },
+                ]);
+                Swal.fire({
+                  title: "¡Imagen subida con éxito!",
+                  text: `URL: ${uploadedImage.secure_url}`,
+                  icon: "success",
+                });
+              }
+            }}
           >
-            Subir Imagen
-          </button>
-          <div className="flex flex-wrap gap-2">
-            {uploadedImages.map((image) => (
-              <Image
-                key={image.id}
-                src={image.url ?? ""}
-                alt={image.alt ?? ""}
-                width={100}
-                height={100}
-              />
+            {({ open }) => (
+              <button
+                type="button"
+                className="focus text-ls px-3 py-2 text-white bg-blue-500 rounded-md ml-2"
+                onClick={() => open()}
+              >
+                Subir imagen
+              </button>
+            )}
+          </CldUploadWidget>
+          <div className="mt-2">
+            {uploadedImages.map((image, index) => (
+              <div key={index} className="mt-2">
+                <Image
+                  src={image.url}
+                  alt={image.alt}
+                  width={300}
+                  height={150}
+                  className="w-full"
+                />
+              </div>
             ))}
           </div>
         </div>
 
-        {/* Botón de envío */}
-        <div className="flex justify-center">
-          <button type="submit" className="w-full">
+        <div className="mt-6">
+          <button
+            type="submit"
+            className="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700"
+          >
             Crear Servicio
           </button>
         </div>

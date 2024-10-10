@@ -85,4 +85,8 @@ const AboutUsPage = () => {
   );
 };
 
+<<<<<<< HEAD
 export default AboutUsPage;
+=======
+export default AboutUsPage;
+>>>>>>> ae59e5b72de41f9cc1896f56be828dba4193b4ad

@@ -3,30 +3,24 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import Swal from "sweetalert2";
-import Image from "next/image";
+import Swal from "sweetalert2"
+import Image from "next/image"; 
+import { CldUploadWidget, CloudinaryUploadWidgetInfo } from "next-cloudinary";
 
 interface IImage {
   url: string;
+  publicId:string,
   alt: string;
 }
 
 interface IBlogFormValues {
   title: string;
   content: string;
-  images?: IImage[];
+  images: IImage[];
 }
 
 const BlogForm: React.FC = () => {
-  const [uploadedImages, setUploadedImages] = useState<IImage[]>([]);
-
-  const handleImageUpload = () => {
-    const newImage: IImage = {
-      url: "https://ejemplo.com/imagen.jpg",
-      alt: "Descripción de la imagen",
-    };
-    setUploadedImages([...uploadedImages, newImage]);
-  };
+  const [uploadedImages, setUploadedImages] = useState<IImage[]>([]); 
 
   const formik = useFormik<IBlogFormValues>({
     initialValues: {
@@ -39,22 +33,24 @@ const BlogForm: React.FC = () => {
       content: Yup.string().required("El contenido es obligatorio."),
     }),
     onSubmit: async (values, { resetForm }) => {
+<<<<<<< HEAD
+=======
       const token =  localStorage.getItem("token") ;
+>>>>>>> ae59e5b72de41f9cc1896f56be828dba4193b4ad
       try {
-        const formData = { ...values, images: uploadedImages };
-        await axios.post("https://api-sivoy.onrender.com/blogs", formData, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const formData = { ...values, images: uploadedImages }; 
+        console.log(formData)
+        console.log(uploadedImages)
+        await axios.post("/api/blogs", formData);
         resetForm();
         setUploadedImages([]);
         Swal.fire({
-          icon: "success",
-          title: "Éxito",
+          icon: 'success',
+          title: 'Éxito',
           text: "¡Blog creado exitosamente!",
         });
-      } catch (error) {}
+      } catch (error) {
+      }
     },
   });
 
@@ -119,13 +115,38 @@ const BlogForm: React.FC = () => {
           <label className="block text-xl font-medium text-gray-700">
             Imágenes del Blog
           </label>
-          <button
-            type="button"
-            onClick={handleImageUpload}
-            className="mt-2 p-2 w-full"
-          >
-            Subir Imágenes
-          </button>
+          <CldUploadWidget
+  uploadPreset="siVoyPreset"
+  onSuccess={(result) => {
+    const uploadedImage = result?.info as CloudinaryUploadWidgetInfo;
+    if (uploadedImage) {
+      setUploadedImages( (prevImages) => [...prevImages, {
+        url: uploadedImage.secure_url,
+        publicId: uploadedImage.public_id,
+        alt: uploadedImage.original_filename,
+      }]); 
+      Swal.fire({
+        title: "¡Imagen subida con éxito!",
+        text: `URL: ${uploadedImage.secure_url}`,
+        icon: "success",
+      });
+    }
+  }}
+>
+  {({ open }) => (
+    <button
+      type="button"
+      className="focus text-ls px-3 py-2 text-white bg-blue-500 rounded-md ml-2"
+      onClick={() => open()}
+    >
+      Subir imagen
+    </button>
+  )}
+</CldUploadWidget>
+
+          {formik.touched.images && formik.errors.images && (
+            <p className="text-red-500 text-sm mt-1">error</p>
+          )}
           <div className="mt-2">
             {uploadedImages.map((image, index) => (
               <div key={index} className="mt-2">
