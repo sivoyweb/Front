@@ -1,9 +1,11 @@
-import AdminFaqComponent from "@/components/AdminFaqComponent";
+
+import TravelForm from "@/components/TravelForm";
+
 
 function prueba() {
   return (
     <div className="h-full">
-      <AdminFaqComponent />
+      <TravelForm />
     </div>
   );
 }

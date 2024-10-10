@@ -4,13 +4,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import Swal from "sweetalert2";
-
-interface ITeamFormValues {
-  name: string;
-  description: string;
-  linkedin: string;
-  image: File | null;
-}
+import { CldUploadWidget, CloudinaryUploadWidgetInfo } from "next-cloudinary";
+import { ITeamFormValues } from "@/interfaces/interfaces";
 
 const TeamForm: React.FC = () => {
   const formik = useFormik<ITeamFormValues>({
@@ -18,7 +13,7 @@ const TeamForm: React.FC = () => {
       name: "",
       description: "",
       linkedin: "",
-      image: null,
+      image: { id: "", url: null, publicId: "", alt: "", active: true }, // Adaptación del objeto IImage
     },
     validationSchema: Yup.object({
       name: Yup.string().required("El nombre es obligatorio."),
@@ -26,28 +21,42 @@ const TeamForm: React.FC = () => {
       linkedin: Yup.string()
         .url("Debe ser un enlace válido de LinkedIn")
         .required("El enlace de LinkedIn es obligatorio."),
-      image: Yup.mixed().required("La imagen es obligatoria."),
+      image: Yup.object().shape({
+        url: Yup.string().required("La imagen es obligatoria."), // Validamos el campo `url`
+      }),
     }),
     onSubmit: async (values, { resetForm }) => {
       const token = localStorage.getItem("token");
       try {
-        const formData = new FormData();
-        formData.append("name", values.name);
-        formData.append("description", values.description);
-        formData.append("linkedin", values.linkedin);
-        if (values.image) {
-          formData.append("image", values.image);
-        }
+        // Payload ajustado según el formato requerido
+        const payload = {
+          name: values.name,
+          description: values.description,
+          linkedin: values.linkedin,
+          image: {
+            url: values.image.url,
+            publicId: values.image.publicId,
+          },
+        };
 
-        await axios.post("https://api-sivoy.onrender.com/team", formData, {
+        console.log("Payload:", payload);
+
+        await axios.post("https://api-sivoy.onrender.com/team", payload, {
           headers: { Authorization: `Bearer ${token}` },
         });
+
         resetForm();
         Swal.fire({
           icon: "success",
           text: "¡Persona agregada exitosamente al equipo!",
         });
-      } catch (error) {}
+      } catch (error) {
+        console.error("Error al enviar el formulario:", error);
+        Swal.fire({
+          icon: "error",
+          text: "Hubo un error al agregar la persona.",
+        });
+      }
     },
   });
 
@@ -138,30 +147,51 @@ const TeamForm: React.FC = () => {
         </div>
 
         <div className="mb-4">
-          <label
-            htmlFor="image"
-            className="block text-xl font-medium text-gray-700"
-          >
+          <label className="block text-xl font-medium text-gray-700">
             Imagen
           </label>
-          <input
-            id="image"
-            name="image"
-            type="file"
-            onChange={(event) => {
-              formik.setFieldValue(
-                "image",
-                event.currentTarget.files?.[0] || null
-              );
+          <CldUploadWidget
+            uploadPreset="siVoyPreset"
+            onSuccess={(result) => {
+              const uploadedImage = result?.info as CloudinaryUploadWidgetInfo;
+              if (uploadedImage) {
+                formik.setFieldValue("image", {
+                  id: uploadedImage.asset_id,
+                  url: uploadedImage.secure_url,
+                  publicId: uploadedImage.public_id,
+                  alt: uploadedImage.original_filename,
+                  active: true,
+                });
+                Swal.fire({
+                  title: "¡Imagen subida con éxito!",
+                  text: `URL: ${uploadedImage.secure_url}`,
+                  icon: "success",
+                });
+              }
             }}
-            className="mt-1 p-2 block w-full shadow-sm border border-gray-300 rounded-md"
-          />
-          {formik.touched.image && formik.errors.image ? (
-            <p className="text-red-500 text-sm mt-1">{formik.errors.image}</p>
+          >
+            {({ open }) => (
+              <button
+                type="button"
+                className="focus text-ls px-3 py-2 text-white bg-blue-500 rounded-md ml-2"
+                onClick={() => open()}
+              >
+                Subir imagen
+              </button>
+            )}
+          </CldUploadWidget>
+          {formik.touched.image?.url && formik.errors.image?.url ? (
+            <p className="text-red-500 text-sm mt-1">
+              {formik.errors.image.url}
+            </p>
           ) : null}
         </div>
 
-        <button type="submit" className="w-full" disabled={formik.isSubmitting}>
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white py-2 rounded-md"
+          disabled={formik.isSubmitting}
+        >
           {formik.isSubmitting ? "Enviando..." : "Agregar Persona"}
         </button>
       </form>
