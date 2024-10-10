@@ -36,7 +36,7 @@ export const BlogArticleContainer = () => {
     }
   }, [id]);
 
-  if (loading) return <p className=".loader"></p>;
+  if (loading) return <p className="loader"></p>;
   if (error) return <div>{error}</div>;
   if (!article) return <div>No se encontró el artículo.</div>;
 

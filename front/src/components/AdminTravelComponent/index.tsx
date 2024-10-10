@@ -119,7 +119,7 @@ const AdminTravelComponent = () => {
   };
 
   if (loading) {
-    <p className=".loader"></p>
+    <p className="loader"></p>
   }
 
   return (
