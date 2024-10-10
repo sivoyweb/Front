@@ -54,64 +54,70 @@ const TravelSearch: React.FC<ITravelSearchProps> = ({ onSearchToggle }) => {
   };
 
   return (
-    <div className="absolute inset-0 flex flex-col justify-center items-center z-10">
-      <header className="absolute bg-white/90 py-8 md-lg:py-16 rounded-3xl text-sivoy-blue w-3/4">
-        <div className="flex flex-col md:flex-row md:space-x-4 px-8">
-          <div className="flex-1 mb-4">
-            <h1 className="text-lg md-lg:text-xl mb-2 font-arialroundedmtbold text-center">¿Dónde quiere ir?</h1>
-            <div className="flex justify-center">
-            <input
-              ref={inputRef}
-              type="text"
-              name="ciudad"
-              placeholder="Por ej: Buenos Aires"
-              className="px-4 py-2 w-full md:w-64 rounded-md bg-white border border-gray-600 focus:outline-none focus:ring-2 focus:border-transparent"
-              onKeyUp={handleInputChange}
-            />
-            </div>
-          </div>
+<div className="absolute inset-0 flex flex-col justify-center items-center z-10">
+  <header className="absolute bg-white/90 py-6 px-4 md-lg:py-12 rounded-3xl text-sivoy-blue w-3/4 max-w-4xl shadow-lg">
+  {/* <header className="absolute bg-white/90 py-8 px-8 md-lg:py-16 rounded-3xl text-sivoy-blue w-3/4 max-w-4xl shadow-lg"> */}
 
-          <div className="flex-1 r">
-            <h1 className="text-lg md-lg:text-xl mb-2 font-arialroundedmtbold text-center">¿Qué tipo de destino o servicio busca?</h1>
-            <div className="flex justify-center">
-              <input
-                type="text"
-                name="servicio"
-                value={selectedService}
-                readOnly
-                className="px-4 py-2 w-full md:w-64 rounded-md bg-white border border-gray-600 cursor-pointer focus:outline-none focus:ring-2 focus:border-transparent"
-                onClick={() => setIsOpen(!isOpen)}
-              />
-            </div>
-
-            {isOpen && (
-              <div className="absolute z-10 mt-1 w-full md:w-64 bg-white border border-gray-300 rounded-md shadow-lg">
-                <ul>
-                  {services.map((service, index) => (
-                    <li
-                      key={index}
-                      onClick={() => handleServiceClick(service)}
-                      className="px-4 py-2 cursor-pointer hover:bg-gray-100"
-                    >
-                      {service}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
+  <div className="flex flex-col md:flex-row md:space-x-4 items-center md:items-end">
+      <div className="flex-1 align-bottom mb-4 md:mb-0">
+        <h1 className="text-base md:text-lg font-arialroundedmtbold text-center">
+          ¿Dónde quiere ir?
+        </h1>
+        <div className="mt-2">
+          <input
+            ref={inputRef}
+            type="text"
+            name="ciudad"
+            placeholder="Por ej: Buenos Aires"
+            className="px-4 py-3 w-full rounded-lg bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-sivoy-blue"
+            onKeyUp={handleInputChange}
+          />
         </div>
+      </div>
 
-        <div className="mt-6 flex justify-center">
-          <button
-            className="px-6 md-lg:px-10 py-2 md-lg:text-lg"
-            onClick={handleSearch}
-          >
-            Buscar
-          </button>
+      <div className="flex-1">
+        <h1 className="text-base md:text-lg font-arialroundedmtbold text-center">
+          ¿Qué tipo de destino o servicio busca?
+        </h1>
+        <div className="mt-2 relative">
+          <input
+            type="text"
+            name="servicio"
+            value={selectedService}
+            readOnly
+            className="px-4 py-3 w-full md:w-full rounded-lg bg-white border border-gray-300 cursor-pointer focus:outline-none focus:ring-2 focus:ring-sivoy-blue"
+            onClick={() => setIsOpen(!isOpen)}
+          />
+          {isOpen && (
+            <div className="absolute top-full left-0 w-full mt-1 bg-white border border-gray-200 rounded-lg shadow-md z-20">
+              <ul>
+                {services.map((service, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handleServiceClick(service)}
+                    className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                  >
+                    {service}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
-      </header>
+      </div>
     </div>
+
+    <div className="mt-6 flex justify-center">
+      <button
+        className="px-4 py-2 text-white bg-sivoy-orange rounded-lg shadow-md text-base w-40"
+        onClick={handleSearch}
+      >
+        Buscar
+      </button>
+    </div>
+  </header>
+</div>
+
   );
 };
 
