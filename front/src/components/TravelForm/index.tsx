@@ -4,14 +4,14 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import Image from "next/image";
-import Swal from "sweetalert2"
+import Swal from "sweetalert2";
 
 interface IImage {
-  id: string;
+  id?: string;
   url?: string | null;
-  publicId: string;
-  alt: string;
-  active: boolean;
+  publicId?: string;
+  alt?: string;
+  active?: boolean;
 }
 
 interface IServiceFormValues {
@@ -21,8 +21,8 @@ interface IServiceFormValues {
   date?: string;
   description: string;
   serviceType: string;
-  accesibilitySeal: IImage[];
-  images: IImage[];
+  accesibilitySeal?: IImage[];
+  images?: IImage[];
   website: string;
   phone: string;
   email: string;
@@ -34,8 +34,7 @@ const TravelForm: React.FC = () => {
   const [uploadedImages, setUploadedImages] = useState<IImage[]>([]);
   const [uploadedSeals, setUploadedSeals] = useState<IImage[]>([]);
 
-  const token =
-    typeof window !== "undefined" ? localStorage.getItem("token") : "";
+  const token = localStorage.getItem("token");
 
   const handleImageUpload = () => {
     const newImage: IImage = {
@@ -107,14 +106,13 @@ const TravelForm: React.FC = () => {
           },
         });
         Swal.fire({
-          icon: 'success',
+          icon: "success",
           text: "Servicio creado exitosamente!",
         });
         resetForm();
         setUploadedImages([]);
         setUploadedSeals([]);
-      } catch (error) {
-      }
+      } catch (error) {}
     },
   });
 
@@ -274,9 +272,14 @@ const TravelForm: React.FC = () => {
             <option value="Balneario" label="Balneario" />
             <option value="Gastronomía" label="Gastronomía" />
             <option value="Alojamiento" label="Alojamiento" />
-            <option value="Ocio y Recreación" label="Ocio y Recreación" />
-            <option value="Culturales" label="Actividades Culturales" />
-            <option value="Transporte" label="Transporte" />
+            <option value="Ocio y recreación" label="Ocio y recreación" />
+            <option
+              value="Actividades culturales"
+              label="Actividades culturales"
+            />
+            <option value="Medios de transporte" label="Medios de transporte" />
+            <option value="Experiencias" label="Experiencias" />
+            <option value="Servicios personales" label="Servicios personales" />
             <option value="Otro" label="Otro" />
           </select>
           {formik.touched.serviceType && formik.errors.serviceType && (
@@ -303,7 +306,7 @@ const TravelForm: React.FC = () => {
               <Image
                 key={seal.id}
                 src={seal.url ?? ""}
-                alt={seal.alt}
+                alt={seal.alt ?? ""}
                 width={100}
                 height={100}
               />
@@ -460,7 +463,7 @@ const TravelForm: React.FC = () => {
               <Image
                 key={image.id}
                 src={image.url ?? ""}
-                alt={image.alt}
+                alt={image.alt ?? ""}
                 width={100}
                 height={100}
               />

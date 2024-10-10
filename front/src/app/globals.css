@@ -62,7 +62,7 @@ html, body {
   overflow-x: hidden; 
 }
 * {
-  box-sizing: border-box; /* Asegura que el ancho y alto de los elementos incluyan padding y border */
+  box-sizing: border-box; 
 }
 
 button {
@@ -115,17 +115,17 @@ button:disabled {
 
 .slick-prev:before,
 .slick-next:before {
-  color: #1a7970; /* Cambia este color por el que desees */
-  font-size: 24px; /* Cambia el tamaño si es necesario */
+  color: #1a7970; 
+  font-size: 24px; 
 }
 
 .slick-dots li button {
-  background-color: #ffffff; /* Color de los puntos inactivos */
+  background-color: #ffffff; 
 }
 
-/* Cambiar el color del punto activo */
+
 .slick-dots li.slick-active button {
-  background-color: #df5430; /* Color del punto activo */
+  background-color: #df5430;
 }
 
 .line-clamp {
@@ -151,6 +151,81 @@ button:disabled {
 button.custom-button {
   all: unset;
 }
+
+.guardarInfo {
+  background-color: transparent; 
+  color: #4b5563; 
+  padding: 0.5rem 1rem;
+  border: 2px solid #d1d5db; 
+  border-radius: 0.5rem; 
+  font-weight: 500;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; 
+  cursor: pointer;
+  display: inline-block;
+}
+
+.guardarInfo:hover {
+  background-color: #1d8461; 
+  border-color: #109166; 
+  color: white; 
+}
+
+.guardarInfo:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.5); 
+}
+.editarBtn {
+  background-color: transparent; 
+  color: #4b5563; 
+  padding: 0.5rem 1rem;
+  border: 2px solid #d1d5db; 
+  border-radius: 0.5rem; 
+  font-weight: 500;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease; 
+  cursor: pointer;
+  display: inline-block;
+}
+
+.editarBtn:hover {
+  background-color: #cb8308; 
+  border-color: #c07c07; 
+  color: white; 
+}
+
+.editarBtn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.5); 
+}
+.cancelarBtn {
+  background-color: #9ca3af; 
+  color: white; 
+  padding: 0.5rem 1rem;
+  border: none; 
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer; 
+  display: inline-block; }
+  .cancelarBtn:hover {
+    background-color: #6b7280; 
+  }
+
+  .blogToggleBtn {
+    background-color: transparent; 
+    color: #333; 
+    padding: 0.5rem; 
+    border: none; 
+    text-align: left; 
+    width: 100%; 
+    cursor: pointer;
+    font-weight: 600; 
+    transition: background-color 0.3s, color 0.3s; 
+  }
+  
+  
+  .blogToggleBtn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #000; 
+  }
 
 .loader {
   border: 4px solid rgba(0, 0, 0, .1);
@@ -182,3 +257,4 @@ button.custom-button {
     transform: rotate(360deg);
   }
 }
+

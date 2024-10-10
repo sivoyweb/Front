@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 
  const CloudinaryButton = () => {
   return (
-    <div>
+    <div> 
       
       <CldUploadWidget
         uploadPreset="siVoyPreset" 
@@ -29,7 +29,7 @@ import Swal from "sweetalert2";
         {({ open }) => {
           return (
             <button
-              className="focus text-ls px-3 py-2  text-white rounded-md"
+              className="focus text-ls px-3 py-2  text-white rounded-md ml-2"
               onClick={() => open()} 
             >
               Subir imagen

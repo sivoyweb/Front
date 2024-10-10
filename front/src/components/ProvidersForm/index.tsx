@@ -3,7 +3,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import Swal from "sweetalert2"
+import Swal from "sweetalert2";
 
 interface IProviderFormValues {
   name: string;
@@ -20,16 +20,22 @@ const ProvidersForm: React.FC = () => {
       name: Yup.string().required("El nombre es obligatorio."),
       description: Yup.string().required("La descripción es obligatoria."),
     }),
+
     onSubmit: async (values, { resetForm }) => {
+      const token = localStorage.getItem("token");
+
       try {
-        await axios.post("/api/providers", values);
+        await axios.post("https://api-sivoy.onrender.com/providers", values, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         resetForm();
         Swal.fire({
-          icon: 'success',
+          icon: "success",
           text: "¡Proveedor creado exitosamente!",
         });
-      } catch (error) {
-      }
+      } catch (error) {}
     },
   });
 

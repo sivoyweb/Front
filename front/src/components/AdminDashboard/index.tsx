@@ -11,6 +11,7 @@ import AdminUsersComponent from "../AdminUsersComponent";
 import AdminTravelComponent from "../AdminTravelComponent";
 import { UserContext } from "@/context/userContext";
 import { useRouter } from "next/navigation";
+import AdminReviewsComponent from "../AdminReviewsComponent";
 
 
 const AdminDashboard = () => {
@@ -77,6 +78,12 @@ const AdminDashboard = () => {
         return (
           <div className="bg-white rounded-lg shadow-lg p-6">
             <AdminTravelComponent />
+          </div>
+        );
+      case "reviews":
+        return (
+          <div className="bg-white rounded-lg shadow-lg p-6">
+            <AdminReviewsComponent />
           </div>
         );
 
@@ -176,6 +183,15 @@ const AdminDashboard = () => {
             }`}
           >
             Usuarios
+          </Link>
+          <Link
+            href="#"
+            onClick={() => setActiveSection("reviews")}
+            className={`block py-2.5 px-4 rounded transition-all duration-200 hover:bg-sivoy-blue ${
+              !sidebarOpen ? "opacity-0 w-0" : "opacity-100 w-full"
+            }`}
+          >
+            Reviews
           </Link>
         </nav>
       </div>

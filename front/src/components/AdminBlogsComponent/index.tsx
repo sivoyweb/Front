@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import Image from "next/image"; 
+import CloudinaryButton from "../CloudinaryButton";
 
 const MySwal = withReactContent(Swal);
 
@@ -45,15 +46,31 @@ const AdminBlogsComponent = () => {
   }, []);
 
 
-  const handleUploadImages = async () => {
-  };
-
+  
   const handleEdit = async (id: string) => {
     if (!editingBlog) return;
-
+  
     const token = localStorage.getItem("token");
+  
+    
+    const result = await Swal.fire({
+      title: "¿Estás seguro de que deseas actualizar este blog?",
+      text: "Se aplicarán los cambios realizados.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, actualizar",
+      cancelButtonText: "Cancelar",
+    });
+  
+    
+    if (!result.isConfirmed) {
+      return;
+    }
+  
     try {
       const { title, content } = editingBlog;
+  
+      
       await axios.put(
         `https://api-sivoy.onrender.com/blogs/${id}`,
         { title, content },
@@ -63,9 +80,10 @@ const AdminBlogsComponent = () => {
           },
         }
       );
-      Swal.fire(
-        "¡El blog ha sido actualizado exitosamente!"
-      );
+  
+      
+      Swal.fire("¡El blog ha sido actualizado exitosamente!");
+  
       setEditingBlog(null);
       fetchBlogs(); 
     } catch (error) {
@@ -127,7 +145,7 @@ const AdminBlogsComponent = () => {
           {blogs.map((blog) => (
             <div key={blog.id} className="border rounded-lg p-4 shadow-md">
               <button
-                className="w-full text-left"
+                className="blogToggleBtn"
                 onClick={() =>
                   document
                     .getElementById(`blog-${blog.id}`)
@@ -173,22 +191,17 @@ const AdminBlogsComponent = () => {
                         />
                       ))}
                     </div>
-                    <button
-                      onClick={handleUploadImages}
-                      className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                    >
-                      Subir Imágenes
-                    </button>
+                      <CloudinaryButton />
                     <div className="flex justify-between mt-4">
                       <button
                         onClick={() => handleEdit(blog.id)}
-                        className="bg-green-500 text-white px-4 py-2 rounded-md"
+                        className="guardarInfo"
                       >
                         Guardar Cambios
                       </button>
                       <button
                         onClick={() => setEditingBlog(null)}
-                        className="bg-gray-500 text-white px-4 py-2 rounded-md"
+                        className="cancelarBtn"
                       >
                         Cancelar
                       </button>
@@ -216,7 +229,7 @@ const AdminBlogsComponent = () => {
                     <div className="flex justify-between mt-4">
                       <button
                         onClick={() => setEditingBlog(blog)}
-                        className="bg-yellow-500 text-white px-4 py-2 rounded-md"
+                        className="editarBtn"
                       >
                         Editar
                       </button>

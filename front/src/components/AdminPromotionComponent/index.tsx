@@ -6,6 +6,7 @@ import withReactContent from "sweetalert2-react-content";
 import { format } from "date-fns";
 import Image from "next/image";
 import { IPromotionAdmin } from "@/interfaces/interfaces";
+import CloudinaryButton from "../CloudinaryButton";
 
 // SweetAlert2 con React
 const MySwal = withReactContent(Swal);
@@ -51,11 +52,28 @@ const AdminPromotionComponent = () => {
 
   const handleEdit = async (id: string) => {
     if (!editingPromotion) return;
-
+  
     const token = localStorage.getItem("token");
+  
+    // Mostrar confirmación antes de editar la promoción
+    const result = await Swal.fire({
+      title: "¿Estás seguro de que deseas actualizar esta promoción?",
+      text: "Se aplicarán los cambios realizados.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, actualizar",
+      cancelButtonText: "Cancelar",
+    });
+  
+    // Si el usuario cancela, salir de la función
+    if (!result.isConfirmed) {
+      return;
+    }
+  
     try {
-      const { name, description, validFrom, validUntil, images } =
-        editingPromotion;
+      const { name, description, validFrom, validUntil, images } = editingPromotion;
+      
+      
       await axios.put(
         `https://api-sivoy.onrender.com/promotions/${id}`,
         { name, description, validFrom, validUntil, images },
@@ -65,12 +83,15 @@ const AdminPromotionComponent = () => {
           },
         }
       );
+  
+      
       Swal.fire(
         "Promoción actualizada",
         "La promoción ha sido actualizada correctamente"
       );
+      
       setEditingPromotion(null);
-      fetchPromotions();
+      fetchPromotions(); 
     } catch (error) {
       Swal.fire("Error", "No se pudo actualizar la promoción.", "error");
     }
@@ -102,10 +123,6 @@ const AdminPromotionComponent = () => {
     }
   };
 
-  const handleImageUpdate = () => {
-    // Aquí puedes agregar la lógica del widget de Cloudinary
-  };
-
   if (loading) {
     <p className=".loader"></p>
   }
@@ -118,7 +135,7 @@ const AdminPromotionComponent = () => {
     <div className="container mx-auto p-4">
       <h1 className="text-xl font-bold mb-4">Lista de Promociones</h1>
 
-      {/* Botón para actualizar la lista de promociones */}
+      
       <div className="text-right mb-4">
         <button
           onClick={fetchPromotions}
@@ -135,7 +152,7 @@ const AdminPromotionComponent = () => {
           {promotions.map((promotion, index) => (
             <div key={index} className="border rounded-lg p-4 shadow-md">
               <button
-                className="w-full text-left"
+                className="blogToggleBtn"
                 onClick={() =>
                   document
                     .getElementById(`promotion-${index}`)
@@ -211,21 +228,16 @@ const AdminPromotionComponent = () => {
                         />
                       ))}
                     </div>
-                    <button
-                      onClick={handleImageUpdate}
-                      className="bg-blue-500 text-white px-4 py-2 rounded-md mb-2"
-                    >
-                      Actualizar Imágenes
-                    </button>
+                   <CloudinaryButton />
                     <button
                       onClick={() => handleEdit(promotion.id)}
-                      className="bg-green-500 text-white px-4 py-2 rounded-md mr-2"
+                      className="guardarInfo m-2"
                     >
                       Guardar Cambios
                     </button>
                     <button
                       onClick={() => setEditingPromotion(null)}
-                      className="bg-gray-500 text-white px-4 py-2 rounded-md"
+                      className="cancelarBtn"
                     >
                       Cancelar
                     </button>
@@ -263,7 +275,7 @@ const AdminPromotionComponent = () => {
                     <div className="flex justify-between mt-4">
                       <button
                         onClick={() => setEditingPromotion(promotion)}
-                        className="bg-yellow-500 text-white px-4 py-2 rounded-md"
+                        className="editarBtn"
                       >
                         Editar
                       </button>

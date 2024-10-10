@@ -76,7 +76,7 @@ const AdminDonationsComponent = () => {
           {donations.map((donation, index) => (
             <div key={index} className="border rounded-lg p-4 shadow-md">
               <button
-                className="w-full text-left"
+                className="blogToggleBtn"
                 onClick={() =>
                   document
                     .getElementById(`donation-${index}`)

@@ -9,7 +9,6 @@ import axios from "axios";
 import { IDisability } from "@/interfaces/interfaces";
 
 
-
 interface Credential {
   avatar: {
     url: string;
@@ -30,6 +29,7 @@ const UserDashboard = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [token, setToken] = useState<string | null>(null);
   const { user ,updateUser} = useContext(UserContext);
+  
   
   const router = useRouter()
 
@@ -156,8 +156,8 @@ const UserDashboard = () => {
   
       // Actualiza el array de discapacidades en el formData
       const updatedDisabilities = isAlreadySelected
-        ? prev.disabilities.filter(disability => disability.name !== disabilityCategory) // Si está seleccionada, la eliminamos
-        : [...prev.disabilities, { name: disabilityCategory } as IDisability]; // Si no está, la añadimos
+        ? prev.disabilities.filter(disability => disability.name !== disabilityCategory) 
+        : [...prev.disabilities, { name: disabilityCategory } as IDisability]; 
   
       return {
         ...prev,
@@ -165,7 +165,7 @@ const UserDashboard = () => {
       };
     });
   
-    // Actualiza el array de discapacidades seleccionadas para el span
+    
     setSelectedDisabilities((prevSelected) => {
       if (prevSelected.includes(disabilityCategory)) {
         return prevSelected.filter((item) => item !== disabilityCategory);
@@ -274,8 +274,8 @@ console.log(formData);
     ? Array.from(new Set([
         ...selectedDisabilities, 
         ...(user?.disabilities ?? []).map(disability => disability.name)
-      ])).join(', ') // Combina las discapacidades seleccionadas con las que ya tiene el usuario
-    : (user?.disabilities ?? []).map(disability => disability.name).join(', ') // Si no hay nuevas seleccionadas, muestra las anteriores
+      ])).join(', ') 
+    : (user?.disabilities ?? []).map(disability => disability.name).join(', ') 
   }
 </span>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5">

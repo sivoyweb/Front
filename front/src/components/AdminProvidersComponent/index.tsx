@@ -49,10 +49,28 @@ const AdminProvidersComponent = () => {
 
   const handleEdit = async (id: string) => {
     if (!editingProvider) return;
-
+  
     const token = localStorage.getItem("token");
+  
+
+    const result = await Swal.fire({
+      title: "¿Estás seguro de que deseas actualizar este proveedor?",
+      text: "Se aplicarán los cambios realizados.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, actualizar",
+      cancelButtonText: "Cancelar",
+    });
+  
+    
+    if (!result.isConfirmed) {
+      return;
+    }
+  
     try {
       const { name, description } = editingProvider;
+  
+      
       await axios.put(
         `https://api-sivoy.onrender.com/providers/${id}`,
         { name, description },
@@ -62,12 +80,15 @@ const AdminProvidersComponent = () => {
           },
         }
       );
+  
+      
       Swal.fire(
         "Proveedor actualizado",
         "El proveedor ha sido actualizado correctamente"
       );
+  
       setEditingProvider(null);
-      fetchProviders(); // Actualizar lista después de editar
+      fetchProviders(); 
     } catch (error) {
       Swal.fire("Error", "No se pudo actualizar el proveedor.", "error");
     }
@@ -128,7 +149,7 @@ const AdminProvidersComponent = () => {
           {providers.map((provider) => (
             <div key={provider.id} className="border rounded-lg p-4 shadow-md">
               <button
-                className="w-full text-left"
+                className="blogToggleBtn"
                 onClick={() =>
                   document
                     .getElementById(`provider-${provider.id}`)
@@ -165,16 +186,17 @@ const AdminProvidersComponent = () => {
                     <div className="flex justify-between mt-4">
                       <button
                         onClick={() => handleEdit(provider.id)}
-                        className="bg-green-500 text-white px-4 py-2 rounded-md"
+                        className="guardarInfo"
                       >
                         Guardar Cambios
                       </button>
                       <button
-                        onClick={() => setEditingProvider(null)}
-                        className="bg-gray-500 text-white px-4 py-2 rounded-md"
-                      >
-                        Cancelar
-                      </button>
+                      onClick={() => setEditingProvider(null)}
+                      className="cancelarBtn"
+                    >
+                      Cancelar
+                    </button>
+                     
                     </div>
                   </div>
                 ) : (
@@ -183,7 +205,7 @@ const AdminProvidersComponent = () => {
                     <div className="flex justify-between mt-4">
                       <button
                         onClick={() => setEditingProvider(provider)}
-                        className="bg-yellow-500 text-white px-4 py-2 rounded-md"
+                        className="editarBtn"
                       >
                         Editar
                       </button>

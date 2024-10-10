@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { ITeam } from "@/interfaces/interfaces";
 import Image from "next/image"
+import CloudinaryButton from "../CloudinaryButton";
 
 // SweetAlert2 con React
 const MySwal = withReactContent(Swal);
@@ -52,10 +53,20 @@ const AdminTeamComponent = () => {
     const token = localStorage.getItem("token");
 
     try {
+
+      const result = await Swal.fire({
+        title: "¿Estás seguro de que desea guardar los cambios?",
+        text: "Se aplicarán los cambios",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sí, guardar",
+        cancelButtonText: "Cancelar",
+      });
+      if(result.isConfirmed){
       const { name, description, linkedin, image } = editingMember;
 
       const response = await axios.put(
-        `https://api-sivoy.onrender.com/team/${id}`, // Verificar que `id` sea correcto
+        `https://api-sivoy.onrender.com/team/${id}`,
         { name, description, linkedin, image },
         {
           headers: {
@@ -69,7 +80,8 @@ console.log(response);
         "¡El miembro del equipo ha sido actualizado correctamente!"
       );
       setEditingMember(null);
-      fetchTeam(); // Actualizar la lista después de la edición
+      fetchTeam(); 
+    }
     } catch (error) {
       Swal.fire(
         "Error",
@@ -150,7 +162,7 @@ console.log(response);
           {team.map((member) => (
             <div key={member.id} className="border rounded-lg p-4 shadow-md">
               <button
-                className="w-full text-left"
+                className="blogToggleBtn"
                 onClick={() =>
                   document
                     .getElementById(`member-${member.id}`)
@@ -206,13 +218,14 @@ console.log(response);
                     )}
                     <button
                       onClick={() => handleEdit(member.id)}
-                      className="bg-green-500 text-white px-4 py-2 rounded-md mr-2"
+                      className="guardarInfo m-3"
                     >
                       Guardar Cambios
                     </button>
+                    <CloudinaryButton/>
                     <button
                       onClick={() => setEditingMember(null)}
-                      className="bg-gray-500 text-white px-4 py-2 rounded-md"
+                      className="cancelarBtn m-3"
                     >
                       Cancelar
                     </button>
@@ -237,7 +250,7 @@ console.log(response);
                     <div className="flex justify-between mt-4">
                       <button
                         onClick={() => setEditingMember(member)}
-                        className="bg-yellow-500 text-white px-4 py-2 rounded-md"
+                        className="editarBtn"
                       >
                         Editar
                       </button>

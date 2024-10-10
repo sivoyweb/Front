@@ -48,31 +48,50 @@ const AdminProjectsComponent = () => {
 
   const handleEdit = async (id: string) => {
     if (!editingProject) return;
-
+  
     const token = localStorage.getItem("token");
+  
     try {
-      const { name, description } = editingProject;
-      await axios.put(
-        `https://api-sivoy.onrender.com/projects/${id}`,
-        { name, description },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      Swal.fire(
-        "¡El proyecto ha sido actualizado correctamente!"
+      
+      const result = await Swal.fire({
+        title: "¿Estás seguro de que deseas actualizar este proyecto?",
+        text: "Se aplicarán los cambios al proyecto.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Sí, actualizar",
+        cancelButtonText: "Cancelar",
+      });
+  
+      
+      if (result.isConfirmed) {
+        const { name, description } = editingProject;
+  
+      
+        await axios.put(
+          `https://api-sivoy.onrender.com/projects/${id}`,
+          { name, description },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+  
         
-      );
-      setEditingProject(null);
-      fetchProjects(); // Actualizar lista después de editar
+        Swal.fire(
+          "¡El proyecto ha sido actualizado correctamente!"
+        );
+  
+        
+        setEditingProject(null);
+        fetchProjects(); 
+      }
     } catch (error) {
       Swal.fire("Error", "No se pudo actualizar el proyecto.", "error");
     }
   };
 
-  // Función para manejar la eliminación de un proyecto
+  
   const handleDelete = async (id: string) => {
     const token = localStorage.getItem("token");
     try {
@@ -99,11 +118,11 @@ const AdminProjectsComponent = () => {
     }
   };
 
-  // Función para manejar la actualización de la lista de proyectos
+  
   const handleUpdateProjects = async () => {
-    setUpdating(true); // Activar el estado de carga
+    setUpdating(true); 
     await fetchProjects();
-    setUpdating(false); // Desactivar el estado de carga
+    setUpdating(false);
   };
 
   if (loading) {
@@ -122,20 +141,20 @@ const AdminProjectsComponent = () => {
         <div className="text-center">No hay proyectos disponibles.</div>
       ) : (
         <div className="space-y-4">
-          <button
+         <button
             onClick={handleUpdateProjects}
-            className={`bg-blue-500 text-white px-4 py-2 rounded-md ${
+            className={`bg-blue-500 text-white px-4 py-2 rounded-lg ${
               updating ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-            disabled={updating} // Desactivar el botón mientras se actualiza
+            } transition-colors duration-200 hover:bg-blue-600 focus:outline-none`}
+            disabled={updating}
           >
             {updating ? "Actualizando..." : "Actualizar Proyectos"}
           </button>
 
           {projects.map((project) => (
-            <div key={project.id} className="border rounded-lg p-4 shadow-md">
+            <div key={project.id}>
               <button
-                className="w-full text-left"
+                className="blogToggleBtn"
                 onClick={() =>
                   document
                     .getElementById(`project-${project.id}`)
@@ -171,13 +190,13 @@ const AdminProjectsComponent = () => {
                     />
                     <button
                       onClick={() => handleEdit(project.id)}
-                      className="bg-green-500 text-white px-4 py-2 rounded-md mr-2"
+                      className="guardarInfo"
                     >
                       Guardar Cambios
                     </button>
                     <button
                       onClick={() => setEditingProject(null)}
-                      className="bg-gray-500 text-white px-4 py-2 rounded-md"
+                      className="cancelarBtn"
                     >
                       Cancelar
                     </button>
@@ -190,7 +209,7 @@ const AdminProjectsComponent = () => {
                     <div className="flex justify-between mt-4">
                       <button
                         onClick={() => setEditingProject(project)}
-                        className="bg-yellow-500 text-white px-4 py-2 rounded-md"
+                        className="editarBtn"
                       >
                         Editar
                       </button>
