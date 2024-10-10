@@ -69,11 +69,6 @@ const UserDashboard = () => {
   const [selectedDisabilities, setSelectedDisabilities] = useState<string[]>([]);
   const [isDisabilityListOpen, setIsDisabilityListOpen] = useState(false);
   
-
-  
-  
-
- 
   useEffect(() => {
     if(!user){
       Swal.fire({
@@ -196,9 +191,9 @@ console.log(formData);
       
       case 'account':
         return (
-          <div className="bg-white rounded-lg shadow-lg p-6 mb-20 ">
+          <div className="bg-white rounded-3xl shadow-lg p-6 mb-20 ">
             <div className="flex justify-between items-center">
-              <h2 className="text-xl mb-4 font-arialroundedmtbold">Cuenta</h2>
+              <h2 className="text-xl mb-4 font-arialroundedmtbold">Información del Usuario</h2>
               <button
                 onClick={() => setIsEditing(!isEditing)}
                 className="focus:text-white hover:text-gray-700"
@@ -208,15 +203,27 @@ console.log(formData);
             </div>
             {!isEditing ? (
               <>
-                <p className="text-gray-600">Nombre: {user?.name }</p>
-                <p className="text-gray-600">Email: {user?.credential?.email }</p>
-               <p className="text-gray-600">Teléfono:{user?.phone} </p> 
-               <p className="text-gray-600"> Representante: {user?.isRepresentative ? "Sí" : "No"}
-</p>
-               <p className="text-gray-600">discapcidad/es: {
+              <div className="grid grid-cols-2 mt-8">
+                <p className="text-sivoy-blue font-arialroundedmtbold">Nombre y Apellido:</p><span>{user?.name }</span>
+              </div>
+
+              <div className="grid grid-cols-2">
+                <p className="text-sivoy-blue font-arialroundedmtbold">Correo Electrónico:</p><span>{user?.credential?.email }</span>
+              </div>
+
+              <div className="grid grid-cols-2">
+                <p className="text-sivoy-blue font-arialroundedmtbold">Teléfono de Contacto:</p><span>{user?.phone}</span>
+              </div>
+
+              <div className="grid grid-cols-2">
+                <p className="text-sivoy-blue font-arialroundedmtbold">¿Es representante de un tercero?</p><span>{user?.isRepresentative ? "Sí" : "No"}</span>
+              </div>
+
+              <div className="grid grid-cols-2">
+                <p className="text-sivoy-blue font-arialroundedmtbold">Discapacidad/es:</p><span>{
           (user?.disabilities ?? []).map(disability => disability.name).join(', ') || 'Ninguna'
-        }</p>
-                
+        }</span>
+              </div>
               </>
             ) : (
               <form className="space-y-4"
@@ -315,7 +322,7 @@ console.log(formData);
 
 
                  <div>
-                  <label className="block text-sm font-medium text-gray-700 mt-6 ">Avatar</label>
+                  <label className="block text-base font-medium text-gray-700 mt-6 mb-2">Avatar:</label>
                   <CldUploadWidget uploadPreset="siVoyPreset"
                                    onSuccess={(result)=>{
 
@@ -348,7 +355,7 @@ console.log(formData);
                                   }
                                    }}>
                   {({open})=>{
-                    return <button className='focus text-xs px-3 py-2' 
+                    return <button className='focus text-sm px-3 py-2' 
                                     onClick={()=>open()}>Subir imagen</button>
                   }}
                   </CldUploadWidget>
@@ -393,7 +400,7 @@ console.log(formData);
           <a
             href="#"
             onClick={() => setActiveSection('account')}
-            className={`block py-2.5 px-4 rounded transition-all duration-200 hover:bg-sivoy-blue ${
+            className={`block py-2.5 px-4 rounded transition-all duration-200 hover:bg-sivoy-blue font-arialroundedmtbold ${
               !sidebarOpen ? "opacity-0 w-0" : "opacity-100 w-full"
             }`}
           >
@@ -403,8 +410,8 @@ console.log(formData);
       </div>
 
       <div className="flex-1 p-6">
-        <header className="flex justify-between items-center bg-white shadow p-4">
-          <h1 className="text-2xl font-semibold">Perfil</h1>
+        <header className="flex justify-between items-center bg-white shadow p-4 rounded-3xl">
+          <h1 className="text-2xl font-arialroundedmtbold">Perfil</h1>
           <div className="flex items-center">
           
              <Image
