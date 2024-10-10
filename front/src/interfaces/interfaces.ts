@@ -110,8 +110,8 @@ export interface IImage {
   id: string;
   url?: string | null;
   publicId: string;
-  alt: string;
-  active: boolean;
+  alt?: string;
+  active?: boolean;
 }
 
 export interface IImageBlog {
@@ -461,4 +461,11 @@ export interface IReviewAdmin {
 export interface IFAQAdmin {
   question: string;
   answer: string;
+}
+
+export interface ITeamFormValues {
+  name: string;
+  description: string;
+  linkedin: string;
+  image: IImage;
 }
