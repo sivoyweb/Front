@@ -7,14 +7,13 @@ import MapsComponent from "@/components/MapsComponent";
 import ReviewsComponent from "@/components/ReviewsComponent";
 import StarRating from "@/components/RatingComponent";
 import Link from "next/link";
-import { useContext } from "react";
-import { UserContext } from "@/context/userContext";
+
 
 
 
 
 const TravelDetail = async({ params }: { params: { travelId: string } }) => {
-  const {user} = useContext(UserContext)
+  
   const travels = await fetchTravelById(params.travelId);
   const imagen = travels.images[0];
 
@@ -83,8 +82,6 @@ const TravelDetail = async({ params }: { params: { travelId: string } }) => {
             <p className="text-sivoy-blue text-lg">{travels.address}</p>
           </div>
           
-         {user?.auth ? 
-         <div>
          <div>
             <h2 className="text-xl font-arialroundedmtbold">Email</h2>
             <p className="text-sivoy-blue text-lg">{travels.email}</p>
@@ -93,7 +90,6 @@ const TravelDetail = async({ params }: { params: { travelId: string } }) => {
             <h2 className="text-xl font-arialroundedmtbold">Teléfono</h2>
             <p className="text-sivoy-blue text-lg">{travels.phone}</p>
           </div>
-          </div>: null}
           
           <div>
             <h2 className="text-xl font-arialroundedmtbold">Calificación</h2>
