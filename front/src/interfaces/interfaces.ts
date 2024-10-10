@@ -457,3 +457,8 @@ export interface IReviewAdmin {
   date: string;
   user: IUser;
 }
+
+export interface IFAQAdmin {
+  question: string;
+  answer: string;
+}

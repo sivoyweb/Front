@@ -1,13 +1,12 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from 'react';
-import {fetchProjects} from "@/lib/server/fetchProjects"
-import { IProjects } from '@/interfaces/interfaces';
-import Loader from "@/components/Loader"
+import { useState, useEffect } from "react";
+import { fetchProjects } from "@/lib/server/fetchProjects";
+import { IProjects } from "@/interfaces/interfaces";
+import Loader from "@/components/Loader";
 
 export const ProjectsSection = () => {
-    const [projects, setProjects] = useState<IProjects[]>([]);
-
+  const [projects, setProjects] = useState<IProjects[]>([]);
 
   useEffect(() => {
     const getProjects = async () => {
@@ -20,12 +19,15 @@ export const ProjectsSection = () => {
 
   return (
     <section className="flex-1">
-      <h2 className="text-2xl font-arialroundedmtbold text-sivoy-blue mb-4">Proyectos</h2>
+      <h2 className="text-2xl font-arialroundedmtbold text-sivoy-blue mb-4">
+        Proyectos
+      </h2>
       <ul className="list-disc list-inside text-gray-700 text-lg">
         {projects.length > 0 ? (
           projects.map((project, index) => (
             <li key={index}>
-              <span className="font-arialroundedmtbold">{project.name}:</span> {project.description}
+              <span className="font-arialroundedmtbold">{project.name}:</span>{" "}
+              {project.description}
             </li>
           ))
         ) : (
@@ -34,4 +36,4 @@ export const ProjectsSection = () => {
       </ul>
     </section>
   );
-}
+};
