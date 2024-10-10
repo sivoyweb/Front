@@ -18,7 +18,7 @@ const AdminProjectsComponent = () => {
     setLoading(true);
     setError(null);
     try {
-      const token = localStorage.getItem("token");
+      const token =  localStorage.getItem("token") ;
       if (!token) {
         setError("No se encontró un token de autenticación.");
         setLoading(false);
@@ -49,7 +49,7 @@ const AdminProjectsComponent = () => {
   const handleEdit = async (id: string) => {
     if (!editingProject) return;
   
-    const token = localStorage.getItem("token");
+    const token =  localStorage.getItem("token") ;
   
     try {
       
@@ -93,7 +93,7 @@ const AdminProjectsComponent = () => {
 
   
   const handleDelete = async (id: string) => {
-    const token = localStorage.getItem("token");
+    const token =  localStorage.getItem("token") ;
     try {
       const result = await MySwal.fire({
         title: "¿Estás seguro?",
@@ -126,7 +126,7 @@ const AdminProjectsComponent = () => {
   };
 
   if (loading) {
-    <p className=".loader"></p>
+    <p className="loader"></p>
   }
 
   if (error) {
@@ -154,7 +154,7 @@ const AdminProjectsComponent = () => {
           {projects.map((project) => (
             <div key={project.id}>
               <button
-                className="blogToggleBtn"
+                className="custom-button"
                 onClick={() =>
                   document
                     .getElementById(`project-${project.id}`)

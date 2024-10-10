@@ -188,6 +188,17 @@ const Register: React.FC = () => {
           </Form>
         )}
       </Formik>
+      <div className="text-center mt-6">
+  <p className="text-sivoy-blue text-lg">
+    ¿Ya tienes una cuenta?
+    <a
+      href="/login"
+      className="text-sivoy-orange font-bold hover:text-orange-600 ml-1"
+    >
+      Inicia sesión aquí
+    </a>
+  </p>
+</div>
     </div>
   );
 };

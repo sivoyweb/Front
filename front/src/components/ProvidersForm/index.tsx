@@ -22,7 +22,7 @@ const ProvidersForm: React.FC = () => {
     }),
 
     onSubmit: async (values, { resetForm }) => {
-      const token = localStorage.getItem("token");
+      const token =  localStorage.getItem("token") ;
 
       try {
         await axios.post("https://api-sivoy.onrender.com/providers", values, {

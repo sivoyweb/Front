@@ -19,7 +19,7 @@ const AdminProvidersComponent = () => {
     setLoading(true);
     setError(null);
     try {
-      const token = localStorage.getItem("token");
+      const token =  localStorage.getItem("token") ;
       if (!token) {
         setError("No se encontró un token de autenticación.");
         setLoading(false);
@@ -50,7 +50,7 @@ const AdminProvidersComponent = () => {
   const handleEdit = async (id: string) => {
     if (!editingProvider) return;
   
-    const token = localStorage.getItem("token");
+    const token =  localStorage.getItem("token") ;
   
 
     const result = await Swal.fire({
@@ -95,7 +95,7 @@ const AdminProvidersComponent = () => {
   };
 
   const handleDelete = async (id: string) => {
-    const token = localStorage.getItem("token");
+    const token =  localStorage.getItem("token") ;
     try {
       const result = await MySwal.fire({
         title: "¿Estás seguro?",
@@ -121,7 +121,7 @@ const AdminProvidersComponent = () => {
   };
 
   if (loading) {
-    <p className=".loader"></p>
+    <p className="loader"></p>
   }
 
   if (error) {
@@ -149,7 +149,7 @@ const AdminProvidersComponent = () => {
           {providers.map((provider) => (
             <div key={provider.id} className="border rounded-lg p-4 shadow-md">
               <button
-                className="blogToggleBtn"
+                className="custom-button"
                 onClick={() =>
                   document
                     .getElementById(`provider-${provider.id}`)

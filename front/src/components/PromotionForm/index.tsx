@@ -45,7 +45,7 @@ const PromotionForm: React.FC = () => {
       validUntil: Yup.date().required("La fecha de fin es obligatoria."),
     }),
     onSubmit: async (values, { resetForm }) => {
-      const token = localStorage.getItem("token");
+      const token =  localStorage.getItem("token") ;
       try {
         const formData = { ...values, images: uploadedImages };
         await axios.post(

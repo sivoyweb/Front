@@ -15,9 +15,9 @@ export const AlliancesGrid = () => {
         const data = await fetchAlliances();
         setAlliances(data);
       } catch (error) {
-        error;
+        console.error(error);
+      }
     };
-  }
 
     getAlliances();
   }, []);
@@ -65,15 +65,15 @@ export const AlliancesGrid = () => {
         {alliances.map((alliance) => (
           <div
             key={alliance.id}
-            className="relative isolate mb-1 mt-1 cursor-pointer"
+            className="relative isolate mb-1 mt-1 cursor-pointer flex justify-center items-center"
             onClick={() => handleClick(alliance.url)}
           >
-            <div className="w-full h-auto p-8 bg-white rounded-2xl transition-transform hover:scale-105 duration-300 flex justify-center items-center">
+            <div className="w-full h-48 p-8 bg-white rounded-2xl transition-transform hover:scale-105 duration-300 flex justify-center items-center">
               {alliance.image.url ? (
                 <Image
                   src={alliance.image.url as string}
                   alt={alliance.name}
-                  className="max-w-full max-h-full"
+                  className="max-w-full max-h-full object-contain"
                   width={200}
                   height={200}
                 />

@@ -22,7 +22,7 @@ const AdminTravelComponent = () => {
     const fetchTravels = async () => {
       try {
         
-        const token = localStorage.getItem("token");
+        const token =  localStorage.getItem("token") ;
         const response = await axios.get(
           "https://api-sivoy.onrender.com/travels",
           {
@@ -42,7 +42,7 @@ const AdminTravelComponent = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      const token = localStorage.getItem("token");
+      const token =  localStorage.getItem("token") ;
       const result = await MySwal.fire({
         title: "¿Estás seguro?",
         text: "Esta acción no se puede deshacer",
@@ -68,8 +68,7 @@ const AdminTravelComponent = () => {
 
   const handleSave = async () => {
     if (!editingTravel) return;
-    const token = localStorage.getItem("token");
-  
+    const token =  localStorage.getItem("token") ;
 
     const result = await MySwal.fire({
       title: "¿Estás seguro de que deseas actualizar este destino?",
@@ -119,7 +118,7 @@ const AdminTravelComponent = () => {
   };
 
   if (loading) {
-    <p className=".loader"></p>
+    <p className="loader"></p>
   }
 
   return (
@@ -129,7 +128,7 @@ const AdminTravelComponent = () => {
       ) : (
         <div className="space-y-4">
           {travels.map((travel) => (
-            <div key={travel.id} className="blogToggleBtn">
+            <div key={travel.id} className="custom-button">
               {editingTravel?.id === travel.id ? (
                 <div>
                   {/* Inputs de edición */}

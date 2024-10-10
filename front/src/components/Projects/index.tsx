@@ -32,7 +32,7 @@ export const ProjectsSection = () => {
             </li>
           ))
         ) : (
-          <p className='.loader'></p>
+          <p className='loader'></p>
         )}
       </ul>
     </section>

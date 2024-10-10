@@ -42,7 +42,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       const dataUser = data.userFinal;
       setUser(dataUser);
 
-      localStorage.setItem("user", JSON.stringify(data));
+      localStorage.setItem("user", JSON.stringify(data))  ;
       localStorage.setItem("token", data.token);
 
       Swal.fire({
@@ -101,8 +101,8 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const TokenGoogle = localStorage.getItem("TokenGoogle");
+    const token =  localStorage.getItem("token") ;
+    const TokenGoogle = typeof window !== "undefined" ? localStorage.getItem("TokenGoogle") === 'true' : null;
 
     if (session?.user) {
       localStorage.setItem("TokenGoogle", "true");
@@ -180,14 +180,14 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token =  localStorage.getItem("token") ;
     if (token) {
       setIsLogged(true);
     }
   }, [user]);
 
   useEffect(() => {
-    const user = localStorage.getItem("user");
+    const user =  localStorage.getItem("user");
     if (user) {
       setUser(JSON.parse(user));
       return;

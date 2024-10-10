@@ -33,6 +33,10 @@ const BlogForm: React.FC = () => {
       content: Yup.string().required("El contenido es obligatorio."),
     }),
     onSubmit: async (values, { resetForm }) => {
+<<<<<<< HEAD
+=======
+      const token =  localStorage.getItem("token") ;
+>>>>>>> ae59e5b72de41f9cc1896f56be828dba4193b4ad
       try {
         const formData = { ...values, images: uploadedImages }; 
         console.log(formData)

@@ -26,7 +26,7 @@ const TeamForm: React.FC = () => {
       }),
     }),
     onSubmit: async (values, { resetForm }) => {
-      const token = localStorage.getItem("token");
+      const token =  localStorage.getItem("token") ;
       try {
         // Payload ajustado según el formato requerido
         const payload = {

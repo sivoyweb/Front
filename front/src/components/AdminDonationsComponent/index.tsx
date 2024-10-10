@@ -13,7 +13,7 @@ const AdminDonationsComponent = () => {
     setLoading(true);
     setError(null);
     try {
-      const token = localStorage.getItem("token");
+      const token =  localStorage.getItem("token");
       if (!token) {
         setError("No se encontró un token de autenticación.");
         setLoading(false);
@@ -33,23 +33,23 @@ const AdminDonationsComponent = () => {
       setError("Hubo un problema al obtener las donaciones.");
     } finally {
       setLoading(false);
-      setUpdating(false); // Apagar el estado de actualización
+      setUpdating(false); 
     }
   };
 
-  // Se llama a fetchDonations al montar el componente
+  
   useEffect(() => {
     fetchDonations();
   }, []);
 
-  // Manejador para actualizar las donaciones
+  
   const handleUpdateDonations = async () => {
     setUpdating(true);
-    await fetchDonations(); // Reutilizamos la función fetchDonations para actualizar
+    await fetchDonations(); 
   };
 
   if (loading) {
-    <p className=".loader"></p>
+    <p className="loader"></p>
   }
 
   if (error) {
@@ -76,7 +76,7 @@ const AdminDonationsComponent = () => {
           {donations.map((donation, index) => (
             <div key={index} className="border rounded-lg p-4 shadow-md">
               <button
-                className="blogToggleBtn"
+                className="custom-button"
                 onClick={() =>
                   document
                     .getElementById(`donation-${index}`)

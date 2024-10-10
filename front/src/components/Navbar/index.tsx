@@ -20,7 +20,7 @@ export default function Navbar() {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null); 
-  const { isLogged, user, logOut } = useContext(UserContext);
+  const {  user, logOut } = useContext(UserContext);
   const { data:session } = useSession() 
 
   const handleLogout = () => {
@@ -81,12 +81,12 @@ export default function Navbar() {
             </div>
           </div>
           <div className="hidden md-lg:block">
-            {isLogged || session ? (
+            {user?.auth === true ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button className="relative h-8 w-8 rounded-full custom-button hover:bg-sivoy-blue">
                     <Image
-                      src={user?.credential?.avatar?.url|| session?.user?.image || ''} 
+                      src={user?.credential?.avatar?.url|| session?.user?.image || 'https://res.cloudinary.com/dvxh2vynm/image/upload/v1728364236/qclbqnbkrp0jxjmkpguj.png'} 
                       alt="Avatar del usuario"
                       className="rounded-full mt-2"
                       width={46}
@@ -100,7 +100,7 @@ export default function Navbar() {
                   </DropdownMenuItem>
 
                   {user?.role==="admin" ? <DropdownMenuItem onClick={handleAdmin}>
-                    Administrador
+                    Panel de Administrador
                   </DropdownMenuItem>: null}
 
                   <DropdownMenuItem onClick={handleLogout}>
@@ -150,11 +150,11 @@ export default function Navbar() {
             ))}
           </div>
           <div className="pt-4 pb-3 border-t border-[#172a46]">
-            {isLogged ? (
+            {user?.auth === true ? (
               <div className="flex items-center px-5">
                 <div className="flex-shrink-0">
                   <Image
-                    src={user?.credential?.avatar.url || session?.user?.image || ""} 
+                    src={user?.credential?.avatar.url || session?.user?.image || "https://res.cloudinary.com/dvxh2vynm/image/upload/v1728364236/qclbqnbkrp0jxjmkpguj.png"} 
                     alt="Avatar del Usuario"
                     className="rounded-full"
                     width={40}
@@ -182,7 +182,7 @@ export default function Navbar() {
                 </Button>
               </div>
             )}
-            {isLogged && (
+            {user?.auth === true && (
               <div className="mt-3 px-2 space-y-1">
                 <Link
                   href="/user-dashboard"
@@ -201,7 +201,7 @@ export default function Navbar() {
                  
                   }}
                 > 
-                  Administracion
+                  Panel de Administrador
                 </Link> : null}
                 <button
                   className="block w-32 ml-2 text-left px-3 py-2 rounded-md text-base font-medium"

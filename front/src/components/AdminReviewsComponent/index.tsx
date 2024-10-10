@@ -6,8 +6,7 @@ import { IReviewAdmin } from "@/interfaces/interfaces";
 const AdminReviewsComponent: React.FC = () => {
   const [reviews, setReviews] = useState<IReviewAdmin[]>([]);
   const [visibleReviews, setVisibleReviews] = useState(5);
-  const token = localStorage.getItem("token");
-
+  const token =  localStorage.getItem("token") ;
   const fetchReviews = useCallback(async () => {
     try {
       const response = await axios.get(
@@ -107,7 +106,7 @@ const AdminReviewsComponent: React.FC = () => {
             {review.state !== "Aprobado" && (
               <button
                 onClick={() => handleApprove(review.id)}
-                className="px-4 py-2 "
+                className="custom-button"
               >
                 Aceptar
               </button>
