@@ -13,8 +13,7 @@ export const TeamSection = () => {
       try {
         const data = await fetchTeam();
         setTeamMembers(data);
-      } catch (error) {
-      }
+      } catch (error) {}
     };
 
     getTeam();
@@ -31,7 +30,7 @@ export const TeamSection = () => {
             rel="noopener noreferrer"
           >
             {member.image?.url ? (
-              <Image 
+              <Image
                 src={member.image.url as string}
                 alt={`Foto de perfil de ${member.name}`}
                 width={180}

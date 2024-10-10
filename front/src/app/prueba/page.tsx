@@ -1,9 +1,9 @@
-import AdminReviewsComponent from "@/components/AdminReviewsComponent";
+import AdminFaqComponent from "@/components/AdminFaqComponent";
 
 function prueba() {
   return (
     <div className="h-full">
-      <AdminReviewsComponent />
+      <AdminFaqComponent />
     </div>
   );
 }
