@@ -178,6 +178,7 @@ export interface ITravel {
   website: string;
   phone: string;
   averageStars: number;
+  accessibilitySealName: string;
 }
 
 export interface ITravelAdmin {
@@ -345,6 +346,7 @@ export interface ITravelsProps {
   reviews: IReviewT[];
   images: IImage[];
   provider: null;
+  accessibilitySealName: string;
 }
 
 export interface IAccordionItemProps {

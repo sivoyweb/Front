@@ -13,7 +13,7 @@ const AdminDonationsComponent = () => {
     setLoading(true);
     setError(null);
     try {
-      const token =  localStorage.getItem("token");
+      const token = localStorage.getItem("token");
       if (!token) {
         setError("No se encontró un token de autenticación.");
         setLoading(false);
@@ -33,23 +33,70 @@ const AdminDonationsComponent = () => {
       setError("Hubo un problema al obtener las donaciones.");
     } finally {
       setLoading(false);
-      setUpdating(false); 
+      setUpdating(false);
     }
   };
 
-  
+  const handleDownload = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setError("No se encontró un token de autenticación.");
+        return;
+      }
+
+      // Paso 1: Llamar a la API para exportar "Donation"
+      const exportResponse = await axios.get(
+        "https://api-sivoy.onrender.com/data/export/Donation", // Aquí enviamos la entidad Donation
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      // Asumimos que el objeto de respuesta tiene la propiedad `fileName`
+      const fileName = exportResponse.data.fileName;
+      if (!fileName) {
+        setError("No se pudo obtener el nombre del archivo.");
+        return;
+      }
+
+      // Paso 2: Descargar el archivo exportado
+      const downloadResponse = await axios({
+        url: `https://api-sivoy.onrender.com/data/download/${fileName}`,
+        method: "GET",
+        responseType: "blob", // Esto es importante para manejar archivos binarios
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // Crear un enlace temporal para descargar el archivo
+      const url = window.URL.createObjectURL(new Blob([downloadResponse.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", fileName); // Nombre del archivo que descargaremos
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link); // Elimina el enlace tras la descarga
+
+    } catch (err) {
+      setError("Hubo un problema al descargar el archivo.");
+    }
+  };
+
   useEffect(() => {
     fetchDonations();
   }, []);
 
-  
   const handleUpdateDonations = async () => {
     setUpdating(true);
-    await fetchDonations(); 
+    await fetchDonations();
   };
 
   if (loading) {
-    <p className="loader"></p>
+    <p className="loader"></p>;
   }
 
   if (error) {
@@ -60,13 +107,21 @@ const AdminDonationsComponent = () => {
     <div className="container mx-auto p-4">
       <div className="flex justify-between mb-4">
         <h1 className="text-xl font-bold">Listado de Donaciones</h1>
-        <button
-          onClick={handleUpdateDonations}
-          className="bg-blue-500 text-white px-4 py-2 rounded-md"
-          disabled={updating}
-        >
-          {updating ? "Actualizando..." : "Actualizar Donaciones"}
-        </button>
+        <div>
+          <button
+            onClick={handleUpdateDonations}
+            className="bg-blue-500 text-white px-4 py-2 rounded-md"
+            disabled={updating}
+          >
+            {updating ? "Actualizando..." : "Actualizar Donaciones"}
+          </button>
+          <button
+            onClick={handleDownload}
+            className="bg-green-500 text-white px-4 py-2 rounded-md ml-4"
+          >
+            Descargar Excel
+          </button>
+        </div>
       </div>
 
       {donations.length === 0 ? (
